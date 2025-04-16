@@ -1,0 +1,48 @@
+---
+// The shell - a layout for LAW.
+// Cieron <cirrow@proton.me>
+
+const { title } = Astro.props
+
+import Header from "../components/Header.astro"
+import '../styles/global.css'
+---
+
+<!doctype html>
+
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+        <meta name="generator" content={Astro.generator} />
+
+
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="stylesheet" href="/styles/global.css" />
+
+
+		<title>{ title }</title>
+	</head>
+	
+	<body class="min-h-screen min-w-full">
+        <div id="lawe-page">
+            <Header />
+            <div id="non-header" class="flex">
+                <div id="sidebar" class="border-4">
+    
+                </div>
+    
+                <div id="content-window">
+                    <main>
+                        <slot />
+                    </main>
+                </div>
+    
+            </div>
+        </div>
+
+	</body>
+</html>
+
+
