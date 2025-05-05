@@ -20,7 +20,7 @@ export default class Renderer {
 
             case 'Heading':
                 const level = Math.min(node.level || 1, 6)  // HTML supports h1-h6
-                return `<h${level} id="law-heading" class="law-heading-${level}>${this.renderChildren(node)}</h${level}>"`
+                return `<h${level} id="law-heading" class="law-heading-${level}">${this.renderChildren(node)}</h${level}>`
 
             case 'Underline':
                 return `<u>${this.renderChildren(node)}</u>`
