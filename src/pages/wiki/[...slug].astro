@@ -1,0 +1,34 @@
+---
+import { processWithCache } from '../../utils/pages-processor';
+import type { RawPage } from '../../utils/git-service';
+import { fetchWikiContent } from '../../utils/git-service';
+
+export async function getStaticPaths() {
+
+    // Step 1: Fetch raw wiki pages (from remote Git)
+    const rawPages = await fetchWikiContent();
+
+  // Step 2: Process all pages into HTML
+  const { processedPages } = await processWithCache(rawPages);
+
+  // Step 3: Return paths and props for each page
+  return processedPages.map(page => ({
+    params: { slug: page.slug },
+    props: { page }
+  }));
+}
+
+const { page } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <title>{page.title}</title>
+  </head>
+  <body>
+    <article>
+      <h1>{page.title}</h1>
+      <div set:html={page.htmlContent} />
+    </article>
+  </body>
+</html>

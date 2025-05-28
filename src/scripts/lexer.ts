@@ -37,14 +37,18 @@ export interface Token {
 
 export default class Lexer {
 
-    private input: string
+    private input: string = ''
     private position = 0
     private line = 1
     private col = 1
 
+    constructor() {
+    }
 
-    constructor(input: string) {
-        this.input = input
+    private reset() {
+        this.position = 0
+        this.line = 1
+        this.col = 1
     }
 
     private isEOF(): boolean {
@@ -90,8 +94,12 @@ export default class Lexer {
     }
     // Concat type and value into one object
 
-    public tokenise(): Token[] {
+    public tokenise(input: string): Token[] {
         //bri' ish
+        
+        // Set the input and reset position tracking
+        this.input = input
+        this.reset()
         
         const tokens: Token[] = []          // The tokens (object) will be pushed into here as the lexer evaluates the text
         const tokenStack: TokenType[] = []  // Stack to track nested tokens

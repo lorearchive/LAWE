@@ -1,0 +1,397 @@
+// Wiki processing pipeline that transforms raw wiki content into HTML
+
+// Wiki processing pipeline that transforms raw wiki content into HTML
+
+import type { RawPage } from './git-service';
+
+// Import your custom wiki processing modules
+// Adjust these import paths based on your actual file structure
+import Lexer  from '../scripts/lexer';
+import Parser from '../scripts/parser';
+import Renderer from '../scripts/renderer';
+
+// Configuration for page processing
+interface PageProcessorConfig {
+    enableCaching: boolean;
+    validateOutput: boolean;
+    stripEmptyLines: boolean;
+    generateTOC: boolean; // Table of Contents
+    maxProcessingTime: number; // milliseconds
+}
+
+// Processed page with HTML output
+interface ProcessedPage {
+    slug: string[];
+    filePath: string;
+    rawContent: string;
+    htmlContent: string;
+    title: string;
+    excerpt: string;
+    toc?: TOCItem[];
+    metadata: {
+        lastModified: Date;
+        size: number;
+        processingTime: number;
+        wordCount: number;
+        readingTime: number; // estimated minutes
+    };
+}
+
+// Table of contents structure
+interface TOCItem {
+    level: number;
+    title: string;
+    anchor: string;
+    children?: TOCItem[];
+}
+
+// Processing statistics
+interface ProcessingStats {
+    totalPages: number;
+    successfulPages: number;
+    failedPages: number;
+    totalProcessingTime: number;
+    averageProcessingTime: number;
+    errors: ProcessingError[];
+}
+
+// Processing error details
+interface ProcessingError {
+    filePath: string;
+    slug: string[];
+    error: Error;
+    stage: 'lexing' | 'parsing' | 'rendering' | 'validation';
+}
+
+
+// Custom error class for processing errors
+export class PageProcessorError extends Error {
+    constructor(
+        message: string,
+        public readonly stage: string,
+        public readonly filePath: string,
+        public readonly cause?: Error
+    ) {
+        super(message);
+        this.name = 'PageProcessorError';
+    }
+}
+
+const defaultConfig: PageProcessorConfig = {
+    enableCaching: true,
+    validateOutput: true,
+    stripEmptyLines: true,
+    generateTOC: true,
+    maxProcessingTime: 7000, // 7 seconds per page
+};
+
+
+// Extract title from wiki content (first heading or filename)
+function extractTitle( content: string, slug: string[] ): string {
+    // Try to find first heading in content
+    const headingMatch = content.match(/^#+\s+(.+)$/m);
+    if (headingMatch) {
+        return headingMatch[1].trim();
+    }
+    
+    // Fall back to last part of slug, formatted nicely
+    const lastSlug = slug[slug.length - 1] || 'Untitled';
+    return lastSlug
+        .split('-')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(' ');
+}
+
+
+// Extract excerpt from content (first paragraph or first N characters)
+
+function extractExcerpt(content: string, maxLength: number = 200): string {
+    // Remove headings and empty lines
+    const cleanContent = content
+        .replace(/^#+\s+.+$/gm, '') // Remove headings
+        .replace(/^\s*$/gm, '') // Remove empty lines
+        .trim();
+    
+    // Get first paragraph or truncate
+    const firstParagraph = cleanContent.split('\n\n')[0] || cleanContent;
+    
+    if (firstParagraph.length <= maxLength) {
+        return firstParagraph;
+    }
+    
+    return firstParagraph.substring(0, maxLength).replace(/\s+\S*$/, '') + '...';
+}
+
+
+// Calculate estimated reading time (average 200 words per minute)
+function calculateReadingTime(wordCount: number): number {
+    return Math.ceil(wordCount / 200);
+}
+
+
+// Count words in text content
+function countWords(text: string): number {
+    return text.trim().split(/\s+/).filter(word => word.length > 0).length;
+}
+
+
+// Generate table of contents from HTML headings
+function generateTOC( htmlContent: string ): TOCItem[] {
+    const headings: TOCItem[] = [];
+    const headingRegex = /<h([1-6])[^>]*id="([^"]*)"[^>]*>([^<]+)</gi;
+    let match;
+    
+    while ((match = headingRegex.exec(htmlContent)) !== null) {
+        const level = parseInt(match[1]);
+        const anchor = match[2];
+        const title = match[3].trim();
+        
+        headings.push({
+            level,
+            title,
+            anchor,
+        })
+    }
+    
+    return headings
+}
+
+// Validate HTML output for common issues
+function validateHtmlOutput(html: string, filePath: string): void {
+
+    // Check for unclosed tags (basic validation)
+    const openTags = (html.match(/<[^\/][^>]*>/g) || []).length;
+    const closeTags = (html.match(/<\/[^>]*>/g) || []).length;
+    const selfClosingTags = (html.match(/<[^>]*\/>/g) || []).length;
+    
+    // super basic check, in real scenarios we might want proper HTML validation -- TODO
+    if (Math.abs(openTags - closeTags - selfClosingTags) > 5) {
+        console.warn(`LAWE PP: Potential HTML structure issues in ${filePath}`);
+    }
+    
+    // Check for empty output
+    if (html.trim().length === 0) {
+        throw new PageProcessorError(
+            'Generated HTML is empty',
+            'validation',
+            filePath
+        );
+    }
+}
+
+
+// Process a single wiki page through the lexer → parser → renderer pipeline
+export async function processPage( rawPage: RawPage, config: Partial<PageProcessorConfig> = {} ): Promise<ProcessedPage> {
+    const finalConfig = { ...defaultConfig, ...config };
+    const startTime = Date.now()
+    const lexer = new Lexer()
+    const parser = new Parser()
+    const renderer = new Renderer()
+
+    
+    try {
+
+        let content = rawPage.content
+        
+        // Preprocessing
+        if (finalConfig.stripEmptyLines) {
+            content = content.replace(/^\s*\n/gm, '');
+        }
+        
+        // Stage 1: Lexical Analysis
+        let tokens;
+        try {
+            tokens = lexer.tokenise(content);
+        } catch (e) {
+            throw new PageProcessorError( 'LAWE: Lexical analysis failed', 'lexing', rawPage.filePath, e as Error )
+        }
+        
+        // Stage 2: Parsing
+        let ast;
+        try {
+            ast = parser.parse(tokens);
+        } catch (e) {
+            throw new PageProcessorError( 'LAWE PP: Parsing failed', 'parsing', rawPage.filePath, e as Error )
+        }
+        
+        // Stage 3: Rendering
+        let htmlContent;
+        try {
+            htmlContent = renderer.render(ast);
+        } catch (e) {
+            throw new PageProcessorError( 'LAWE PP: Rendering failed', 'rendering', rawPage.filePath, e as Error )
+        }
+        
+        // Stage 4: Validation
+        if (finalConfig.validateOutput) {
+            try {
+                validateHtmlOutput(htmlContent, rawPage.filePath);
+            } catch (e) {
+                throw new PageProcessorError( 'LAWE PP: HTML validation failed', 'validation', rawPage.filePath, e as Error )
+            }
+        }
+        
+        // Extract metadata
+        const title = extractTitle(rawPage.content, rawPage.slug);
+        const excerpt = extractExcerpt(rawPage.content);
+        const wordCount = countWords(rawPage.content);
+        const readingTime = calculateReadingTime(wordCount);
+        const processingTime = Date.now() - startTime;
+        
+        // Generate table of contents
+        let toc: TOCItem[] | undefined;
+        if (finalConfig.generateTOC) {
+            toc = generateTOC(htmlContent);
+        }
+        
+        // Check processing time
+        if (processingTime > finalConfig.maxProcessingTime) {
+            console.warn(`LAWE PP: Page ${rawPage.filePath} took ${processingTime}ms to process`);
+        }
+        
+        return {
+            slug: rawPage.slug,
+            filePath: rawPage.filePath,
+            rawContent: rawPage.content,
+            htmlContent,
+            title,
+            excerpt,
+            toc,
+            metadata: {
+                lastModified: rawPage.lastModified,
+                size: rawPage.size,
+                processingTime,
+                wordCount,
+                readingTime,
+            },
+        };
+        
+    } catch (e) {
+        if (e instanceof PageProcessorError) {
+            throw e;
+        }
+        
+        throw new PageProcessorError(
+            'LAWE PP: Unexpected error during page processing',
+            'unknown',
+            rawPage.filePath,
+            e as Error
+        );
+    }
+}
+
+
+// Process multiple wiki pages in parallel with error handling
+export async function processAllPages( rawPages: RawPage[], config: Partial<PageProcessorConfig> = {} ): Promise<{ processedPages: ProcessedPage[]; stats: ProcessingStats; }> {
+    const finalConfig = { ...defaultConfig, ...config };
+    const startTime = Date.now();
+    
+    console.log(`LAWE PP: Processing ${rawPages.length} wiki pages...`);
+    
+    const processedPages: ProcessedPage[] = [];
+    const errors: ProcessingError[] = [];
+    
+    // Process pages in parallel with error isolation
+    const results = await Promise.allSettled(
+        rawPages.map(rawPage => processPage(rawPage, finalConfig))
+    )
+    
+    // Collect results and errors
+    results.forEach((result, index) => {
+        if (result.status === 'fulfilled') {
+            processedPages.push(result.value);
+        } else {
+            const rawPage = rawPages[index];
+            const error = result.reason;
+            
+            errors.push({
+                filePath: rawPage.filePath,
+                slug: rawPage.slug,
+                error: error instanceof Error ? error : new Error(String(error)),
+                stage: error instanceof PageProcessorError ? error.stage as any : 'unknown',
+            });
+            
+            console.error(`LAWE PP: Failed to process ${rawPage.filePath}:`, error);
+        }
+    });
+    
+    const totalProcessingTime = Date.now() - startTime;
+    const stats: ProcessingStats = {
+        totalPages: rawPages.length,
+        successfulPages: processedPages.length,
+        failedPages: errors.length,
+        totalProcessingTime,
+        averageProcessingTime: processedPages.length > 0 
+            ? processedPages.reduce((sum, page) => sum + page.metadata.processingTime, 0) / processedPages.length 
+            : 0,
+        errors,
+    };
+    
+    console.log(`LAWE PP: Processing complete! ${stats.successfulPages}/${stats.totalPages} pages successful in ${totalProcessingTime}ms`);
+    
+    if (errors.length > 0) {
+        console.warn(`LAWE PP: ${errors.length} pages failed to process`);
+    }
+    
+    return { processedPages, stats };
+}
+
+
+// Process pages with caching support (in-memory for build time)
+export async function processWithCache(
+    rawPages: RawPage[],
+    config: Partial<PageProcessorConfig> = {}
+): Promise<{
+    processedPages: ProcessedPage[];
+    stats: ProcessingStats;
+}> {
+    const finalConfig = { ...defaultConfig, ...config };
+    
+    if (!finalConfig.enableCaching) {
+        return processAllPages(rawPages, finalConfig);
+    }
+    
+    // Simple in-memory cache for build time (you could extend this to use file-based caching)
+    const cache = new Map<string, ProcessedPage>();
+    const cacheHits = [];
+    const cacheMisses = [];
+    
+    for (const rawPage of rawPages) {
+        const cacheKey = `${rawPage.filePath}:${rawPage.lastModified.getTime()}`;
+        
+        if (cache.has(cacheKey)) {
+            cacheHits.push(rawPage);
+        } else {
+            cacheMisses.push(rawPage);
+        }
+    }
+    
+    console.log(`LAWE PP: Cache stats - ${cacheHits.length} hits, ${cacheMisses.length} misses`);
+    
+    // Process only cache misses
+    const { processedPages: newProcessedPages, stats } = await processAllPages(cacheMisses, finalConfig);
+    
+    // Update cache
+    newProcessedPages.forEach(page => {
+        const cacheKey = `${page.filePath}:${page.metadata.lastModified.getTime()}`;
+        cache.set(cacheKey, page);
+    });
+    
+    // Combine cached and newly processed pages
+    const allProcessedPages = [
+        ...cacheHits.map(rawPage => {
+            const cacheKey = `${rawPage.filePath}:${rawPage.lastModified.getTime()}`;
+            return cache.get(cacheKey)!;
+        }),
+        ...newProcessedPages,
+    ];
+    
+    return {
+        processedPages: allProcessedPages,
+        stats: {
+            ...stats,
+            totalPages: rawPages.length,
+            successfulPages: allProcessedPages.length,
+        },
+    };
+}

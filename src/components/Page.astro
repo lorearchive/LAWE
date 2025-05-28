@@ -1,0 +1,18 @@
+---
+import Parser from '../scripts/parser.ts'
+import type { ASTNode } from '../scripts/parser'
+
+
+export interface Props {
+    slug: string[];
+    content: string;
+    title?: string;
+}
+
+const { slug, content, title } = Astro.props
+
+
+// Convert raw wiki text to HTML using  parser
+const htmlContent = Parser.parse(content)
+
+---

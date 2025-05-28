@@ -33,14 +33,23 @@ export interface ASTNode {
 
 export default class Parser {
 
-    private tokens: Token[]
+    private tokens: Token[] = []
     private current: number = 0
 
-    constructor(tokens: Token[]) {
-        this.tokens = tokens
+    constructor() {
+        // No longer takes tokens parameter
     }
 
-    public parse(): ASTNode {
+    private reset() {
+        this.tokens = []
+        this.current = 0
+    }
+
+    public parse(tokens: Token[]): ASTNode {
+        
+        // Set the tokens and reset position tracking
+        this.tokens = tokens
+        this.current = 0
 
         //root document node
         const document: ASTNode = {
@@ -324,8 +333,5 @@ export default class Parser {
     //private isEmptyLine(): boolean {
     //    return this.check(TokenType.NEWLINE) && (this.current + 1 < this.tokens.length && this.tokens[this.current + 1].type === TokenType.NEWLINE)
 
-    //}
-
-
-    
+    //}   
 }
