@@ -168,9 +168,14 @@ export async function testErrorHandling() {
     
     try {
         const result = await processPage(errorPage);
-        console.log('❌ Expected error but processing succeeded:', result.title);
+        console.log('LAWE: Expected error but processing succeeded:', result.title);
     } catch (e) {
-        console.log('✅ Error handling working correctly:', e.message);
+        if (e instanceof Error ) {
+            console.log('Error handling working correctly:', e.message)
+        } else {
+            console.log('Error handling working correctly with non-Error:', e);
+        }
+
     }
 }
 
