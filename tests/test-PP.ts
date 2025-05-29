@@ -211,7 +211,7 @@ This page has approximately 50 words for testing processing speed.`,
 
 // Main test runner
 export async function runAllTests() {
-    console.log('🚀 STARTING PAGE PROCESSOR TESTS');
+    console.log('LAWE: STARTING PP TESTS');
     
     try {
         await testSinglePage();
@@ -219,10 +219,10 @@ export async function runAllTests() {
         await testErrorHandling();
         await testPerformance();
         
-        console.log('\n🎉 ALL TESTS COMPLETED SUCCESSFULLY!');
+        console.log('\nLAWE: ALL TESTS COMPLETED SUCCESSFULLY!');
         
     } catch (error) {
-        console.error('\n💥 TESTS FAILED:', error);
+        console.error('\nLAWE: TESTS FAILED:', error);
         process.exit(1);
     }
 }
