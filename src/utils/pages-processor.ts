@@ -36,7 +36,7 @@ interface ProcessedPage {
 }
 
 // Table of contents structure
-interface TOCItem {
+export interface TOCItem {
     level: number;
     title: string;
     anchor: string;
@@ -141,7 +141,7 @@ function generateTOC( htmlContent: string ): TOCItem[] {
     
     while ((match = headingRegex.exec(htmlContent)) !== null) {
         const level = parseInt(match[1]);
-        const anchor = match[2];
+        const anchor = match[3].trim().toLowerCase().replace(/[^a-zA-Z0-9 ]/g, "").replace(/ /g, "_")
         const title = match[3].trim();
         
         headings.push({

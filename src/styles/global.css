@@ -3,7 +3,12 @@
 /** ------------------------ SHELL **/
 
 header#lawe-header {
+    background-color: white;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+}
+
+header#lawe-header.header-hidden {
+  transform: translateY(-100%);
 }
 
 
@@ -30,6 +35,18 @@ h1 {
 }
 
 h2 {
-    font-size: 2.1em;
+    font-size: 2em;
     font-family: serif;
+}
+
+h3 {
+    margin: 0.5em 0 0.5em 0;
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+h4 {
+    margin: 2em 0 0.5em 0;
+    font-size: 1.3em;
+    font-weight: bold;
 }

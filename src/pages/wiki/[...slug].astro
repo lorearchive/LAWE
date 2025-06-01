@@ -1,17 +1,22 @@
 ---
+// get the pre processed data from props
+const { page } = Astro.props
+
+
 import { fetchWikiContent, getAllWikiPages } from '../../utils/git-service'
 import { processAllPages } from '../../utils/pages-processor'
 import Shell from '../../layouts/Shell.astro'
+import RenderTOC from '../../components/RenderTOC.astro'
 
 export async function getStaticPaths() {
-  const contentPath = await fetchWikiContent()
-  const rawPages = await getAllWikiPages(contentPath)
-  const { processedPages } = await processAllPages(rawPages)
+    const contentPath = await fetchWikiContent()
+    const rawPages = await getAllWikiPages(contentPath)
+    const { processedPages } = await processAllPages(rawPages)
   
-  console.log('Sample page slugs:', processedPages.slice(0, 3).map(p => ({ 
-    slug: p.slug, 
-    joined: p.slug.join('/') 
-  })))
+    console.log('Sample page slugs:', processedPages.slice(0, 3).map(p => ({ 
+        slug: p.slug, 
+        joined: p.slug.join('/') 
+    })))
   
   const routes = processedPages.map(page => { 
     
@@ -25,10 +30,13 @@ export async function getStaticPaths() {
   
   return routes
 }
-// get the pre processed data from props
-const { page } = Astro.props
+
 ---
 
-<Shell title={`${page.title} - Lore Archive`}>
-    <div set:html={page.htmlContent} />
+<Shell title={`${ page.title } - Lore Archive`}>
+    <div set:html={ page.htmlContent } />
+
+    <div slot="TOCbar">
+        <RenderTOC TOC={ page.toc }/>
+    </div>
 </Shell>

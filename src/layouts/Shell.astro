@@ -1,7 +1,4 @@
 ---
-// The shell - a layout for LAW.
-// Cieron <cirrow@proton.me>
-
 const { title } = Astro.props
 
 import Header from "../components/Header.astro"
@@ -25,21 +22,28 @@ import '../styles/global.css' // This enables tailwind
 	
 	<body class="min-h-screen min-w-full">
         <div id="lawe-page">
+
             <Header />
-            <div id="non-header" class="flex">
-                <div id="sidebar" class="border-4 min-w-90">
+
+            <div id="non-header" class="flex mt-19">
+                <div id="sidebar" class="border-4 min-w-80 fixed">
     
                 </div>
     
-                <div id="content-window" class="w-full">
-                    <main>
+                <div id="content-window" class="ml-80 w-full grid grid-cols-4 gap-4">
+                    <main class="col-span-3 p-4">
                         <slot />
                     </main>
+
+                    <aside id="TOCbar" class="col-span-1 p-4">
+                        <slot name="TOCbar" />
+                    </aside>
                 </div>
     
             </div>
         </div>
 
+        <script src="/src/scripts/header-scroll.js"></script>
 	</body>
 </html>
 
