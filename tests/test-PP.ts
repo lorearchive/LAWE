@@ -185,7 +185,7 @@ export async function testPerformance() {
     
     // Generate many test pages
     const manyPages: RawPage[] = [];
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 500; i++) {
         manyPages.push({
             slug: ['performance', `page-${i}`],
             filePath: `/performance/page-${i}.wiki`,

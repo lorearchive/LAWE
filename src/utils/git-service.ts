@@ -1,4 +1,4 @@
-// fetches raw wiki files from remote git at compile time.
+// fetches raw wiki files from remote git at compile time. Git-service (GS)
 
 import { execSync } from 'child_process';
 import fs from 'fs/promises';
@@ -210,14 +210,14 @@ export async function getAllWikiPages( contentPath: string, config: Partial<Pick
                     // Process subdirectory recursively
                     await processDirectory(entryPath, [...parentSlug, entry.name])
             
-                } else if (entry.isFile() && entry.name.endsWith('.wiki')) {
+                } else if (entry.isFile() && entry.name.endsWith('.txt')) {
             
                     try {
                         // Validate file before processing
                         await validateWikiFile(entryPath, finalConfig.maxFileSize);
               
                         // Process wiki file
-                        const pageName = entry.name.replace(/\.wiki$/, '');
+                        const pageName = entry.name.replace(/\.txt$/, '');
                         const slug = generateSlug([...parentSlug, pageName]);
               
                         // Read file content and stats
@@ -238,7 +238,7 @@ export async function getAllWikiPages( contentPath: string, config: Partial<Pick
                         // Continue processing other files instead of failing completely
                     }
                 } else {
-                    console.log(`LAWE: Unrecognized entry: ${entry}`)
+                    console.log(`LAWE: Unrecognized entry: ${entry.name}`)
                 }
             }));
       
@@ -261,7 +261,7 @@ export async function getAllWikiPages( contentPath: string, config: Partial<Pick
  */
 export async function getWikiPage( contentPath: string, slug: string[] ): Promise<RawPage | null> {
     try {
-        const filePath = path.join(contentPath, ...slug) + '.wiki';
+        const filePath = path.join(contentPath, ...slug) + '.txt';
     
         // Validate the constructed path is within content directory
         const resolvedPath = path.resolve(filePath);

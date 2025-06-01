@@ -1,6 +1,4 @@
-// Wiki processing pipeline that transforms raw wiki content into HTML
-
-// Wiki processing pipeline that transforms raw wiki content into HTML
+// Wiki processing pipeline that transforms raw wiki content into HTML. Pages-processor (PP)
 
 import type { RawPage } from './git-service';
 
