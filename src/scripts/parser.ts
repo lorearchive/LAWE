@@ -27,8 +27,6 @@ export interface ASTNode {
     level?: number
     url?: string
     text?: string
-    lang?: string
-    isHeading?: string
 }
 
 export default class Parser {
