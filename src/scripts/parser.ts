@@ -213,8 +213,7 @@ export default class Parser {
                 children.push({ type: 'Text', value: this.previous().value });
 
             } else {
-                // if unrecognized just skip it
-                this.advance();
+                throw new Error("LAWE Parsing error: parseInlineUntil() encountered unrecognized token: " + TokenType)
             }
         }
     
