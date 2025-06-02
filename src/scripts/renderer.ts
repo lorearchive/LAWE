@@ -1,8 +1,3 @@
-// adding a new syntax ( a note for me ) continued from parser
-//11. add a switch case statement in render function
-//12. done! EASYYYYYYYYYYY
-
-
 import type { ASTNode } from "./parser";
 
 
@@ -20,7 +15,7 @@ export default class Renderer {
 
             case 'Heading':
                 const level = Math.min(node.level || 1, 6)  // HTML supports h1-h6
-                return `<h${level} id="law-heading" class="law-heading-${level}">${this.renderChildren(node)}</h${level}>`
+                return `<h${level} id="${node.ID}" class="law-heading-${level}">${this.renderChildren(node)}</h${level}>`
 
             case 'Underline':
                 return `<u>${this.renderChildren(node)}</u>`
@@ -33,6 +28,10 @@ export default class Renderer {
 
             case 'Text':
                 return this.escapeHTML(node.value || '')
+
+            case 'Rule':
+                return `<div id="horiz_rule" class="my-5"><hr /></div>`
+                
 
             default:
                 console.warn(`Unknown node type ${node.type}.`)

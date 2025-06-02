@@ -31,7 +31,6 @@ interface ProcessedPage {
         size: number;
         processingTime: number;
         wordCount: number;
-        readingTime: number; // estimated minutes
     };
 }
 
@@ -121,12 +120,6 @@ function extractExcerpt(content: string, maxLength: number = 200): string {
 }
 
 
-// Calculate estimated reading time (average 200 words per minute)
-function calculateReadingTime(wordCount: number): number {
-    return Math.ceil(wordCount / 200);
-}
-
-
 // Count words in text content
 function countWords(text: string): number {
     return text.trim().split(/\s+/).filter(word => word.length > 0).length;
@@ -156,7 +149,6 @@ function generateTOC( htmlContent: string ): TOCItem[] {
 
 // Validate HTML output for common issues
 function validateHtmlOutput(html: string, filePath: string): void {
-
     // Check for unclosed tags (basic validation)
     const openTags = (html.match(/<[^\/][^>]*>/g) || []).length;
     const closeTags = (html.match(/<\/[^>]*>/g) || []).length;
@@ -172,6 +164,20 @@ function validateHtmlOutput(html: string, filePath: string): void {
         throw new PageProcessorError(
             'Generated HTML is empty',
             'validation',
+            filePath
+        );
+    }
+    
+    // Check if HTML begins with an H1 element
+    const trimmedHtml = html.trim();
+    const h1Regex = /^<h1[^>]*>/i;
+    
+    if (!h1Regex.test(trimmedHtml)) {
+        console.warn(`LAWE PP: HTML content in ${filePath} does not begin with an H1 element.`);
+        
+        throw new PageProcessorError(
+           'HTML must begin with an H1 element',
+           'validation',
             filePath
         );
     }
@@ -233,7 +239,6 @@ export async function processPage( rawPage: RawPage, config: Partial<PageProcess
         const title = extractTitle(rawPage.content, rawPage.slug);
         const excerpt = extractExcerpt(rawPage.content);
         const wordCount = countWords(rawPage.content);
-        const readingTime = calculateReadingTime(wordCount);
         const processingTime = Date.now() - startTime;
         
         // Generate table of contents
@@ -260,7 +265,6 @@ export async function processPage( rawPage: RawPage, config: Partial<PageProcess
                 size: rawPage.size,
                 processingTime,
                 wordCount,
-                readingTime,
             },
         };
         

@@ -19,6 +19,8 @@ export enum TokenType {
     HEADING_OPEN = "HEADING_OPEN", // ==, ==, ===, ====, =====, ====== or smth basically think them as a open/close tag
     HEADING_CLOSE = "HEADING_CLOSE",
 
+    HORIZ_RULE = "HORIZ_RULE", // horizontal rule <hr />
+
     NEWLINE = "NEWLINE",
     WHITESPACE = "WHITESPACE",
 
@@ -177,6 +179,19 @@ export default class Lexer {
                 }
             }
 
+            // check for horizontal rule
+            if (
+                this.peek() === "-" &&
+                this.peek(1) === "-" &&
+                this.peek(2) === "-" &&
+                this.peek(3) === "-" &&
+                this.peek(4) !== "-"
+            ) {
+                this.advance(4)
+                tokens.push(this.createToken(TokenType.HORIZ_RULE, "----"))
+                continue
+            }
+
             // Check for underline
             if (this.peek() === "_" && this.peek(1) === "_") {
                 
@@ -238,8 +253,13 @@ export default class Lexer {
             }
 
             // Newline
-            if (this.peek() === '\n') {
-                tokens.push(this.createToken(TokenType.NEWLINE, this.advance()));
+            if (this.peek() === '\n' || (this.peek() === "\\" && this.peek(1) === "\\")) {
+
+                if (this.peek() === '\n') {
+                    tokens.push(this.createToken(TokenType.NEWLINE, this.advance()));
+                } else {
+                    tokens.push(this.createToken(TokenType.NEWLINE, this.advance(2)));
+                }
                 continue;
             }
 

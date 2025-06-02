@@ -18,6 +18,8 @@ export type NodeType =
     | 'Bold'
     | 'Italic'
     | 'Text'
+    | 'Rule'
+    | 'Linebreak'
 
 
 export interface ASTNode {
@@ -84,7 +86,7 @@ export default class Parser {
         // parse block-level stuff
 
         // Skip whitespace and newlines at the top level
-        this.skipWhitespaceAndNewlines() // Super nice function name
+        this.skipWhitespace() // Super nice function name
 
         if (this.isAtEnd()) {
             return null
@@ -94,6 +96,10 @@ export default class Parser {
 
         if (this.match(TokenType.HEADING_OPEN)) {
             return this.parseHeading()
+        }
+
+        if (this.match(TokenType.HORIZ_RULE)) {
+            return this.parseHorizRule()
         }
 
         // Default to paragraph for inline content
@@ -209,6 +215,12 @@ export default class Parser {
         this.generatedIDs.add(uniqueID)
 
         return uniqueID
+    }
+
+    private parseHorizRule(): ASTNode {
+        return {
+            type: 'Rule'
+        }
     }
 
     // INLINE LEVEL ELEMENTS----------------------------------------------------------
@@ -353,13 +365,9 @@ export default class Parser {
         return this.tokens[this.current]
     }
 
-    private skipWhitespaceAndNewlines(): void {
+    private skipWhitespace(): void {
         while (true) {
             if (this.match(TokenType.WHITESPACE)) {
-                continue
-            }
-
-            if (this.match(TokenType.NEWLINE)) {
                 continue
             }
 
