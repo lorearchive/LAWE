@@ -27,12 +27,14 @@ export interface ASTNode {
     level?: number
     url?: string
     text?: string
+    ID?: string // used for headings to generate a unique ID for every heading.
 }
 
 export default class Parser {
 
     private tokens: Token[] = []
     private current: number = 0
+    private generatedIDs: Set<string> = new Set() // Track generated heading IDs
 
     constructor() {
         // No longer takes tokens parameter
@@ -41,6 +43,7 @@ export default class Parser {
     private reset() {
         this.tokens = []
         this.current = 0
+        this.generatedIDs.clear() // Clear generated IDs when resetting
     }
 
     public parse(tokens: Token[]): ASTNode {
@@ -48,6 +51,7 @@ export default class Parser {
         // Set the tokens and reset position tracking
         this.tokens = tokens
         this.current = 0
+        this.generatedIDs.clear() // Clear generated IDs for new parse
 
         //root document node
         const document: ASTNode = {
@@ -89,14 +93,14 @@ export default class Parser {
         // Here youwould check for other block level elements
 
         if (this.match(TokenType.HEADING_OPEN)) {
-            return this.parseHeader()
+            return this.parseHeading()
         }
 
         // Default to paragraph for inline content
         return this.parseParagraph();
     }
 
-    private parseHeader(): ASTNode {
+    private parseHeading(): ASTNode {
         // previous() is now the HEADING_OPEN token
         const openToken = this.previous();
         const openLevel = openToken.value.length;
@@ -163,12 +167,48 @@ export default class Parser {
         if (this.match(TokenType.NEWLINE)) {
             this.match(TokenType.NEWLINE);
         }
+
+        // generate heading ID
+        const ID = this.getHeadingID(trimmedChildren)
+        console.log(ID)
         
         return {
             type: 'Heading',
             level,
-            children: trimmedChildren
+            children: trimmedChildren,
+            ID: ID
         };
+    }
+
+    private getHeadingID(nodeArr: ASTNode[]): string {
+
+        let baseID: string
+
+        if (nodeArr.every(node => node.type === "Text")) {
+        
+            const concat = nodeArr.map(node => node.value).join("")
+            baseID = concat
+                .trim()
+                .toLowerCase()
+                .replace(/[^a-zA-Z0-9 ]/g, "")
+                .replace(/ /g, "_")
+        } else {
+            throw new Error("LAWE parsing error: getHeadingID received node array which all nodes are not text." + JSON.stringify(nodeArr))
+        }
+
+        // Handle duplicate IDs by adding numbers
+        let uniqueID = baseID
+        let counter = 1
+
+        while (this.generatedIDs.has(uniqueID)) {
+            uniqueID = `${baseID}_${counter}`
+            counter++
+        }
+
+        // Add the unique ID to our set of generated IDs
+        this.generatedIDs.add(uniqueID)
+
+        return uniqueID
     }
 
     // INLINE LEVEL ELEMENTS----------------------------------------------------------
