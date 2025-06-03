@@ -20,6 +20,7 @@ export enum TokenType {
     HEADING_CLOSE = "HEADING_CLOSE",
 
     HORIZ_RULE = "HORIZ_RULE", // horizontal rule <hr />
+    LINEBREAK = "LINEBREAK", // forced linebreak \\
 
     NEWLINE = "NEWLINE",
     WHITESPACE = "WHITESPACE",
@@ -179,6 +180,23 @@ export default class Lexer {
                 }
             }
 
+            // Check for linebreak
+            if (this.peek() === '\\' && this.peek(1) === '\\') {
+                
+                this.advance(2) // Move past the two backslashes
+                
+                // Check if followed by whitespace or end of line (following DokuWiki spec)
+                if (this.isEOF() || /\s/.test(this.peek())) {
+                    tokens.push(this.createToken(TokenType.LINEBREAK, "\\\\"))
+                    continue
+                } else {
+                    // If not followed by whitespace/EOL, treat as regular text
+                    // Move back and let it be handled as text
+                    this.position -= 2
+                    this.col -= 2
+                }
+            }
+
             // check for horizontal rule
             if (
                 this.peek() === "-" &&
@@ -253,7 +271,7 @@ export default class Lexer {
             }
 
             // Newline
-            if (this.peek() === '\n' || (this.peek() === "\\" && this.peek(1) === "\\")) {
+            if (this.peek() === '\n') {
 
                 if (this.peek() === '\n') {
                     tokens.push(this.createToken(TokenType.NEWLINE, this.advance()));
@@ -299,7 +317,7 @@ export default class Lexer {
 
     private isSpecialCharacter(char: string): boolean {
         // Check if the character is part of special syntax
-        return ['_', '*', '/', '[', ']', '=', '\n', '|', '-', '`'].includes(char);
+        return ['_', '*', '/', '[', ']', '=', '\n', '|', '-', '`', '\\'].includes(char);
     }
 
 }

@@ -176,7 +176,6 @@ export default class Parser {
 
         // generate heading ID
         const ID = this.getHeadingID(trimmedChildren)
-        console.log(ID)
         
         return {
             type: 'Heading',
@@ -251,6 +250,11 @@ export default class Parser {
                 children.push({ type: "Text", value: " " })
                 continue
             }
+
+            if (this.match(TokenType.LINEBREAK)) {
+                children.push(this.parseLinebreak());
+                continue
+            }
             
             if (this.match(TokenType.UNDERLINE_OPEN)) {
                 children.push(this.parseUnderline());
@@ -265,13 +269,19 @@ export default class Parser {
                 children.push({ type: 'Text', value: this.previous().value });
 
             } else {
-                throw new Error("LAWE Parsing error: parseInlineUntil() encountered unrecognized token: " + TokenType)
+                throw new Error("LAWE Parsing error: parseInlineUntil() encountered unrecognized token: " + this.peek().type)
             }
         }
     
         return children;
     }
-  
+
+    private parseLinebreak(): ASTNode {
+        // The LINEBREAK token has already been consumed by the match() call
+        return {
+            type: 'Linebreak'
+        };
+    }
 
 
     private parseUnderline(): ASTNode {

@@ -129,10 +129,10 @@ function countWords(text: string): number {
 // Generate table of contents from HTML headings
 function generateTOC( htmlContent: string ): TOCItem[] {
     const headings: TOCItem[] = [];
-    const headingRegex = /<h([1-6])[^>]*id="([^"]*)"[^>]*>([^<]+)</gi;
-    let match;
+    const headingRegex = /<div[^>]*><h([1-6])[^>]*id="([^"]*)"[^>]*>(?:<span[^>]*>)?([^<]+)(?:<\/span>)?<\/h[1-6]><\/div>/gi;    let match;
     
     while ((match = headingRegex.exec(htmlContent)) !== null) {
+
         const level = parseInt(match[1]);
         const anchor = match[3].trim().toLowerCase().replace(/[^a-zA-Z0-9 ]/g, "").replace(/ /g, "_")
         const title = match[3].trim();
@@ -170,8 +170,8 @@ function validateHtmlOutput(html: string, filePath: string): void {
     
     // Check if HTML begins with an H1 element
     const trimmedHtml = html.trim();
-    const h1Regex = /^<h1[^>]*>/i;
-    
+    const h1Regex = /^<div[^>]*><h1[^>]*>/i;
+
     if (!h1Regex.test(trimmedHtml)) {
         console.warn(`LAWE PP: HTML content in ${filePath} does not begin with an H1 element.`);
         

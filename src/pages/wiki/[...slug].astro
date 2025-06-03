@@ -14,11 +14,6 @@ export async function getStaticPaths() {
     const rawPages = await getAllWikiPages(contentPath)
     const { processedPages } = await processAllPages(rawPages)
   
-    console.log('Sample page slugs:', processedPages.slice(0, 3).map(p => ({ 
-        slug: p.slug, 
-        joined: p.slug.join('/') 
-    })))
-  
     const routes = processedPages.map(page => { 
     
         const slugString = page.slug.join('/')
@@ -48,16 +43,22 @@ const lastModifiedDate = page.metadata.lastModified.toLocaleString('en-GB', {
 
 
 const pageURL = `https://github.com/lorearchive/law-content/tree/main/wiki/${page.slug.join("/")}.txt`
-
+const pageEditURL = `https://github.com/lorearchive/law-content/edit/main/wiki/${page.slug.join("/")}.txt`
 ---
 
 <Shell title={`${ page.title } - Lore Archive`}>
     <header id="pageTitle" set:html={ h1match } />
 
-    <div id="page-toolbar" class="mt-3 py-1 border-t border-b border-black mb-7 items-center flex flex-row">
+    <div id="page-toolbar" class="mt-3 p-2 border-t border-b border-black mb-7 items-center flex flex-row justify-between">
         <div id="lastModified">
             <span class="flex flex-row items-center">
-                <a href={pageURL} >Last Modified:</p>{ lastModifiedDate }</a>
+                <a href={pageURL} >Last Modified: { lastModifiedDate }</a>
+            </span>
+        </div>
+
+        <div id="page-toolbar-actions">
+            <span>
+                <a href={pageEditURL}>Edit this page</a>
             </span>
         </div>
     </div>
