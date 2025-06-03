@@ -4,6 +4,8 @@ export default class Renderer {
 
     public render(node: ASTNode): string {
 
+
+
         switch (node.type) {
             
             case 'Document':
@@ -25,10 +27,31 @@ export default class Renderer {
                 return `<div id="horiz_rule" class="my-5"><hr /></div>`
             case 'Linebreak':
                 return `<br />`
+
+            case 'Callout':
+                return this.renderCallout(node)
+
             default:
                 console.warn(`Unknown node type ${node.type}.`)
                 return ''
         }
+
+    }
+
+
+    private renderCallout(node: ASTNode): string {
+        const type = node.calloutType || 'default'
+        const title = node.calloutTitle
+        const body = this.renderChildren(node)
+
+
+        if (title) {
+            return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><span id="lawe-callout-span-title">${title}</span><span id="lawe-callout-span-body">${body}</span></div></div> `
+        } else {
+            return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><span id="lawe-callout-span-body">${body}</span></div></div> `
+        }
+
+
     }
 
     private renderChildren(node: ASTNode): string {

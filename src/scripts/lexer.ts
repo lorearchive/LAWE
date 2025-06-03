@@ -22,6 +22,9 @@ export enum TokenType {
     HORIZ_RULE = "HORIZ_RULE", // horizontal rule <hr />
     LINEBREAK = "LINEBREAK", // forced linebreak \\
 
+    CALLOUT_OPEN = "CALLOUT_OPEN", // <callout ...>
+    CALLOUT_CLOSE = "CALLOUT_CLOSE", // </callout>
+
     NEWLINE = "NEWLINE",
     WHITESPACE = "WHITESPACE",
 
@@ -36,6 +39,8 @@ export interface Token {
         line: number
         col: number
     }
+    calloutType?: string
+    calloutTitle?: string
 }
 
 export default class Lexer {
@@ -87,12 +92,14 @@ export default class Lexer {
     // This moves the lexer cursor.
     // The lexer evals one char at a time so if peek() is like a time traveller advance() is like u (not a time traveller)
 
-    private createToken(type: TokenType, value: string) {
+    private createToken(type: TokenType, value: string, calloutType?: string, calloutTitle?: string) {
 
         return {
             type,
             value,
-            position: { line: this.line, col: this.col - value.length}
+            position: { line: this.line, col: this.col - value.length},
+            calloutType,
+            calloutTitle
         }
     }
     // Concat type and value into one object
@@ -130,6 +137,32 @@ export default class Lexer {
 
 
         while(!this.isEOF()) {
+
+            // Check for callout tags
+            if (this.peek() === '<') {
+                // Check for opening callout tag
+                if (this.matchString('<callout')) {
+                    const result = this.parseCalloutOpen();
+                    if (result) {
+                        tokens.push(this.createToken(TokenType.CALLOUT_OPEN, result.value, result.type, result.title));
+                        tokenStack.push(TokenType.CALLOUT_OPEN);
+                        continue;
+                    }
+                }
+                
+                // Check for closing callout tag
+                if (this.matchString('</callout>')) {
+                    this.advance(10); // Move past "</callout>"
+                    tokens.push(this.createToken(TokenType.CALLOUT_CLOSE, '</callout>'));
+                    
+                    // Remove the most recent callout open token from the stack
+                    const index = tokenStack.lastIndexOf(TokenType.CALLOUT_OPEN);
+                    if (index !== -1) {
+                        tokenStack.splice(index, 1);
+                    }
+                    continue;
+                }
+            }
 
             // check for heading - look for equal signs at start of line
             if ((this.position === 0 || this.input[this.position - 1] === "\n") && this.peek() === "=") {
@@ -315,9 +348,91 @@ export default class Lexer {
         return tokens
     }
 
+    private matchString(str: string): boolean {
+        for (let i = 0; i < str.length; i++) {
+            if (this.peek(i) !== str[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private parseCalloutOpen(): { value: string, type: string, title?: string } | null {
+        const startPos = this.position;
+        
+        // Move past "<callout"
+        this.advance(8);
+        
+        // Skip whitespace
+        while (!this.isEOF() && /\s/.test(this.peek())) {
+            this.advance();
+        }
+        
+        let calloutType = 'default';
+        let calloutTitle: string | undefined;
+        
+        // Parse attributes
+        while (!this.isEOF() && this.peek() !== '>') {
+            // Skip whitespace
+            while (!this.isEOF() && /\s/.test(this.peek())) {
+                this.advance();
+            }
+            
+            if (this.peek() === '>') break;
+            
+            // Parse attribute name
+            let attrName = '';
+            while (!this.isEOF() && /[a-zA-Z]/.test(this.peek())) {
+                attrName += this.advance();
+            }
+            
+            // Skip whitespace and '='
+            while (!this.isEOF() && (/\s/.test(this.peek()) || this.peek() === '=')) {
+                this.advance();
+            }
+            
+            // Parse attribute value (with or without quotes)
+            let attrValue = '';
+            if (this.peek() === '"') {
+                this.advance(); // Skip opening quote
+                while (!this.isEOF() && this.peek() !== '"') {
+                    attrValue += this.advance();
+                }
+                this.advance(); // Skip closing quote
+            } else {
+                while (!this.isEOF() && !/\s/.test(this.peek()) && this.peek() !== '>') {
+                    attrValue += this.advance();
+                }
+            }
+            
+            // Store the attribute
+            if (attrName === 'type') {
+                const validTypes = ['default', 'info', 'warning', 'danger', 'success'];
+                if (validTypes.includes(attrValue)) {
+                    calloutType = attrValue;
+                }
+            } else if (attrName === 'title') {
+                calloutTitle = attrValue;
+            }
+        }
+        
+        // Consume the '>'
+        if (this.peek() === '>') {
+            this.advance();
+        } else {
+            // Invalid callout tag, reset position
+            this.position = startPos;
+            this.col = 1; // Simplified col tracking for this case
+            return null;
+        }
+        
+        const fullTag = this.input.slice(startPos, this.position);
+        return { value: fullTag, type: calloutType, title: calloutTitle };
+    }
+
     private isSpecialCharacter(char: string): boolean {
         // Check if the character is part of special syntax
-        return ['_', '*', '/', '[', ']', '=', '\n', '|', '-', '`', '\\'].includes(char);
+        return ['_', '*', '/', '[', ']', '=', '\n', '|', '-', '`', '\\', '<'].includes(char);
     }
 
 }

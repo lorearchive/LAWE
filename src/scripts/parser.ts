@@ -20,6 +20,7 @@ export type NodeType =
     | 'Text'
     | 'Rule'
     | 'Linebreak'
+    | 'Callout'
 
 
 export interface ASTNode {
@@ -30,6 +31,8 @@ export interface ASTNode {
     url?: string
     text?: string
     ID?: string // used for headings to generate a unique ID for every heading.
+    calloutType?: string // for callouts: default, info, warning, danger, success
+    calloutTitle?: string // optional title for callouts
 }
 
 export default class Parser {
@@ -38,9 +41,6 @@ export default class Parser {
     private current: number = 0
     private generatedIDs: Set<string> = new Set() // Track generated heading IDs
 
-    constructor() {
-        // No longer takes tokens parameter
-    }
 
     private reset() {
         this.tokens = []
@@ -100,6 +100,10 @@ export default class Parser {
 
         if (this.match(TokenType.HORIZ_RULE)) {
             return this.parseHorizRule()
+        }
+
+        if (this.match(TokenType.CALLOUT_OPEN)) {
+            return this.parseCallout()
         }
 
         // Default to paragraph for inline content
@@ -222,6 +226,39 @@ export default class Parser {
         }
     }
 
+    private parseCallout(): ASTNode {
+        // previous() is now the CALLOUT_OPEN token
+        const openToken = this.previous();
+        const calloutType = openToken.calloutType || 'default';
+        const calloutTitle = openToken.calloutTitle;
+        
+        // Skip any whitespace/newlines after the opening tag
+        this.skipWhitespaceAndNewlines();
+        
+        // Parse content until we hit CALLOUT_CLOSE
+        const children: ASTNode[] = [];
+        
+        while (!this.isAtEnd() && !this.check(TokenType.CALLOUT_CLOSE)) {
+            const nodes = this.parseInlineUntil(TokenType.CALLOUT_CLOSE);
+            children.push(...nodes);
+        }
+        
+        // Consume the closing tag
+        this.consume(TokenType.CALLOUT_CLOSE, "Expected '</callout>' to close callout");
+        
+        // Optionally consume newlines after closing tag
+        if (this.match(TokenType.NEWLINE)) {
+            this.match(TokenType.NEWLINE);
+        }
+        
+        return {
+            type: 'Callout',
+            calloutType,
+            calloutTitle,
+            children
+        };
+    }
+
     // INLINE LEVEL ELEMENTS----------------------------------------------------------
 
     private parseParagraph(): ASTNode {
@@ -266,7 +303,7 @@ export default class Parser {
                 children.push(this.parseItalic());
 
             } else if (this.match(TokenType.TEXT)) {
-                children.push({ type: 'Text', value: this.previous().value });
+                children.push({ type: 'Text', value: this.previous().value })
 
             } else {
                 throw new Error("LAWE Parsing error: parseInlineUntil() encountered unrecognized token: " + this.peek().type)
@@ -378,6 +415,16 @@ export default class Parser {
     private skipWhitespace(): void {
         while (true) {
             if (this.match(TokenType.WHITESPACE)) {
+                continue
+            }
+
+            break
+        }
+    }
+
+    private skipWhitespaceAndNewlines(): void {
+        while (true) {
+            if (this.match(TokenType.WHITESPACE) || this.match(TokenType.NEWLINE)) {
                 continue
             }
 

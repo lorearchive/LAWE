@@ -117,7 +117,7 @@ export async function fetchWikiContent( config: Partial<ContentFetchConfig> = {}
             executeGitCommand( `cd "${localPath}" && git reset --hard HEAD && git pull origin ${finalConfig.branch}`, finalConfig.gitTimeout );
         
         } else {
-            console.log('Cloning wiki content repository...')
+            console.log('LAWE: Cloning wiki content repository...')
       
             executeGitCommand( `git clone --depth 1 --single-branch --branch ${finalConfig.branch} "${finalConfig.repoUrl}" "${localPath}"`, finalConfig.gitTimeout );
         }
