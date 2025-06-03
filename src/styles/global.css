@@ -55,3 +55,20 @@ h4 {
 p:not(.p-no-margin) {
     margin-bottom: 1.4em;
 }
+
+a:link:not(.a-no-style) {
+    color: #0000ee;
+    text-decoration: underline;
+}
+a:link:not(.a-no-style):hover {
+    text-decoration: none;
+}
+
+a:visited:not(.a-no-style) {
+    color: #551a8b;
+}
+
+a:link:active:not(.a-no-style)
+a:visited:active:not(.a-no-style) {
+    color: #ff0000;
+}
