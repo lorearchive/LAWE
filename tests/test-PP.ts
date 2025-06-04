@@ -1,8 +1,8 @@
 import type { RawPage } from '../src/utils/git-service';
-import { processPage, processAllPages } from '../src/utils/pages-processor';
-import Lexer from '../src/scripts/lexer';
-import Parser from '../src/scripts/parser';
-import Renderer from '../src/scripts/renderer';
+import { processPage, processAllPages } from '../src/utils/pages-processor.ts';
+import Lexer from '../src/scripts/Lexing/lexer.ts';
+import Parser from '../src/scripts/parser.ts';
+import Renderer from '../src/scripts/renderer.ts';
 
 // Create test data
 function createTestRawPages(): RawPage[] {
@@ -93,7 +93,6 @@ export async function testSinglePage() {
         console.log('Excerpt:', result.excerpt);
         console.log('Processing time:', result.metadata.processingTime + 'ms');
         console.log('Word count:', result.metadata.wordCount);
-        console.log('Reading time:', result.metadata.readingTime + ' min');
         
         if (result.toc && result.toc.length > 0) {
             console.log('Table of contents:');
@@ -161,7 +160,7 @@ export async function testErrorHandling() {
     const errorPage: RawPage = {
         slug: ['error-test'],
         filePath: '/error-test.wiki',
-        content: 'This will cause lexer errors: {{{{invalid}}}}',
+        content: '====== Heading 1 ====== This will cause lexer errors: {{{{invalid}}}}',
         lastModified: new Date(),
         size: 50
     };
@@ -189,7 +188,7 @@ export async function testPerformance() {
         manyPages.push({
             slug: ['performance', `page-${i}`],
             filePath: `/performance/page-${i}.wiki`,
-            content: `# Performance Test Page ${i}
+            content: `====== Heading 1 ====== Performance Test Page ${i}
 
 This is test page number ${i} for performance testing.
 

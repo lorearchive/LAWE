@@ -7,8 +7,8 @@
 
 
 
-import type { Token } from "./lexer";
-import { TokenType } from "./lexer";
+import type { Token } from "./Lexing/lexer";
+import { TokenType } from "./Lexing/lexer";
 
 export type NodeType = 
     | 'Document'
