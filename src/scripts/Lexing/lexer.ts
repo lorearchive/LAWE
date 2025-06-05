@@ -1,6 +1,6 @@
 import LexerContext from "./context"
 import type { TokenHandler } from "./handlers"
-import { FormattingHandler, HeadingHandler, MiscHandler, TextHandler, WhitespaceHandler } from "./handlers";
+import { FormattingHandler, HeadingHandler, MiscHandler, PseudoHTMLHandler, TextHandler, WhitespaceHandler } from "./handlers";
 
 export enum TokenType {
     TEXT = 'TEXT',
@@ -21,6 +21,10 @@ export enum TokenType {
 
     CALLOUT_OPEN = "CALLOUT_OPEN",
     CALLOUT_CLOSE = "CALLOUT_CLOSE",
+    SUB_OPEN = "SUB_OPEN",
+    SUB_CLOSE = "SUB_CLOSE",
+    SUP_OPEN = "SUP_OPEN",
+    SUP_CLOSE = "SUP_CLOSE",
 
     EOF = "EOF"
 }
@@ -49,6 +53,7 @@ export default class Lexer {
             new HeadingHandler(),
             new WhitespaceHandler(),
             new TextHandler(),
+            new PseudoHTMLHandler(),
             new MiscHandler()
         ];
 
@@ -63,8 +68,8 @@ export default class Lexer {
 
     public tokenise(input: string): Token[] {
         const context = new LexerContext(input);
-        const tokens: Token[] = [];
-        const tokenStack: TokenType[] = [];
+        const tokens: Token[] = []
+        const tokenStack: TokenType[] = []
 
         while (!context.isEOF()) {
             let handled = false;
@@ -84,7 +89,7 @@ export default class Lexer {
             }
         }
 
-        tokens.push(context.createToken(TokenType.EOF, ''));
-        return tokens;
+        tokens.push(context.createToken(TokenType.EOF, ''))
+        return tokens
     }
 }
