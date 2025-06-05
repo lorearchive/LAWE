@@ -1,5 +1,5 @@
 # Adding new syntax to the Lexer
-This guide walks you through adding new syntax to the lexer. We'll use linebreak (\\) as our example.
+This guide walks you through adding new syntax to the lexer. We'll use linebreak (\\\\) as our example.
 
 ## Step 1: Add Token Types
 First, we must add the new token type (if applicable) to the `TokenType` enum in `Lexing/lexer.ts`.
