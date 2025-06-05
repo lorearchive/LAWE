@@ -71,3 +71,7 @@ export class TextHandler extends BaseTokenHandler {
 }
 ```
 This prevents the text handler from consuming characters that should be handled by syntax handlers.
+
+
+## Misc & pseudo-HTML  handling
+Typically, most new syntax would be added as misc and/or pseudo-HTML (HTML-like) syntax. In this case, they must be added to the `MiscHandler()` and/or the `PseudoHTMLHandler()`.
