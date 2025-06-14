@@ -205,11 +205,19 @@ export class MiscHandler extends BaseTokenHandler {
     handle(context: LexerContext, tokens: Token[], tokenStack: TokenType[]): boolean {
 
         if (this.isLinebreak(context)) {
-            return this.handleLinebreak(context, tokens)
+
+            context.advance(2)
+            tokens.push(context.createToken(TokenType.LINEBREAK, '\\\\'))
+
+            return true
         }
 
         if (this.isHorizRule(context)) {
-            return this.handleHorizRule(context, tokens)
+
+            context.advance(4)
+            tokens.push(context.createToken(TokenType.HORIZ_RULE, '----'))
+            
+            return true
         }
         
         return false
@@ -223,18 +231,6 @@ export class MiscHandler extends BaseTokenHandler {
         const asStartOfLine = context.position === 0 || context.input[context.position - 1] === '\n'
 
         return asStartOfLine && context.peek() === '-' && context.peek(1) === '-' && context.peek(2) === '-' && context.peek(3) === '-' && context.peek(4) !== '-';
-    }
-
-    private handleLinebreak(context: LexerContext, tokens: Token[]): boolean {
-        context.advance(2)
-        tokens.push(context.createToken(TokenType.LINEBREAK, '\\\\'))
-        return true
-    }
-
-    private handleHorizRule(context: LexerContext, tokens: Token[]): boolean {
-        context.advance(4);
-        tokens.push(context.createToken(TokenType.HORIZ_RULE, '----'));
-        return true;
     }
 }
 
@@ -325,7 +321,7 @@ export class PseudoHTMLHandler extends BaseTokenHandler {
             return false;
         }
 
-        const mapping = this.tagMappings[tagName]
+        const mapping = this.tagMappings[tagName as keyof typeof this.tagMappings];
         let attributes: { [key: string]: string } = {};
 
         // Parse attributes (for callout)
@@ -375,8 +371,7 @@ export class PseudoHTMLHandler extends BaseTokenHandler {
             return false;
         }
 
-        const mapping = this.tagMappings[tagName];
-
+        const mapping = this.tagMappings[tagName as keyof typeof this.tagMappings];
         // Skip to closing '>'
         while (!context.isEOF() && context.peek() !== '>') {
             context.advance();
