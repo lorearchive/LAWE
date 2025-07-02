@@ -183,7 +183,7 @@ function generateSlug(pathComponents: string[]): string[] {
  * @param config Configuration options
  * @returns Array of objects with page paths and content
  */
-export async function getAllWikiPages( contentPath: string, config: Partial<Pick<ContentFetchConfig, 'maxFileSize'>> = {} ): Promise<RawPage[]> {
+export async function getAllPages( contentPath: string, config: Partial<Pick<ContentFetchConfig, 'maxFileSize'>> = {} ): Promise<RawPage[]> {
 
     const finalConfig = { ...defaultConfig, ...config };
     const pages: RawPage[] = [];
@@ -259,7 +259,7 @@ export async function getAllWikiPages( contentPath: string, config: Partial<Pick
  * @param slug Array representing the page path
  * @returns Page object or null if not found
  */
-export async function getWikiPage( contentPath: string, slug: string[] ): Promise<RawPage | null> {
+export async function getSinglePage( contentPath: string, slug: string[] ): Promise<RawPage | null> {
     try {
         const filePath = path.join(contentPath, ...slug) + '.txt';
     
