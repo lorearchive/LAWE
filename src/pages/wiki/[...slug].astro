@@ -3,7 +3,7 @@
 const { page } = Astro.props
 
 
-import { fetchWikiContent, getAllWikiPages } from '../../utils/git-service'
+import { fetchWikiContent, getAllPages } from '../../utils/git-service'
 import { processAllPages } from '../../utils/pages-processor'
 import Shell from '../../layouts/Shell.astro'
 import RenderTOC from '../../components/RenderTOC.astro'
@@ -11,7 +11,7 @@ import Icon from '../../components/Icon.astro'
 
 export async function getStaticPaths() {
     const contentPath = await fetchWikiContent()
-    const rawPages = await getAllWikiPages(contentPath)
+    const rawPages = await getAllPages(contentPath)
     const { processedPages } = await processAllPages(rawPages)
   
     const routes = processedPages.map(page => { 

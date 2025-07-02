@@ -71,15 +71,12 @@ But this part should work fine.`,
 export async function testSinglePage() {
     console.log('\n=== TESTING SINGLE PAGE PROCESSING ===');
     
-    // Temporarily replace your actual lexer/parser/renderer with mocks
-    // You'll need to modify your PageProcessor imports or create a way to inject these
-    
     const testPage = createTestRawPages()[0];
     
     try {
         console.log(`Testing page: ${testPage.slug.join('/')}`);
         
-        // You might need to modify PageProcessor to accept these as parameters
+        //  might need to modify PageProcessor to accept these as parameters TODO
         // or temporarily replace the imports
         const result = await processPage(testPage, {
             enableCaching: false,

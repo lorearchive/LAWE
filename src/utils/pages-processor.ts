@@ -2,8 +2,6 @@
 
 import type { RawPage } from './git-service';
 
-// Import your custom wiki processing modules
-// Adjust these import paths based on your actual file structure
 import Lexer  from '../scripts/Lexing/lexer';
 import Parser from '../scripts/parser';
 import Renderer from '../scripts/renderer';
@@ -353,7 +351,7 @@ export async function processWithCache(
         return processAllPages(rawPages, finalConfig);
     }
     
-    // Simple in-memory cache for build time (you could extend this to use file-based caching)
+    // Simple in-memory cache for build time (could extend to file-based caching TODO)
     const cache = new Map<string, ProcessedPage>();
     const cacheHits = [];
     const cacheMisses = [];

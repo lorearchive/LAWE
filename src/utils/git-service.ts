@@ -1,5 +1,7 @@
 // fetches raw wiki files from remote git at compile time. Git-service (GS)
 
+import global from '../constants';
+
 import { execSync } from 'child_process';
 import fs from 'fs/promises';
 import path from 'path';
@@ -113,7 +115,7 @@ export async function fetchWikiContent( config: Partial<ContentFetchConfig> = {}
 
             console.log('LAWE: Updating existing wiki content repository...');
       
-            // Reset any local changes and pull latest
+            // Reset local changes and pull latest
             executeGitCommand( `cd "${localPath}" && git reset --hard HEAD && git pull origin ${finalConfig.branch}`, finalConfig.gitTimeout );
         
         } else {
@@ -174,7 +176,49 @@ function generateSlug(pathComponents: string[]): string[] {
             .replace(/[^\w\-]/g, '')
             .replace(/--+/g, '-')
             .replace(/^-+|-+$/g, '')
-    ).filter(Boolean); // Remove empty components
+    ).filter(Boolean)
+}
+
+// Helper function to get the last commit date for a specific file
+async function getLastCommitDate(filePath: string, repoPath: string): Promise<Date> {
+    try {
+        const relativePath = path.relative(repoPath, filePath);
+        const command = `cd "${repoPath}" && git log -1 --format="%ci" -- "${relativePath}"`;
+        
+        console.log(`LAWE: [DEBUG] Running git command: ${command}`);
+        
+        const result = execSync(command, {
+            stdio: 'pipe',
+            timeout: 5000, // 5 second timeout for individual git log commands
+            encoding: 'utf8',
+        });
+        
+        const commitDateStr = result.trim();
+        console.log(`LAWE: [DEBUG] Git result for ${relativePath}: "${commitDateStr}"`);
+        
+        if (!commitDateStr) {
+            // If no commit found for this file, fall back to file modification time
+            console.warn(`LAWE: No git history found for ${relativePath}, using file modification time`);
+            const stats = await fs.stat(filePath);
+            return stats.mtime;
+        }
+        
+        const commitDate = new Date(commitDateStr);
+        console.log(`LAWE: [DEBUG] Parsed commit date for ${relativePath}: ${commitDate.toISOString()}`);
+        return commitDate;
+    } catch (e) {
+        console.warn(`LAWE: Error getting git commit date for ${filePath}:`, e);
+        // Fall back to file modification time
+        try {
+            const stats = await fs.stat(filePath);
+            console.log(`LAWE: [DEBUG] Fallback to file mtime for ${filePath}: ${stats.mtime.toISOString()}`);
+            return stats.mtime;
+        } catch (statError) {
+            // If we can't even get file stats, return current date as last resort
+            console.error(`LAWE: Cannot get file stats for ${filePath}:`, statError);
+            return new Date();
+        }
+    }
 }
 
 /**
@@ -191,6 +235,13 @@ export async function getAllPages( contentPath: string, config: Partial<Pick<Con
     // Validate content path
     if (!(await directoryExists(contentPath))) {
         throw new ContentValidationError(`LAWE: Content directory does not exist: ${contentPath}`);
+    }
+
+    // Find the git repository root (should be the parent of contentPath)
+    const repoPath = path.dirname(contentPath);
+    const gitDirExists = await directoryExists(path.join(repoPath, '.git'));
+    if (!gitDirExists) {
+        console.warn('LAWE: Git repository not found, falling back to file modification times');
     }
 
     // Recursive function to walk directory tree
@@ -220,16 +271,26 @@ export async function getAllPages( contentPath: string, config: Partial<Pick<Con
                         const pageName = entry.name.replace(/\.txt$/, '');
                         const slug = generateSlug([...parentSlug, pageName]);
               
-                        // Read file content and stats
-                        const [content, stats] = await Promise.all([
-                            fs.readFile(entryPath, 'utf-8'),
-                            fs.stat(entryPath)
-                        ]);
+                        // Read file content and get stats
+                        const content = await fs.readFile(entryPath, 'utf-8');
+                        const stats = await fs.stat(entryPath);
+                        
+                        // Get last commit date (falls back to file mtime if git fails)
+                        const lastModified = gitDirExists 
+                            ? await getLastCommitDate(entryPath, repoPath)
+                            : stats.mtime;
+
+                        const slugPath = slug.join("/");
+                        global.lastMod[slugPath] = lastModified
+                        
+                        // Debug logging
+                        console.log(`LAWE: [DEBUG] ${slugPath} -> ${lastModified.toISOString()} (${gitDirExists ? 'git commit' : 'file mtime'})`);
               
-                        pages.push({ slug,
+                        pages.push({ 
+                            slug,
                             filePath: entryPath,
                             content: content.trim(), // Remove leading/trailing whitespace
-                            lastModified: stats.mtime,
+                            lastModified,
                             size: stats.size
                         });
               
@@ -250,6 +311,13 @@ export async function getAllPages( contentPath: string, config: Partial<Pick<Con
     await processDirectory(contentPath);
   
     console.log(`LAWE: Successfully processed ${pages.length} wiki pages`);
+    
+    // Debug: Print summary of all lastMod dates
+    console.log('\nLAWE: [DEBUG] Summary of lastMod dates:');
+    Object.entries(global.lastMod).forEach(([slug, date]) => {
+        console.log(`  ${slug}: ${date.toISOString()}`);
+    });
+    
     return pages;
 }
 

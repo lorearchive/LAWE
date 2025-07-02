@@ -1,74 +1,75 @@
 // @ts-check
+import global from './src/constants'
 import { defineConfig } from 'astro/config'
 import sitemap from '@astrojs/sitemap'
-import { processAllPages } from './src/utils/pages-processor'
-import { fetchWikiContent, getAllWikiPages } from './src/utils/git-service'
 import tailwindcss from '@tailwindcss/vite';
-
-
-
-// Process pages at build time
-let processedPagesMap = new Map();
-
-
-async function initializeProcessedPages() {
-    try {
-        const contentPath = await fetchWikiContent()
-        const rawPages = await getAllWikiPages(contentPath)
-        const { processedPages } = await processAllPages(rawPages);
-    
-        // Create a map for quick lookups
-        processedPages.forEach(page => {
-            const urlPath = '/' + page.slug.join('/');
-            processedPagesMap.set(urlPath === '/' ? '/' : urlPath, page);
-        });
-    
-        console.log(`LAWE ASTRO CONFIG: Loaded ${processedPages.length} processed pages for sitemap`);
-    }
-     catch (error) {
-        console.error('LAWE ASTRO CONFIG: Failed to initialize processed pages:', error);
-    }
-}
-
-
-await initializeProcessedPages()
-
+import { processAllPages } from './src/utils/pages-processor'
+import { fetchWikiContent, getAllPages } from './src/utils/git-service'
 
 // https://astro.build/config
 export default defineConfig({
-
-    site: 'https://lorearchive.org',
-    build: {},
-
-    integrations: [
-        sitemap({
-            serialize(item) {
-                const urlPath = item.url.replace('https://lorearchive.org', '') || '/'
-                const processedPage = processedPagesMap.get(urlPath)
-
-                if (processedPage && processedPage.metadata.lastModified) {
-                    item.lastmod = processedPage.metadata.lastModified.toISOString()
-                } else {
-                    console.warn(`LAWE ASTRO CONFIG: No processed page found for ${urlPath}, using current date`)
-                    item.lastmod = new Date().toISOString()
-                }
-
-                return item
-            }
-    })],
-
-    
-
-    vite: {
-        plugins: [
-            {
-                name: "content fetcher",
-                buildStart: async () => {
-                    console.log('Fetching content from remote repository...')
-                }
-            },
+  site: 'https://lorearchive.org',
+  build: {},
+  integrations: [
+    sitemap({
+      serialize(item) {
+        // Extract the page path from the URL
+        const url = new URL(item.url);
+        let pathname = url.pathname;
         
-            tailwindcss()]
-    }
-
+        // Remove leading/trailing slashes
+        pathname = pathname.replace(/^\/+|\/+$/g, '');
+        
+        // Remove the 'wiki/' prefix if it exists, since that's part of the content path
+        // not the actual slug stored in global.lastMod
+        const slugPath = pathname.replace(/^wiki\//, '');
+        
+        // Look up the lastMod date for this page
+        const lastMod = global.lastMod[slugPath];
+        
+        console.log(`LAWE: [SITEMAP DEBUG] URL: ${item.url}, pathname: ${pathname}, slugPath: ${slugPath}`);
+        
+        if (lastMod) {
+          console.log(`LAWE: [SITEMAP] ${slugPath} -> ${lastMod.toISOString()}`);
+          return {
+            url: item.url,
+            lastmod: lastMod.toISOString(),
+            links: item.links
+          };
+        } else {
+          console.warn(`LAWE: [SITEMAP] No lastMod found for ${slugPath}, available keys:`, Object.keys(global.lastMod));
+          return {
+            url: item.url,
+            lastmod: new Date().toISOString(),
+            links: item.links
+          };
+        }
+      }
+    })
+  ],
+  vite: {
+    plugins: [
+      {
+        name: "content fetcher",
+        buildStart: async () => {
+          console.log('LAWE: Fetching content from remote repository...');
+          
+          try {
+            const contentPath = await fetchWikiContent();
+            const pages = await getAllPages(contentPath);
+            
+            await processAllPages(pages);
+            
+            console.log(`LAWE: Content fetching complete. Processed ${pages.length} pages.`);
+            console.log(`LAWE: global.lastMod contains ${Object.keys(global.lastMod).length} entries`);
+            
+          } catch (error) {
+            console.error('LAWE: Error during content fetching:', error);
+            throw error
+          }
+        }
+      },
+      tailwindcss()
+    ]
+  }
 });
