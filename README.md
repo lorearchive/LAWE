@@ -13,6 +13,25 @@ It ships as little JavaScript to user as possible with the help of [AstroJS](htt
 ## Compiling
 LAWE fetches its raw content from [law-content](https://github.com/lorearchive/law-content) at compile time, then generates static HTML files (as opposed to rendering whenever a user visits a page), which makes LAWE extremely fast and memory-efficient, while also improving [SEO](https://en.wikipedia.org/wiki/Search_engine_optimization).
 
+You can start the dev server with:
+
+```bash
+npm run dev
+```
+
+and compile LAWE with:
+
+```bash
+npx astro build
+```
+
+or
+
+```bash
+npm run astro build
+```
+
+
 
 ## Important acronyms used while compiling
 - `LAWE PP`: LAWE Pages-processor. (`/src/utils/pages-processor.ts`) Builds HTML from raw wikitext at compile time.
