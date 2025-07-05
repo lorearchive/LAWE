@@ -8,6 +8,8 @@ export interface TokenHandler {
     priority: number; // Higher number = higher priority
 }
 
+export type CalloutType = "default" | "success" | "info" | "warning" | "danger"
+
 
 export abstract class BaseTokenHandler implements TokenHandler {
     abstract priority: number;
@@ -345,7 +347,7 @@ export class PseudoHTMLHandler extends BaseTokenHandler {
         const token = context.createToken(mapping.open, fullTag);
         
         if (tagName === 'callout') {
-            token.calloutType = attributes.type || 'default';
+            token.calloutType = (attributes.type as CalloutType) || 'default'
             token.calloutTitle = attributes.title;
         }
 

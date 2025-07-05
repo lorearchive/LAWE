@@ -5,8 +5,7 @@
 //9. Add the corresponding parse function.
 //10. proceed to renderer
 
-
-
+import type { CalloutType } from "./Lexing/handlers";
 import type { Token } from "./Lexing/lexer";
 import { TokenType } from "./Lexing/lexer";
 
@@ -20,8 +19,8 @@ export type NodeType =
     | 'Text'
     | 'Rule'
     | 'Linebreak'
+    | 'Newline'
     | 'Callout'
-
 
 export interface ASTNode {
     type: NodeType
@@ -31,7 +30,7 @@ export interface ASTNode {
     url?: string
     text?: string
     ID?: string // used for headings to generate a unique ID for every heading.
-    calloutType?: string // for callouts: default, info, warning, danger, success
+    calloutType?: CalloutType // for callouts: default, info, warning, danger, success
     calloutTitle?: string // optional title for callouts
 }
 
@@ -40,7 +39,6 @@ export default class Parser {
     private tokens: Token[] = []
     private current: number = 0
     private generatedIDs: Set<string> = new Set() // Track generated heading IDs
-
 
     private reset() {
         this.tokens = []
@@ -92,7 +90,7 @@ export default class Parser {
             return null
         }
 
-        // Here youwould check for other block level elements
+        // Here you would check for other block level elements
 
         if (this.match(TokenType.HEADING_OPEN)) {
             return this.parseHeading()
@@ -292,6 +290,11 @@ export default class Parser {
                 children.push(this.parseLinebreak());
                 continue
             }
+
+            if (this.match(TokenType.NEWLINE)) {
+                children.push(this.parseNewline());
+                continue
+            }
             
             if (this.match(TokenType.UNDERLINE_OPEN)) {
                 children.push(this.parseUnderline());
@@ -320,6 +323,12 @@ export default class Parser {
         };
     }
 
+    private parseNewline(): ASTNode {
+        // The NEWLINE token has already been consumed by the match() call
+        return {
+            type: 'Newline'
+        };
+    }
 
     private parseUnderline(): ASTNode {
 
@@ -359,9 +368,6 @@ export default class Parser {
             children
         };
     }
-
-
-
 
     // --------------------------- HELPER METHODS
 

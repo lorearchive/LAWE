@@ -1,4 +1,5 @@
 import type { ASTNode } from "./parser";
+import icons, { getIconMarkup, type IconName } from "../assets/Icons";
 
 export default class Renderer {
 
@@ -27,6 +28,8 @@ export default class Renderer {
                 return `<div id="horiz_rule" class="my-5"><hr /></div>`
             case 'Linebreak':
                 return `<br />`
+            case 'Newline':
+                return '\n'
 
             case 'Callout':
                 return this.renderCallout(node)
@@ -44,11 +47,44 @@ export default class Renderer {
         const title = node.calloutTitle
         const body = this.renderChildren(node)
 
+        
+
+
+        console.log("DEBUG CALLOUT TYPE" + type)
+
 
         if (title) {
-            return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><span id="lawe-callout-span-title">${title}</span><span id="lawe-callout-span-body">${body}</span></div></div> `
+
+            switch(type) {
+                case "warning":
+                case "success":
+                case "danger":
+                    return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><div id="lawe-callout-icon"><span id="lawe-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {isCallout: true, calloutType: type, className: "mb-2"})}</span></div><span id="lawe-callout-title-span"><h4>${title}</h4></span><span id="lawe-callout-span-body">${body}</span></div></div> `
+
+                case "info":
+                    return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><div id="lawe-callout-icon"><span id="lawe-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {isCallout: true, calloutType: type, size: 28, className: "mb-2"})}</span></div><span id="lawe-callout-title-span"><h4>${title}</h4></span><span id="lawe-callout-span-body">${body}</span></div></div> `
+
+                default: 
+                    throw new Error("LAWE CALLOUT TYPE UNKNOWN IN ICONS: " + type)
+                    //used to suppress errors, probably won't ever come across this
+            }
+
+
         } else {
-            return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><span id="lawe-callout-span-body">${body}</span></div></div> `
+            switch(type) {
+                case "warning":
+                case "success":
+                case "danger":
+                    return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><div id="lawe-callout-icon"><span id="lawe-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {isCallout: true, calloutType: type, className: "mb-2"})}</span></div><span id="lawe-callout-span-body">${body}</span></div></div> `
+
+                case "info":
+                    return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><div id="lawe-callout-icon"><span id="lawe-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {isCallout: true, calloutType: type, size: 28, className: "mb-2"})}</span></div><span id="lawe-callout-span-body">${body}</span></div></div> `
+
+                default: 
+                    throw new Error("LAWE CALLOUT TYPE UNKNOWN IN ICONS: " + type)
+                    //used to suppress errors, probably won't ever come across this
+            }
+
         }
 
 

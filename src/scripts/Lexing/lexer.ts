@@ -1,5 +1,5 @@
 import LexerContext from "./context"
-import type { TokenHandler } from "./handlers"
+import type { CalloutType, TokenHandler } from "./handlers"
 import { FormattingHandler, HeadingHandler, MiscHandler, PseudoHTMLHandler, TextHandler, WhitespaceHandler } from "./handlers";
 
 export enum TokenType {
@@ -33,7 +33,7 @@ export interface Token {
     type: TokenType;
     value: string;
     position: { line: number; col: number };
-    calloutType?: string;
+    calloutType?: CalloutType;
     calloutTitle?: string;
 }
 

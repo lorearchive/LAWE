@@ -1,5 +1,6 @@
 import type { Token } from "./lexer";
 import { TokenType } from "./lexer";
+import type { CalloutType } from "./handlers";
 
 export default class LexerContext {
     constructor(
@@ -42,7 +43,7 @@ export default class LexerContext {
         return true;
     }
 
-    createToken(type: TokenType, value: string, calloutType?: string, calloutTitle?: string): Token {
+    createToken(type: TokenType, value: string, calloutType?: CalloutType, calloutTitle?: string): Token {
         return {
             type,
             value,

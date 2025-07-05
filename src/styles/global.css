@@ -76,3 +76,48 @@ a:link:active:not(.a-no-style)
 a:visited:active:not(.a-no-style) {
     color: #ff0000;
 }
+
+
+/** ------------------------ Typography --- Callouts **/
+
+.lawe-callout {
+    margin-bottom: 1.4em;
+    border-top: 0.15em solid #eeeeee;
+    border-right: 0.15em solid #eeeeee;
+    border-bottom: 0.15em solid #eeeeee;
+    border-radius: 0.5em;
+    background-color: none;
+}
+.lawe-callout #lawe-callout-title-span > h4 {
+    margin: 0 0 0.1em 0; /* fallback for no title callouts */
+}
+
+#lawe-callout-inner {
+    padding: 2em 2em 2em 2em;
+    background-color: #f5f4f8;
+}
+
+
+#lawe-callout-info {
+    border-left: 0.2em solid #5bc0de;
+}
+#lawe-callout-info #lawe-callout-title-span > h4 {
+    margin: 0 0 0.1em 0;
+    color: #5bc0de !important;
+}
+#lawe-callout-icon-span-info svg {
+    fill: #5bc0de;
+}
+
+
+#lawe-callout-warning {
+    border-left: 0.2em solid #FFA500;
+}
+#lawe-callout-warning #lawe-callout-title-span > h4 {
+    margin: 0 0 0.1em 0;
+    color: darkorange !important;
+}
+
+#lawe-callout-icon-span-warning svg {
+    fill: darkorange;
+}
