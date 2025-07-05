@@ -23,10 +23,27 @@ export enum TokenType {
 
     CALLOUT_OPEN = "CALLOUT_OPEN",
     CALLOUT_CLOSE = "CALLOUT_CLOSE",
+
     SUB_OPEN = "SUB_OPEN",
     SUB_CLOSE = "SUB_CLOSE",
     SUP_OPEN = "SUP_OPEN",
     SUP_CLOSE = "SUP_CLOSE",
+
+    TABLE_OPEN = "TABLE_OPEN",
+    TABLE_CLOSE = "TABLE_CLOSE",
+    THEAD_OPEN = "THEAD_OPEN",
+    THEAD_CLOSE = "THEAD_CLOSE",
+    TBODY_OPEN = "TBODY_OPEN",
+    TBODY_CLOSE = "TBODY_CLOSE",
+    TFOOT_OPEN = "TFOOT_OPEN",
+    TFOOT_CLOSE = "TFOOT_CLOSE",
+    TR_OPEN = "TR_OPEN",
+    TR_CLOSE = "TR_CLOSE",
+    TD_OPEN = "TD_OPEN",
+    TD_CLOSE = "TD_CLOSE",
+    TH_OPEN = "TH_OPEN",
+    TH_CLOSE = "TH_CLOSE",
+
 
     EOF = "EOF"
 }
@@ -35,6 +52,7 @@ export interface Token {
     type: TokenType;
     value: string;
     position: { line: number; col: number };
+    attributes?: Record<string, string>;
     calloutType?: CalloutType;
     calloutTitle?: string;
 }

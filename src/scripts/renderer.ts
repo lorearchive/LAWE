@@ -1,4 +1,4 @@
-import type { ASTNode } from "./parser";
+import type { ASTNode } from "./Parsing/parser";
 import icons, { getIconMarkup, type IconName } from "../assets/Icons";
 
 export default class Renderer {
@@ -33,6 +33,21 @@ export default class Renderer {
 
             case 'Callout':
                 return this.renderCallout(node)
+
+            case 'Table':
+                return `<table class="lawe-table">${this.renderChildren(node)}</table>`
+            case 'TableHead':
+                return `<thead>${this.renderChildren(node)}</thead>`
+            case 'TableBody':
+                return `<tbody>${this.renderChildren(node)}</tbody>`
+            case 'TableRow':
+                return `<tr>${this.renderChildren(node)}</tr>`
+            case 'TableCell':
+                return `<td>${this.renderChildren(node)}</td>`
+
+            case 'TableHeaderCell':
+                return `<th>${this.renderChildren(node)}</th>`
+
 
             default:
                 console.warn(`Unknown node type ${node.type}.`)

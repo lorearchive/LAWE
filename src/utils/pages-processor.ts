@@ -3,7 +3,7 @@
 import type { RawPage } from './git-service';
 
 import Lexer  from '../scripts/Lexing/lexer';
-import Parser from '../scripts/parser';
+import Parser from '../scripts/Parsing/parser';
 import Renderer from '../scripts/renderer';
 
 // Configuration for page processing

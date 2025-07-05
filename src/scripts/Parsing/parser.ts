@@ -1,13 +1,8 @@
-// adding a new syntax ( a note for me ) continued from lexer
-//6. add the new syntax to NodeType
-//7. If required, add a value to ASTNode interface
-//8. If the new syntax is a block level element, add syntax to parseBlock(). if inline, add syntax to parseInlineUntil().
-//9. Add the corresponding parse function.
-//10. proceed to renderer
+import type { CalloutType } from "../Lexing/Handlers/PseudoHTMLHandler";
+import type { Token } from "../Lexing/lexer";
+import { TokenType } from "../Lexing/lexer";
 
-import type { CalloutType } from "./Lexing/Handlers/PseudoHTMLHandler";
-import type { Token } from "./Lexing/lexer";
-import { TokenType } from "./Lexing/lexer";
+import { parseTable, parseTableHead, parseTableBody, parseTableRow, parseTableCell, parseTableHeaderCell } from './TableParser';
 
 export type NodeType = 
     | 'Document'
@@ -21,6 +16,14 @@ export type NodeType =
     | 'Linebreak'
     | 'Newline'
     | 'Callout'
+
+    | 'Table'
+    | 'TableHead'
+    | 'TableBody'
+    | 'TableFoot'
+    | 'TableRow'
+    | 'TableCell'
+    | 'TableHeaderCell'
 
 export interface ASTNode {
     type: NodeType
@@ -78,7 +81,7 @@ export default class Parser {
         return document
     }
 
-    // BLOCK LEVEL ELEMENTS----------------------------------------------------------
+    // BLOCK LEVEL ELEMENTS---------------------------------------------------------------------------------------------------
 
     private parseBlock(): ASTNode | null {
         // parse block-level stuff
@@ -104,9 +107,15 @@ export default class Parser {
             return this.parseCallout()
         }
 
+        if (this.match(TokenType.TABLE_OPEN)) {
+            return parseTable(this)
+        }
+
         // Default to paragraph for inline content
         return this.parseParagraph();
     }
+
+    // BLOCK LEVEL ELEMENTS INDIVIDUAL---------------------------------------------------------------------------------------------------
 
     private parseHeading(): ASTNode {
         // previous() is now the HEADING_OPEN token
@@ -257,7 +266,9 @@ export default class Parser {
         };
     }
 
-    // INLINE LEVEL ELEMENTS----------------------------------------------------------
+
+
+    // INLINE LEVEL ELEMENTS INDIVIDUAL-------------------------------------------------------------------------------------
 
     private parseParagraph(): ASTNode {
        
@@ -275,7 +286,7 @@ export default class Parser {
     }
     
 
-    private parseInlineUntil(terminator: TokenType|null = null): ASTNode[] {
+    public parseInlineUntil(terminator: TokenType|null = null): ASTNode[] {
         
         const children: ASTNode[] = [];
     
@@ -371,27 +382,27 @@ export default class Parser {
 
     // --------------------------- HELPER METHODS
 
-    private isAtEnd(): boolean {
+    public isAtEnd(): boolean {
 
         return this.current >= this.tokens.length
             || this.tokens[this.current].type === TokenType.EOF
 
     }
 
-    private check(type: TokenType): boolean {
+    public check(type: TokenType): boolean {
         
         if (this.current >= this.tokens.length) return false
 
         return this.tokens[this.current].type === type
     }
 
-    private advance(): Token {
+    public advance(): Token {
         if (!this.isAtEnd()) this.current++
 
         return this.previous()
     }
 
-    private consume(type: TokenType, errMsg: string): Token {
+    public consume(type: TokenType, errMsg: string): Token {
 
         if (this.check(type)) {
             return this.advance()
@@ -400,7 +411,7 @@ export default class Parser {
         throw new Error(`${errMsg} at line ${this.peek().position.line}, col ${this.peek().position.col}`)
     }
 
-    private match(type: TokenType): boolean {
+    public match(type: TokenType): boolean {
 
         if (this.check(type)) {
 

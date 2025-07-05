@@ -12,7 +12,15 @@ export class PseudoHTMLHandler extends BaseTokenHandler {
     private tagMappings = {
         'callout': { open: TokenType.CALLOUT_OPEN, close: TokenType.CALLOUT_CLOSE },
         'sub': { open: TokenType.SUB_OPEN, close: TokenType.SUB_CLOSE },
-        'sup': { open: TokenType.SUP_OPEN, close: TokenType.SUP_CLOSE }
+        'sup': { open: TokenType.SUP_OPEN, close: TokenType.SUP_CLOSE },
+
+        'table': { open: TokenType.TABLE_OPEN, close: TokenType.TABLE_CLOSE },
+        'thead': { open: TokenType.THEAD_OPEN, close: TokenType.THEAD_CLOSE },
+        'tbody': { open: TokenType.TBODY_OPEN, close: TokenType.TBODY_CLOSE },
+        'tfoot': { open: TokenType.TFOOT_OPEN, close: TokenType.TFOOT_CLOSE },
+        'tr': { open: TokenType.TR_OPEN, close: TokenType.TR_CLOSE },
+        'td': { open: TokenType.TD_OPEN, close: TokenType.TD_CLOSE },
+        'th': { open: TokenType.TH_OPEN, close: TokenType.TH_CLOSE },
     };
 
     canHandle(context: LexerContext): boolean {
@@ -93,13 +101,10 @@ export class PseudoHTMLHandler extends BaseTokenHandler {
             return false;
         }
 
-        const mapping = this.tagMappings[tagName as keyof typeof this.tagMappings];
+        const mapping = this.tagMappings[tagName as keyof typeof this.tagMappings]
         let attributes: { [key: string]: string } = {};
+        attributes = this.parseAttributes(context);
 
-        // Parse attributes (for callout)
-        if (tagName === 'callout') {
-            attributes = this.parseAttributes(context);
-        }
 
         // Skip to closing '>'
         while (!context.isEOF() && context.peek() !== '>') {

@@ -121,3 +121,14 @@ a:visited:active:not(.a-no-style) {
 #lawe-callout-icon-span-warning svg {
     fill: darkorange;
 }
+
+
+
+
+
+
+/** ------------------------ Tables **/
+
+table#lawe-table {
+    border: 0.5em solid black;
+}
