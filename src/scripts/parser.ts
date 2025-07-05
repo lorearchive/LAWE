@@ -5,7 +5,7 @@
 //9. Add the corresponding parse function.
 //10. proceed to renderer
 
-import type { CalloutType } from "./Lexing/handlers";
+import type { CalloutType } from "./Lexing/Handlers/PseudoHTMLHandler";
 import type { Token } from "./Lexing/lexer";
 import { TokenType } from "./Lexing/lexer";
 

@@ -1,6 +1,6 @@
 import type { Token } from "./lexer";
 import { TokenType } from "./lexer";
-import type { CalloutType } from "./handlers";
+import type { CalloutType } from "./Handlers/PseudoHTMLHandler";
 
 export default class LexerContext {
     constructor(
