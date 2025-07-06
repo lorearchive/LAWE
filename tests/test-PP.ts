@@ -1,8 +1,5 @@
-import type { RawPage } from '../src/utils/git-service';
-import { processPage, processAllPages } from '../src/utils/pages-processor.ts';
-import Lexer from '../src/scripts/Lexing/lexer.ts';
-import Parser from '../src/scripts/parser.ts';
-import Renderer from '../src/scripts/renderer.ts';
+import type { RawPage } from '../src/utils/git-service'
+import { processPage, processAllPages } from '../src/utils/pages-processor.ts'
 
 // Create test data
 function createTestRawPages(): RawPage[] {
@@ -56,7 +53,7 @@ This concludes our complex page example.`,
 
 This page might cause issues...
 
-{{invalid_syntax_here}}
+{{invalid_syntax_here}}//
 
 ===== Still Valid Section =====
 

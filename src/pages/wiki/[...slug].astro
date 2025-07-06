@@ -7,7 +7,6 @@ import { fetchWikiContent, getAllPages } from '../../utils/git-service'
 import { processAllPages } from '../../utils/pages-processor'
 import Shell from '../../layouts/Shell.astro'
 import RenderTOC from '../../components/RenderTOC.astro'
-import Icon from '../../components/Icon.astro'
 
 export async function getStaticPaths() {
     const contentPath = await fetchWikiContent()

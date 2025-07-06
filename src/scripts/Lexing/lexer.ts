@@ -59,7 +59,6 @@ export interface Token {
 
 
 
-// lexer/main.ts
 export default class Lexer {
     private handlers: TokenHandler[] = [];
 
