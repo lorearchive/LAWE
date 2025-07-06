@@ -6,14 +6,17 @@ export interface ParserCtx {
     check(type: TokenType): boolean
     match(type: TokenType): boolean
     advance(): Token;
+    previous(): Token
     consume(type: TokenType, errMsg: string): Token;
     parseInlineUntil(terminator: TokenType|null): ASTNode[]
+    peek(): Token
 }
 
 // main parser as ctx
 export function parseTable(ctx: ParserCtx): ASTNode {
-    const children: ASTNode[] = [];
-
+    const children: ASTNode[] = []
+    const openToken = ctx.previous()
+    
     while(!ctx.isAtEnd() && !ctx.check(TokenType.TABLE_CLOSE)) {
 
         if (ctx.match(TokenType.THEAD_OPEN)) {
@@ -26,30 +29,42 @@ export function parseTable(ctx: ParserCtx): ASTNode {
             children.push(parseTableRow(ctx));
 
         } else {
-            ctx.advance();
+            const inlineContent = ctx.parseInlineUntil(null);
+            children.push(...inlineContent);
+            if (children.length === 0) {
+                ctx.advance();
+            }
         }
     }
-
-    ctx.consume(TokenType.TABLE_CLOSE, "Expected </table>");
-    return { type: 'Table', children };
+    
+    ctx.consume(TokenType.TABLE_CLOSE, "Expected </table>")
+    return { type: 'Table', children, attributes: openToken.attributes };
 }
 
 export function parseTableHead(ctx: ParserCtx): ASTNode {
-        const children: ASTNode[] = []
-  
-        while (!ctx.isAtEnd() && !ctx.check(TokenType.THEAD_CLOSE)) {
-    
-            if (ctx.match(TokenType.TR_OPEN)) {
-                children.push(parseTableRow(ctx))
-    
-            } else {
-                ctx.advance()
+    const children: ASTNode[] = []
+
+    while (!ctx.isAtEnd() && !ctx.check(TokenType.THEAD_CLOSE)) {
+
+        if (ctx.match(TokenType.TR_OPEN)) {
+            children.push(parseTableRow(ctx));
+
+        } else if (ctx.match(TokenType.TH_OPEN)){
+            children.push(parseTableHeaderCell(ctx))
+        
+        } else {
+            const inlineContent = ctx.parseInlineUntil(null);
+            children.push(...inlineContent);
+        
+            if (children.length === 0) {
+                ctx.advance();
             }
         }
-        
-        ctx.consume(TokenType.THEAD_CLOSE, "Expected </thead>")
-        return { type: 'TableHead', children }
     }
+    
+    ctx.consume(TokenType.THEAD_CLOSE, "Expected </thead>")
+    return { type: 'TableHead', children }
+}
 
     
 export function parseTableBody(ctx: ParserCtx): ASTNode {
@@ -70,35 +85,50 @@ export function parseTableBody(ctx: ParserCtx): ASTNode {
 }
 
 export function parseTableRow(ctx: ParserCtx): ASTNode {
-    
+
     const children: ASTNode[] = []
-    
+
     while (!ctx.isAtEnd() && !ctx.check(TokenType.TR_CLOSE)) {
-    
+        
         if (ctx.match(TokenType.TD_OPEN)) {
-            children.push(parseTableCell(ctx))
-        
+            children.push(parseTableHead(ctx));
+
         } else if (ctx.match(TokenType.TH_OPEN)) {
-            children.push(parseTableHeaderCell(ctx))
-        
+            children.push(parseTableRow(ctx));
+
         } else {
-            ctx.advance()
+            const inlineContent = ctx.parseInlineUntil(null);
+            children.push(...inlineContent);
+            if (children.length === 0) {
+                ctx.advance();
+            }
         }
     }
-
     ctx.consume(TokenType.TR_CLOSE, "Expected </tr>")
     return { type: 'TableRow', children }
 }
 
 export function parseTableCell(ctx: ParserCtx): ASTNode {
-    // collect inline content until </td>
+    const openToken = ctx.previous()
     const children = ctx.parseInlineUntil(TokenType.TD_CLOSE)
-    ctx.consume(TokenType.TD_CLOSE, "Expected </td>")
-    return { type: 'TableCell', children }
+
+    ctx.consume(TokenType.TD_CLOSE, "Expected </td>");
+    return {
+        type: 'TableCell',
+        children,
+        attributes: openToken.attributes ?? {}
+    };
 }
 
 export function parseTableHeaderCell(ctx: ParserCtx): ASTNode {
-    const children = ctx.parseInlineUntil(TokenType.TH_CLOSE)
-    ctx.consume(TokenType.TH_CLOSE, "Expected </th>")
-    return { type: 'TableHeaderCell', children }
+    
+    const openToken = ctx.previous()
+    const children = ctx.parseInlineUntil(TokenType.TH_CLOSE);
+    
+    ctx.consume(TokenType.TH_CLOSE, "Expected </th>");
+    return {
+        type: 'TableHeaderCell',
+        children,
+        attributes: openToken.attributes ?? {}
+    }
 }

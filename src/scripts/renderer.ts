@@ -34,8 +34,11 @@ export default class Renderer {
             case 'Callout':
                 return this.renderCallout(node)
 
+
             case 'Table':
-                return `<table class="lawe-table">${this.renderChildren(node)}</table>`
+                const attrs = this.renderAttributes(node.attributes, { class: "lawe-table" })
+                return `<table ${attrs}>${this.renderChildren(node)}</table>`
+
             case 'TableHead':
                 return `<thead>${this.renderChildren(node)}</thead>`
             case 'TableBody':
@@ -62,10 +65,6 @@ export default class Renderer {
         const title = node.calloutTitle
         const body = this.renderChildren(node)
 
-        
-
-
-        console.log("DEBUG CALLOUT TYPE" + type)
 
 
         if (title) {
@@ -109,6 +108,29 @@ export default class Renderer {
         if (!node.children) return ''
         return node.children.map(child => this.render(child)).join('')
     }
+
+    private renderAttributes(attributes?: Record<string, string>, defaults?: Record<string, string>): string {
+        const merged: Record<string, string> = { ...(defaults || {}) };
+
+        if (attributes) {
+            for (const [key, value] of Object.entries(attributes)) {
+                if (key === "class" && merged.class) {
+                    // Merge classes (append user classes to default)
+                    merged.class += " " + value;
+                } else {
+                    merged[key] = value;
+                }
+            }
+        }
+
+        return Object.entries(merged)
+            .filter(([_, value]) => value.trim() !== '')
+            .map(([key, value]) => `${key}="${this.escapeHTML(value)}"`)
+            .join(' ');
+    }
+
+
+
 
     private escapeHTML(str: string): string {
         return str

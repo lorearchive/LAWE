@@ -103,7 +103,7 @@ export class PseudoHTMLHandler extends BaseTokenHandler {
 
         const mapping = this.tagMappings[tagName as keyof typeof this.tagMappings]
         let attributes: { [key: string]: string } = {};
-        attributes = this.parseAttributes(context);
+        attributes = this.filterAllowedAttributes(tagName, this.parseAttributes(context))
 
 
         // Skip to closing '>'
@@ -217,7 +217,59 @@ export class PseudoHTMLHandler extends BaseTokenHandler {
                 attributes[attrName] = attrValue;
             }
         }
-
         return attributes;
+    }
+
+    private renderAttributes(attrs?: Record<string, string>): string {
+        if (!attrs) return '';
+
+        return Object.entries(attrs)
+            .map(([key, value]) => {
+                const safeKey = this.escapeHTML(key);
+                const safeValue = this.escapeHTML(value);
+                return `${safeKey}="${safeValue}"`;
+            }).join(' ');
+    }
+
+    private filterAllowedAttributes(tag: string, attributes: Record<string, string>): Record<string, string> {
+
+        const allowedAttributes: Record<string, Set<string>> = {
+            'callout': new Set(['type', 'title']),
+            'table': new Set(['class']),
+            'th': new Set(['class', 'align', 'colspan']),
+            'td': new Set(['class', 'align', 'colspan']),
+            'tr': new Set(['class']),
+            'thead': new Set(['class']),
+            'tbody': new Set(['class']),
+        };
+
+
+        const allowed = allowedAttributes[tag];
+        if (!allowed) return {};
+
+        const result: Record<string, string> = {};
+        for (const [key, value] of Object.entries(attributes)) {
+            if (allowed.has(key)) {
+                result[key] = this.sanitizeAttributeValue(value);
+            }
+        }
+        return result;
+    }
+
+    private sanitizeAttributeValue(value: string): string {
+        // Remove dangerous protocols
+        if (/^javascript:/i.test(value)) return '';
+
+        // Escape quotes & angle brackets
+        return this.escapeHTML(value) 
+    }
+
+    private escapeHTML(str: string): string {
+        return str
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
     }
 }

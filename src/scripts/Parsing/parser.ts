@@ -2,7 +2,7 @@ import type { CalloutType } from "../Lexing/Handlers/PseudoHTMLHandler";
 import type { Token } from "../Lexing/lexer";
 import { TokenType } from "../Lexing/lexer";
 
-import { parseTable, parseTableHead, parseTableBody, parseTableRow, parseTableCell, parseTableHeaderCell } from './TableParser';
+import { parseTable } from './TableParser';
 
 export type NodeType = 
     | 'Document'
@@ -35,6 +35,7 @@ export interface ASTNode {
     ID?: string // used for headings to generate a unique ID for every heading.
     calloutType?: CalloutType // for callouts: default, info, warning, danger, success
     calloutTitle?: string // optional title for callouts
+    attributes?: Record<string, string> // HTML-like attributes on pseudohtml tags. e.g. id, class, style etc
 }
 
 export default class Parser {
@@ -380,7 +381,7 @@ export default class Parser {
         };
     }
 
-    // --------------------------- HELPER METHODS
+    // ----------------------------------------------------------------------------------------------------- HELPER METHODS
 
     public isAtEnd(): boolean {
 
@@ -421,11 +422,11 @@ export default class Parser {
         return false
     }
 
-    private previous(): Token {
+    public previous(): Token {
         return this.tokens[this.current - 1]
     }
 
-    private peek(): Token {
+    public peek(): Token {
         return this.tokens[this.current]
     }
 
