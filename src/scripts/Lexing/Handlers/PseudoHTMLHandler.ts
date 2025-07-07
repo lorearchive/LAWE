@@ -6,7 +6,7 @@ import LexerContext from "../context"
 export type CalloutType = "default" | "success" | "info" | "warning" | "danger"
 
 
-export class PseudoHTMLHandler extends BaseTokenHandler {
+export default class PseudoHTMLHandler extends BaseTokenHandler {
     priority = 110; // High priority to catch before other handlers
 
     private tagMappings = {
@@ -60,10 +60,9 @@ export class PseudoHTMLHandler extends BaseTokenHandler {
     private isValidVoidTag(context: LexerContext): boolean {
         if (context.peek() !== '<') return false;
 
-        // Extract tag name and check for void tag pattern
-        let pos = 1; // Skip '<'
+        let pos = 1; // skip '<'
         let tagName = '';
-        
+
         while (pos < context.input.length - context.position) {
             const char = context.peek(pos);
             if (char === ' ' || char === '/' || char === '\n') break;
@@ -75,24 +74,29 @@ export class PseudoHTMLHandler extends BaseTokenHandler {
             }
         }
 
-        // Check if it's a known void tag and has void syntax
         if (!this.voidTagMappings.hasOwnProperty(tagName)) return false;
 
-        // Look for the void tag pattern: space(s) + '/' + '>'
+        // Now scan forward for '/>' skipping attributes
+        let inQuotes = false;
         while (pos < context.input.length - context.position) {
             const char = context.peek(pos);
-            if (char === ' ') {
+
+            if (char === '"') {
+                inQuotes = !inQuotes;
                 pos++;
-            } else if (char === '/') {
-                pos++;
-                return pos < context.input.length - context.position && context.peek(pos) === '>';
-            } else {
-                return false;
+                continue;
             }
+
+            if (!inQuotes && char === '/' && context.peek(pos + 1) === '>') {
+                return true;
+            }
+
+            pos++;
         }
-        
+
         return false;
     }
+
 
     private isValidOpeningTag(context: LexerContext): boolean {
         if (context.peek() !== '<') return false;

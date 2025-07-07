@@ -2,7 +2,7 @@ import LexerContext from "./context"
 import type { TokenHandler } from "./Handlers/handlers"
 import type { CalloutType } from "./Handlers/PseudoHTMLHandler";
 import { FormattingHandler, HeadingHandler, MiscHandler, TextHandler, WhitespaceHandler } from "./Handlers/handlers";
-import { PseudoHTMLHandler } from "./Handlers/PseudoHTMLHandler";
+import PseudoHTMLHandler from "./Handlers/PseudoHTMLHandler";
 
 export enum TokenType {
     TEXT = 'TEXT',

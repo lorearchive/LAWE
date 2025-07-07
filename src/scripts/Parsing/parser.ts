@@ -47,6 +47,7 @@ export interface ParserCtx {
     match(type: TokenType): boolean
     advance(): Token;
     previous(): Token
+    whereami(): Token
     consume(type: TokenType, errMsg: string): Token;
     parseInlineUntil(terminator: TokenType|null): ASTNode[]
     peek(): Token
@@ -401,6 +402,10 @@ export default class Parser {
         return this.current >= this.tokens.length
             || this.tokens[this.current].type === TokenType.EOF
 
+    }
+
+    public whereami(): Token {
+        return this.tokens[this.current]
     }
 
     public check(type: TokenType): boolean {

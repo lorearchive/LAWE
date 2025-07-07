@@ -4,7 +4,7 @@ import type { RawPage } from './git-service';
 
 import Lexer  from '../scripts/Lexing/lexer';
 import Parser from '../scripts/Parsing/parser';
-import Renderer from '../scripts/renderer';
+import Renderer from '../scripts/Rendering/renderer';
 
 // Configuration for page processing
 interface PageProcessorConfig {
@@ -204,6 +204,7 @@ export async function processPage( rawPage: RawPage, config: Partial<PageProcess
         let tokens;
         try {
             tokens = lexer.tokenise(content);
+            console.log(tokens)
         } catch (e) {
             throw new PageProcessorError( 'LAWE: Lexical analysis failed', 'lexing', rawPage.filePath, e as Error )
         }

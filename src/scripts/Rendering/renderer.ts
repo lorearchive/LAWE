@@ -1,6 +1,6 @@
-import type { ASTNode } from "./Parsing/parser";
-import { getIconMarkup, type IconName } from "../assets/Icons";
-import AffiliTable from "../components/AffiliTable.astro";
+import type { ASTNode } from "../Parsing/parser";
+import { getIconMarkup, type IconName } from "../../assets/Icons";
+import { renderAffiliTable } from "./infoTableRenderer.astro";
 
 export default class Renderer {
 
@@ -56,11 +56,13 @@ export default class Renderer {
             }
 
             case 'InfoTableAffili': {
-                if (node.attributes && node.attributes.name && node.attributes.school) {
-
-                    return AffiliTable({ name: node.attributes.name, school: node.attributes.school})
+                 if (node.attributes && node.attributes.name && node.attributes.school) {
+                    return renderAffiliTable({ 
+                        name: node.attributes.name, 
+                        school: node.attributes.school 
+                    });
                 } else {
-                    throw new Error("LAWE RENDERING ERROR: node does not include any name or school information while trying to render affili table")
+                    throw new Error("LAWE RENDERING ERROR: node does not include any name or school information while trying to render affili table");
                 }
             }
 
