@@ -43,6 +43,7 @@ const lastModifiedDate = page.metadata.lastModified.toLocaleString('en-GB', {
 
 const pageURL = `https://github.com/lorearchive/law-content/tree/main/wiki/${page.slug.join("/")}.txt`
 const pageEditURL = `https://github.com/lorearchive/law-content/edit/main/wiki/${page.slug.join("/")}.txt`
+const historyURL = `https://github.com/lorearchive/law-content/commits/main/wiki/${page.slug.join("/")}.txt`
 ---
 
 <Shell title={`${ page.title } - Lore Archive`}>
@@ -56,6 +57,12 @@ const pageEditURL = `https://github.com/lorearchive/law-content/edit/main/wiki/$
         </div>
 
         <div id="page-toolbar-actions">
+            <span>
+                <a href={pageURL}>Raw</a>
+            </span>
+            <span>
+                <a href={historyURL}>View history</a>
+            </span>
             <span>
                 <a href={pageEditURL}>Edit this page</a>
             </span>
