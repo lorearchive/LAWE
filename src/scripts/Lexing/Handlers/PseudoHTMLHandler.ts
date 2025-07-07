@@ -14,6 +14,7 @@ export class PseudoHTMLHandler extends BaseTokenHandler {
         'sub': { open: TokenType.SUB_OPEN, close: TokenType.SUB_CLOSE },
         'sup': { open: TokenType.SUP_OPEN, close: TokenType.SUP_CLOSE },
 
+        // HTML tables
         'table': { open: TokenType.TABLE_OPEN, close: TokenType.TABLE_CLOSE },
         'thead': { open: TokenType.THEAD_OPEN, close: TokenType.THEAD_CLOSE },
         'tbody': { open: TokenType.TBODY_OPEN, close: TokenType.TBODY_CLOSE },
@@ -21,6 +22,10 @@ export class PseudoHTMLHandler extends BaseTokenHandler {
         'tr': { open: TokenType.TR_OPEN, close: TokenType.TR_CLOSE },
         'td': { open: TokenType.TD_OPEN, close: TokenType.TD_CLOSE },
         'th': { open: TokenType.TH_OPEN, close: TokenType.TH_CLOSE },
+    };
+
+    private voidTagMappings = {
+        'affili': TokenType.AFFILI
     };
 
     canHandle(context: LexerContext): boolean {
@@ -31,6 +36,11 @@ export class PseudoHTMLHandler extends BaseTokenHandler {
             return this.isValidClosingTag(context);
         }
 
+        // Check for void tag: <tagname />
+        if (this.isValidVoidTag(context)) {
+            return true;
+        }
+
         // Check for opening tag: <tagname ...>
         return this.isValidOpeningTag(context);
     }
@@ -38,9 +48,50 @@ export class PseudoHTMLHandler extends BaseTokenHandler {
     handle(context: LexerContext, tokens: Token[], tokenStack: TokenType[]): boolean {
         if (context.peek(1) === '/') {
             return this.handleClosingTag(context, tokens, tokenStack);
+        
+        } else if (this.isValidVoidTag(context)) {
+            return this.handleVoidTag(context, tokens);
+        
         } else {
             return this.handleOpeningTag(context, tokens, tokenStack);
         }
+    }
+
+    private isValidVoidTag(context: LexerContext): boolean {
+        if (context.peek() !== '<') return false;
+
+        // Extract tag name and check for void tag pattern
+        let pos = 1; // Skip '<'
+        let tagName = '';
+        
+        while (pos < context.input.length - context.position) {
+            const char = context.peek(pos);
+            if (char === ' ' || char === '/' || char === '\n') break;
+            if (/[a-zA-Z]/.test(char)) {
+                tagName += char;
+                pos++;
+            } else {
+                return false;
+            }
+        }
+
+        // Check if it's a known void tag and has void syntax
+        if (!this.voidTagMappings.hasOwnProperty(tagName)) return false;
+
+        // Look for the void tag pattern: space(s) + '/' + '>'
+        while (pos < context.input.length - context.position) {
+            const char = context.peek(pos);
+            if (char === ' ') {
+                pos++;
+            } else if (char === '/') {
+                pos++;
+                return pos < context.input.length - context.position && context.peek(pos) === '>';
+            } else {
+                return false;
+            }
+        }
+        
+        return false;
     }
 
     private isValidOpeningTag(context: LexerContext): boolean {
@@ -125,11 +176,13 @@ export class PseudoHTMLHandler extends BaseTokenHandler {
             token.calloutType = (attributes.type as CalloutType) || 'default'
             token.calloutTitle = attributes.title;
         }
+            
+        token.attributes = attributes
 
         tokens.push(token);
         tokenStack.push(mapping.open);
         
-        return true;
+        return true
     }
 
     private handleClosingTag(context: LexerContext, tokens: Token[], tokenStack: TokenType[]): boolean {
@@ -168,6 +221,50 @@ export class PseudoHTMLHandler extends BaseTokenHandler {
         if (index !== -1) {
             tokenStack.splice(index, 1);
         }
+        
+        return true;
+    }
+
+    private handleVoidTag(context: LexerContext, tokens: Token[]): boolean {
+        const startPos = context.position;
+        context.advance(1); // Skip '<'
+
+        // Parse tag name
+        let tagName = '';
+        while (!context.isEOF() && /[a-zA-Z]/.test(context.peek())) {
+            tagName += context.advance();
+        }
+
+        if (!this.voidTagMappings.hasOwnProperty(tagName)) {
+            context.position = startPos;
+            return false;
+        }
+
+        const tokenType = this.voidTagMappings[tagName as keyof typeof this.voidTagMappings];
+        let attributes: { [key: string]: string } = {};
+        attributes = this.filterAllowedAttributes(tagName, this.parseAttributes(context));
+
+        // Skip to '/>'
+        while (!context.isEOF() && context.peek() !== '/') {
+            context.advance();
+        }
+
+        if (context.peek() === '/') {
+            context.advance(); // Skip '/'
+            if (context.peek() === '>') {
+                context.advance(); // Skip '>'
+            }
+        }
+
+        // Create the full tag string
+        const fullTag = context.input.slice(startPos, context.position);
+        
+        // Create token with attributes
+        const token = context.createToken(tokenType, fullTag);
+        token.attributes = attributes;
+
+        tokens.push(token);
+        // Note: We don't push to tokenStack since void tags don't need closing
         
         return true;
     }
@@ -217,22 +314,12 @@ export class PseudoHTMLHandler extends BaseTokenHandler {
                 attributes[attrName] = attrValue;
             }
         }
-        return attributes;
+        return attributes
     }
 
-    private renderAttributes(attrs?: Record<string, string>): string {
-        if (!attrs) return '';
-
-        return Object.entries(attrs)
-            .map(([key, value]) => {
-                const safeKey = this.escapeHTML(key);
-                const safeValue = this.escapeHTML(value);
-                return `${safeKey}="${safeValue}"`;
-            }).join(' ');
-    }
 
     private filterAllowedAttributes(tag: string, attributes: Record<string, string>): Record<string, string> {
-
+        
         const allowedAttributes: Record<string, Set<string>> = {
             'callout': new Set(['type', 'title']),
             'table': new Set(['class']),
@@ -241,8 +328,9 @@ export class PseudoHTMLHandler extends BaseTokenHandler {
             'tr': new Set(['class']),
             'thead': new Set(['class']),
             'tbody': new Set(['class']),
-        };
 
+            'affili': new Set(['class', 'name', 'school', 'fAppear']), //fAppear: first appearance 
+        }
 
         const allowed = allowedAttributes[tag];
         if (!allowed) return {};

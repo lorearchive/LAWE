@@ -1,16 +1,7 @@
-import { type Token, TokenType } from "../Lexing/lexer";
-import type { ASTNode } from "./parser"
+import { TokenType } from "../Lexing/lexer";
+import type { ASTNode, ParserCtx } from "./parser"
 
-export interface ParserCtx {
-    isAtEnd(): boolean;
-    check(type: TokenType): boolean
-    match(type: TokenType): boolean
-    advance(): Token;
-    previous(): Token
-    consume(type: TokenType, errMsg: string): Token;
-    parseInlineUntil(terminator: TokenType|null): ASTNode[]
-    peek(): Token
-}
+
 
 // main parser as ctx
 export function parseTable(ctx: ParserCtx): ASTNode {
@@ -29,7 +20,7 @@ export function parseTable(ctx: ParserCtx): ASTNode {
             children.push(parseTableRow(ctx));
 
         } else {
-            const inlineContent = ctx.parseInlineUntil(null);
+            const inlineContent = ctx.parseInlineUntil(TokenType.TABLE_CLOSE);
             children.push(...inlineContent);
             if (children.length === 0) {
                 ctx.advance();
@@ -53,7 +44,7 @@ export function parseTableHead(ctx: ParserCtx): ASTNode {
             children.push(parseTableHeaderCell(ctx))
         
         } else {
-            const inlineContent = ctx.parseInlineUntil(null);
+            const inlineContent = ctx.parseInlineUntil(TokenType.THEAD_CLOSE);
             children.push(...inlineContent);
         
             if (children.length === 0) {
@@ -91,13 +82,13 @@ export function parseTableRow(ctx: ParserCtx): ASTNode {
     while (!ctx.isAtEnd() && !ctx.check(TokenType.TR_CLOSE)) {
         
         if (ctx.match(TokenType.TD_OPEN)) {
-            children.push(parseTableHead(ctx));
+            children.push(parseTableCell(ctx));
 
         } else if (ctx.match(TokenType.TH_OPEN)) {
-            children.push(parseTableRow(ctx));
+            children.push(parseTableHeaderCell(ctx));
 
         } else {
-            const inlineContent = ctx.parseInlineUntil(null);
+            const inlineContent = ctx.parseInlineUntil(TokenType.TR_CLOSE);
             children.push(...inlineContent);
             if (children.length === 0) {
                 ctx.advance();

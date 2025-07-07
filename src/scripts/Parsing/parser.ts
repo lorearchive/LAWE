@@ -1,6 +1,7 @@
 import type { CalloutType } from "../Lexing/Handlers/PseudoHTMLHandler";
 import type { Token } from "../Lexing/lexer";
 import { TokenType } from "../Lexing/lexer";
+import { parseInfoTable } from "./infoTableParser";
 
 import { parseTable } from './TableParser';
 
@@ -25,6 +26,8 @@ export type NodeType =
     | 'TableCell'
     | 'TableHeaderCell'
 
+    | 'InfoTableAffili'
+
 export interface ASTNode {
     type: NodeType
     children?: ASTNode[]
@@ -38,17 +41,23 @@ export interface ASTNode {
     attributes?: Record<string, string> // HTML-like attributes on pseudohtml tags. e.g. id, class, style etc
 }
 
+export interface ParserCtx {
+    isAtEnd(): boolean;
+    check(type: TokenType): boolean
+    match(type: TokenType): boolean
+    advance(): Token;
+    previous(): Token
+    consume(type: TokenType, errMsg: string): Token;
+    parseInlineUntil(terminator: TokenType|null): ASTNode[]
+    peek(): Token
+}
+
 export default class Parser {
 
     private tokens: Token[] = []
     private current: number = 0
     private generatedIDs: Set<string> = new Set() // Track generated heading IDs
 
-    private reset() {
-        this.tokens = []
-        this.current = 0
-        this.generatedIDs.clear() // Clear generated IDs when resetting
-    }
 
     public parse(tokens: Token[]): ASTNode {
         
@@ -110,6 +119,10 @@ export default class Parser {
 
         if (this.match(TokenType.TABLE_OPEN)) {
             return parseTable(this)
+        }
+
+        if (this.match(TokenType.AFFILI)) {
+            return parseInfoTable(this)
         }
 
         // Default to paragraph for inline content

@@ -44,6 +44,8 @@ export enum TokenType {
     TH_OPEN = "TH_OPEN",
     TH_CLOSE = "TH_CLOSE",
 
+    AFFILI = "AFFILI",
+
 
     EOF = "EOF"
 }

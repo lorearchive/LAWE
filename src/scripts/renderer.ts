@@ -1,5 +1,6 @@
 import type { ASTNode } from "./Parsing/parser";
-import icons, { getIconMarkup, type IconName } from "../assets/Icons";
+import { getIconMarkup, type IconName } from "../assets/Icons";
+import AffiliTable from "../components/AffiliTable.astro";
 
 export default class Renderer {
 
@@ -35,9 +36,10 @@ export default class Renderer {
                 return this.renderCallout(node)
 
 
-            case 'Table':
-                const attrs = this.renderAttributes(node.attributes, { class: "lawe-table" })
+            case 'Table': {
+                const attrs = this.renderAttributes(node.attributes, { id: "lawe-table" })
                 return `<table ${attrs}>${this.renderChildren(node)}</table>`
+            }
 
             case 'TableHead':
                 return `<thead>${this.renderChildren(node)}</thead>`
@@ -48,9 +50,19 @@ export default class Renderer {
             case 'TableCell':
                 return `<td>${this.renderChildren(node)}</td>`
 
-            case 'TableHeaderCell':
-                return `<th>${this.renderChildren(node)}</th>`
+            case 'TableHeaderCell': {
+                const attrs = this.renderAttributes(node.attributes, { id: "lawe-table-header-cell" })
+                return `<th ${attrs}>${this.renderChildren(node)}</th>`
+            }
 
+            case 'InfoTableAffili': {
+                if (node.attributes && node.attributes.name && node.attributes.school) {
+
+                    return AffiliTable({ name: node.attributes.name, school: node.attributes.school})
+                } else {
+                    throw new Error("LAWE RENDERING ERROR: node does not include any name or school information while trying to render affili table")
+                }
+            }
 
             default:
                 console.warn(`Unknown node type ${node.type}.`)
