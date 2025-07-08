@@ -1,6 +1,6 @@
 import type { ASTNode } from "../Parsing/parser";
 import { getIconMarkup, type IconName } from "../../assets/Icons";
-import { renderAffiliTable } from "./infoTableRenderer.astro";
+import { renderAffiliTable } from "./infoTableRenderer.ts";
 
 export default class Renderer {
 

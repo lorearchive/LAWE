@@ -204,7 +204,6 @@ export async function processPage( rawPage: RawPage, config: Partial<PageProcess
         let tokens;
         try {
             tokens = lexer.tokenise(content);
-            console.log(tokens)
         } catch (e) {
             throw new PageProcessorError( 'LAWE: Lexical analysis failed', 'lexing', rawPage.filePath, e as Error )
         }

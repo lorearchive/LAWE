@@ -1,4 +1,3 @@
----
 // AffiliTable.ts
 interface AffiliTableProps {
     name: string;
@@ -113,4 +112,3 @@ export function renderAffiliTable({ name, school }: AffiliTableProps): string {
         </table>
     `
 }
----
