@@ -1,7 +1,7 @@
 import LexerContext from "./context"
 import type { TokenHandler } from "./Handlers/handlers"
 import type { CalloutType } from "./Handlers/PseudoHTMLHandler";
-import { FormattingHandler, HeadingHandler, MiscHandler, TextHandler, WhitespaceHandler } from "./Handlers/handlers";
+import { FormattingHandler, HeadingHandler, ImageHandler, MiscHandler, TextHandler, WhitespaceHandler } from "./Handlers/handlers";
 import PseudoHTMLHandler from "./Handlers/PseudoHTMLHandler";
 
 export enum TokenType {
@@ -44,6 +44,10 @@ export enum TokenType {
     TH_OPEN = "TH_OPEN",
     TH_CLOSE = "TH_CLOSE",
 
+    IMAGE_OPEN = "IMAGE_OPEN",
+    IMAGE_PIPE = "IMAGE_PIPE", // Separator of image file path and caption. {{/file/to/path|caption here!}}
+    IMAGE_CLOSE = "IMAGE_CLOSE",
+
     AFFILI = "AFFILI",
 
 
@@ -75,6 +79,7 @@ export default class Lexer {
             new WhitespaceHandler(),
             new TextHandler(),
             new PseudoHTMLHandler(),
+            new ImageHandler(),
             new MiscHandler()
         ];
 

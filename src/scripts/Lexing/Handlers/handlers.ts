@@ -136,6 +136,75 @@ export class HeadingHandler extends BaseTokenHandler {
     }
 }
 
+export class ImageHandler extends BaseTokenHandler {
+    priority = 80; // High priority, should come before text handler
+
+    canHandle(context: LexerContext): boolean {
+        // Can handle opening braces
+        if (context.peek() === '{' && context.peek(1) === '{') {
+            return true;
+        }
+        
+        // Can handle closing braces if we're inside an image
+        if (context.peek() === '}' && context.peek(1) === '}') {
+            return true; // we check the stack in handle()
+        }
+        
+        // Can handle pipe if we're inside an image
+        if (context.peek() === '|') {
+            return true; // we also check the stack in handle()
+        }
+        
+        return false;
+    }
+
+    handle(context: LexerContext, tokens: Token[], tokenStack: TokenType[]): boolean {
+        // Check if we're at the start of an image tag
+        if (context.peek() === '{' && context.peek(1) === '{') {
+            return this.handleImageOpen(context, tokens, tokenStack);
+        }
+        
+        // Check if we're at the end of an image tag
+        if (context.peek() === '}' && context.peek(1) === '}' && 
+            tokenStack.includes(TokenType.IMAGE_OPEN)) {
+            return this.handleImageClose(context, tokens, tokenStack);
+        }
+
+        // Handle pipe separator within image tag
+        if (context.peek() === '|' && tokenStack.includes(TokenType.IMAGE_OPEN)) {
+            return this.handleImagePipe(context, tokens, tokenStack);
+        }
+
+        return false;
+    }
+
+    private handleImageOpen(context: LexerContext, tokens: Token[], tokenStack: TokenType[]): boolean {
+        context.advance(2); // Skip '{{'
+        tokens.push(context.createToken(TokenType.IMAGE_OPEN, '{{'));
+        tokenStack.push(TokenType.IMAGE_OPEN);
+        return true;
+    }
+
+    private handleImageClose(context: LexerContext, tokens: Token[], tokenStack: TokenType[]): boolean {
+        context.advance(2); // Skip '}}'
+        tokens.push(context.createToken(TokenType.IMAGE_CLOSE, '}}'));
+        
+        // Remove the corresponding open tag from stack
+        const index = tokenStack.lastIndexOf(TokenType.IMAGE_OPEN);
+        if (index !== -1) {
+            tokenStack.splice(index, 1);
+        }
+        
+        return true;
+    }
+
+    private handleImagePipe(context: LexerContext, tokens: Token[], tokenStack: TokenType[]): boolean {
+        context.advance(1); // Skip '|'
+        tokens.push(context.createToken(TokenType.IMAGE_PIPE, '|'));
+        return true;
+    }
+}
+
 export class WhitespaceHandler extends BaseTokenHandler {
     priority = 10; // Low priority
 
@@ -165,7 +234,7 @@ export class WhitespaceHandler extends BaseTokenHandler {
 export class TextHandler extends BaseTokenHandler {
     priority = 1; // Lowest priority - fallback
 
-    private specialChars = ['_', '*', '/', '[', ']', '=', '\n', '|', '-', '`', '\\', '<'];
+    private specialChars = ['_', '*', '/', '[', ']', '=', '\n', '|', '-', '`', '\\', '<', '{', '}']
 
     canHandle(context: LexerContext): boolean {
         return !context.isEOF(); // Always can handle as fallback

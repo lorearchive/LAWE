@@ -1,10 +1,11 @@
 import type { ASTNode } from "../Parsing/parser";
 import { getIconMarkup, type IconName } from "../../assets/Icons";
 import { renderAffiliTable } from "./infoTableRenderer.ts";
+import ImageOptimiser from "../../utils/fetch-image.ts"
 
 export default class Renderer {
 
-    public render(node: ASTNode): string {
+    public async render(node: ASTNode): Promise<string> {
 
 
 
@@ -66,11 +67,23 @@ export default class Renderer {
                 }
             }
 
+            case 'Image': {
+                return this.renderImage(node)
+                }
+
             default:
                 console.warn(`Unknown node type ${node.type}.`)
                 return ''
         }
 
+    }
+
+    private async renderImage(node: ASTNode): Promise<string> {
+        const imageOpter = new ImageOptimiser()
+        const imageOpted = await imageOpter.optimizeImage(`https://raw.githubusercontent.com/lorearchive/law-content/main/images${node.src}`, node)
+            
+        return imageOpted
+        
     }
 
 
@@ -118,9 +131,11 @@ export default class Renderer {
 
     }
 
-    private renderChildren(node: ASTNode): string {
-        if (!node.children) return ''
-        return node.children.map(child => this.render(child)).join('')
+    private async renderChildren(node: ASTNode): Promise<string> {
+        if (!node.children) return '';
+        
+        const rendered = await Promise.all(node.children.map(child => this.render(child)));
+        return rendered.join('');
     }
 
     private renderAttributes(attributes?: Record<string, string>, defaults?: Record<string, string>): string {

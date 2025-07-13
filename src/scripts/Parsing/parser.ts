@@ -26,6 +26,8 @@ export type NodeType =
     | 'TableCell'
     | 'TableHeaderCell'
 
+    | 'Image'
+
     | 'InfoTableAffili'
 
 export interface ASTNode {
@@ -35,10 +37,15 @@ export interface ASTNode {
     level?: number
     url?: string
     text?: string
-    ID?: string // used for headings to generate a unique ID for every heading.
-    calloutType?: CalloutType // for callouts: default, info, warning, danger, success
-    calloutTitle?: string // optional title for callouts
-    attributes?: Record<string, string> // HTML-like attributes on pseudohtml tags. e.g. id, class, style etc
+    ID?: string
+    calloutType?: CalloutType
+    calloutTitle?: string
+    attributes?: Record<string, string>
+    src?: string      // Image path/URL
+    alt?: string      // Image caption/alt text
+    width?: string    // Image width
+    format?: string   // Image format
+    loading?: string  // Image loading (lazy or eager)
 }
 
 export interface ParserCtx {
@@ -104,7 +111,7 @@ export default class Parser {
             return null
         }
 
-        // Here you would check for other block level elements
+        // Here we check for other block level elements
 
         if (this.match(TokenType.HEADING_OPEN)) {
             return this.parseHeading()
@@ -124,6 +131,10 @@ export default class Parser {
 
         if (this.match(TokenType.AFFILI)) {
             return parseInfoTable(this)
+        }
+
+        if (this.match(TokenType.IMAGE_OPEN)) {
+            return this.parseImage();
         }
 
         // Default to paragraph for inline content
@@ -280,6 +291,87 @@ export default class Parser {
             children
         };
     }
+
+    private parseImage(): ASTNode {
+        // IMAGE_OPEN token has already been consumed by match()
+
+        // Parse the image path - collect TEXT tokens until we hit IMAGE_PIPE or IMAGE_CLOSE
+        let src = '';
+        const pathTokens: string[] = [];
+
+        while (!this.isAtEnd() &&
+            !this.check(TokenType.IMAGE_PIPE) &&
+            !this.check(TokenType.IMAGE_CLOSE)) {
+
+            if (this.match(TokenType.TEXT)) {
+                pathTokens.push(this.previous().value);
+            } else if (this.match(TokenType.WHITESPACE)) {
+                pathTokens.push(' ');
+            } else {
+                // Skip other tokens or handle them as needed
+                this.advance();
+            }
+        }
+
+        src = pathTokens.join('').trim();
+
+        // extract width if there's a `?` parameter in the path
+        let imagePath = src;
+        let width: string = '' //Initialized to prevent vscode throwing errors on return
+        let format: string | undefined
+
+        if (src.includes('?')) {
+            const [basePath, query] = src.split('?');
+
+            // support width=300, 300px, 50%, etc.
+            const match = query.match(/^width=(\d+)(px|%)?$|^(\d+)(px|%)?$/);
+            if (match) {
+                width = match[1] || (match[3] + (match[4] || ''));
+            }
+
+            imagePath = basePath
+
+            // extract file extension (format)
+            const formatMatch = basePath.match(/\.(\w+)$/);
+            format = formatMatch ? formatMatch[1].toLowerCase() : undefined
+
+        } else {
+            throw new Error("LAWE Parsing error: Parser encountered no width information associated with image.")
+        }
+
+        // Parse the caption if there's a pipe
+        let alt = '';
+        if (this.match(TokenType.IMAGE_PIPE)) {
+            const captionTokens: string[] = [];
+
+            while (!this.isAtEnd() && !this.check(TokenType.IMAGE_CLOSE)) {
+                if (this.match(TokenType.TEXT)) {
+                    captionTokens.push(this.previous().value);
+                } else if (this.match(TokenType.WHITESPACE)) {
+                    captionTokens.push(' ');
+                } else {
+                    // Skip other tokens or handle them as needed
+                    this.advance();
+                }
+            }
+
+            alt = captionTokens.join('').trim();
+        }
+
+        // Consume the closing tag
+        this.consume(TokenType.IMAGE_CLOSE, "Expected '}}' to close image");
+
+        return {
+            type: 'Image',
+            src: imagePath,
+            alt: alt || undefined,
+            width: width,
+            format: format || undefined,
+            loading: 'lazy'
+        };
+    }
+
+
 
 
 
