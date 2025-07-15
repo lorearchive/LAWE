@@ -1,7 +1,7 @@
 import type { ASTNode } from "../Parsing/parser";
 import { getIconMarkup, type IconName } from "../../assets/Icons";
 import { renderAffiliTable } from "./infoTableRenderer.ts";
-import ImageOptimiser from "../../utils/fetch-image.ts"
+import ImageOptimiser from "../../utils/image-processor.ts"
 
 export default class Renderer {
 
