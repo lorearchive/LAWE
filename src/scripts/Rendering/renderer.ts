@@ -66,10 +66,11 @@ export default class Renderer {
                     throw new Error("LAWE RENDERING ERROR: node does not include any name or school information while trying to render affili table");
                 }
             }
+            
 
-            case 'Image': {
+            case 'Image':
                 return this.renderImage(node)
-                }
+                
 
             default:
                 console.warn(`Unknown node type ${node.type}.`)
