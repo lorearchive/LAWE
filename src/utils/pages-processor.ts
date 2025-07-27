@@ -183,7 +183,7 @@ function validateHtmlOutput(html: string, filePath: string): void {
 
 
 // Process a single wiki page through the lexer → parser → renderer pipeline
-export async function processPage( rawPage: RawPage, config: Partial<PageProcessorConfig> = {} ): Promise<ProcessedPage> {
+export function processPage( rawPage: RawPage, config: Partial<PageProcessorConfig> = {} ): ProcessedPage {
     const finalConfig = { ...defaultConfig, ...config };
     const startTime = Date.now()
     const lexer = new Lexer()
@@ -219,7 +219,7 @@ export async function processPage( rawPage: RawPage, config: Partial<PageProcess
         // Stage 3: Rendering
         let htmlContent;
         try {
-            htmlContent = await renderer.render(ast);
+            htmlContent = renderer.render(ast);
         } catch (e) {
             throw new PageProcessorError( 'LAWE PP: Rendering failed', 'rendering', rawPage.filePath, e as Error )
         }

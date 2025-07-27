@@ -1,8 +1,9 @@
-import { getImage } from 'astro:assets'
-import type { ASTNode } from '../scripts/Parsing/parser';
+// unusued until astro:assets become available
+//import { getImage } from 'astro:assets'
+//import type { ASTNode } from '../scripts/Parsing/parser';
 
 
-export default class ImageOptimiser {
+/* export default class ImageOptimiser {
 
     private cache = new Map<string, Promise<any>>();
 
@@ -36,4 +37,4 @@ export default class ImageOptimiser {
 
         return { html, src: optimized.src, attributes: optimized.attributes };
     }
-}
+} */

@@ -1,11 +1,10 @@
 import type { ASTNode } from "../Parsing/parser";
 import { getIconMarkup, type IconName } from "../../assets/Icons";
 import { renderAffiliTable } from "./infoTableRenderer.ts";
-import ImageOptimiser from "../../utils/image-processor.ts"
 
 export default class Renderer {
 
-    public async render(node: ASTNode): Promise<string> {
+    public render(node: ASTNode): string {
 
 
 
@@ -79,11 +78,8 @@ export default class Renderer {
 
     }
 
-    private async renderImage(node: ASTNode): Promise<string> {
-        const imageOpter = new ImageOptimiser()
-        const imageOpted = await imageOpter.optimizeImage(`https://raw.githubusercontent.com/lorearchive/law-content/main/images${node.src}`, node)
-            
-        return imageOpted
+    private renderImage(node: ASTNode): string {       
+        return `<figure id="lawe-figure"><a class="a-no-style" href="https://github.com/lorearchive/law-content/tree/main/images${node.src}"><img src="https://raw.githubusercontent.com/lorearchive/law-content/main/images${node.src}" width="${node.width}" alt="${node.alt}" loading="lazy" /></a><figcaption>${node.alt}</figcaption></figure>`
         
     }
 
@@ -101,10 +97,10 @@ export default class Renderer {
                 case "warning":
                 case "success":
                 case "danger":
-                    return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><div id="lawe-callout-icon"><span id="lawe-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {isCallout: true, calloutType: type, className: "mb-2"})}</span></div><span id="lawe-callout-title-span"><h4>${title}</h4></span><span id="lawe-callout-span-body">${body}</span></div></div> `
+                    return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><div id="lawe-callout-icon"><span id="lawe-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {isCallout: true, calloutType: type, className: "mb-2"})}</span></div><span id="lawe-callout-title-span"><h4>${title}</h4></span><span id="lawe-callout-span-body">${body}</span></div></div>`
 
                 case "info":
-                    return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><div id="lawe-callout-icon"><span id="lawe-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {isCallout: true, calloutType: type, size: 28, className: "mb-2"})}</span></div><span id="lawe-callout-title-span"><h4>${title}</h4></span><span id="lawe-callout-span-body">${body}</span></div></div> `
+                    return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><div id="lawe-callout-icon"><span id="lawe-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {isCallout: true, calloutType: type, size: 28, className: "mb-2"})}</span></div><span id="lawe-callout-title-span"><h4>${title}</h4></span><span id="lawe-callout-span-body">${body}</span></div></div>`
 
                 default: 
                     throw new Error("LAWE CALLOUT TYPE UNKNOWN IN ICONS: " + type)
@@ -117,10 +113,10 @@ export default class Renderer {
                 case "warning":
                 case "success":
                 case "danger":
-                    return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><div id="lawe-callout-icon"><span id="lawe-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {isCallout: true, calloutType: type, className: "mb-2"})}</span></div><span id="lawe-callout-span-body">${body}</span></div></div> `
+                    return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><div id="lawe-callout-icon"><span id="lawe-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {isCallout: true, calloutType: type, className: "mb-2"})}</span></div><span id="lawe-callout-span-body">${body}</span></div></div>`
 
                 case "info":
-                    return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><div id="lawe-callout-icon"><span id="lawe-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {isCallout: true, calloutType: type, size: 28, className: "mb-2"})}</span></div><span id="lawe-callout-span-body">${body}</span></div></div> `
+                    return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><div id="lawe-callout-icon"><span id="lawe-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {isCallout: true, calloutType: type, size: 28, className: "mb-2"})}</span></div><span id="lawe-callout-span-body">${body}</span></div></div>`
 
                 default: 
                     throw new Error("LAWE CALLOUT TYPE UNKNOWN IN ICONS: " + type)
@@ -132,11 +128,10 @@ export default class Renderer {
 
     }
 
-    private async renderChildren(node: ASTNode): Promise<string> {
+    private renderChildren(node: ASTNode): string {
         if (!node.children) return '';
         
-        const rendered = await Promise.all(node.children.map(child => this.render(child)));
-        return rendered.join('');
+        return node.children.map(child => this.render(child)).join('')
     }
 
     private renderAttributes(attributes?: Record<string, string>, defaults?: Record<string, string>): string {
