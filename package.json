@@ -6,15 +6,19 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "vitest",
+    "test:watch": "vitest --watch"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.4.1",
     "@tailwindcss/vite": "^4.1.4",
     "astro": "^5.11.1",
-    "tailwindcss": "^4.1.4"
+    "tailwindcss": "^4.1.4",
+    "typescript": "^5.8.3"
   },
   "devDependencies": {
-    "@types/node": "^22.14.1"
+    "@types/node": "^22.16.5",
+    "vitest": "^3.2.4"
   }
 }
