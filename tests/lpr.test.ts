@@ -35,7 +35,7 @@ const cases: Element[] = [
     {
         name: "Image",
         raw: `{{/someImage.png?200|figcaption}}`,
-        expected: `<figure id="lawe-figure"><a class="a-no-style" href="https://github.com/lorearchive/law-content/tree/main/images/someImage.png"><img src="https://raw.githubusercontent.com/lorearchive/law-content/main/images/someImage.png" width="200" alt="figcaption" loading="lazy" /></a><figcaption>figcaption</figcaption></figure>`
+        expected: `<figure id="lawe-figure"  class="lawe-figure-left"><div id="lawe-figure-innerdiv"><a id="lawe-figure-a"><a class="a-no-style" href="https://github.com/lorearchive/law-content/tree/main/images/someImage.png"><img src="https://raw.githubusercontent.com/lorearchive/law-content/main/images/someImage.png" width="200" alt="figcaption" loading="lazy" /></a><figcaption>figcaption</figcaption></div></figure>`
 
     }
 
@@ -55,5 +55,11 @@ describe('LPR', () => {
 
             expect(html).toBe(expected)
         })
+    })
+})
+
+describe('Lexer', () => {
+    it('analyses tokens from raw wikitext.', () => {
+        expect(lexer.tokenise("{{ /image.png|Sigma}}")).toEqual("sig")
     })
 })

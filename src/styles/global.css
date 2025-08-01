@@ -171,3 +171,28 @@ td#lawe-infoTable-school-cell {
     border-top: transparent;
     text-align: center;
 }
+
+
+/** ------------------------ Figures and images **/
+
+#lawe-figure {
+    margin-bottom:.5em;
+    padding-right:10px;
+    width:auto;
+    display:block
+}
+
+.lawe-figure-right {
+    clear: right;
+    float: right;
+    margin: .5em 0 .8em 1.4em;
+}
+
+#lawe-figure .lawe-figure-innerdiv {
+    display: inline-block;
+    background-color: #F9F9F9;
+    border: 1px solid #CCC;
+    font-size: 94%;
+    overflow: hidden;
+    padding: 3px;
+}

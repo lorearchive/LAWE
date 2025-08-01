@@ -79,7 +79,7 @@ export default class Renderer {
     }
 
     private renderImage(node: ASTNode): string {       
-        return `<figure id="lawe-figure"><a class="a-no-style" href="https://github.com/lorearchive/law-content/tree/main/images${node.src}"><img src="https://raw.githubusercontent.com/lorearchive/law-content/main/images${node.src}" width="${node.width}" alt="${node.alt}" loading="lazy" /></a><figcaption>${node.alt}</figcaption></figure>`
+        return `<figure id="lawe-figure" class="lawe-figure-${node.align}"><div id="lawe-figure-innerdiv"><a id="lawe-figure-a" class="a-no-style" href="https://github.com/lorearchive/law-content/tree/main/images${node.src}"><img src="https://raw.githubusercontent.com/lorearchive/law-content/main/images${node.src}" width="${node.width}" alt="${node.alt}" loading="lazy" /></a><figcaption>${node.alt}</figcaption></div></figure>`
         
     }
 

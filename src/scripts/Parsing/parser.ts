@@ -46,6 +46,7 @@ export interface ASTNode {
     width?: string    // Image width
     format?: string   // Image format
     loading?: string  // Image loading (lazy or eager)
+    align?: string    // Image align (right, left)
 }
 
 export interface ParserCtx {
@@ -298,15 +299,21 @@ export default class Parser {
         // Parse the image path - collect TEXT tokens until we hit IMAGE_PIPE or IMAGE_CLOSE
         let src = '';
         const pathTokens: string[] = [];
+        let align: string = "right" //no support for center yet
 
-        while (!this.isAtEnd() &&
-            !this.check(TokenType.IMAGE_PIPE) &&
-            !this.check(TokenType.IMAGE_CLOSE)) {
+
+        while (!this.isAtEnd() && !this.check(TokenType.IMAGE_PIPE) && !this.check(TokenType.IMAGE_CLOSE)) {
+
+            if (this.match(TokenType.WHITESPACE)) {
+                align = "right"
+            }
 
             if (this.match(TokenType.TEXT)) {
-                pathTokens.push(this.previous().value);
+                pathTokens.push(this.previous().value)
+
             } else if (this.match(TokenType.WHITESPACE)) {
-                pathTokens.push(' ');
+                align = "left"
+
             } else {
                 // Skip other tokens or handle them as needed
                 this.advance();
@@ -320,7 +327,8 @@ export default class Parser {
         let width: string = '' //Initialized to prevent vscode throwing errors on return
         let format: string | undefined
 
-        if (src.includes('?')) {
+       
+        if (imagePath.includes('?')) {
             const [basePath, query] = src.split('?');
 
             // support width=300, 300px, 50%, etc.
@@ -331,7 +339,7 @@ export default class Parser {
 
             imagePath = basePath
 
-            // extract file extension (format)
+            // extract file extension
             const formatMatch = basePath.match(/\.(\w+)$/);
             format = formatMatch ? formatMatch[1].toLowerCase() : undefined
 
@@ -367,7 +375,8 @@ export default class Parser {
             alt: alt || undefined,
             width: width,
             format: format || undefined,
-            loading: 'lazy'
+            loading: 'lazy',
+            align: align
         };
     }
 

@@ -44,12 +44,22 @@ export default class LexerContext {
     }
 
     createToken(type: TokenType, value: string, calloutType?: CalloutType, calloutTitle?: string): Token {
-        return {
-            type,
-            value,
-            position: { line: this.line, col: this.col - value.length },
-            calloutType,
-            calloutTitle
-        };
+
+        if (calloutType && calloutTitle) {
+            return {
+                type,
+                value,
+                position: { line: this.line, col: this.col - value.length },
+                calloutType,
+                calloutTitle
+            };
+        } else {
+            return {
+                type,
+                value,
+                position: { line: this.line, col: this.col - value.length },
+            }
+        }
+        
     }
 }
