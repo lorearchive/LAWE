@@ -188,11 +188,15 @@ td#lawe-infoTable-school-cell {
     margin: .5em 0 .8em 1.4em;
 }
 
-#lawe-figure .lawe-figure-innerdiv {
+#lawe-figure #lawe-figure-innerdiv {
     display: inline-block;
     background-color: #F9F9F9;
     border: 1px solid #CCC;
     font-size: 94%;
     overflow: hidden;
     padding: 3px;
+}
+
+#lawe-figure-innerdiv figcaption {
+    padding: 0.25em 0 0 0.1em;
 }

@@ -136,6 +136,175 @@ export class HeadingHandler extends BaseTokenHandler {
     }
 }
 
+export class LinkHandler extends BaseTokenHandler {
+    priority = 85; // High priority, should come before text handler but after image
+
+    // Pre-compiled regex patterns for optimization
+    private static readonly EXTERNAL_URL_REGEX = /^https?:\/\//;
+    private static readonly INTERNAL_LINK_REGEX = /^[a-zA-Z0-9_\-\/:#]+$/;
+    private static readonly NAMESPACE_CHAR_REGEX = /[a-zA-Z0-9_\-\/:#]/;
+
+    canHandle(context: LexerContext): boolean {
+        if (context.peek() === '[' && context.peek(1) === '[') {
+            return true;
+        }
+        
+        if (context.peek() === ']' && context.peek(1) === ']') {
+            return true;
+        }
+        
+        if (context.peek() === '|') {
+            return true;
+        }
+        
+        return false;
+    }
+
+    handle(context: LexerContext, tokens: Token[], tokenStack: TokenType[]): boolean {
+        if (context.peek() === '[' && context.peek(1) === '[') {
+            return this.handleLinkOpen(context, tokens, tokenStack);
+        }
+        
+        if (context.peek() === ']' && context.peek(1) === ']' && 
+            this.hasOpenLink(tokenStack)) {
+            return this.handleLinkClose(context, tokens, tokenStack);
+        }
+
+        if (context.peek() === '|' && this.hasOpenLink(tokenStack)) {
+            return this.handleLinkPipe(context, tokens, tokenStack);
+        }
+
+        return false;
+    }
+
+    private handleLinkOpen(context: LexerContext, tokens: Token[], tokenStack: TokenType[]): boolean {
+        context.advance(2); // Skip '[['
+        tokens.push(context.createToken(TokenType.LINK_OPEN, '[['));
+        tokenStack.push(TokenType.LINK_OPEN);
+        return true;
+    }
+
+    private handleLinkClose(context: LexerContext, tokens: Token[], tokenStack: TokenType[]): boolean {
+        context.advance(2); // Skip ']]'
+        tokens.push(context.createToken(TokenType.LINK_CLOSE, ']]'));
+        
+        // Remove the corresponding open tag from stack
+        const index = this.findLastUnclosedOpenTag(tokenStack, TokenType.LINK_OPEN, TokenType.LINK_CLOSE);
+        if (index !== -1) {
+            tokenStack.splice(index, 1);
+        }
+        
+        return true;
+    }
+
+    private handleLinkPipe(context: LexerContext, tokens: Token[], tokenStack: TokenType[]): boolean {
+        context.advance(1); // Skip '|'
+        tokens.push(context.createToken(TokenType.LINK_PIPE, '|'));
+        return true;
+    }
+
+    private hasOpenLink(tokenStack: TokenType[]): boolean {
+        return tokenStack.includes(TokenType.LINK_OPEN);
+    }
+
+    /**
+     * Utility method to validate and categorize link types
+     * This can be used by the parser to determine link behavior
+     */
+    static validateLinkTarget(target: string): {
+        isValid: boolean;
+        type: 'external' | 'internal' | 'anchor';
+        namespace?: string;
+        page?: string;
+        anchor?: string;
+        error?: string;
+    } {
+        if (!target || target.trim().length === 0) {
+            return { isValid: false, type: 'internal', error: 'Empty link target' };
+        }
+
+        const trimmed = target.trim();
+
+        // External link (http/https)
+        if (LinkHandler.EXTERNAL_URL_REGEX.test(trimmed)) {
+            return {
+                isValid: true,
+                type: 'external'
+            };
+        }
+
+        // Anchor-only link (starts with #)
+        if (trimmed.startsWith('#')) {
+            const anchor = trimmed.slice(1);
+            if (anchor.length === 0) {
+                return { isValid: false, type: 'anchor', error: 'Empty anchor' };
+            }
+            return {
+                isValid: true,
+                type: 'anchor',
+                anchor: anchor
+            };
+        }
+
+        // Internal link validation
+        if (!LinkHandler.INTERNAL_LINK_REGEX.test(trimmed)) {
+            return { isValid: false, type: 'internal', error: 'Invalid characters in internal link' };
+        }
+
+        // Parse internal link with potential anchor
+        const [linkPart, anchor] = trimmed.split('#', 2);
+        
+        // Parse namespace and page
+        const parts = linkPart.split('/');
+        let namespace = '';
+        let page = '';
+
+        if (parts.length === 1) {
+            page = parts[0];
+        } else {
+            namespace = parts.slice(0, -1).join('/');
+            page = parts[parts.length - 1];
+        }
+
+        // Validate page name isn't empty (but namespace can be)
+        if (!page && !anchor) {
+            return { isValid: false, type: 'internal', error: 'Missing page name' };
+        }
+
+        return {
+            isValid: true,
+            type: 'internal',
+            namespace: namespace || undefined,
+            page: page || undefined,
+            anchor: anchor || undefined
+        };
+    }
+
+    /**
+     * Utility method to normalize internal link paths
+     * Only handles absolute paths - no relative link support
+     */
+    static normalizeInternalLink(target: string): string {
+        const validation = LinkHandler.validateLinkTarget(target);
+        
+        if (!validation.isValid || validation.type !== 'internal') {
+            return target;
+        }
+
+        let normalized = target.trim();
+
+        // Remove leading slash for consistency
+        if (normalized.startsWith('/')) {
+            normalized = normalized.slice(1);
+        }
+
+        // Clean up double slashes
+        normalized = normalized.replace(/\/+/g, '/');
+
+        return normalized;
+    }
+}
+
 export class ImageHandler extends BaseTokenHandler {
     priority = 80; // High priority, should come before text handler
 

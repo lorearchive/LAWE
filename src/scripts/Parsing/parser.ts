@@ -1,4 +1,5 @@
 import type { CalloutType } from "../Lexing/Handlers/PseudoHTMLHandler";
+import { LinkHandler } from "../Lexing/Handlers/handlers";
 import type { Token } from "../Lexing/lexer";
 import { TokenType } from "../Lexing/lexer";
 import { parseInfoTable } from "./infoTableParser";
@@ -27,6 +28,7 @@ export type NodeType =
     | 'TableHeaderCell'
 
     | 'Image'
+    | 'Link'
 
     | 'InfoTableAffili'
 
@@ -47,6 +49,11 @@ export interface ASTNode {
     format?: string   // Image format
     loading?: string  // Image loading (lazy or eager)
     align?: string    // Image align (right, left)
+    linkType?: 'external' | 'internal' | 'anchor'
+    href?: string        // The actual link target
+    namespace?: string   // For internal links
+    page?: string        // For internal links  
+    anchor?: string      // Fragment identifier
 }
 
 export interface ParserCtx {
@@ -108,7 +115,7 @@ export default class Parser {
         // Skip whitespace and newlines at the top level
         this.skipWhitespace() // Super nice function name
 
-        if (this.isAtEnd()) {
+        if (this.isAtEnd()) {   
             return null
         }
 
@@ -135,6 +142,7 @@ export default class Parser {
         }
 
         if (this.match(TokenType.IMAGE_OPEN)) {
+            console.log("LIGMA" + JSON.stringify(this.previous()))
             return this.parseImage();
         }
 
@@ -422,6 +430,11 @@ export default class Parser {
                 children.push(this.parseNewline());
                 continue
             }
+
+            if (this.match(TokenType.LINK_OPEN)) {
+                children.push(this.parseLink());
+                continue;
+            }
             
             if (this.match(TokenType.UNDERLINE_OPEN)) {
                 children.push(this.parseUnderline());
@@ -456,6 +469,85 @@ export default class Parser {
             type: 'Newline'
         };
     }
+
+    private parseLink(): ASTNode {
+        // LINK_OPEN token has already been consumed by match()
+        
+        // Parse the link target - collect tokens until we hit LINK_PIPE or LINK_CLOSE
+        let target = '';
+        const targetTokens: string[] = [];
+        
+        while (!this.isAtEnd() && !this.check(TokenType.LINK_PIPE) && !this.check(TokenType.LINK_CLOSE)) {
+            if (this.match(TokenType.TEXT)) {
+                targetTokens.push(this.previous().value);
+            } else if (this.match(TokenType.WHITESPACE)) {
+                targetTokens.push(' ');
+            } else {
+                // Skip other tokens or advance past unexpected tokens
+                this.advance();
+            }
+        }
+        
+        target = targetTokens.join('').trim();
+        
+        // Parse the link text if there's a pipe
+        let linkText = '';
+        const linkTextNodes: ASTNode[] = [];
+        
+        if (this.match(TokenType.LINK_PIPE)) {
+            // Parse inline content until LINK_CLOSE
+            linkTextNodes.push(...this.parseInlineUntil(TokenType.LINK_CLOSE));
+            
+            // Convert nodes to text for simple cases
+            if (linkTextNodes.every(node => node.type === 'Text')) {
+                linkText = linkTextNodes.map(node => node.value).join('').trim();
+            }
+        }
+        
+        // Consume the closing tag
+        this.consume(TokenType.LINK_CLOSE, "Expected ']]' to close link");
+        
+        // Validate and categorize the link using the LinkHandler utility
+        const validation = LinkHandler.validateLinkTarget(target);
+        
+        if (!validation.isValid) {
+            // Handle invalid links - you might want to treat them as plain text
+            console.warn(`Invalid link target: ${target} - ${validation.error}`);
+            return {
+                type: 'Text',
+                value: `[[${target}${linkText ? '|' + linkText : ''}]]`
+            };
+        }
+        
+        // Create the link node based on type
+        const linkNode: ASTNode = {
+            type: 'Link',
+            linkType: validation.type,
+            href: target,
+            text: linkText || target, // Use link text or fall back to target
+        };
+        
+        // Add type-specific properties
+        if (validation.type === 'internal') {
+            linkNode.namespace = validation.namespace;
+            linkNode.page = validation.page;
+            linkNode.anchor = validation.anchor;
+            
+            // Normalize the internal link
+            linkNode.href = LinkHandler.normalizeInternalLink(target);
+        } else if (validation.type === 'anchor') {
+            linkNode.anchor = validation.anchor;
+        }
+        
+        // If we have complex link text (not just plain text), store it as children
+        if (linkTextNodes.length > 0 && !linkTextNodes.every(node => node.type === 'Text')) {
+            linkNode.children = linkTextNodes;
+            delete linkNode.text; // Remove simple text property
+        }
+        
+        return linkNode;
+    }
+
 
     private parseUnderline(): ASTNode {
 

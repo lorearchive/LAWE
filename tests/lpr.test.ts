@@ -60,6 +60,6 @@ describe('LPR', () => {
 
 describe('Lexer', () => {
     it('analyses tokens from raw wikitext.', () => {
-        expect(lexer.tokenise("{{ /image.png|Sigma}}")).toEqual("sig")
+        expect(lexer.tokenise(`[[page]], [[namespace/page]], [[namespace/page]], [[page|customText]]. [[page#heading|custom]]`)).toEqual("sig")
     })
 })
