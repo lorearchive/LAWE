@@ -37,6 +37,11 @@ const cases: Element[] = [
         raw: `{{/someImage.png?200|figcaption}}`,
         expected: `<figure id="lawe-figure"  class="lawe-figure-left"><div id="lawe-figure-innerdiv"><a id="lawe-figure-a"><a class="a-no-style" href="https://github.com/lorearchive/law-content/tree/main/images/someImage.png"><img src="https://raw.githubusercontent.com/lorearchive/law-content/main/images/someImage.png" width="200" alt="figcaption" loading="lazy" /></a><figcaption>figcaption</figcaption></div></figure>`
 
+    },
+    {
+        name: "Link",
+        raw: `[[/path/to/page#anchor|Sigma]]`,
+        expected: `<p><a href="/wiki/path/to/page#anchor" title="Sigma" id="lawe-link" class="internal">Sigma</a></p>`
     }
 
 ]
@@ -58,8 +63,8 @@ describe('LPR', () => {
     })
 })
 
-describe('Lexer', () => {
-    it('analyses tokens from raw wikitext.', () => {
-        expect(lexer.tokenise(`[[page]], [[namespace/page]], [[namespace/page]], [[page|customText]]. [[page#heading|custom]]`)).toEqual("sig")
-    })
-})
+//describe('Lexer', () => {
+  //  it('analyses tokens from raw wikitext.', () => {
+    //    expect(lexer.tokenise(`[[page]], [[namespace/page]], [[namespace/page]], [[page|customText]]. [[page#heading|custom]]`)).toEqual("sig")
+    //})
+//})

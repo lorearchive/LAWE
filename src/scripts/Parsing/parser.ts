@@ -142,7 +142,6 @@ export default class Parser {
         }
 
         if (this.match(TokenType.IMAGE_OPEN)) {
-            console.log("LIGMA" + JSON.stringify(this.previous()))
             return this.parseImage();
         }
 

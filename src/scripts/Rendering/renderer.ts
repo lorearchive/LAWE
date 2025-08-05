@@ -70,6 +70,9 @@ export default class Renderer {
             case 'Image':
                 return this.renderImage(node)
                 
+            case 'Link':
+                return this.renderLink(node)
+
 
             default:
                 console.warn(`Unknown node type ${node.type}.`)
@@ -81,6 +84,17 @@ export default class Renderer {
     private renderImage(node: ASTNode): string {       
         return `<figure id="lawe-figure" class="lawe-figure-${node.align}"><div id="lawe-figure-innerdiv"><a id="lawe-figure-a" class="a-no-style" href="https://github.com/lorearchive/law-content/tree/main/images${node.src}"><img src="https://raw.githubusercontent.com/lorearchive/law-content/main/images${node.src}" width="${node.width}" alt="${node.alt}" loading="lazy" /></a><figcaption>${node.alt}</figcaption></div></figure>`
         
+    }
+
+    private renderLink(node: ASTNode): string {
+
+        let href = node.href
+
+        if (href?.startsWith("/")) {
+            href = href.slice(1)
+        }
+
+        return `<a href="/wiki/${href}" title="${node.text}" id="lawe-link" class="${node.linkType}">${node.text}</a>`
     }
 
 
