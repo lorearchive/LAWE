@@ -4,7 +4,7 @@
 
 </div>
 
-The Lore Archive Wiki Engine (LAWE) is a [static](https://en.wikipedia.org/wiki/Static_site_generator) [wiki engine](https://en.wikipedia.org/wiki/Wiki_software) created by [Cieron](https://github.com/Cirrow) for use in the [Lore Archive Wiki](https://lorearchive.org). It takes on a different approach to a traditional wiki, where pages are organized in namespaces rather than no namespaces. It features a dynamic sidebar on the left where all pages can be found.
+The Lore Archive Wiki Engine (LAWE) is a [statically-generated](https://en.wikipedia.org/wiki/Static_site_generator) [wiki engine](https://en.wikipedia.org/wiki/Wiki_software) created by [Cieron](https://github.com/Cirrow) for use in the [Lore Archive Wiki](https://lorearchive.org). It takes on a different approach to a traditional wiki, where pages are organized in namespaces rather than no namespaces. It features a dynamic sidebar on the left where all pages can be found.
 
 
 It ships as little JavaScript to user as possible with the help of [AstroJS](https://astro.build/).
