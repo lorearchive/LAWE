@@ -53,7 +53,9 @@ export interface ASTNode {
     href?: string        // The actual link target
     namespace?: string   // For internal links
     page?: string        // For internal links  
-    anchor?: string      // Fragment identifier
+    anchor?: string      // Fragment identifier 
+    interwikiDest?: string // refer to linkHandler
+    interwikiId?: string   // same thing here
 }
 
 export interface ParserCtx {
@@ -523,9 +525,9 @@ export default class Parser {
             type: 'Link',
             linkType: validation.type,
             href: target,
-            text: linkText || target, // Use link text or fall back to target
-        };
-        
+            text: linkText || (validation.interwikiId || target), // Use link text, or wiki ID, or fall back to full target
+        }
+
         // Add type-specific properties
         if (validation.type === 'internal') {
             linkNode.namespace = validation.namespace;
@@ -534,6 +536,16 @@ export default class Parser {
             
             // Normalize the internal link
             linkNode.href = LinkHandler.normalizeInternalLink(target);
+        } else if (validation.type === 'external' && validation.interwikiDest) {
+            // Handle wiki prefix links (wp>, yt>, etc.)
+            linkNode.interwikiDest = validation.interwikiDest;
+            linkNode.interwikiId = validation.interwikiId;
+            
+            // Generate the actual URL if needed (optional - could be done in renderer)
+            const wikiUrl = LinkHandler.generateInterwikiUrl(validation.interwikiDest, validation.interwikiId!);
+            if (wikiUrl) {
+                linkNode.href = wikiUrl;
+            }
         } else if (validation.type === 'anchor') {
             linkNode.anchor = validation.anchor;
         }

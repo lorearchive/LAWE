@@ -143,6 +143,20 @@ export class LinkHandler extends BaseTokenHandler {
     private static readonly EXTERNAL_URL_REGEX = /^https?:\/\//;
     private static readonly INTERNAL_LINK_REGEX = /^[a-zA-Z0-9_\-\/:#]+$/;
     private static readonly NAMESPACE_CHAR_REGEX = /[a-zA-Z0-9_\-\/:#]/;
+    private static readonly WIKI_PREFIX_REGEX = /^([a-z]+)>(.+)$/;
+
+    private static readonly WIKI_PREFIXES: Record<string, { baseUrl: string, pathTemplate: string }> = {
+        'wp': { 
+            baseUrl: 'https://en.wikipedia.org', 
+            pathTemplate: '/wiki/{id}' 
+        },
+        'yt': { 
+            baseUrl: 'https://www.youtube.com', 
+            pathTemplate: '/watch?v={id}' 
+        }
+        // we can add more websites here later
+    }
+
 
     canHandle(context: LexerContext): boolean {
         if (context.peek() === '[' && context.peek(1) === '[') {
@@ -217,6 +231,8 @@ export class LinkHandler extends BaseTokenHandler {
         namespace?: string;
         page?: string;
         anchor?: string;
+        interwikiDest?: string // destination website for interwiki links
+        interwikiId?: string   // id for website for interwiki links
         error?: string;
     } {
         if (!target || target.trim().length === 0) {
@@ -224,6 +240,28 @@ export class LinkHandler extends BaseTokenHandler {
         }
 
         const trimmed = target.trim();
+
+        const wikiMatch = trimmed.match(LinkHandler.WIKI_PREFIX_REGEX);
+        if (wikiMatch) {
+            const [, prefix, id] = wikiMatch;
+            const wikiConfig = LinkHandler.WIKI_PREFIXES[prefix.toLowerCase()];
+            
+            if (!wikiConfig) {
+                return { isValid: false, type: 'external', error: `Unknown wiki prefix: ${prefix}` };
+            }
+            
+            if (!id || id.trim().length === 0) {
+                return { isValid: false, type: 'external', error: `Empty ${prefix} identifier` };
+            }
+            
+            return {
+                isValid: true,
+                type: 'external',
+                interwikiDest: prefix,
+                interwikiId: id.trim()
+            };
+        }
+
 
         // External link (http/https)
         if (LinkHandler.EXTERNAL_URL_REGEX.test(trimmed)) {
@@ -302,6 +340,17 @@ export class LinkHandler extends BaseTokenHandler {
         normalized = normalized.replace(/\/+/g, '/');
 
         return normalized;
+    }
+
+    /**
+     * Generates the actual URL for interwiki links
+     */
+    static generateInterwikiUrl(prefix: string, id: string): string | null {
+        const wikiConfig = LinkHandler.WIKI_PREFIXES[prefix.toLowerCase()];
+        if (!wikiConfig) {
+            return null;
+        }
+        return wikiConfig.baseUrl + wikiConfig.pathTemplate.replace('{id}', encodeURIComponent(id));
     }
 }
 

@@ -64,7 +64,13 @@ describe('LPR', () => {
 })
 
 //describe('Lexer', () => {
-  //  it('analyses tokens from raw wikitext.', () => {
-    //    expect(lexer.tokenise(`[[page]], [[namespace/page]], [[namespace/page]], [[page|customText]]. [[page#heading|custom]]`)).toEqual("sig")
-    //})
+  //it('analyses tokens from raw wikitext.', () => {
+    //expect(lexer.tokenise(`[[wp>sigma]]`)).toEqual("sig")
 //})
+//})
+
+describe('Parser', () => {
+    it('generates AST from tokens', () => {
+        expect(parser.parse(lexer.tokenise(`[[wp>sigma]]`))).toEqual('sigm')
+    })
+})

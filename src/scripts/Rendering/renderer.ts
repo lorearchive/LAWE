@@ -6,8 +6,6 @@ export default class Renderer {
 
     public render(node: ASTNode): string {
 
-
-
         switch (node.type) {
             
             case 'Document':
@@ -92,6 +90,10 @@ export default class Renderer {
 
         if (href?.startsWith("/")) {
             href = href.slice(1)
+        }
+
+        if (node.interwikiDest && node.interwikiId) {
+            return `<a href="/wiki/${href}" title="${node.text}" id="lawe-link" class="${node.linkType} interwiki">${node.text}</a>`
         }
 
         return `<a href="/wiki/${href}" title="${node.text}" id="lawe-link" class="${node.linkType}">${node.text}</a>`
