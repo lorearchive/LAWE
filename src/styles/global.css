@@ -6,6 +6,7 @@
 * {
     box-sizing: border-box;
     line-height: 1.4;
+    scroll-margin-top: 90px;
 }
 
 /** ------------------------ SHELL **/
@@ -26,6 +27,13 @@ header#lawe-header.header-hidden {
 
 main {
     margin: 2em 1em 0 2em;
+    width: 60vw;
+    max-width: 1116px;
+}
+@media (max-width: 1544px) {
+    main {
+        width: 55vw;
+    }
 }
 
 
