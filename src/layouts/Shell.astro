@@ -31,12 +31,12 @@ import '../styles/global.css' // This enables tailwind
     
                 </div>
     
-                <div id="content-window" class="ml-80 w-full grid grid-cols-8 gap-4">
-                    <main class="col-span-6 p-4">
+                <div id="content-window" class="ml-80 w-full flex justify-end">
+                    <main class="p-4">
                         <slot />
                     </main>
 
-                    <aside id="TOCbar" class="col-span-2 p-4 pl-0 mt-16">
+                    <aside id="TOCaside" class="p-4 mt-16 w-70 text-nowrap">
                         <slot name="TOCbar" />
                     </aside>
                 </div>
