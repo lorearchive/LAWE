@@ -41,22 +41,34 @@ main {
 
 /** ------------------------ Typography **/
 
+.lawe-heading-div {
+    display: flow-root;
+}
+
 h1 {
-    font-size: 2.7em;
-    font-family: serif;
+    font-size: 2.3em;
+    font-family: 'Linux Libertine', "Georgia", 'Times', 'Source Serif Pro', serif;
+}
+
+#lawe-heading-2-div {
+    padding: 0.5em 0 0 0;
+    margin: 1em 0 1em 0;
+    border-bottom: 1px solid #a2a9b1;
 }
 
 h2 {
+    font-family: 'Linux Libertine', "Georgia", 'Times', 'Source Serif Pro', serif;
     padding: 0;
-    margin: 0;
-    font-size: 2em;
-    font-family: serif;
-    margin-bottom: 0.7em;
+    margin-bottom: 0;
+    display: inline-block;
+    font-size: 1.8rem;
+    line-height: 1;
+    
 }
 
 h3 {
     margin: 0.5em 0 0.5em 0;
-    font-size: 1.4em;
+    font-size: 1.35rem;
     font-weight: bold;
 }
 
