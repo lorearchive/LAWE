@@ -4,12 +4,42 @@ import { renderAffiliTable } from "./infoTableRenderer.ts";
 
 export default class Renderer {
 
+    private footnoteCounter: number = 0;
+    private footnoteDefinitions: string[] = [];
+
+    public resetFootnotes(): void {
+        this.footnoteCounter = 0;
+        this.footnoteDefinitions = [];
+    }
+
+    public getFootnoteDefinitions(): string {
+        if (this.footnoteDefinitions.length === 0) return '';
+        
+        const footnotes = this.footnoteDefinitions
+            .map((content, index) => 
+                `<li id="fn-${index + 1}" class="mb-4"><div class="footnote-content">${index + 1}. <a href="#fnref-${index + 1}" class="footnote-backref mr-2">⇈</a> ${content}</div></li>`
+            )
+            .join('');
+            
+        return `
+            <div id="lawe-heading-2-div" class="lawe-heading-div"><h2 id="notes" class="lawe-heading-2"><span class="lawe-heading">Notes</span></h2></div>
+            <div class="footnotes-section">
+                <ol class="footnotes-list">
+                    ${footnotes}
+                </ol>
+            </div>
+        `;
+    }
+
     public render(node: ASTNode): string {
 
         switch (node.type) {
             
             case 'Document':
-                return this.renderChildren(node)
+                this.resetFootnotes();
+                const content = this.renderChildren(node);
+                const footnotes = this.getFootnoteDefinitions();
+                return content + footnotes;
             case 'Paragraph':
                 return `<p>${this.renderChildren(node)}</p>`
             case 'Heading':
@@ -71,6 +101,12 @@ export default class Renderer {
             case 'Link':
                 return this.renderLink(node)
 
+            case 'Footnote':
+                return this.renderFootnote(node);
+                
+            case 'CitationNeeded':
+                return this.renderCitationNeeded();
+
 
             default:
                 console.warn(`Unknown node type ${node.type}.`)
@@ -82,6 +118,25 @@ export default class Renderer {
     private renderImage(node: ASTNode): string {       
         return `<figure id="lawe-figure" class="lawe-figure-${node.align}"><div id="lawe-figure-innerdiv"><a id="lawe-figure-a" class="a-no-style" href="https://github.com/lorearchive/law-content/tree/main/images${node.src}"><img src="https://raw.githubusercontent.com/lorearchive/law-content/main/images${node.src}" width="${node.width}" alt="${node.alt}" loading="lazy" /></a><figcaption>${node.alt}</figcaption></div></figure>`
         
+    }
+
+    private renderFootnote(node: ASTNode): string {
+        // Increment counter and get footnote number
+        this.footnoteCounter++;
+        const fnNum = this.footnoteCounter;
+        
+        // Render the footnote content
+        const content = this.renderChildren(node);
+        
+        // Store the footnote definition
+        this.footnoteDefinitions.push(content);
+        
+        // Return the footnote reference
+        return `<sup class="footnote-ref"><a href="#fn-${fnNum}" id="fnref-${fnNum}" class="footnote-link">[${fnNum}]</a></sup>`;
+    }
+
+    private renderCitationNeeded(): string {
+        return `<sup class="citation-needed" title="Citation needed">[<em>citation needed</em>]</sup>`;
     }
 
     private renderLink(node: ASTNode): string {

@@ -1,7 +1,7 @@
 import LexerContext from "./context"
 import type { TokenHandler } from "./Handlers/handlers"
 import type { CalloutType } from "./Handlers/PseudoHTMLHandler";
-import { FormattingHandler, HeadingHandler, ImageHandler, LinkHandler, MiscHandler, TextHandler, WhitespaceHandler } from "./Handlers/handlers";
+import { FootnoteHandler, FormattingHandler, HeadingHandler, ImageHandler, LinkHandler, MiscHandler, TextHandler, WhitespaceHandler } from "./Handlers/handlers";
 import PseudoHTMLHandler from "./Handlers/PseudoHTMLHandler";
 
 export enum TokenType {
@@ -51,6 +51,9 @@ export enum TokenType {
     LINK_OPEN = "LINK_OPEN",
     LINK_CLOSE = "LINK_CLOSE",
     LINK_PIPE = "LINK_PIPE",
+    FOOTNOTE_OPEN = "FOOTNOTE_OPEN",
+    FOOTNOTE_CLOSE = "FOOTNOTE_CLOSE",
+    CITATION_NEEDED = "CITATION_NEEDED",
 
     AFFILI = "AFFILI",
 
@@ -85,7 +88,8 @@ export default class Lexer {
             new PseudoHTMLHandler(),
             new ImageHandler(),
             new MiscHandler(),
-            new LinkHandler()
+            new LinkHandler(),
+            new FootnoteHandler()
         ];
 
         // Sort by priority (highest first)

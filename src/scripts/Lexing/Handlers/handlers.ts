@@ -136,13 +136,85 @@ export class HeadingHandler extends BaseTokenHandler {
     }
 }
 
+export class FootnoteHandler extends BaseTokenHandler {
+    priority = 87; // higher than linkhandler to ensure links work inside footnotes
+    
+    canHandle(context: LexerContext): boolean {
+        // Check for regular footnotes: (( and ))
+        if (context.peek() === '(' && context.peek(1) === "(") return true;
+        if (context.peek() === ")" && context.peek(1) === ")") return true;
+        
+        // Check for citation needed: (((cn)))
+        if (context.peek() === '(' && context.peek(1) === '(' && context.peek(2) === '(') {
+            // Look ahead to see if this is a citation needed tag
+            return this.isCitationNeeded(context);
+        }
+        
+        return false;
+    }
+
+    handle(context: LexerContext, tokens: Token[], tokenStack: TokenType[]): boolean {
+        
+        // Handle citation needed first (more specific pattern)
+        if (context.peek() === '(' && context.peek(1) === '(' && context.peek(2) === '(' && 
+            this.isCitationNeeded(context)) {
+            return this.handleCitationNeeded(context, tokens);
+        }
+        
+        // Handle regular footnotes
+        if (context.peek() === "(" && context.peek(1) === "(") {
+            return this.handleFootnoteOpen(context, tokens, tokenStack);
+        }
+        if (context.peek() === ')' && context.peek(1) === ')' && 
+            tokenStack.includes(TokenType.FOOTNOTE_OPEN)) {
+            return this.handleFootnoteClose(context, tokens, tokenStack);
+        }
+        
+        return false;
+    }
+
+    private isCitationNeeded(context: LexerContext): boolean {
+        // Check if we have "(((cn)))" pattern
+        if (context.peek() === '(' && context.peek(1) === '(' && context.peek(2) === '(' &&
+            context.peek(3) === 'c' && context.peek(4) === 'n' &&
+            context.peek(5) === ')' && context.peek(6) === ')' && context.peek(7) === ')') {
+            return true;
+        }
+        return false;
+    }
+
+    private handleCitationNeeded(context: LexerContext, tokens: Token[]): boolean {
+        context.advance(8); // Skip "(((cn)))"
+        tokens.push(context.createToken(TokenType.CITATION_NEEDED, "(((cn)))"));
+        return true;
+    }
+
+    private handleFootnoteOpen(context: LexerContext, tokens: Token[], tokenStack: TokenType[]): boolean {
+        context.advance(2); // skip "(("
+        tokens.push(context.createToken(TokenType.FOOTNOTE_OPEN, "(("));
+        tokenStack.push(TokenType.FOOTNOTE_OPEN);
+        return true;
+    }
+
+    private handleFootnoteClose(context: LexerContext, tokens: Token[], tokenStack: TokenType[]): boolean {
+
+        context.advance(2); // Skip '))'
+        tokens.push(context.createToken(TokenType.FOOTNOTE_CLOSE, '))'));
+        
+        // Remove the corresponding open tag from stack
+        const index = this.findLastUnclosedOpenTag(tokenStack, TokenType.FOOTNOTE_OPEN, TokenType.FOOTNOTE_CLOSE);
+        if (index !== -1) tokenStack.splice(index, 1);
+        return true;
+    }
+}
+
 export class LinkHandler extends BaseTokenHandler {
     priority = 85; // High priority, should come before text handler but after image
 
     // Pre-compiled regex patterns for optimization
     private static readonly EXTERNAL_URL_REGEX = /^https?:\/\//;
     private static readonly INTERNAL_LINK_REGEX = /^[a-zA-Z0-9_\-\/:#]+$/;
-    private static readonly NAMESPACE_CHAR_REGEX = /[a-zA-Z0-9_\-\/:#]/;
+    //private static readonly NAMESPACE_CHAR_REGEX = /[a-zA-Z0-9_\-\/:#]/;
     private static readonly WIKI_PREFIX_REGEX = /^([a-z]+)>(.+)$/;
 
     private static readonly WIKI_PREFIXES: Record<string, { baseUrl: string, pathTemplate: string }> = {
@@ -452,7 +524,7 @@ export class WhitespaceHandler extends BaseTokenHandler {
 export class TextHandler extends BaseTokenHandler {
     priority = 1; // Lowest priority - fallback
 
-    private specialChars = ['_', '*', '/', '[', ']', '=', '\n', '|', '-', '`', '\\', '<', '{', '}']
+    private specialChars = ['_', '*', '/', '[', ']', '=', '\n', '|', '-', '`', '\\', '<', '{', '}', '(', ')']
 
     canHandle(context: LexerContext): boolean {
         return !context.isEOF(); // Always can handle as fallback

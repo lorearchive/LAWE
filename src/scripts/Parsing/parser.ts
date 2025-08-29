@@ -29,6 +29,8 @@ export type NodeType =
 
     | 'Image'
     | 'Link'
+    | 'Footnote'
+    | 'CitationNeeded'
 
     | 'InfoTableAffili'
 
@@ -432,6 +434,16 @@ export default class Parser {
                 continue
             }
 
+            if (this.match(TokenType.FOOTNOTE_OPEN)) {
+                children.push(this.parseFootnote())
+                continue
+            }
+
+            if (this.match(TokenType.CITATION_NEEDED)) {
+                children.push({ type: 'CitationNeeded' });
+                continue;
+            }
+
             if (this.match(TokenType.LINK_OPEN)) {
                 children.push(this.parseLink());
                 continue;
@@ -470,6 +482,22 @@ export default class Parser {
             type: 'Newline'
         };
     }
+
+    private parseFootnote(): ASTNode {
+        // FOOTNOTE_OPEN token has already been consumed by match()
+        
+        // Parse the footnote content - collect inline nodes until FOOTNOTE_CLOSE
+        const children = this.parseInlineUntil(TokenType.FOOTNOTE_CLOSE);
+        
+        // Consume the closing tag
+        this.consume(TokenType.FOOTNOTE_CLOSE, "Expected '))'to close footnote");
+        
+        return {
+            type: 'Footnote',
+            children
+        };
+    }
+
 
     private parseLink(): ASTNode {
         // LINK_OPEN token has already been consumed by match()
