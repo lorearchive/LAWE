@@ -9,6 +9,39 @@
     scroll-margin-top: 90px;
 }
 
+header#lawe-header {
+    background-color: white;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
+}
+
+header#lawe-header.header-hidden {
+    transform: translateY(-100%);
+}
+
+
+#sidebar {
+    height: calc(100vh - 72px);
+}
+
+main {
+    margin: 2em 1em 0 2em;
+    width: 60vw;
+    max-width: 1116px;
+}
+@media (max-width: 1544px) {
+    main {
+        width: 55vw;
+    }
+}
+
+#fnTooltip {
+    width: max-content;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #f0f0f0;
+    padding: 5px;
+}
 
 
 
