@@ -13,6 +13,8 @@ It ships as little JavaScript to user as possible with the help of [AstroJS](htt
 ## Compiling
 LAWE fetches its raw content from [law-content](https://github.com/lorearchive/law-content) at compile time, then generates static HTML files (as opposed to rendering whenever a user visits a page), which makes LAWE extremely fast and memory-efficient, while also improving [SEO](https://en.wikipedia.org/wiki/Search_engine_optimization).
 
+In this vein, some may argue that LAWE is not a wiki engine but instead a static site generator. However, I doubt that this engine will be popular enough for people to gather and spend their time engaging in such vain thoughts. For now, let's agree on the name "statically-generative wiki engine" or something similar.
+
 You can start the dev server with:
 
 ```bash
