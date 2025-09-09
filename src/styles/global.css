@@ -35,13 +35,37 @@ main {
 }
 
 #fnTooltip {
-    width: max-content;
+    -webkit-box-shadow: 5px 6px 20px 6px rgba(0,0,0,0.21); 
+    box-shadow: 5px 6px 20px 6px rgba(0,0,0,0.21);
+    max-width: 450px;
+    padding: 1em;
     position: absolute;
     top: 0;
     left: 0;
-    background: #f0f0f0;
-    padding: 5px;
+    background: #fff;
+    padding: 1em;
+    border: 1px solid #a2a9b1;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
 }
+
+#fnTooltip.show {
+    opacity: 1;
+    visibility: visible;
+
+}
+
+.tooltip-arrow {
+    position: absolute;
+    background: white;
+    width: 8px;
+    height: 8px;
+    transform: rotate(45deg);
+    border: inherit;
+}
+
 
 
 
@@ -56,11 +80,6 @@ h1 {
     font-family: 'Linux Libertine', "Georgia", 'Times', 'Source Serif Pro', serif;
 }
 
-#lawe-heading-2-div {
-    padding: 0.5em 0 0 0;
-    margin: 1em 0 1em 0;
-    border-bottom: 1px solid #a2a9b1;
-}
 
 h2 {
     font-family: 'Linux Libertine', "Georgia", 'Times', 'Source Serif Pro', serif;
@@ -70,6 +89,12 @@ h2 {
     font-size: 1.8rem;
     line-height: 1;
     
+}
+
+#lawe-heading-2-div {
+    padding: 0.5em 0 0 0;
+    margin: 1em 0 1em 0;
+    border-bottom: 1px solid #a2a9b1;
 }
 
 h3 {
@@ -110,9 +135,9 @@ a:visited:active:not(.a-no-style) {
 
 .lawe-callout {
     margin-bottom: 1.4em;
-    border-top: 0.15em solid #eeeeee;
-    border-right: 0.15em solid #eeeeee;
-    border-bottom: 0.15em solid #eeeeee;
+    border-top: 0.15em solid #eee;
+    border-right: 0.15em solid #eee;
+    border-bottom: 0.15em solid #eee;
     border-radius: 0.5em;
     background-color: none;
 }
@@ -202,8 +227,8 @@ td#lawe-infoTable-school-cell {
 /** ------------------------ Figures and images **/
 
 #lawe-figure {
-    margin-bottom:.5em;
-    padding-right:10px;
+    background-color: #F9F9F9;
+    border: 1px solid #CCC;
     width:auto;
     display:block
 }
@@ -214,15 +239,19 @@ td#lawe-infoTable-school-cell {
     margin: .5em 0 .8em 1.4em;
 }
 
-#lawe-figure #lawe-figure-innerdiv {
-    display: inline-block;
-    background-color: #F9F9F9;
-    border: 1px solid #CCC;
-    font-size: 94%;
-    overflow: hidden;
-    padding: 3px;
+#lawe-figure img {
+    margin: 3px;
 }
 
-#lawe-figure-innerdiv figcaption {
-    padding: 0.25em 6px 6px 6px;
+#lawe-figure figcaption {
+    display: inline-block;
+    width: 100%;
+    background-color: #F9F9F9;
+    font-size: 94%;
+    overflow: hidden;
+    padding: 0.25em 6px 3px 6px;
 }
+
+
+
+

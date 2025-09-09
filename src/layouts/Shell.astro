@@ -3,6 +3,7 @@ const { title } = Astro.props
 
 import Header from "../components/Header.astro"
 import '../styles/global.css' // This enables tailwind
+import Tooltips from "../scripts/tooltips.astro"
 ---
 
 <!doctype html>
@@ -44,8 +45,12 @@ import '../styles/global.css' // This enables tailwind
             </div>
         </div>
 
-        <div id="fnTooltip" role="tooltip">My tooltip</div>
+        <div id="fnTooltip" role="tooltip">
+            <div class="tooltip-content"></div>
+            <div id="tooltip-arrow" class="tooltip-arrow"></div>
+        </div>
 
+            <Tooltips />
         <script src="/src/scripts/header-scroll.js"></script>
 	</body>
 </html>
