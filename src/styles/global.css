@@ -219,6 +219,10 @@ th#lawe-infoTable-th {
 }
 
 td#lawe-infoTable-school-cell {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     border-top: transparent;
     text-align: center;
 }
@@ -226,7 +230,7 @@ td#lawe-infoTable-school-cell {
 
 /** ------------------------ Figures and images **/
 
-#lawe-figure {
+#lawe-figure:not(.figure-no-style) {
     background-color: #F9F9F9;
     border: 1px solid #CCC;
     width:auto;
