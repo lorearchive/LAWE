@@ -8,7 +8,7 @@ import path from 'path';
 
 
 // Configuration for content fetching
-interface ContentFetchConfig {
+export interface ContentFetchConfig {
     repoUrl: string;
     branch: string;
     localPath: string;
@@ -372,3 +372,4 @@ export async function cleanupLocalRepo( config: Partial<ContentFetchConfig> = {}
         throw new GitServiceError(`LAWE: Failed to cleanup local repository: ${localPath}`, e as Error);
     }
 }
+

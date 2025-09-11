@@ -12,11 +12,13 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.4.2",
+    "@astrojs/svelte": "^7.1.1",
     "@floating-ui/dom": "^1.7.4",
     "@tailwindcss/vite": "^4.1.4",
     "astro": "^5.12.8",
+    "svelte": "^5.38.8",
     "tailwindcss": "^4.1.4",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.2"
   },
   "devDependencies": {
     "@types/node": "^22.16.5",
