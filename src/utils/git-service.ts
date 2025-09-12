@@ -185,7 +185,7 @@ async function getLastCommitDate(filePath: string, repoPath: string): Promise<Da
         const relativePath = path.relative(repoPath, filePath);
         const command = `cd "${repoPath}" && git log -1 --format="%ci" -- "${relativePath}"`;
         
-        console.log(`LAWE: [DEBUG] Running git command: ${command}`);
+        console.log(`LAWE: Running git command: ${command}`);
         
         const result = execSync(command, {
             stdio: 'pipe',
@@ -194,7 +194,6 @@ async function getLastCommitDate(filePath: string, repoPath: string): Promise<Da
         });
         
         const commitDateStr = result.trim();
-        console.log(`LAWE: [DEBUG] Git result for ${relativePath}: "${commitDateStr}"`);
         
         if (!commitDateStr) {
             // If no commit found for this file, fall back to file modification time
@@ -204,7 +203,6 @@ async function getLastCommitDate(filePath: string, repoPath: string): Promise<Da
         }
         
         const commitDate = new Date(commitDateStr);
-        console.log(`LAWE: [DEBUG] Parsed commit date for ${relativePath}: ${commitDate.toISOString()}`);
         return commitDate;
     } catch (e) {
         console.warn(`LAWE: Error getting git commit date for ${filePath}:`, e);
@@ -282,10 +280,7 @@ export async function getAllPages( contentPath: string, config: Partial<Pick<Con
 
                         const slugPath = slug.join("/");
                         global.lastMod[slugPath] = lastModified
-                        
-                        // Debug logging
-                        console.log(`LAWE: [DEBUG] ${slugPath} -> ${lastModified.toISOString()} (${gitDirExists ? 'git commit' : 'file mtime'})`);
-              
+                                      
                         pages.push({ 
                             slug,
                             filePath: entryPath,
@@ -311,12 +306,6 @@ export async function getAllPages( contentPath: string, config: Partial<Pick<Con
     await processDirectory(contentPath);
   
     console.log(`LAWE: Successfully processed ${pages.length} wiki pages`);
-    
-    // Debug: Print summary of all lastMod dates
-    console.log('\nLAWE: [DEBUG] Summary of lastMod dates:');
-    Object.entries(global.lastMod).forEach(([slug, date]) => {
-        console.log(`  ${slug}: ${date.toISOString()}`);
-    });
     
     return pages;
 }
