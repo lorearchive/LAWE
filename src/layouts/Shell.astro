@@ -23,37 +23,41 @@ import Sidebar from "../components/island/Sidebar.svelte"
 		<title>{ title }</title>
 	</head>
 	
-	<body class="min-h-screen min-w-full">
-        <div id="lawe-page">
+	<body class="h-screen w-full overflow-hidden">
+        <div class="grid grid-cols-[16rem_minmax(0,1fr)] h-full">
+    
+        <aside id="sidebar" class="border-r overflow-y-auto mt-20">
+            <Sidebar client:load routes={routes} />
+        </aside>
 
+        <!-- Main content area -->
+        <div class="flex flex-col h-full overflow-hidden">
             <Header />
 
-            <div id="non-header" class="flex mt-19">
-                <div id="sidebar" class="border-4 min-w-80 fixed">
-                    <Sidebar client:load routes={routes} />
-                </div>
-    
-                <div id="content-window" class="ml-80 w-full flex justify-end">
-                    <main class="p-4">
-                        <slot />
-                    </main>
+            <!-- Main scrollable content -->
+            <div class="flex flex-row justify-center h-full overflow-y-auto mt-20">
+                <main class="flex-1 p-4">
+                    <slot />
+                </main> 
 
-                    <aside id="TOCaside" class="p-4 mt-16 w-70 text-nowrap">
-                        <slot name="TOCbar" />
-                    </aside>
-                </div>
-    
+                <!-- TOC area, also scrollable independently if long -->
+                <aside id="TOCaside" class="w-70 p-4 mt-16 overflow-y-auto text-nowrap">
+                <slot name="TOCbar" />
+                </aside>
             </div>
         </div>
 
-        <div id="fnTooltip" role="tooltip">
+  </div>
+
+  <div id="fnTooltip" role="tooltip">
             <div class="tooltip-content"></div>
             <div id="tooltip-arrow" class="tooltip-arrow"></div>
         </div>
 
             <Tooltips />
         <script src="/src/scripts/header-scroll.js"></script>
-	</body>
+</body>
+
 </html>
 
 
