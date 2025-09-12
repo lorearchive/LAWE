@@ -6,18 +6,18 @@ interface AffiliTableProps {
 
 export function renderAffiliTable({ name, school }: AffiliTableProps): string {
     const schoolCode: Record<string, string> = {
-        abyd: "Abydos High School",
-        gehn: "Gehenna Academy",
-        trin: "Trinity General School",
-        ariu: "Arius Branch School",
-        mill: "Millennium Science School",
-        hyak: "Allied Hyakkiyako Academy",
-        shan: "Shanhaijing Senior Secondary School",
-        valk: "Valkyrie Police School",
-        redw: "Red Winter Federal Academy",
+        abydos: "Abydos High School",
+        gehenna: "Gehenna Academy",
+        trinity: "Trinity General School",
+        arius: "Arius Branch School",
+        millennium: "Millennium Science School",
+        hyakkiyako: "Allied Hyakkiyako Academy",
+        shanhaijing: "Shanhaijing Senior Secondary School",
+        valkyrie: "Valkyrie Police School",
+        red_winter: "Red Winter Federal Academy",
         srt: "SRT Special Academy",
-        rail: "Highlander Railroad Academy",
-        gema: "Gematria"
+        highlander: "Highlander Railroad Academy",
+        gematria: "Gematria"
     };
 
     const schoolFullName = schoolCode[school] ?? "";
@@ -52,15 +52,15 @@ export function renderAffiliTable({ name, school }: AffiliTableProps): string {
         schale: ["sensei", "arona"],
         schale1: ["sensei", "arona", "plana"],
         gsc: ["president", "rin", "momoka", "ayumu", "kaya", "aoi", "sumomo", "haine"],
-        gema: ["black_suit", "beatrice", "maestro"],
-        pande: ["makoto", "satsuki", "iroha", "chiaki", "ibuki"],
+        gematria: ["black_suit", "beatrice", "maestro"],
+        pandemonium: ["makoto", "satsuki", "iroha", "chiaki", "ibuki"],
         prefect: ["hina", "ako", "iori", "chinatsu"],
         "68": ["aru", "kayoko", "mutsuki", "haruka"],
         seminar: ["yuuka", "noa", "rio", "koyuki"],
         gdd: ["yuzu", "momoi", "midori", "aris"],
         tea: ["nagisa", "mika", "seia"],
         makeup: ["hifumi", "azusa", "hanako", "koharu"],
-        sister: ["sakurako", "mari", "hinata"],
+        sisterhood: ["sakurako", "mari", "hinata"],
         justice: ["tsurugi", "hasumi", "mashiro", "ichika"],
         rabbit: ["miyako", "saki", "moe", "miyu"],
         fox: ["yukino", "niko", "kurumi", "otogi"],
@@ -76,7 +76,7 @@ export function renderAffiliTable({ name, school }: AffiliTableProps): string {
 
     const members = clubMemberList[club];
     const memberListItems = members.map(member => 
-        `<li>
+        `<li class="border-b p-2">
             <a>${personFullName[member] || member}</a>
             
         </li>`
@@ -93,6 +93,11 @@ export function renderAffiliTable({ name, school }: AffiliTableProps): string {
             <tbody>
                 <tr>
                     <td id="lawe-infoTable-school-cell" colspan="2">
+                        <figure id="lawe-figure" class="figure-no-style inline-block">
+                            <a id="lawe-figure-a" class="a-no-style" href="/wiki/setting/academies/${school}">
+                                <img src="https://raw.githubusercontent.com/lorearchive/law-content/main/images/icons/${school}.png" width="100" alt="The logo of ${schoolFullName}." loading="lazy" />
+                            </a>
+                        </figure>
                         <strong>${schoolFullName}</strong>
                     </td>
                 </tr>
@@ -100,7 +105,7 @@ export function renderAffiliTable({ name, school }: AffiliTableProps): string {
                     <td class="center" colspan="2">
                         <div id="clubMemberList">
                             <h3>${clubCode[club] || club}</h3>
-                            <div class="max-w-xs flex flex-col border border-gray-500 rounded-md">
+                            <div class="max-w-xs flex flex-col border-r border-t border-l border-gray-500 rounded-md">
                                 <ul>
                                     ${memberListItems}
                                 </ul>
