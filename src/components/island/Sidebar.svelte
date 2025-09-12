@@ -1,117 +1,145 @@
-<script lang="ts" context="module">
-    import type { ContentFetchConfig, RawPage } from "../../utils/git-service";
-    import { getAllPages, fetchWikiContent } from "../../utils/git-service";
+<script lang="ts" module>
 
     interface DirectoryNode {
         name: string;
         type: 'file' | 'directory';
-        slug: string[];
+        path: string;
         children: Map<string, DirectoryNode>;
-        page?: RawPage;
+        fullPath?: string; // Original route path
     }
 
-    function buildDirectoryTree(pages: RawPage[]): DirectoryNode {
+    function buildFilesystemFromRoutes(routes: string[]): DirectoryNode {
         const root: DirectoryNode = {
-            name: 'wiki',
+            name: 'root',
             type: 'directory',
-            slug: [],
+            path: '',
             children: new Map()
         };
 
-        for (const page of pages) {
+        for (const route of routes) {
+
+            const cleanPath = route.replace(/^\.+\//, '');
+            const segments = cleanPath.split('/').filter(segment => segment.length > 0).slice(2);
+            
             let current = root;
             
             // Navigate/create path structure
-            for (let i = 0; i < page.slug.length; i++) {
-                const segment = page.slug[i];
-                
-                if (!current.children.has(segment)) {
-                    const isFile = i === page.slug.length - 1;
-                    current.children.set(segment, {
-                        name: segment,
-                        type: isFile ? 'file' : 'directory',
-                        slug: page.slug.slice(0, i + 1),
-                        children: new Map(),
-                        page: isFile ? page : undefined
-                    });
-                }
-                
-                current = current.children.get(segment)!;
+            for (let i = 0; i < segments.length; i++) {
+            const segment = segments[i];
+            const isFile = i === segments.length - 1;
+            const currentPath = segments.slice(0, i + 1).join('/');
+            
+            if (!current.children.has(segment)) {
+                current.children.set(segment, {
+                    name: isFile ? segment.replace(/\.txt$/, '') : segment,
+                    type: isFile ? 'file' : 'directory',
+                    path: isFile ? currentPath.replace(/\.txt$/, '') : currentPath,
+                    children: new Map(),
+                    fullPath: isFile ? route : undefined
+                });
+            }
+            
+            current = current.children.get(segment)!;
             }
         }
-
+        
         return root;
     }
-
-    function treeToHTML(node: DirectoryNode, isRoot: boolean = true): string {
-        if (isRoot && node.children.size === 0) {
-            return '<ol><li class="empty">No wiki files found</li></ol>';
-        }
-        
-        const children = Array.from(node.children.values())
-            .sort((a, b) => {
-                // Directories first, then files, both alphabetically
-                if (a.type !== b.type) {
-                    return a.type === 'directory' ? -1 : 1;
-                }
-                return a.name.localeCompare(b.name);
-            });
-
-        if (children.length === 0 && !isRoot) {
-            return '';
-        }
-
-        let html = '<ol>\n';
-        
-        for (const child of children) {
-            const slugPath = child.slug.join('/');
-            const lastMod = child.page?.lastModified.toISOString() || '';
-            
-            html += `    <span class="name">${child.name}</span>\n`;
-            html += `  <li class="${child.type}" data-slug="${slugPath}" data-last-modified="${lastMod}">\n`;
-            
-            if (child.type === 'directory' && child.children.size > 0) {
-                const childrenHTML = treeToHTML(child, false);
-                if (childrenHTML) {
-                    html += indentHTML(childrenHTML, 2);
-                }
-            }
-            
-            html += `  </li>\n`;
-        }
-        
-        html += '</ol>\n';
-        return html;
-    }
-
-    function indentHTML(html: string, spaces: number): string {
-        const indent = ' '.repeat(spaces);
-        return html.split('\n')
-            .map(line => line.length > 0 ? indent + line : line)
-            .join('\n');
-    }
-
-    /**
-     * Generate HTML directory structure as ol/li from wiki content
-     * @param contentPath Path to the local content directory
-     * @param config Configuration options
-     * @returns HTML string with ol/li structure
-     */
-    export async function generateWikiDirectoryHTML(
-        contentPath: string, 
-        config: Partial<Pick<ContentFetchConfig, 'maxFileSize'>> = {}
-    ): Promise<string> {
-        const pages = await getAllPages(contentPath, config);
-        
-        // Build directory tree from flat page list
-        const tree = buildDirectoryTree(pages);
-        
-        // Convert tree to HTML
-        return treeToHTML(tree);
-    }
-
-const contentPath = await fetchWikiContent();
-const wikiHTML = await generateWikiDirectoryHTML(contentPath);
 </script>
 
-{@html wikiHTML}
+<script lang="ts">
+    const { routes } = $props<{ routes: string[] }>();
+    let tree: DirectoryNode | null = $state(null);
+
+    $effect(() => {
+        if (routes && routes.length > 0) {
+            tree = buildFilesystemFromRoutes(routes);
+        } else {
+            tree = null;
+        }
+    });
+
+
+</script>
+
+{#snippet treeToHTMLSnippet(node: DirectoryNode, isRoot: boolean = true)}
+
+    {#if isRoot && node.children.size === 0}
+        <ul><li class="empty">No files found</li></ul>
+    
+    {:else}
+    
+        {@const children = Array.from(node.children.values())
+            .sort((a, b) => {
+            // Files first, then directories, both alphabetically
+                if (a.type !== b.type) {
+                    return a.type === 'file' ? -1 : 1;
+                }
+                return a.name.localeCompare(b.name);
+            })
+        }
+    
+        {#if children.length > 0}
+            <ul>
+                {#each children as child}
+                    <li class="{child.type}" data-path="{child.path}">
+                        <a href={`/wiki/${child.path}`} class="a-no-style">
+                             <span class="name">
+                                {child.name}
+                            </span>
+                        </a>
+                       
+                        
+                        {#if child.type === 'directory' && child.children.size > 0}
+                            {@render treeToHTMLSnippet(child, false)}
+                        {/if}
+                    </li>
+                {/each}
+            </ul>
+        {/if}
+    {/if}
+{/snippet}
+
+{#if tree}
+    {@render treeToHTMLSnippet(tree)}
+{:else}
+    <p>No routes provided</p>
+{/if}
+
+<style>
+  ul {
+    list-style: none;
+    padding-left: 1.5rem;
+    margin: 0.5rem 0;
+  }
+  
+  li {
+    margin: 0.25rem 0;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 4px;
+  }
+  
+  li:hover {
+    background-color: #f5f5f5;
+  }
+  
+  li.directory {
+    font-weight: 500;
+  }
+  
+  li.file {
+    color: #666;
+  }
+  
+  .name {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .empty {
+    color: #999;
+    font-style: italic;
+  }
+</style>

@@ -1,29 +1,31 @@
 ---
 // get the pre processed data from props
-const { page } = Astro.props
-
+const { page, routes } = Astro.props;
 
 import { fetchWikiContent, getAllPages } from '../../utils/git-service'
 import { processAllPages } from '../../utils/pages-processor'
 import Shell from '../../layouts/Shell.astro'
 import RenderTOC from '../../components/RenderTOC.astro'
 
+
 export async function getStaticPaths() {
     const contentPath = await fetchWikiContent()
     const rawPages = await getAllPages(contentPath)
     const { processedPages } = await processAllPages(rawPages)
-  
+    const filePaths = processedPages.map(page => page.filePath);
+    
+
     const routes = processedPages.map(page => { 
     
         const slugString = page.slug.join('/')
     
         return {
             params: { slug: slugString },
-            props: { page }
+            props: { page, routes: filePaths }
         }
-  })
+    })
   
-  return routes  
+    return routes  
 }
 
 const h1Match = page.htmlContent.match(/<h1[^>]*>.*?<\/h1>/i)
@@ -46,7 +48,7 @@ const pageEditURL = `https://github.com/lorearchive/law-content/edit/main/wiki/$
 const historyURL = `https://github.com/lorearchive/law-content/commits/main/wiki/${page.slug.join("/")}.txt`
 ---
 
-<Shell title={`${ page.title } - Lore Archive`}>
+<Shell title={`${ page.title } - Lore Archive`}, routes={routes}>
     <header id="pageTitle" set:html={ h1match } />
 
     <div id="page-toolbar" class="mt-3 p-2 border-t border-b border-black mb-7 items-center flex flex-row justify-between">
