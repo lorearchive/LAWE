@@ -106,6 +106,8 @@ export default class Renderer {
                 
             case 'CitationNeeded':
                 return this.renderCitationNeeded();
+            case 'TripleParentheses':
+                return this.renderTripleParentheses(node)
 
 
             default:
@@ -118,6 +120,17 @@ export default class Renderer {
     private renderImage(node: ASTNode): string {       
         return `<figure id="lawe-figure" class="lawe-figure-${node.align}"><a id="lawe-figure-a" class="a-no-style" href="https://github.com/lorearchive/law-content/tree/main/images${node.src}"><img src="https://raw.githubusercontent.com/lorearchive/law-content/main/images${node.src}" width="${node.width}" alt="${node.alt}" loading="lazy" /></a><figcaption>${node.alt}</figcaption></figure>`
         
+    }
+
+    private renderTripleParentheses(node: ASTNode): string {
+        const type = node.tripleParenAlertType
+
+        switch(type) {
+
+            case 'external':
+                return `<div id="lawe-alert" class="alert alert-warning alertnotif" role="alert">${getIconMarkup('globe-alt', {className: "mb-2"})}<p><strong>This article is for an external media.</strong> The material being described in this article are not part of the main story or game, and while most of them are considered canon, everything may not be. This wiki only provides the lore side of all external media.<br><span class="alertnotifsubtext"><em>(${node.tripleParenAlertDate}) &middot;</em></span></p></div>`
+
+        }
     }
 
     private renderFootnote(node: ASTNode): string {
@@ -167,10 +180,10 @@ export default class Renderer {
                 case "warning":
                 case "success":
                 case "danger":
-                    return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><div id="lawe-callout-icon"><span id="lawe-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {isCallout: true, calloutType: type, className: "mb-2"})}</span></div><span id="lawe-callout-title-span"><h4>${title}</h4></span><span id="lawe-callout-span-body">${body}</span></div></div>`
+                    return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><div id="lawe-callout-icon"><span id="lawe-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {className: "mb-2"})}</span></div><span id="lawe-callout-title-span"><h4>${title}</h4></span><span id="lawe-callout-span-body">${body}</span></div></div>`
 
                 case "info":
-                    return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><div id="lawe-callout-icon"><span id="lawe-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {isCallout: true, calloutType: type, size: 28, className: "mb-2"})}</span></div><span id="lawe-callout-title-span"><h4>${title}</h4></span><span id="lawe-callout-span-body">${body}</span></div></div>`
+                    return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><div id="lawe-callout-icon"><span id="lawe-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {size: 28, className: "mb-2"})}</span></div><span id="lawe-callout-title-span"><h4>${title}</h4></span><span id="lawe-callout-span-body">${body}</span></div></div>`
 
                 default: 
                     throw new Error("LAWE CALLOUT TYPE UNKNOWN IN ICONS: " + type)
@@ -183,10 +196,10 @@ export default class Renderer {
                 case "warning":
                 case "success":
                 case "danger":
-                    return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><div id="lawe-callout-icon"><span id="lawe-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {isCallout: true, calloutType: type, className: "mb-2"})}</span></div><span id="lawe-callout-span-body">${body}</span></div></div>`
+                    return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><div id="lawe-callout-icon"><span id="lawe-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {className: "mb-2"})}</span></div><span id="lawe-callout-span-body">${body}</span></div></div>`
 
                 case "info":
-                    return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><div id="lawe-callout-icon"><span id="lawe-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {isCallout: true, calloutType: type, size: 28, className: "mb-2"})}</span></div><span id="lawe-callout-span-body">${body}</span></div></div>`
+                    return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><div id="lawe-callout-icon"><span id="lawe-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {size: 28, className: "mb-2"})}</span></div><span id="lawe-callout-span-body">${body}</span></div></div>`
 
                 default: 
                     throw new Error("LAWE CALLOUT TYPE UNKNOWN IN ICONS: " + type)

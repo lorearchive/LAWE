@@ -1,3 +1,4 @@
+import type { ValidCommand } from "../Lexing/Handlers/tripleParenHandler";
 import type { CalloutType } from "../Lexing/Handlers/PseudoHTMLHandler";
 import { LinkHandler } from "../Lexing/Handlers/handlers";
 import type { Token } from "../Lexing/lexer";
@@ -33,6 +34,7 @@ export type NodeType =
     | 'CitationNeeded'
 
     | 'InfoTableAffili'
+    | 'TripleParentheses'
 
 export interface ASTNode {
     type: NodeType
@@ -58,6 +60,8 @@ export interface ASTNode {
     anchor?: string      // Fragment identifier 
     interwikiDest?: string // refer to linkHandler
     interwikiId?: string   // same thing here
+    tripleParenAlertType?: ValidCommand
+    tripleParenAlertDate?: string
 }
 
 export interface ParserCtx {
@@ -125,6 +129,10 @@ export default class Parser {
 
         // Here we check for other block level elements
 
+        if (this.match(TokenType.TRIPLE_PARENTHESES)) {
+            return this.parseTripleParentheses()
+        }
+
         if (this.match(TokenType.HEADING_OPEN)) {
             return this.parseHeading()
         }
@@ -154,6 +162,36 @@ export default class Parser {
     }
 
     // BLOCK LEVEL ELEMENTS INDIVIDUAL---------------------------------------------------------------------------------------------------
+
+    private parseTripleParentheses(): ASTNode {
+        // TRIPLE_PARENTHESES token has already been consumed by match()
+        const token = this.previous();
+        
+        // Parse the content from the token value: (((command|date)))
+        const content = token.value.slice(3, -3); // Remove ((( and )))
+        const parts = content.split('|');
+        
+        if (parts.length !== 2) {
+            throw new Error("LAWE Parsing error: Invalid triple parentheses format");
+        }
+        
+        const [command, date] = parts.map(part => part.trim());
+        
+        // Validate command type
+        const alertType: ValidCommand = command;
+        
+        // Optionally consume newlines after the alert
+        if (this.match(TokenType.NEWLINE)) {
+            this.match(TokenType.NEWLINE);
+        }
+        
+        return {
+            type: 'TripleParentheses',
+            tripleParenAlertType: alertType,
+            tripleParenAlertDate: date,
+            value: content // Store original content for fallback rendering
+        };
+    }
 
     private parseHeading(): ASTNode {
         // previous() is now the HEADING_OPEN token

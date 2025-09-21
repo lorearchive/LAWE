@@ -3,6 +3,7 @@ import type { TokenHandler } from "./Handlers/handlers"
 import type { CalloutType } from "./Handlers/PseudoHTMLHandler";
 import { FootnoteHandler, FormattingHandler, HeadingHandler, ImageHandler, LinkHandler, MiscHandler, TextHandler, WhitespaceHandler } from "./Handlers/handlers";
 import PseudoHTMLHandler from "./Handlers/PseudoHTMLHandler";
+import TripleParenthesesHandler from "./Handlers/tripleParenHandler";
 
 export enum TokenType {
     TEXT = 'TEXT',
@@ -53,7 +54,8 @@ export enum TokenType {
     LINK_PIPE = "LINK_PIPE",
     FOOTNOTE_OPEN = "FOOTNOTE_OPEN",
     FOOTNOTE_CLOSE = "FOOTNOTE_CLOSE",
-    CITATION_NEEDED = "CITATION_NEEDED",
+    CITATION_NEEDED = "CITATION_NEEDED", // CITATION_NEEDED and TRIPLE_PARENTHESES are considered as different tokens
+    TRIPLE_PARENTHESES = "TRIPLE_PARENTHESES",
 
     AFFILI = "AFFILI",
 
@@ -89,7 +91,8 @@ export default class Lexer {
             new ImageHandler(),
             new MiscHandler(),
             new LinkHandler(),
-            new FootnoteHandler()
+            new FootnoteHandler(),
+            new TripleParenthesesHandler()
         ];
 
         // Sort by priority (highest first)
