@@ -128,8 +128,11 @@ export default class Renderer {
         switch(type) {
 
             case 'external':
-                return `<div id="lawe-alert" class="alert alert-warning alertnotif" role="alert">${getIconMarkup('globe-alt', {className: "mb-2"})}<p><strong>This article is for an external media.</strong> The material being described in this article are not part of the main story or game, and while most of them are considered canon, everything may not be. This wiki only provides the lore side of all external media.<br><span class="alertnotifsubtext"><em>(${node.tripleParenAlertDate}) &middot;</em></span></p></div>`
-
+                return `<div id="lawe-alertnotif" class="alert alert-warning alertnotif" role="alert">${getIconMarkup('globe2', {className: "mb-2", color: "black"})}<p><strong>This article is for an external media.</strong> The material being described in this article are not part of the main story or game, and while most of them are considered canon, everything may not be. This wiki only provides the lore side of all external media.<br><span class="alertnotifsubtext"><em>(${node.tripleParenAlertDate}) &middot;</em></span></p></div>`
+            case 'unfinished':
+                return `<div id="lawe-alertnotif" class="alert alert-warning alertnotif" role="alert">${getIconMarkup('document-text', {className: "mb-2"})}<p>This article is <strong>unfinished</strong>. Pleae wait patiently until the article is complete. You may help speed up the completion process by providing extra details or completing missing sections.<br><span class="alertnotifsubtext"><em>(${node.tripleParenAlertDate}) &middot; <a href="/wiki/alert_notifications">How do you know whether an article is finished?</a> &middot; <a href="#">Learn how and when to remove this message</a></em></span></p></div>`
+            default:
+                return ''
         }
     }
 
