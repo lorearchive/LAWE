@@ -182,6 +182,9 @@ a:visited:active:not(.a-no-style) {
 #lawe-alertnotif {
     width: 80%;
     margin: 2rem auto;
+    padding: 2rem;
+    border: 1px solid #252428;
+    border-radius: 10px;
 }
 
 #lawe-alertnotif p {
@@ -230,17 +233,33 @@ table#lawe-table {
 }
 
 
+
+/** ------------------------ Tables --- infoTables **/
+
+table#lawe-infoTable.affili {
+    width: 300px;
+    float: right;
+    clear: right;   
+}
+
+table#lawe-infoTable.affili h3 {
+    text-align: center;
+}
+
 th#lawe-infoTable-th {
     background-color: transparent;
     border-bottom: transparent;
+    padding-bottom: 0;
 }
 
 td#lawe-infoTable-school-cell {
+    padding-top: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-top: transparent;
+    border-bottom: transparent;
     text-align: center;
 }
 
@@ -264,7 +283,7 @@ td#lawe-infoTable-school-cell {
     margin: 3px;
 }
 
-#lawe-figure figcaption {
+#lawe-figure figcaption:not(.figcaption-no-style) {
     display: inline-block;
     width: 100%;
     background-color: #F9F9F9;

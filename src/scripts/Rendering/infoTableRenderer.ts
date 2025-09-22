@@ -26,7 +26,8 @@ export function renderAffiliTable({ name, school }: AffiliTableProps): string {
         schale: "S.C.H.A.L.E",
         schale1: "S.C.H.A.L.E",
         gsc: "General Student Council",
-        ftf: "Foreclosure Task Force"
+        ftf: "Foreclosure Task Force",
+        seminar: "Seminar"
     };
 
     const personFullName: Record<string, string> = {
@@ -45,6 +46,19 @@ export function renderAffiliTable({ name, school }: AffiliTableProps): string {
         mutsuki: "Asagi Mutsuki",
         haruka: "Igusa Haruka",
         hifumi: "Ajitani Hifumi",
+        yuuka: "Hayase Yuuka",
+        izuna: "Kuda Izuna",
+        azusa: "Shirasu Azusa",
+        momoi: "Saiba Momoi",
+        midori: "Saiba Midori",
+        aris: "Tendou Aris",
+        mari: "Iochi Mari",
+        makoto: "Hanuma Makoto",
+        kirara: "Yozakura Kirara",
+        izumi: "Shishidou Izumi",
+        rio: "Tsukatsuki Rio",
+        noa: "Ushio Noa",
+        koyuki: "Kurosaki Koyuki"
     };
 
     const clubMemberList: Record<string, string[]> = {
