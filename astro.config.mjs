@@ -1,5 +1,5 @@
 // @ts-check
-import global from './src/constants'
+import global from './src/store'
 import { defineConfig } from 'astro/config'
 import sitemap from '@astrojs/sitemap'
 import tailwindcss from '@tailwindcss/vite';
@@ -13,6 +13,9 @@ export default defineConfig({
     site: 'https://lorearchive.org',
     build: {},
 
+    redirects: {
+        "/": "/wiki/home"
+    },
 
     integrations: [sitemap({
         serialize(item) {
