@@ -1,4 +1,4 @@
-// this file acts like a global state during compile time
+// this file acts like a global state during compile time.
 
 export interface global {
     lastMod: Record<string, Date>
