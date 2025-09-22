@@ -13,6 +13,7 @@ export default class PseudoHTMLHandler extends BaseTokenHandler {
         'callout': { open: TokenType.CALLOUT_OPEN, close: TokenType.CALLOUT_CLOSE },
         'sub': { open: TokenType.SUB_OPEN, close: TokenType.SUB_CLOSE },
         'sup': { open: TokenType.SUP_OPEN, close: TokenType.SUP_CLOSE },
+        'blockquote': { open: TokenType.BLOCKQUOTE_OPEN, close: TokenType.BLOCKQUOTE_CLOSE },
 
         // HTML tables
         'table': { open: TokenType.TABLE_OPEN, close: TokenType.TABLE_CLOSE },
@@ -334,6 +335,7 @@ export default class PseudoHTMLHandler extends BaseTokenHandler {
             'tbody': new Set(['class']),
 
             'affili': new Set(['class', 'name', 'school', 'fAppear']), //fAppear: first appearance 
+            'blockquote': new Set(["cite"])
         }
 
         const allowed = allowedAttributes[tag];

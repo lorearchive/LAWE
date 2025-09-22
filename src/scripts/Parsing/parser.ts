@@ -19,6 +19,7 @@ export type NodeType =
     | 'Linebreak'
     | 'Newline'
     | 'Callout'
+    | 'Blockquote'
 
     | 'Table'
     | 'TableHead'
@@ -62,6 +63,7 @@ export interface ASTNode {
     interwikiId?: string   // same thing here
     tripleParenAlertType?: ValidCommand
     tripleParenAlertDate?: string
+    blockquoteCite?: string
 }
 
 export interface ParserCtx {
@@ -153,6 +155,10 @@ export default class Parser {
             return parseInfoTable(this)
         }
 
+        if (this.match(TokenType.BLOCKQUOTE_OPEN)) {
+            return this.parseBlockquote();
+        }
+
         if (this.match(TokenType.IMAGE_OPEN)) {
             return this.parseImage();
         }
@@ -191,6 +197,27 @@ export default class Parser {
             tripleParenAlertDate: date,
             value: content // Store original content for fallback rendering
         };
+    }
+
+    private parseBlockquote(): ASTNode {
+        const openToken = this.previous()
+        const cite = openToken.attributes?.cite
+
+        const children: ASTNode[] = [];
+
+        while (!this.isAtEnd() && !this.check(TokenType.BLOCKQUOTE_CLOSE)) {
+            // Allow nested inline content
+            const nodes = this.parseInlineUntil(TokenType.BLOCKQUOTE_CLOSE);
+            children.push(...nodes);
+        }
+
+        this.consume(TokenType.BLOCKQUOTE_CLOSE, "Expected '</blockquote>' to close blockquote");
+
+        return {
+            type: "Blockquote",
+            blockquoteCite: cite,
+            children
+        }
     }
 
     private parseHeading(): ASTNode {

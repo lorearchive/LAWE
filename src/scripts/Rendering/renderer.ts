@@ -63,6 +63,10 @@ export default class Renderer {
             case 'Callout':
                 return this.renderCallout(node)
 
+            case 'Blockquote':
+                return `<div id="lawe-blockquoteDiv"><blockquote id="lawe-blockquote">${this.renderChildren(node)}</blockquote><cite>— ${node.blockquoteCite}</cite></div>`
+
+
 
             case 'Table': {
                 const attrs = this.renderAttributes(node.attributes, { id: "lawe-table" })
