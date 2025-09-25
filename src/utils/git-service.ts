@@ -1,6 +1,6 @@
 // fetches raw wiki files from remote git at compile time. Git-service (GS)
 
-import global from '../constants';
+import global from '../store';
 
 import { execSync } from 'child_process';
 import fs from 'fs/promises';

@@ -1,7 +1,8 @@
 let lastScroll = 0;
+const scrollWindow = document.getElementById('scrollableWindow')
 const header = document.getElementById('lawe-header')
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
+scrollWindow.addEventListener('scroll', () => {
+    const currentScroll = scrollWindow.scrollTop;
     if (currentScroll <= 0) {
         header.classList.remove('header-hidden');
         return;

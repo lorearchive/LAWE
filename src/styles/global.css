@@ -24,14 +24,20 @@ header#lawe-header.header-hidden {
 }
 
 main {
-    margin: 2em 1em 0 2em;
+    margin: 7rem 1em 0 2em;
     width: 60vw;
     max-width: 1116px;
+    min-height: max-content;
 }
+
 @media (max-width: 1544px) {
     main {
         width: 55vw;
     }
+}
+
+main article {
+    padding-bottom: 4em;
 }
 
 #fnTooltip {
