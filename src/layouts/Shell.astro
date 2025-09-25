@@ -1,5 +1,5 @@
 ---
-const { title, routes } = Astro.props
+const { title, routes, aside = true } = Astro.props
 
 import Header from "../components/Header.astro"
 import '../styles/global.css' // This enables tailwind
@@ -26,23 +26,25 @@ import Sidebar from "../components/island/Sidebar.svelte"
 	<body class="h-screen w-full overflow-hidden">
         <div class="grid grid-cols-[16rem_minmax(0,1fr)] h-full">
     
-        <aside id="sidebar" class="border-r overflow-y-auto mt-20">
-            <Sidebar client:load routes={routes} />
-        </aside>
+        {aside && (
+            <aside id="sidebar" class="border-r overflow-y-auto mt-20">
+                <Sidebar client:load routes={routes} />
+            </aside>
+            )
+        }
 
         <!-- Main content area -->
         <div class="flex flex-col h-full overflow-hidden">
             <Header />
 
             <!-- Main scrollable content -->
-            <div class="flex flex-row justify-center h-full overflow-y-auto mt-20">
+            <div id="scrollableWindow" class="flex flex-row justify-center h-full overflow-y-auto">
                 <main class="flex-1 p-4">
                     <slot />
                 </main> 
 
-                <!-- TOC area, also scrollable independently if long -->
-                <aside id="TOCaside" class="w-70 p-4 mt-16 overflow-y-auto text-nowrap">
-                <slot name="TOCbar" />
+                <aside id="TOCaside" class="w-70 p-4 mt-30 overflow-y-auto text-nowrap">
+                    <slot name="TOCbar" />
                 </aside>
             </div>
         </div>
