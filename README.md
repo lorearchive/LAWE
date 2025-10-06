@@ -9,6 +9,11 @@ The Lore Archive Wiki Engine (LAWE) is a [statically-generative](https://en.wiki
 
 It ships as little JavaScript to user as possible with the help of [AstroJS](https://astro.build/).
 
+## CPP-LPR
+The CPP-LPR version of LAWE replaces the traditional TypeScript versions of the Lexer, Parser, and Renderer pipeline to their repsective C++ versions. Then the C++ versions are compiled to WebAssembly, so that they may be used by the AstroJS framework. It uses the clangd language server and is configured for a NixOS development environment.
+
+### CPP-LPR for NixOS users
+After `cd`ing into the project directory, run `nix-shell` to initiate the nix shell.
 
 ## Compiling
 LAWE fetches its raw content from [law-content](https://github.com/lorearchive/law-content) at compile time, then generates static HTML files (as opposed to rendering whenever a user visits a page), which makes LAWE extremely fast and memory-efficient, while also improving [SEO](https://en.wikipedia.org/wiki/Search_engine_optimization).
