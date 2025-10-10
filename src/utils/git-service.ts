@@ -26,6 +26,15 @@ export interface RawPage {
     size: number
 }
 
+export interface PageMeta {
+    id: string
+    title: string
+    slug: string[]
+    filePath: string
+    lastModified: Date
+    size: number
+}
+
 
 const defaultConfig: ContentFetchConfig = {
     repoUrl: 'https://github.com/lorearchive/law-content.git', //might change to SSH?
@@ -219,6 +228,28 @@ async function getLastCommitDate(filePath: string, repoPath: string): Promise<Da
     }
 }
 
+// Ensure metadata directory exists
+async function checkMetaDir( wikiPath: string ): Promise<string> {
+    const metaDir = path.join(wikiPath, 'meta');
+    
+    try {
+        await fs.access(metaDir);
+    } catch {
+        await fs.mkdir(metaDir, { recursive: true });
+        console.log(`LAWE: Created metadata directory: ${metaDir}`);
+    }
+    
+    return metaDir;
+}
+
+// Save metadata for a single page
+async function savePageMetadata(metaDir: string, metadata: PageMeta): Promise<void> {
+    const fileName = metadata.id + '.json';
+    const filePath = path.join(metaDir, fileName);
+    
+    await fs.writeFile(filePath, JSON.stringify(metadata, null, 2), 'utf-8');
+}
+
 /**
  * Get all wiki pages from the content directory
  * @param contentPath Path to the local content directory
@@ -234,6 +265,10 @@ export async function getAllPages( contentPath: string, config: Partial<Pick<Con
     if (!(await directoryExists(contentPath))) {
         throw new ContentValidationError(`LAWE: Content directory does not exist: ${contentPath}`);
     }
+
+    const wikiPath = path.dirname(contentPath); // Get .wiki directory
+    const metaDir = await checkMetaDir(wikiPath);
+
 
     // Find the git repository root (should be the parent of contentPath)
     const repoPath = path.dirname(contentPath);
@@ -278,16 +313,33 @@ export async function getAllPages( contentPath: string, config: Partial<Pick<Con
                             ? await getLastCommitDate(entryPath, repoPath)
                             : stats.mtime;
 
-                        const slugPath = slug.join("/");
-                        global.lastMod[slugPath] = lastModified
-                                      
-                        pages.push({ 
+                       const slugPath = slug.join("/");
+                        global.lastMod[slugPath] = lastModified;
+
+                        // Extract title (first line or filename)
+                        const title = content.split('\n')[0].replace(/^#+\s*/, '') || pageName;
+
+                        const pageData = { 
                             slug,
                             filePath: entryPath,
-                            content: content.trim(), // Remove leading/trailing whitespace
+                            content: content.trim(),
                             lastModified,
                             size: stats.size
-                        });
+                        };
+
+                        // Save metadata
+                        const metadata: PageMeta = {
+                            id: pageName,
+                            title: title.trim().slice(6).slice(0, -6).trim(),
+                            slug,
+                            filePath: entryPath,
+                            lastModified,
+                            size: stats.size
+                        };
+
+                        await savePageMetadata(metaDir, metadata);
+                                    
+                        pages.push(pageData);
               
                     } catch (e) {
                         console.error(`LAWE: Error processing wiki file '${entryPath}':`, e);
