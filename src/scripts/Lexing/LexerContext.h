@@ -6,7 +6,7 @@
 
 namespace Lexer {
 
-    class LexerContext {
+    class lctx {
         private:
             std::string input;
             size_t position;
@@ -14,7 +14,7 @@ namespace Lexer {
             int col;
 
         public:
-            LexerContext(const std::string& inputText);
+            lctx(const std::string& inputText);
             
             bool isEOF() const;
             char peek(int lookahead = 0) const;
