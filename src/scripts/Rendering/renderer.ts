@@ -1,3 +1,7 @@
+import fs from 'fs'
+import path from 'path'
+import type { PageMeta } from '../../utils/git-service.ts';
+
 import type { ASTNode } from "../Parsing/parser";
 import { getIconMarkup, type IconName } from "../../assets/Icons";
 import { renderAffiliTable } from "./infoTableRenderer.ts";
@@ -166,11 +170,14 @@ export default class Renderer {
             href = href.slice(1)
         }
 
+        const hrefTitle = href?.replace(/_/g, " ").replace(/^.*\//, "")
+
+
         if (node.interwikiDest && node.interwikiId) {
-            return `<a href="/wiki/${href}" title="${node.text}" id="lawe-link" class="${node.linkType} interwiki">${node.text}</a>`
+            return `<a href="${href}" title="${node.text}" id="lawe-link" class="${node.linkType} interwiki">${node.text}</a>`
         }
 
-        return `<a href="/wiki/${href}" title="${node.text}" id="lawe-link" class="${node.linkType}">${node.text}</a>`
+        return `<a href="/wiki/${href}" title="${node.text}" id="lawe-link" class="${node.linkType}">${hrefTitle}</a>`
     }
 
 
@@ -244,6 +251,18 @@ export default class Renderer {
             .join(' ');
     }
 
+
+    private accessMeta(id: string, field: string) {
+
+        try {
+            const metaPath = path.join('.wiki', 'meta', `${id}.json`)
+            const data = fs.readFileSync(metaPath, 'utf-8');
+            return JSON.parse(data);
+
+        } catch {
+            return null
+        }
+    }
 
 
 
