@@ -1,7 +1,30 @@
 @import "tailwindcss";
 
 
+@font-face {
+  font-family: 'Syne';
+  src: url('/fonts/Syne-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 800; 
+  font-style: normal;
+  font-display: swap;
+}
 
+
+
+.font-syne {
+    font-family: Syne, sans-serif;
+}
+
+.font-syne-500 {
+    font-family: Syne, sans-serif;
+    font-weight: 500;
+}
+
+
+.font-syne-400 {
+    font-family: Syne, sans-serif;
+    font-weight: 500;
+}
 
 * {
     box-sizing: border-box;
@@ -24,9 +47,7 @@ header#lawe-header.header-hidden {
 }
 
 main {
-    margin: 7rem 1em 0 2em;
     width: 60vw;
-    max-width: 1116px;
     min-height: max-content;
 }
 
@@ -81,7 +102,7 @@ main article {
     display: flow-root;
 }
 
-h1 {
+h1:not(.h1-no-style) {
     font-size: 2.3em;
     font-family: 'Linux Libertine', "Georgia", 'Times', 'Source Serif Pro', serif;
 }
