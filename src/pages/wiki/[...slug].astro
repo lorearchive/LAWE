@@ -134,7 +134,8 @@ const isHomePage = Astro.url.pathname.endsWith('/home');
         position: absolute;
         left: 0;
         width: 100%;
-        height: 100vh;
+        min-height: 100vh;
+        height: auto;
         
         /* Combine all backgrounds - grid PLUS gradient overlay */
         background-image:
