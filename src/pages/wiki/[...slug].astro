@@ -46,7 +46,51 @@ const lastModifiedDate = page.metadata.lastModified.toLocaleString('en-GB', {
 const pageURL = `https://github.com/lorearchive/law-content/tree/main/wiki/${page.slug.join("/")}.txt`
 const pageEditURL = `https://github.com/lorearchive/law-content/edit/main/wiki/${page.slug.join("/")}.txt`
 const historyURL = `https://github.com/lorearchive/law-content/commits/main/wiki/${page.slug.join("/")}.txt`
+
+const isHomePage = Astro.url.pathname.endsWith('/home');
 ---
+
+
+{isHomePage ? (
+
+<Shell title={`${ page.title } - Lore Archive`}, routes={routes}, toc={false}>
+
+
+<div id="bg-grid-pattern"></div>
+
+    <div class="absolute top-10 left-0 right-0 bottom-0 font-syne-500">
+        <h1 class="h1-no-style text-9xl absolute -right-7 top-10">The Lore</h1>
+        <h1 class="h1-no-style text-9xl absolute -left-10 top-40">Archive Wiki</h1>
+    </div>
+
+    <div class="absolute top-90 font-syne-400 left-1/2 -translate-x-1/2">
+        <h3>Part of the Lore Archive Project</h3>
+    </div>
+
+
+    <div class="absolute top-135 left-15">
+        <span class="font-syne opacity-65"><em>Built for lore enthusiastic Senseis, by lore enthusiastic Senseis.</em> The Lore Archive Wiki is the premier
+        <br />source of truth of the lore, fictional setting, and worldview of the mobile game <strong>Blue Archive</strong>,
+        <br /> created by the Lore Archive Project. It's open to be edited by anyone, anytime, anywhere.
+        <br />It's fast, free from ads, and looks nice.
+        <br />
+        <br />
+        <br />
+        <br />As of now, the Lore Archive Wiki is solely developed by and maintained by one man, me.
+        <br />If you have spare coffee money, why not buy me a coffee and support the project
+        <br />instead of spending it on pyroexenes(!?)
+        <br />
+        <br />
+        <br />If you have any questions, complaints, comments, or simply want to say hi, feel free to reach out at <a class="a-no-style" href="mailto:cirrow@proton.me"><u>cirrow@proton.me</u></a>.
+        </span>
+    </div>
+
+
+</Shell>
+
+
+
+) : (
 
 <Shell title={`${ page.title } - Lore Archive`}, routes={routes}>
     <header id="pageTitle" set:html={ h1match } />
@@ -77,3 +121,28 @@ const historyURL = `https://github.com/lorearchive/law-content/commits/main/wiki
         <RenderTOC TOC={ page.toc }/>
     </div>
 </Shell>
+)}
+
+
+<style>
+    :root{
+        --cell: 100px;     /* size of each square */
+        --stroke: 1px;    /* line thickness */
+        --color: #dddddd;    /* line color */
+    }
+        #bg-grid-pattern {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        
+        /* Combine all backgrounds - grid PLUS gradient overlay */
+        background-image:
+            linear-gradient(90deg, rgba(109, 240, 247, 0.37) 9%, rgba(110, 255, 170, 0.37) 57%, rgba(255, 248, 196, 0.37) 100%),
+            repeating-linear-gradient(0deg, var(--color) 0, var(--color) var(--stroke), transparent var(--stroke), transparent var(--cell)),
+            repeating-linear-gradient(90deg, var(--color) 0, var(--color) var(--stroke), transparent var(--stroke), transparent var(--cell));
+        
+        background-size: auto, auto, auto;
+        background-position: 0 0, 0 0, 0 0;
+        }
+</style>
