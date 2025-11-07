@@ -177,6 +177,7 @@ export default class Renderer {
             return `<a href="${href}" title="${node.text}" id="lawe-link" class="${node.linkType} interwiki">${node.text}</a>`
         }
 
+        console.log(href)
         return `<a href="/wiki/${href}" title="${node.text}" id="lawe-link" class="${node.linkType}">${hrefTitle}</a>`
     }
 
@@ -257,7 +258,9 @@ export default class Renderer {
         try {
             const metaPath = path.join('.wiki', 'meta', `${id}.json`)
             const data = fs.readFileSync(metaPath, 'utf-8');
-            return JSON.parse(data);
+            const json = JSON.parse(data)
+
+            return json[field];
 
         } catch {
             return null

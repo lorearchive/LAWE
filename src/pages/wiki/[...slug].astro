@@ -64,7 +64,7 @@ const isHomePage = Astro.url.pathname.endsWith('/home');
     </div>
 
     <div class="absolute top-90 font-syne-400 left-1/2 -translate-x-1/2">
-        <h3>Part of the Lore Archive Project</h3>
+        <h3>From the Lore Archive Project</h3>
     </div>
 
 
@@ -130,14 +130,14 @@ const isHomePage = Astro.url.pathname.endsWith('/home');
         --stroke: 1px;    /* line thickness */
         --color: #dddddd;    /* line color */
     }
-        #bg-grid-pattern {
+        
+    #bg-grid-pattern {
         position: absolute;
         left: 0;
         width: 100%;
         min-height: 100vh;
         height: auto;
         
-        /* Combine all backgrounds - grid PLUS gradient overlay */
         background-image:
             linear-gradient(90deg, rgba(109, 240, 247, 0.37) 9%, rgba(110, 255, 170, 0.37) 57%, rgba(255, 248, 196, 0.37) 100%),
             repeating-linear-gradient(0deg, var(--color) 0, var(--color) var(--stroke), transparent var(--stroke), transparent var(--cell)),
@@ -145,5 +145,12 @@ const isHomePage = Astro.url.pathname.endsWith('/home');
         
         background-size: auto, auto, auto;
         background-position: 0 0, 0 0, 0 0;
-        }
+    }
+
+    #scrollable-window {
+        overflow-x: hidden;
+
+    }
+
+
 </style>
