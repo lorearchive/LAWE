@@ -119,24 +119,25 @@ export async function fetchWikiContent( config: Partial<ContentFetchConfig> = {}
             // Verify it's actually a git repository
             const gitDirExists = await directoryExists(path.join(localPath, '.git'));
             if (!gitDirExists) {
-                throw new GitServiceError(`LAWE: Directory '${localPath}' exists but is not a git repository`);
+                console.log(`LAWE: Directory '${localPath}' exists but is not a git repository. Removing and cloning fresh...`);
+                // Remove the directory and clone fresh
+                await fs.rm(localPath, { recursive: true, force: true });
+                console.log('LAWE: Cloning wiki content repository...')
+                executeGitCommand( `git clone --depth 1 --single-branch --branch ${finalConfig.branch} "${finalConfig.repoUrl}" "${localPath}"`, finalConfig.gitTimeout );
+            } else {
+                console.log('LAWE: Updating existing wiki content repository...');
+                // Reset local changes and pull latest
+                executeGitCommand( `cd "${localPath}" && git reset --hard HEAD && git pull origin ${finalConfig.branch}`, finalConfig.gitTimeout );
             }
-
-            console.log('LAWE: Updating existing wiki content repository...');
-      
-            // Reset local changes and pull latest
-            executeGitCommand( `cd "${localPath}" && git reset --hard HEAD && git pull origin ${finalConfig.branch}`, finalConfig.gitTimeout );
-        
         } else {
             console.log('LAWE: Cloning wiki content repository...')
-      
             executeGitCommand( `git clone --depth 1 --single-branch --branch ${finalConfig.branch} "${finalConfig.repoUrl}" "${localPath}"`, finalConfig.gitTimeout );
         }
 
         const contentFullPath = path.join(localPath, wikiContentPath)
     
         if (!(await directoryExists(contentFullPath))) {
-                throw new ContentValidationError(
+            throw new ContentValidationError(
                 `LAWE: Wiki content directory '${wikiContentPath}' not found in repository`
             )
         }
