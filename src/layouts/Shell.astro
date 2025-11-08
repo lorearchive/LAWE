@@ -39,12 +39,12 @@ import Sidebar from "../components/island/Sidebar.svelte"
 
             <!-- Main scrollable content -->
             <div id="scrollableWindow" class="flex flex-row justify-center h-full overflow-y-auto">
-                <main class=`flex-1 relative w-full ${toc ? 'max-w-[1116px] p-4 mt-[7rem] mr-[1em] mb-0 ml-[2em]' : 'max-w-full'} `>
+                <main class=`flex-1 relative w-full ${toc ? 'max-w-[900px] p-4 mt-[7rem] mr-[1em] mb-0' : 'max-w-full'} `>
                     <slot />
                 </main> 
 
                 {toc && (
-                    <aside id="TOCaside" class="w-70 p-4 mt-30 overflow-y-auto text-nowrap">
+                    <aside id="TOCaside">
                         <slot name="TOCbar" />
                     </aside>
                 )}
