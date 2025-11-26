@@ -2,7 +2,9 @@
 const { title, routes, aside = true, toc = true } = Astro.props
 
 import Header from "../components/Header.astro"
-import '../styles/global.css' // This enables tailwind
+import '../styles/global.css'
+import '../styles/typography.css' 
+import '../styles/components.css'
 import Tooltips from "../scripts/tooltips.astro"
 import Sidebar from "../components/island/Sidebar.svelte"
 ---
@@ -11,35 +13,38 @@ import Sidebar from "../components/island/Sidebar.svelte"
 
 <html lang="en" class="light">
 
-	<head>
-		<meta charset="UTF-8" />
+    <head>
+        <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="stylesheet" href="/styles/global.css" />
+        <link rel="stylesheet" href="/styles/typography.css" />
+        <link rel="stylesheet" href="/styles/components.css" />
+
         <link rel="sitemap" href="/sitemap-index.xml" />
 
 
-		<title>{ title }</title>
-	</head>
-	
-	<body class="h-screen w-full overflow-hidden">
-        <div class="grid grid-cols-[16rem_minmax(0,1fr)] h-full">
+        <title>{ title }</title>
+    </head>
+    
+    <body class="page-body">
+        <div class="page-grid">
     
         {aside && (
-            <aside id="sidebar" class="border-r overflow-y-auto mt-20">
+            <aside id="sidebar" class="sidebar">
                 <Sidebar client:load routes={routes} />
             </aside>
             )
         }
 
         <!-- Main content area -->
-        <div class="flex flex-col h-full overflow-hidden">
+        <div class="main-content">
             <Header />
 
             <!-- Main scrollable content -->
-            <div id="scrollableWindow" class="flex flex-row justify-center h-full overflow-y-auto">
-                <main class=`flex-1 relative w-full ${toc ? 'max-w-[900px] p-4 mt-[7rem] mr-[1em] mb-0' : 'max-w-full'} `>
+            <div id="scrollableWindow" class="content-container">
+                <main class={`main-content-area ${toc ? 'main-w-toc' : 'main-no-toc'}`}>
                     <slot />
                 </main> 
 
@@ -67,5 +72,55 @@ import Sidebar from "../components/island/Sidebar.svelte"
 
 
 <style>
+    /* Replaced Tailwind classes with custom CSS */
+    .page-body {
+        height: 100vh;
+        width: 100%;
+        overflow: hidden;
+    }
     
+    .page-grid {
+        display: grid;
+        grid-template-columns: 16rem minmax(0, 1fr);
+        height: 100%;
+    }
+    
+    .sidebar {
+        border-right: 1px solid #e5e7eb; /* Using a light gray color */
+        overflow-y: auto;
+        margin-top: 5rem; /* Equivalent to mt-20 in Tailwind */
+    }
+    
+    .main-content {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow: hidden;
+    }
+    
+    .content-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        height: 100%;
+        overflow-y: auto;
+    }
+    
+    .main-content-area {
+        flex: 1;
+        position: relative;
+        width: 100%;
+    }
+    
+    /* Original styles */
+    .main-w-toc { /* with */
+        max-width: 900px;
+        padding: 16px;
+        margin-top: 7rem;
+        margin-right: 1em;
+        margin-bottom: 0;
+    }
+    .main-no-toc {
+        max-width: 100%;
+    }
 </style>

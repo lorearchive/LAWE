@@ -1,0 +1,85 @@
+@font-face {
+  font-family: 'Syne';
+  src: url('/fonts/Syne-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 800; 
+  font-style: normal;
+  font-display: swap;
+}
+
+
+
+.font-syne {
+    font-family: Syne, sans-serif;
+}
+
+.font-syne-500 {
+    font-family: Syne, sans-serif;
+    font-weight: 500;
+}
+
+
+.font-syne-400 {
+    font-family: Syne, sans-serif;
+    font-weight: 400;
+}
+
+
+
+.lawe-heading-div {
+    display: flow-root;
+}
+
+h1:not(.h1-no-style) {
+    font-size: 2.3em;
+    font-family: 'Linux Libertine', "Georgia", 'Times', 'Source Serif Pro', serif;
+}
+
+
+h2 {
+    font-family: 'Linux Libertine', "Georgia", 'Times', 'Source Serif Pro', serif;
+    padding: 0;
+    margin-bottom: 0;
+    display: inline-block;
+    font-size: 1.8rem;
+    line-height: 1;
+    
+}
+
+#lawe-heading-2-div {
+    padding: 0.5em 0 0 0;
+    margin: 1em 0 1em 0;
+    border-bottom: 1px solid #a2a9b1;
+}
+
+h3 {
+    margin: 0.5em 0 0.5em 0;
+    font-size: 1.35rem;
+    font-weight: bold;
+}
+
+h4 {
+    margin: 2em 0 0.5em 0;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+p:not(.p-no-margin) {
+    margin-bottom: 1.4em;
+}
+
+a:link:not(.a-no-style) {
+    color: #0000ee;
+    text-decoration: none;
+}
+a:link:not(.a-no-style):hover {
+    text-decoration: underline;
+}
+
+a:visited:not(.a-no-style) {
+    color: #551a8b;
+}
+
+a:link:active:not(.a-no-style)
+a:visited:active:not(.a-no-style) {
+    color: #ff0000;
+}

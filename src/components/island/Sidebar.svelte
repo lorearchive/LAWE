@@ -107,39 +107,39 @@
 {/if}
 
 <style>
-  ul {
-    list-style: none;
-    padding-left: 1.5rem;
-    margin: 0.5rem 0;
-  }
-  
-  li {
-    margin: 0.25rem 0;
-    cursor: pointer;
-    padding: 0.25rem;
-    border-radius: 4px;
-  }
-  
-  li:hover {
-    background-color: #f5f5f5;
-  }
-  
-  li.directory {
-    font-weight: 500;
-  }
-  
-  li.file {
-    color: #666;
-  }
-  
-  .name {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  
-  .empty {
-    color: #999;
-    font-style: italic;
-  }
+    ul {
+        list-style: none;
+        padding-left: 1.5rem;
+        margin: 0.5rem 0;
+    }
+
+    li {
+        margin: 0.25rem 0;
+        cursor: pointer;
+        padding: 0.25rem;
+        border-radius: 4px;
+    }
+    
+    li:hover {
+        background-color: #f5f5f5;
+    }
+    
+    li.directory {
+        font-weight: 500;
+    }
+    
+    li.file {
+        color: #666;
+    }
+    
+    .name {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .empty {
+        color: #999;
+        font-style: italic;
+    }
 </style>
