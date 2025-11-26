@@ -58,7 +58,7 @@ export default class Renderer {
             case 'Text':
                 return this.escapeHTML(node.value || '')
             case 'Rule':
-                return `<div id="horiz_rule" class="my-5"><hr /></div>`
+                return `<div id="horiz_rule"><hr /></div>`
             case 'Linebreak':
                 return `<br />`
             case 'Newline':
@@ -177,7 +177,6 @@ export default class Renderer {
             return `<a href="${href}" title="${node.text}" id="lawe-link" class="${node.linkType} interwiki">${node.text}</a>`
         }
 
-        console.log(href)
         return `<a href="/wiki/${href}" title="${node.text}" id="lawe-link" class="${node.linkType}">${hrefTitle}</a>`
     }
 
