@@ -2,7 +2,6 @@
 import global from './src/store'
 import { defineConfig } from 'astro/config'
 import sitemap from '@astrojs/sitemap'
-import tailwindcss from '@tailwindcss/vite';
 import { processAllPages } from './src/utils/pages-processor'
 import { fetchWikiContent, getAllPages } from './src/utils/git-service'
 
@@ -75,9 +74,8 @@ export default defineConfig({
                     throw error
                 }
                 }
-            },
-            
-            tailwindcss()
+            }
+        
         ]
     }
 });
