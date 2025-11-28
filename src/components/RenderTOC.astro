@@ -31,7 +31,7 @@ while (i < TOC.length || stack.length > 0) {
         }
     }
 
-    html += `<li><div id="TOCItem"><a href="#${current.anchor}">${current.title}</a></div>`
+    html += `<li><div id="TOCItem"><a class="a-no-style" href="#${current.anchor}">${current.title}</a></div>`
 
     if (current.children && current.children.length > 0) {
         html += "<ul>";
@@ -44,10 +44,11 @@ while (i < TOC.length || stack.length > 0) {
 
 html += "</ul>"
 ---
-<div id="TOC" class="fixed" set:html={ html } />
+<div id="TOC" set:html={ html } />
 
 <style>
     #TOC {
         word-break: break-word;
+        position: fixed;
     }
 </style>
