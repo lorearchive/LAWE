@@ -35,6 +35,7 @@ export type NodeType =
     | 'CitationNeeded'
 
     | 'InfoTableAffili'
+    | 'InfoTable'
     | 'TripleParentheses'
 
 export interface ASTNode {
@@ -149,6 +150,10 @@ export default class Parser {
 
         if (this.match(TokenType.TABLE_OPEN)) {
             return parseTable(this)
+        }
+
+        if (this.match(TokenType.INFOTABLE)) {
+            return parseInfoTable(this)
         }
 
         if (this.match(TokenType.AFFILI)) {
@@ -280,7 +285,7 @@ export default class Parser {
         // Create a new array with only the non-whitespace content
         const trimmedChildren = children.slice(startIndex, endIndex + 1);
         
-        // Reverse the level as requested: more equals = lower heading number (h1)
+        // Reverse the level: more equals sign -> lower heading number (h1)
         const level = Math.min(7 - openLevel, 6);
         
         // optionally consume one or two newlines
@@ -288,7 +293,6 @@ export default class Parser {
             this.match(TokenType.NEWLINE);
         }
 
-        // generate heading ID
         const ID = this.getHeadingID(trimmedChildren)
         
         return {

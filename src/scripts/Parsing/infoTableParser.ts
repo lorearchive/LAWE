@@ -13,6 +13,14 @@ export function parseInfoTable(ctx: ParserCtx): ASTNode {
             attributes
         }
             
+    } else if (ctx.previous().type === TokenType.INFOTABLE) {
+        const attributes = ctx.previous().attributes
+
+        return {
+            type: "InfoTable",
+            attributes
+        }
+
     } else {
         throw new Error("LAWE DEBUG PARSEINFOTABLE ENCOUNTERED UNRECOGNISED INFOTABLE TYPE: " + JSON.stringify(ctx.whereami()))
     }

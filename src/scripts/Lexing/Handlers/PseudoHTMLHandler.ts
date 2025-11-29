@@ -26,7 +26,8 @@ export default class PseudoHTMLHandler extends BaseTokenHandler {
     };
 
     private voidTagMappings = {
-        'affili': TokenType.AFFILI
+        'affili': TokenType.AFFILI,
+        'infotable': TokenType.INFOTABLE
     };
 
     canHandle(context: LexerContext): boolean {
@@ -335,6 +336,7 @@ export default class PseudoHTMLHandler extends BaseTokenHandler {
             'tbody': new Set(['class']),
 
             'affili': new Set(['class', 'name', 'school', 'fAppear']), //fAppear: first appearance 
+            'infotable': new Set(['class', 'name', 'figure', 'caption', 'alias', 'affiliation', 'clubs', 'halo']),
             'blockquote': new Set(["cite"])
         }
 

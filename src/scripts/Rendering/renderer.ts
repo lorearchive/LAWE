@@ -4,7 +4,7 @@ import type { PageMeta } from '../../utils/git-service.ts';
 
 import type { ASTNode } from "../Parsing/parser";
 import { getIconMarkup, type IconName } from "../../assets/Icons";
-import { renderAffiliTable } from "./infoTableRenderer.ts";
+import { renderAffiliTable, renderInfoTable } from "./infoTableRenderer.ts";
 
 export default class Renderer {
 
@@ -101,6 +101,15 @@ export default class Renderer {
                     throw new Error("LAWE RENDERING ERROR: node does not include any name or school information while trying to render affili table");
                 }
             }
+
+            case 'InfoTable':
+                if (node.attributes && node.attributes.name) {
+                    return renderInfoTable({ 
+                        name: node.attributes.name,
+                    });
+                } else {
+                    throw new Error("LAWE RENDERING ERROR: node does not include any name information while trying to render infotable");
+                }
             
 
             case 'Image':

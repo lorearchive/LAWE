@@ -4,6 +4,68 @@ interface AffiliTableProps {
     school: string;
 }
 
+const clubMemberList: Record<string, string[]> = {
+
+    schale: ["sensei", "arona"],
+    schale1: ["sensei", "arona", "plana"],
+
+    gsc: ["president", "rin", "momoka", "ayumu", "kaya", "aoi", "sumomo", "haine"],
+
+    ftf: ["shiroko", "hoshino", "nonomi", "serika", "ayane"],
+
+    prefect: ["hina", "ako", "iori", "chinatsu"],
+    gematria: ["black_suit", "beatrice", "maestro"],
+    pandemonium: ["makoto", "satsuki", "iroha", "chiaki", "ibuki"],
+    "68": ["aru", "kayoko", "mutsuki", "haruka"],
+
+    seminar: ["yuuka", "noa", "rio", "koyuki"],
+    gdd: ["yuzu", "momoi", "midori", "aris"],
+    "c&c": [],
+
+    tea: ["nagisa", "mika", "seia"],
+    makeup: ["hifumi", "azusa", "hanako", "koharu"],
+    sisterhood: ["sakurako", "mari", "hinata"],
+    justice: ["tsurugi", "hasumi", "mashiro", "ichika"],
+    
+    rabbit: ["miyako", "saki", "moe", "miyu"],
+    fox: ["yukino", "niko", "kurumi", "otogi"],
+    
+    ccc: ["hikari&nozomi", "hikari&nozomi"],
+    hso: ["suou"]
+};
+
+
+const personFullName: Record<string, string> = {
+    shiroko: "Sunaookami Shiroko",
+    serika: "Kuromi Serika",
+    hoshino: "Takanashi Hoshino",
+    nonomi: "Izayoi Nonomi",
+    ayane: "Okusora Ayane",
+    arona: "Arona",
+    hina: "Sorasaki Hina",
+    ako: "Amau Ako",
+    iori: "Shiromi Iori",
+    chinatsu: "Hinomiya Chinatsu",
+    aru: "Rikuhachima Aru",
+    kayoko: "Onikata Kayoko",
+    mutsuki: "Asagi Mutsuki",
+    haruka: "Igusa Haruka",
+    hifumi: "Ajitani Hifumi",
+    yuuka: "Hayase Yuuka",
+    izuna: "Kuda Izuna",
+    azusa: "Shirasu Azusa",
+    momoi: "Saiba Momoi",
+    midori: "Saiba Midori",
+    aris: "Tendou Aris",
+    mari: "Iochi Mari",
+    makoto: "Hanuma Makoto",
+    kirara: "Yozakura Kirara",
+    izumi: "Shishidou Izumi",
+    rio: "Tsukatsuki Rio",
+    noa: "Ushio Noa",
+    koyuki: "Kurosaki Koyuki",
+    seia: "Yurizono Seia"
+};
 export function renderAffiliTable({ name, school }: AffiliTableProps): string {
     const schoolCode: Record<string, string> = {
         abydos: "Abydos High School",
@@ -30,57 +92,9 @@ export function renderAffiliTable({ name, school }: AffiliTableProps): string {
         seminar: "Seminar"
     };
 
-    const personFullName: Record<string, string> = {
-        shiroko: "Sunaookami Shiroko",
-        serika: "Kuromi Serika",
-        hoshino: "Takanashi Hoshino",
-        nonomi: "Izayoi Nonomi",
-        ayane: "Okusora Ayane",
-        arona: "Arona",
-        hina: "Sorasaki Hina",
-        ako: "Amau Ako",
-        iori: "Shiromi Iori",
-        chinatsu: "Hinomiya Chinatsu",
-        aru: "Rikuhachima Aru",
-        kayoko: "Onikata Kayoko",
-        mutsuki: "Asagi Mutsuki",
-        haruka: "Igusa Haruka",
-        hifumi: "Ajitani Hifumi",
-        yuuka: "Hayase Yuuka",
-        izuna: "Kuda Izuna",
-        azusa: "Shirasu Azusa",
-        momoi: "Saiba Momoi",
-        midori: "Saiba Midori",
-        aris: "Tendou Aris",
-        mari: "Iochi Mari",
-        makoto: "Hanuma Makoto",
-        kirara: "Yozakura Kirara",
-        izumi: "Shishidou Izumi",
-        rio: "Tsukatsuki Rio",
-        noa: "Ushio Noa",
-        koyuki: "Kurosaki Koyuki"
-    };
+    
 
-    const clubMemberList: Record<string, string[]> = {
-        ftf: ["shiroko", "hoshino", "nonomi", "serika", "ayane"],
-        schale: ["sensei", "arona"],
-        schale1: ["sensei", "arona", "plana"],
-        gsc: ["president", "rin", "momoka", "ayumu", "kaya", "aoi", "sumomo", "haine"],
-        gematria: ["black_suit", "beatrice", "maestro"],
-        pandemonium: ["makoto", "satsuki", "iroha", "chiaki", "ibuki"],
-        prefect: ["hina", "ako", "iori", "chinatsu"],
-        "68": ["aru", "kayoko", "mutsuki", "haruka"],
-        seminar: ["yuuka", "noa", "rio", "koyuki"],
-        gdd: ["yuzu", "momoi", "midori", "aris"],
-        tea: ["nagisa", "mika", "seia"],
-        makeup: ["hifumi", "azusa", "hanako", "koharu"],
-        sisterhood: ["sakurako", "mari", "hinata"],
-        justice: ["tsurugi", "hasumi", "mashiro", "ichika"],
-        rabbit: ["miyako", "saki", "moe", "miyu"],
-        fox: ["yukino", "niko", "kurumi", "otogi"],
-        ccc: ["hikari&nozomi", "hikari&nozomi"],
-        hso: ["suou"]
-    };
+    
 
     const club = Object.entries(clubMemberList).find(([_, members]) => members.includes(name))?.[0] ?? null;
     
@@ -101,18 +115,17 @@ export function renderAffiliTable({ name, school }: AffiliTableProps): string {
         <table id="lawe-infoTable" class="affili">
             <thead class="thead-no-style">
                 <tr>
-                    <th id="lawe-infoTable-th" colspan="2">A member of</th>
+                    <th id="lawe-infoTable-th" class="pretitle" colspan="2">A member of<br /><h3 class="h3-no-spacing"><a href="/wiki/setting/${school}">${schoolFullName}</a></h3></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td id="lawe-infoTable-school-cell" colspan="2">
-                        <figure id="lawe-figure" class="figure-no-style inline-block">
+                    <td id="lawe-infoTable-school-cell" class="no-spacing" colspan="2">
+                        <figure id="lawe-figure" class="figure-no-style">
                             <a id="lawe-figure-a" class="a-no-style" href="/wiki/setting/academies/${school}">
                                 <img src="https://raw.githubusercontent.com/lorearchive/law-content/main/images/icons/${school}.png" width="100" alt="The logo of ${schoolFullName}." loading="lazy" />
                             </a>
                         </figure>
-                        <strong>${schoolFullName}</strong>
                     </td>
                 </tr>
                 <tr>
@@ -130,4 +143,15 @@ export function renderAffiliTable({ name, school }: AffiliTableProps): string {
             </tbody>
         </table>
     `
+}
+
+export function renderInfoTable({ name, figure, caption, alias, affiliation, clubs, halo }: { name: string; figure?: string; caption?: string; alias?: string; affiliation?: string; clubs?: string; halo?: string }) {    return `
+    <table id="lawe-infoTable" class="infoTable">
+        <thead>
+            <th class>${personFullName[name] || name}</th>
+        </thead>
+        <tbody>
+            
+        </tbody>
+    </table>`
 }
