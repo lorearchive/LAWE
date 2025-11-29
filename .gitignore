@@ -25,3 +25,11 @@ pnpm-debug.log*
 
 # fetched raw wiki files
 .wiki/
+
+
+# Rust
+# Rust build artifacts
+/rust-wasm/target/
+
+# Rust cargo lock file
+rust-wasm/Cargo.lock

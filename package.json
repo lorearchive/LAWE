@@ -3,8 +3,10 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "npm run build:wasm && astro dev",
+    "prebuild": "npm run build:wasm",
     "build": "astro build",
+    "build:wasm": "cd rust-wasm && wasm-pack build --target web --out-dir ../src/wasm-pkg",
     "preview": "astro preview",
     "astro": "astro",
     "test": "vitest",
