@@ -138,8 +138,8 @@ td#lawe-infoTable-school-cell {
 #lawe-figure:not(.figure-no-style) {
     background-color: #F9F9F9;
     border: 1px solid #CCC;
-    width:auto;
-    display:block
+    display: block;
+    max-width: fit-content;
 }
 
 .lawe-figure-right {
@@ -149,15 +149,15 @@ td#lawe-infoTable-school-cell {
 }
 
 #lawe-figure img {
-    margin: 3px;
+    margin: .2em;
+    display: block;
+    height: auto;
 }
 
 #lawe-figure figcaption:not(.figcaption-no-style) {
-    display: inline-block;
-    width: 100%;
+    display: block;
     background-color: #F9F9F9;
     font-size: 94%;
-    overflow: hidden;
     padding: 0.25em 6px 3px 6px;
 }
 
