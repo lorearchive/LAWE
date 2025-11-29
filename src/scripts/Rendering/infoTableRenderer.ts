@@ -145,13 +145,32 @@ export function renderAffiliTable({ name, school }: AffiliTableProps): string {
     `
 }
 
-export function renderInfoTable({ name, figure, caption, alias, affiliation, clubs, halo }: { name: string; figure?: string; caption?: string; alias?: string; affiliation?: string; clubs?: string; halo?: string }) {    return `
+export function renderInfoTable({ name, figure, caption, alias, affiliation, clubs, halo }: { name: string; figure?: string; caption: string; alias: string; affiliation?: string; clubs?: string; halo?: string }) {    return `
     <table id="lawe-infoTable" class="infoTable">
         <thead>
-            <th class>${personFullName[name] || name}</th>
+            <tr>
+                <th id="lawe-infoTable" class="pretitle" colspan="2">
+                    <div class="title-wrap">
+                        <span class="title-line1">${personFullName[name].split(" ")[0]}</span>
+                        <span class="title-line2"><h3 class="h3-no-spacing">${personFullName[name].split(" ")[1]}</h3></span>
+                    </div>
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <figcaption class="figcaption-no-style">${caption}</figcaption>
+                </td>
+            </tr>
         </thead>
         <tbody>
-            
+            <tr>
+                <th id="lawe-infoTable-label">Other names</th>
+                <td>${alias?.split("\\\\").map(s => s.trim()).join("<br />")}</td>
+            </tr>
+            <tr>
+                <th id="lawe-infoTable-label">Affiliation</th>
+                <td>${affiliation}</td>
+            </tr>
         </tbody>
     </table>`
 }

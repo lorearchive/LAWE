@@ -106,6 +106,9 @@ export default class Renderer {
                 if (node.attributes && node.attributes.name) {
                     return renderInfoTable({ 
                         name: node.attributes.name,
+                        caption: node.attributes.caption,
+                        alias: node.attributes.alias,
+                        affiliation: node.attributes.affiliation
                     });
                 } else {
                     throw new Error("LAWE RENDERING ERROR: node does not include any name information while trying to render infotable");
