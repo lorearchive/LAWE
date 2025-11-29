@@ -19,7 +19,7 @@ header#lawe-header.header-hidden {
 }
 
 main {
-    min-height: max-content;
+    min-height: fit-content;
 }
 
 @media (max-width: 1544px) {
@@ -29,6 +29,7 @@ main {
 }
 
 main article {
+    height: min-content;
     padding-bottom: 4em;
 }
 

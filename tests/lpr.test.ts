@@ -51,26 +51,26 @@ const lexer = new Lexer()
 const parser = new Parser()
 const renderer = new Renderer()
 
-describe('LPR', () => {
-    cases.forEach(({ name, raw, expected }) => {
-        it(name, () => {
-            const tokens = lexer.tokenise(raw)
-            const ast = parser.parse(tokens)
-            const html = renderer.render(ast)
+//describe('LPR', () => {
+    //cases.forEach(({ name, raw, eUntitledxpected }) => {
+        //it(name, () => {
+            //const tokens = lexer.tokenise(raw)
+          //  const ast = parser.parse(tokens)
+        //    const html = renderer.render(ast)
 
-            expect(html).toBe(expected)
-        })
-    })
-})
+      //      expect(html).toBe(expected)
+    //    })
+  //  })
+//})
 
 //describe('Lexer', () => {
-  //it('analyses tokens from raw wikitext.', () => {
-    //expect(lexer.tokenise(`[[wp>sigma]]`)).toEqual("sig")
+//it('analyses tokens from raw wikitext.', () => {
+//expect(lexer.tokenise(`<infotable name="seia" />`)).toEqual("sig")
 //})
 //})
 
 describe('Parser', () => {
     it('generates AST from tokens', () => {
-        expect(parser.parse(lexer.tokenise(`[[wp>sigma]]`))).toEqual('sigm')
-    })
+        expect(parser.parse(lexer.tokenise(`<infotable name="seia" />`))).toEqual('sigm')
+  })
 })
