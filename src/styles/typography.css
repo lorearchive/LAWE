@@ -57,9 +57,14 @@ h2 {
 }
 
 h3 {
-    margin: 0.5em 0 0.5em 0;
     font-size: 1.35rem;
     font-weight: bold;
+    margin: 0;
+}
+
+h3:not(.h3-no-spacing) {
+    margin: 0.5em 0 0.5em 0 !important;
+
 }
 
 h4 {
@@ -73,7 +78,7 @@ p:not(.p-no-margin) {
 }
 
 a:link:not(.a-no-style) {
-    color: #0000ee;
+    color: #36c;
     text-decoration: none;
 }
 a:link:not(.a-no-style):hover {

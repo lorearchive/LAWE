@@ -105,10 +105,29 @@ table#lawe-table {
 
 /** ------------------------ Tables --- infoTables **/
 
+table {
+    background-color: #f8f9fa;
+}
+
+table .no-spacing {
+    margin: 0;
+    padding: 0;
+}
+
+tr:not(.tr-border) {
+    border: transparent;
+}
+
+td:not(.td-border-x) {
+    border-right: transparent;
+    border-left: transparent;
+}
+
 table#lawe-infoTable.affili {
     width: 300px;
     float: right;
     clear: right;   
+    border: 1px solid #a2a9b1;
 }
 
 table#lawe-infoTable.affili h3 {
@@ -116,8 +135,7 @@ table#lawe-infoTable.affili h3 {
 }
 
 th#lawe-infoTable-th {
-    background-color: transparent;
-    border-bottom: transparent;
+    border: transparent;
     padding-bottom: 0;
 }
 
@@ -127,13 +145,23 @@ td#lawe-infoTable-school-cell {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-top: transparent;
-    border-bottom: transparent;
+    border: transparent;
     text-align: center;
 }
 
+th.pretitle {
+    background-color: #efefef;
+    font-size: 88%;
+    font-weight: normal;    
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+}
 
 /** ------------------------ Figures and images **/
+
+figure {
+    margin: 0;
+}
 
 #lawe-figure:not(.figure-no-style) {
     background-color: #F9F9F9;
