@@ -450,8 +450,12 @@ export class ImageHandler extends BaseTokenHandler {
 
     handle(context: LexerContext, tokens: Token[], tokenStack: TokenType[]): boolean {
         // Check if we're at the start of an image tag
-        if (context.peek() === '{' && context.peek(1) === '{') {
+        if (context.peek() === '{' && context.peek(1) === '{' && context.peek(2) !== "b") {
             return this.handleImageOpen(context, tokens, tokenStack);
+        }
+
+        if (context.peek() === '{' && context.peek(1) === '{' && context.peek(2) === "b") {
+            return this.handleImageOpen(context, tokens, tokenStack, "external");
         }
         
         // Check if we're at the end of an image tag
@@ -468,9 +472,14 @@ export class ImageHandler extends BaseTokenHandler {
         return false;
     }
 
-    private handleImageOpen(context: LexerContext, tokens: Token[], tokenStack: TokenType[]): boolean {
+    private handleImageOpen(context: LexerContext, tokens: Token[], tokenStack: TokenType[], type?: string): boolean {
         context.advance(2); // Skip '{{'
-        tokens.push(context.createToken(TokenType.IMAGE_OPEN, '{{'));
+        if (type) {
+            tokens.push(context.createToken(TokenType.IMAGE_OPEN, '{{', undefined, undefined, "baw>"));
+
+        } else {
+            tokens.push(context.createToken(TokenType.IMAGE_OPEN, '{{'));
+        }
         tokenStack.push(TokenType.IMAGE_OPEN);
         return true;
     }
