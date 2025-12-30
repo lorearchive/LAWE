@@ -19,7 +19,7 @@ header#lawe-header.header-hidden {
 }
 
 main {
-    min-height: fit-content;
+    height: fit-content;
 }
 
 @media (max-width: 1544px) {
@@ -29,13 +29,13 @@ main {
 }
 
 main article {
-    height: min-content;
+    height: 100%;
     padding-bottom: 4em;
 }
 
 #TOCaside {
     position: relative;
-    width: 250px; /* Use a fixed width instead of max-content */
+    width: 250px; 
     flex-shrink: 0; /* Prevent shrinking */
     white-space: normal; /* Allow content to wrap */
     overflow-y: auto;
