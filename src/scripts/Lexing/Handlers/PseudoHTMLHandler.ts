@@ -336,7 +336,7 @@ export default class PseudoHTMLHandler extends BaseTokenHandler {
             'tbody': new Set(['class']),
 
             'affili': new Set(['class', 'name', 'school', 'fAppear']), //fAppear: first appearance 
-            'infotable': new Set(['class', 'name', 'figure', 'caption', 'alias', 'affiliation', 'clubs', 'halo']),
+            'infotable': new Set(['class', 'name', 'figure', 'caption', 'alias', 'affiliation', 'clubs', 'age', 'height', 'birthday', 'hobbies', 'halo']),
             'blockquote': new Set(["cite"])
         }
 

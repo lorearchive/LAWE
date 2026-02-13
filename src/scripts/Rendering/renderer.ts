@@ -108,7 +108,10 @@ export default class Renderer {
                         name: node.attributes.name,
                         caption: node.attributes.caption,
                         alias: node.attributes.alias,
-                        affiliation: node.attributes.affiliation
+                        affiliation: node.attributes.affiliation,
+                        clubs: node.attributes.clubs,
+                        age: node.attributes.age,
+                        height: node.attributes.height
                     });
                 } else {
                     throw new Error("LAWE RENDERING ERROR: node does not include any name information while trying to render infotable");

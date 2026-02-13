@@ -1,3 +1,8 @@
+import { initWasm } from "../../utils/wasm-loader";
+import { simple_inline } from "../../../rust-wasm/pkg/rust_wasm";
+
+await initWasm()
+
 // AffiliTable.ts
 interface AffiliTableProps {
     name: string;
@@ -111,6 +116,7 @@ export function renderAffiliTable({ name, school }: AffiliTableProps): string {
     ).join('');
 
 
+
     return `
         <table id="lawe-infoTable" class="affili">
             <thead class="thead-no-style">
@@ -140,12 +146,21 @@ export function renderAffiliTable({ name, school }: AffiliTableProps): string {
                         </div>
                     </td>
                 </tr>
+                <tr>
+                    <td>
+                        <div>
+                        </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
     `
 }
 
-export function renderInfoTable({ name, figure, caption, alias, affiliation, clubs, halo }: { name: string; figure?: string; caption: string; alias: string; affiliation?: string; clubs?: string; halo?: string }) {    return `
+export function renderInfoTable({ name, figure, caption, alias, affiliation, clubs, age, height, halo }: { name: string; figure?: string; caption: string; alias: string; affiliation?: string; clubs?: string; age?: string; height?: string, halo?: string }) {
+    
+    
+    return `
     <table id="lawe-infoTable" class="infoTable">
         <thead>
             <tr>
@@ -169,7 +184,19 @@ export function renderInfoTable({ name, figure, caption, alias, affiliation, clu
             </tr>
             <tr>
                 <th id="lawe-infoTable-label">Affiliation</th>
-                <td>${affiliation}</td>
+                <td>${affiliation ? simple_inline(affiliation) : ""}</td>
+            </tr>
+            <tr>
+                <th id="lawe-infoTable-label">Club(s)</th>
+                <td>${clubs}</td>
+            </tr>
+            <tr>
+                <th id="lawe-infoTable-label">Age</th>
+                <td>${age}</td>
+            </tr>
+            <tr>
+                <th id="lawe-infoTable-label">Height</th>
+                <td>${height}</td>
             </tr>
         </tbody>
     </table>`
