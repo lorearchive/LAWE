@@ -71,7 +71,7 @@
 table {
     border-collapse: collapse;
     border-spacing: 0;
-    margin: 1.5em 0;
+    margin: 1em 0;
     font-size: 0.95rem;
     background-color: white;
     color: #333;
@@ -120,8 +120,18 @@ td:not(.td-border-x) {
     border-left: transparent;
 }
 
+table#lawe-infoTable.infoTable {
+    max-width: 300px;
+    table-layout: fixed;
+
+}
+
 table#lawe-infoTable.affili {
-    width: 300px;
+    width: 270px;
+
+}
+
+table#lawe-infoTable {
     float: right;
     clear: right;   
     border: 1px solid #a2a9b1;
@@ -137,6 +147,8 @@ th {
     border-right: transparent;
     padding-bottom: 0;
     text-align: center;
+    padding: 0.25em 0.75em 0 0.75em;
+
 }
 
 th#lawe-infoTable-label {
@@ -156,6 +168,8 @@ td#lawe-infoTable-school-cell {
 
 #lawe-infoTable td {
     padding: 0.25em 0.75em 0.25em 0.75em;
+    word-wrap: break-word;
+    word-break: break-word;
 }
 
 #lawe-infoTable tr {

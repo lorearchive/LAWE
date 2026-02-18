@@ -38,6 +38,14 @@ h1:not(.h1-no-style) {
     font-family: 'Syne';
 }
 
+h1.h1-no-style {
+    font-size: 1em;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+
+
 
 h2 {
     font-family: "Georgia", 'Times', 'Source Serif Pro', serif;
