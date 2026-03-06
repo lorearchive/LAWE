@@ -47,7 +47,7 @@ const pageURL = `https://github.com/lorearchive/law-content/tree/main/wiki/${pag
 const pageEditURL = `https://github.com/lorearchive/law-content/edit/main/wiki/${page.slug.join("/")}.txt`
 const historyURL = `https://github.com/lorearchive/law-content/commits/main/wiki/${page.slug.join("/")}.txt`
 
-const isHomePage = Astro.url.pathname.endsWith('/home');
+const isHomePage = Astro.url.pathname.endsWith('/home') || Astro.url.pathname.endsWith("/home/");
 ---
 
 

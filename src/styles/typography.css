@@ -82,7 +82,7 @@ h3 {
 }
 
 h3:not(.h3-no-spacing) {
-    margin: 0.5em 0 0.5em 0 !important;
+    margin: 0.5em 0 0em 0 !important;
 
 }
 
