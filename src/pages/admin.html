@@ -1,15 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex" />
-    <!-- Tell Decap where to find config.yml -->
-    <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
-    <title>Content Manager</title>
-  </head>
-  <body>
-    <!-- Decap CMS runs purely in the browser via this script -->
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  </body>
-</html>
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+<button id="signup-btn">Sign up</button>
+
+<script>
+  const btn = document.getElementById('signup-btn');
+  if (window.netlifyIdentity) {
+    btn.addEventListener('click', () => {
+      window.netlifyIdentity.open('signup'); // forces the signup tab
+    });
+  }
+</script>
