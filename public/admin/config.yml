@@ -6,7 +6,7 @@ media_folder: "/images" # Where images are stored
 public_folder: "/images"   # The path to access them in the HTML
 
 collections:
-  - name: "Lore Archive Wiki"
+  - name: "law"
     label: "Wiki Pages"
     label_singular: "Wiki Page"
     folder: "public/content/wiki"       # raw wikifiles
