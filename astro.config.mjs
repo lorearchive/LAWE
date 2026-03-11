@@ -3,7 +3,7 @@ import global from './src/store'
 import { defineConfig } from 'astro/config'
 import sitemap from '@astrojs/sitemap'
 import { processAllPages } from './src/utils/pages-processor'
-import { fetchWikiContent, getAllPages } from './src/utils/git-service'
+import { getAllPages } from './src/utils/git-service'
 
 import svelte from '@astrojs/svelte';
 
@@ -61,8 +61,7 @@ export default defineConfig({
                 console.log('LAWE: Fetching content from remote repository...');
                 
                 try {
-                    const contentPath = await fetchWikiContent();
-                    const pages = await getAllPages(contentPath);
+                    const pages = await getAllPages();
                     
                     await processAllPages(pages);
                     
