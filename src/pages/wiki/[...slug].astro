@@ -27,7 +27,7 @@ export async function getStaticPaths() {
     return routes  
 }
 
-const h1Match = page.htmlContent.match(/<h1[^>]*>.*?<\/h1>/i)
+const h1Match = page.htmlContent.match(/<h1[^>]*>.*?<\/h1>/)
 const h1match = h1Match ? h1Match[0] : ''
 const bodyContent = h1Match ? page.htmlContent.replace(h1Match[0], '') : page.htmlContent
 

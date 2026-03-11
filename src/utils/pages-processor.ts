@@ -166,19 +166,7 @@ function validateHtmlOutput(html: string, filePath: string): void {
         );
     }
     
-    // Check if HTML begins with an H1 element
-    const trimmedHtml = html.trim();
-    const h1Regex = /^<div[^>]*><h1[^>]*>/i;
-
-    if (!h1Regex.test(trimmedHtml)) {
-        console.warn(`LAWE PP: HTML content in ${filePath} does not begin with an H1 element.`);
-        
-        throw new PageProcessorError(
-           'HTML must begin with an H1 element',
-           'validation',
-            filePath
-        );
-    }
+    
 }
 
 
