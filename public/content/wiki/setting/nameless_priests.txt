@@ -1,0 +1,53 @@
+====== The Nameless Priests ======
+(((notthatdeep|December 2024)))
+(((citation|November 2024)))
+(((unfinished|November 2024)))
+(((external|September 2025)))
+----
+
+An enigmatic organization of //Blue Archive//.
+
+<blockquote footer="Black Suit, citation needed" cite="citation needed">//The sublime remnants of the pre-Enlightenment era, buried under the mysteries of Kivotos… the <Nameless God> and the nameless priests who worship them… Massive stones, trees, typhoons, and lightning—representing, so to speak, the primal mystery and terror. Thus, it seems they manifest in forms that mimic nature. \\ \\ As for the nameless priests who worship them… whatever they’re plotting is unknown, but it’s safe to say they aren’t friendly toward Kivotos. Although they’ve vanished, their technology remains on this land. And I have quite an interest in their legacy. It sells for a high price, after all...//</blockquote>
+
+<table profileTable><thead><tr><th [colspan=2]>
+NAMELESS PRIESTS
+</th></tr></thead><tbody><tr><td profileTableLeftCell>**Appearance**</td><td>
+Before [[:setting:academycity]]
+</td></tr><tr><td profileTableLeftCell>**Leaders**</td><td>
+The Nameless God \\ <del>[[:people:millennium:aris|The Princess of the Nameless Gods]]</del>
+</td></tr><tr><td profileTableLeftCell>**Firepower**</td><td>
+Atrahasis' Ark \\ Divi:SION \\ The Nameless Followers
+</td></tr><tr><td profileTableLeftCell>**Size**</td><td>
+Unknown
+</td></tr><tr><td profileTableLeftCell>**Capital**</td><td>
+Unknown
+</td></tr>
+</tbody></table>
+
+===== Overview ======
+
+In the story, this enigmatic organization has yet to reveal itself fully. It is portrayed as an ancient group that has existed since a distant past and continues to operate covertly. They possess advanced technology far beyond that of modern [[:setting:synopsis#Kivotos]]. For instance, in the Eden Treaty arc, the supersonic missile that initiated the Cathedral of Communion terrorist attack was based on their technology,(((cn))) and the mask that protected [[:people:arius:atsuko]] from the Halo-destroying bomb also incorporated their expertise.(((cn))) Their influence is also indirectly shown, as seen in Decagramaton using their corrupted legacy and black-suited figures employing the nameless priests' technology.(((cn)))
+
+Their goal is to establish a Sanctum of the New World.(((cn))) To achieve this, they plan to construct the Ark of Atrahasis, bring about the destruction of the current world—leaving it as nothing more than a recorded mystery—and then build a new world upon its remnants.
+
+In the final volume, it is revealed that these characters are priests who worship the "Nameless Gods," originating from ancient faiths that existed before the appearance of the students of Kivotos. They are depicted as possessing the "sublime," a concept associated with their faith. [[:people:gematria:black_suit]] provide detailed explanations about the Nameless Gods but seem to have little knowledge beyond the act of worship itself, a flag if it can be seen so. The phrase "to possess the sublime" is used to describe their acquisition of the destructive power linked to these gods.
+
+Then reveals a shocking portrayal where they obtain a god and then treat the deity like a mere tool, declaring that they will "allow neither rest nor death" to the god. This suggests that the priests' interests were the primary purpose, rather than the god being an object of worship. This aspect resonates with an attitude that verbally claims to worship, but inwardly looks down on and subordinates the deity, not truly believing in the religion but using it to pursue personal gain.
+
+
+<callout type="info" icon="true">
+The general development of a religion follows a path where, initially, ancient humans, overwhelmed by natural disasters, wild animals, and supernatural experiences, began to worship the uncontrollable forces of nature in a primitive faith. As these beliefs were passed down orally and recorded over time, they evolved into legends and myths, and eventually established forms of worship, where humans transitioned from worshiping nature to venerating personified figures. With the rise of Kivotos, these new mystical elements inevitably integrated into this evolving religious structure.
+\\ \\
+As the faith advanced further, it moved toward a monotheistic system, where the remaining deities were either absorbed or relegated to secondary roles. This shift in belief is likely the reason why the Nameless Priests refer to the students of Kivotos as the "Forgotten Gods."
+\\ \\
+This ideological flow sets the stage for inevitable conflict between [[:setting:academies:millennium]] and the Nameless Priests, despite the similarities between them. While Millennium is a school trying to prove concepts that are difficult to comprehend, the Nameless Priests seek the acquisition of an absolute, nameless deity — one that cannot be proven or called by name. The conflict is particularly direct in the //Clockwork Flower Pavane// arc, where the Nameless Priests' worship of [[:people:millennium:aris|OOPArts (Out of Place Artifacts)]] ties into both the trigger for destruction and the command over a legion, showing that they believe in the power of an absolute being.
+</callout>
+
+[[:people:millennium:rio|The student with expertise in this field]], who aim for the absolute control of knowledge, align with the idea of seeking an absolute entity. This presents a parallel to the desire for transcending human limitations and moving closer to an "absolute" — a goal also shared by [[:setting:decagrammaton|an AI]] near Millennium, which seeks to attain a god-like status or reach for the ultimate understanding. Both the Nameless Priests and the AI share a vision of achieving control over knowledge and power that borders on the divine, hence their inevitable clash.
+
+Moreover, if we consider the fundamental value of primitive gods or religions, this might represent a more essential characteristic. The reason for a god's existence could be seen as an object that humans want to give meaning to, create, and worship. If this entire process reflects human psychology, it can naturally include human selfishness. It is often said that the concept of a primitive god emerged from the most primordial fears. If we consider that this is about suppressing fears or incomprehensible things, and creating worship for themselves based on such concepts, it can be equated with **Terror**. In fact, not only in the term "terror" but also in the dialogue of the nameless priests, there are lines suggesting that some things need not be understood. Because of these factors, it might be natural from a human perspective to treat gods like convenient tools.
+
+
+===== See Also =====
+  *[[wp>Animism]]
+  *[[wp>Evolutionary_origin_of_religion|Evolutionary origin of religion]]

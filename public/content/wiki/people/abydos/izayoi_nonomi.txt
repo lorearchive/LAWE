@@ -1,0 +1,80 @@
+====== Izayoi Nonomi ======
+(((unfinished|November 2024)))
+----
+<table profileTable><thead><tr><th [colspan=2]>
+NONOMI
+</th></tr></thead><tbody><tr><td profileTableImage [colspan=2]>
+{{:pasted:20241102-053414.png?330}} \\ //Nonomi in the [[:setting:academycity#kivotos_metropolitan_subway|KMS]].//
+</td></tr><tr><td profileTableLeftCell>**Name**</td><td>
+Izayoi Nonomi \\ 🇰🇷 이자요이 노노미 \\ 🇯🇵 十六夜 ノノミ  \\ 🇨🇳 十六夜 野宫| 野乃美
+</td></tr><tr><td profileTableLeftCell>**Affiliation**</td><td>
+[[setting:academies:abydos#abydos_high_school|Abydos High School]], 2nd Year \\ Saint Nephthys Company \\ Saint Nephthys Private School 3rd Year (Graduated)
+</td></tr><tr><td profileTableLeftCell>**Clubs**</td><td>
+Foreclosure Task Force
+</td></tr><tr><td profileTableLeftCell>**Age**</td><td>
+16
+</td></tr><tr><td profileTableLeftCell>**Height**</td><td>
+160cm
+</td></tr><tr><td profileTableLeftCell>**Birthday**</td><td>
+September 1
+</td></tr><tr><td profileTableLeftCell>**Hobbies**</td><td>
+Shopping
+</td></tr><tr><td profileTableLeftCell>**Illustrator**</td><td>
+9ml
+</td></tr><tr><td profileTableLeftCell>**Halo**</td><td>
+{{halos:nonomi.png?100}}
+</td></tr>
+</tbody></table>
+
+<table profileTable>
+<thead><tr><th [colspan=2]>
+A member of
+</th></tr></thead><tbody><tr><td [colspan=2] center>
+**Abydos High School** \\ [[:setting:academies:abydos|{{:icons:abyd.png?100}}]
+</td></tr><tr><td [colspan=2] center>
+<club ftf>
+</td></tr><tr><td center>
+**First Appearance**
+</td><td>
+Volume 1, C1E1
+</td></tr></tbody></table>
+
+
+A student who studies at [[:setting:academies:abydos#abydos_high_school|Abydos High School]], of //Blue Archive.//
+
+She has an emotional and gentle personality, and serves as a mental support for the Committee, many of whom have extreme personalities. Although she hasn't said it herself, she is the daughter of a very rich family, and most of the snacks for the Council come out from her allowance.
+
+
+===== Appearance =====
+She has pale blonde, long hair reaching to her waist with side bun on her left side. She has emerald green eyes.
+
+What is Lorem Ipsum?
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+Why do we use it?
+It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+
+
+Where does it come from?
+Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+
+The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+
+Where can I get some?
+There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
+
+
+psum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+Why do we use it?
+It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+
+
+Where does it come from?
+Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+
+The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+
+Where can I get some?
+There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
+

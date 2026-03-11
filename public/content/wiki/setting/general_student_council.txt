@@ -1,0 +1,139 @@
+====== General Student Council ======
+----
+(((citation|November 2024)))
+
+The General Student Council(GSC), formerly known as the Prime Student Council on Global, or literally translated as Federal Student Council in JP, is the central administrative body that manages the entirety of [[setting:synopsis#kivotos|Kivotos]].
+
+
+The General Student Council controls all central administrative facilities of Kivotos and mediates conflicts, politics, and disputes between academies.((If we were to analogize Kivotos globally and its academies to countries, the role of the student council resembles that of the United Nations (UN) in the real world, particularly in its role of mediating and resolving disputes or issues between academies.)) In many cases the main stage of the story revolves around the schools, each forming its own independent sphere of influence. Although the presence of the student council may be relatively faint, they are an influential force in Kivotos, formally responsible for controlling and managing all administrative facilities, exercising significant influence.
+
+
+===== Structure =====
+
+In volume 4 of the Main Story, it is revealed through [[:people:gsc:kaya]] that the General Student Council is composed of an Administrative Committee with 11 departments, such as the Financial Office, Supervision Office, and Defence Office, along with a separate Administrative Comission overseen by Rin. Later, the official Twitter account released an organizational chart of the General Student Council,[([[https://x.com/Blue_ArchiveJP/status/1508640268144107523|@BlueArchive_JP, March 29, 2022.]] Retrieved 26 December, 2024.)] which was updated after the release of Chapter 2 of the Main Story Part 4.
+
+==== Members =====
+
+As of the Main Story Vol.4, only a few members of the General Student Council have been revealed. According to Kaya, this is because the [[:setting:academies:srt#fox_platoon|FOX Platoon]] of [[:setting:academies:srt]], displeased with the growing sentiment for the academy's closure, attacked and injured several pro-closure council members.(((cn))) This incident resulted in part of Sanctum Tower being completely destroyed and many council members being hospitalized. Ironically, this led to an increase in influence for the pro-closure faction, including [[:people:gsc:rin]].
+
+  *[[:people:gsc:president]] - The president of the General Student Council, who mysteriously vanished after appointing Senseias the advisor for the Federal Investigation Club ([[:setting:schale]]). In the prologue, there's a remark about a disaster unfolding due to her own mistake of not heeding Sensei's advice. Seems like she made one heck of a questionable choice <del>or multiple</del> that led to utter chaos.
+
+  *Supervision Office - The department that oversees and coordinates the student council.
+    *[[:people:gsc:rin]] - Acting Student Council President and Chief Administrative Officer
+  *Administrative Commission
+    *Cultures Office
+      *Chief - OOO
+    *Medical Office
+      *Chief - OOO
+    *Transportation Office
+      *Chief - [[:people:gsc:momoka]]
+    *Arbitration Office
+      *Chief - [[:people:gsc:ayumu]]
+    *Financial Office
+      *Chief - [[:people:gsc:aoi]]
+    *Defense Office
+      *Chief - [[:people:gsc:kaya]]((In Part 2, Kaya staged a coup and temporarily assumed the role of acting president of the General Student Council. However, it wasn’t long before she was impeached, leading to her automatic detention at the [[:setting:academies:valkyrie]]'s Correctional Bureau, resulting in the suspension of all her duties. Based on the information presented in the story, it seems likely that the Deputy of Defense will take over the acting position.))
+    *Sports Office
+      *Chief - [[:people:gsc:haine]]
+    *Human Resources Office
+      *Chief - Unknown((According to mentions in Part 2, it is said that she is from [[:setting:academies:red_winter]].))
+
+
+
+===== Sanctum Tower =====
+
+
+{{  illust:scenary:sanctumtower.png?350|Shot of the Sanctum Tower.}}
+
+A tower built in the middle of Kivotos, in the D.U. Shiratori Ward. It automatically manages public facilities, infrastructure, etc. under the control of the Student Council. No one knows when, how, or why it was constructed. There has been a rumor floating around that the General Student Council has the information. 
+
+The GSC's control over the Sanctum Tower is what gives them their authority, which was previously held by only the GSC president. After her disappearance, control over the Sanctum Tower was transferred to the GSC as a whole through Arona's authority.
+
+
+The authority of Kivotos is granted to whoever has the administrative power of the tower, which the Shittim Chest is capable of restoring access permissions.
+
+Prior to her disappearance, the General Student Council's president nearly single-handedly held control over the entire city through the Sanctum Tower. After she vanished, the General Student Council lost all control over the tower and, consequently, their authority over Kivotos. However, through the use of the Shittim Chest, the Sanctum Tower's permissions were granted to the tablet's AI, who delegated the authority to the GSC at the request of Sensei.
+
+Later, sometime before the signing of the Treaty of Eden, there was a commotion at the Sanctum Tower, with rumors afloat that a part of the tower was burned. This was later revealed to be an attack on the General Student Council by the FOX Platoon in retaliation to plans for the shutdown of their school. This attack led to the hospitalization of some GSC members and a portion of the Sanctum Tower being reduced to ashes.
+
+
+==== In Volume F ====
+
+{{  :pasted:20241111-073857.png?350|The false sanctum. The design clearly inspired by the Red Marker from the Dead Space franchise.}}
+In the final volume, the Sanctum Tower collapses, and in its place, a false sanctum created by the Chroma emerges.(((cn))) Using assets stolen from Gematria, they deployed guardians to each false sancta. In the false sanctum that replaced Sanctum Tower, Perorozilla was stationed. However, through a joint attack from Schale and Kaitenger, they were able to defeat Perorozilla and successfully destroy the false sanctum.(((cn)))
+
+
+Afterward, to confront the Ark of Atrahasis, the [[:setting:sou]] is used.(((cn))) Originally, the operation of the ship required Sanctum Tower, but since it was destroyed, the Shittim Chest is used as a substitute. This suggests that the same forces responsible for constructing Sanctum Tower are also the ones who built Utanapishtim's ship, implying that these forces are the forgotten gods.
+
+After the nightmare-like invasion of the Chroma has ended, the ruins of Sanctum Tower and Shiratori Ward are to be restored. Due to the complexity of the construction, Kaiser Construction is tasked with the rebuilding. Since the Sanctum Tower itself was an OOPArts (Out-of-Place Artifact) that surpassed Kivotos' technological levels, there are plans to attempt a replica, at least in terms of structure. However, given that the reliance on Sanctum Tower has greatly diminished after the disappearance of the General Student Council President, it doesn’t seem to be a major issue.
+
+===== Ring of Light =====
+
+{{ illust:official:rol.png?300|An official image released from the [[https://x.com/EN_BlueArchive/status/1429661928339623937/photo/1|Twitter]].}}
+
+
+A ring surrounding the entirety of Kivotos, visible from anywhere, even from Arona's Classroom. There are multiple rings dispersed throughout Kivotos, around the **Pillar of Light**((Could also be translated as the Stem of Light.)). This light is projected from Sanctum Tower, a building in the middle of Kivotos.
+
+In the Shale Club building, at the upper floor in the Schale Residence Hall, there is a room presumed to be the starting point of the Pillar of Light.(({{pasted:ringoflight_projection.png?500}}))
+
+Staying true to the setting that it can be observed from anywhere in Kivotos, the Pillar of Light can also be seen in the illustration of the Abydos desert. At first glance, it might appear as if the Pillar of Light is rising straight from the bare ground. However, upon closer inspection, one can confirm that the pillar of light is actually rising from beyond the hazy horizon(({{:pasted:20240719-052444.png}})).
+
+As mentioned in the explanation, there's a noticeable difference between the day and night images. In fact, in the 4th PV video and the final episode of the main story's first part, where the Right of Light is shown in more detail and up close, it's nighttime, so the light is shining brighter than usual. If you look closely, you can see that clouds are distributed in the sky like a circular band beneath the massive halo.
+
+==== Trivia ====
+
+The overall shape of the Craft Chamber, including its nodes, appears almost identical to that of the ring of light, as if it were derived from it. This suggests that the Craft Chamber is likely related to the RoL.
+===== Shittim Chest =====
+
+{{ illust:shittim.png?400|An image of the Shittim Chest.}}
+
+
+<blockquote footer="Nanagami Rin, Prologue">//"Yes, this is what the General Student Council left for you.
+The Shittim Chest.
+\\ \\
+It may seem like a normal tablet, but its origins are mystery. Its manufacturer, OS, system structure, and components are completely unknown.
+\\
+...
+\\
+\\
+None of the other members know how to activate it. Perhaps you may be able to figure it out, Sensei, but if not..."//
+</blockquote>
+
+FIXME
+\\
+==== Description ====
+
+An item left behind by the mysterious General Student Council President who vanished into thin air without any notice. Although information about this object is still unknown, rumors say that Sensei holds the answer to that.(((cn)))
+
+The permission to use the chest is set for Sensei, others cannot use it. It appears that the only entity presumed to have been the previous user before Sensei is the GSC President. At one point Kaiser seized the Chest, however rather than breaching security, the attempt failed outright(((cn))), proving that currently, besides Sensei, no one else can use it.
+
+As a side note, given that it was damaged by a bullet in the flashback in the prologue,(((cn))) its durability seems to be about that of an ordinary tablet.
+
+=== Etymology ===
+
+"Shittim" (שטה) is a Hebrew word meaning acacia wood, and acacia wood is the main material used for the Ark of the Covenant in the Bible. Given that this work adopts Christianity as the basis for its worldview, it is highly likely that the "Shittim Chest" is motived by the Ark of the Covenant.
+
+
+==== In Volume F ====
+
+The Shittim Chest that appeared in the prologue has been confirmed to be the Shittim Chest of Phrenepates, the Sensei from a different timeline.(((cn))) Through Phrenepates' motions shown in the final battle, it has been confirmed that the game's UI is operated using the Shittim Chest.((In the Blue Archive game postmortem analysis from the scenario director Isakusan: [[https://www.youtube.com/watch?v=JJduIEBNbyQ|YouTube, NDC: "[NDC22-게임기획] 미소녀 게임의 히로인이 어째서 복면을 쓰고 은행을 터는 거죠?", 9 June, 2022]], 16 minutes and 47 seconds into the video, the slideshow says that "Sensei is the player. The gameplay screens are equal to the Shittim Chest's screen...". It is likely that the scenario writer opted for this kind of effect on the player.)) The Shittim Chest that appeared in the prologue is almost identical to the Shittim Chest possessed by Sensei in our timeline, but there is a difference in that the buttons are blue and gray respectively.
+
+In the second half of the final volume, when Sensei uses the escape sequence on Terror Shiroko and gives up their own survival, asking Arona to take care of Plana,(((cn))) it appears that either Arona can survive even if the Shittim Chest is damaged, or it is that the Chest itself has enough durability to withstand a freefall. Additionally, according to information revealed in the Arona channel, the Shittim Chest is also fully waterproof.(((cn)))
+
+Moreover, before Terror Shiroko killed Phrenapates, she fired three bullets into the Shittim Chest.(((cn))) However, if you look closely, only the display was cracked, and the tablet itself wasn't pierced through to the back. Even in this condition, Phrenepates was able to successfully activate the Shittim Chest and summon Plana((However, the damages seem to have some effect, as unlike Arona who resides in a classroom inside the Shittim Chest, Plana's classroom had disappeared. Because of this, perhaps finding it uncomfortable to stay inside the Shittim Chest, Plana was using a feature of Atrahasis' Ark to materialize and stay on Naram-Sin's throne.)).
+
+In the epilogue of the final chapter, it was revealed through Plana that the Student Council President is inside the Shittim Chest, although we are yet to figure out if Arona //is// the GSC president.[(Main Story, Volume F, C4E12)]
+==== Operating System ====
+
+For more information, please visit the [[:arona|P:]] document.
+
+===== Trivia =====
+  *Their uniform features a star drawn on the lower left side of the skirt, with the number of stars indicating their school year, as confirmed by the official artbook. However, there is a notable error where [[:people:gsc:kaya]], identified as a third-year student, is depicted with only two stars on her skirt.
+
+
+===== References =====
+~~REFNOTES~~
+==== Sources ====
+  *[[https://bluearchive.fandom.com/wiki/General_Student_Council|Fandom | "Blue Archive" Wiki, General Student Council]]
+  *[[https://namu.wiki/w/%EC%B4%9D%ED%95%99%EC%83%9D%ED%9A%8C(%EB%B8%94%EB%A3%A8%20%EC%95%84%EC%B9%B4%EC%9D%B4%EB%B8%8C)|Namuwiki | “블루 아카이브”, 총학생회]]
+  *[[https://namu.wiki/w/%EB%B8%94%EB%A3%A8%20%EC%95%84%EC%B9%B4%EC%9D%B4%EB%B8%8C/%EC%84%A4%EC%A0%95|Namuwiki | "블루 아카이브", 설정]]

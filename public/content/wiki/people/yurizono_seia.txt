@@ -1,0 +1,11 @@
+====== Yurizono Seia ======
+(((unfinished|December 2024)))
+----
+<infotable 
+name="seia"
+caption="Caption required."
+alias="유리조노 세이아 \\ 百合園 セイア  \\ 百合园 圣娅 | 聖亞"
+affiliation="[[setting/academies/trinity#trinity_general_school|Trinity General School]]"
+/>
+
+<affili school="trinity" name="seia" fAppear="FIXME" />

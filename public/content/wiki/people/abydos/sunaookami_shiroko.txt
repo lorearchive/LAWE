@@ -1,0 +1,77 @@
+====== Sunaookami Shiroko ======
+(((more|November 2024)))
+----
+<blockquote>//"I will shoot the fish. Dead fish can't escape."//</blockquote>
+
+
+<table profileTable><thead><tr><th [colspan=2]>
+SHIROKO
+</th></tr></thead><tbody><tr><td profileTableImage [colspan=2]>
+{{people:shirokochromaup.png?330}} \\
+//Shiroko against the chroma.//
+</td></tr><tr><td profileTableLeftCell>**Name**</td><td>
+Sunaookami Shiroko \\ 🇰🇷 스나오오카미 시로코 \\ 🇯🇵 砂狼 シロコ  \\ 🇨🇳 砂狼 白子
+</td></tr><tr><td profileTableLeftCell>**Aliases**</td><td>
+Anubis
+</td></tr><tr><td profileTableLeftCell>**Affiliation**</td><td>
+[[setting:academies:abydos]], 2nd Year
+</td></tr><tr><td profileTableLeftCell>**Clubs**</td><td>
+Foreclosure Task Force
+</td></tr><tr><td profileTableLeftCell>**Age**</td><td>
+16
+</td></tr><tr><td profileTableLeftCell>**Height**</td><td>
+156cm
+</td></tr><tr><td profileTableLeftCell>**Birthday**</td><td>
+May 16
+</td></tr><tr><td profileTableLeftCell>**Hobbies**</td><td>
+Jogging \\ Exercise \\ Cycling
+</td></tr><tr><td profileTableLeftCell>**Illustrator**</td><td>
+즉흥환상 (Hwansang)
+</td></tr><tr><td profileTableLeftCell>**Halo**</td><td>
+{{:halos:shiroko.png?100}}
+</td></tr></tbody></table>
+
+
+<table affili>
+<thead><tr><th [colspan=2]>
+A member of
+</th></tr></thead><tbody><tr><td [colspan=2] center>
+**Abydos High School** \\ [[:setting:academies:abydos|{{:icons:abyd.png?100}}]
+</td></tr><tr><td [colspan=2] center>
+<division class="profileList list-group list-group-flush">
+<alink "#" class="list-group-item list-group-item-action disabled" >Foreclosure Task Force</alink>
+<alink ":people:abydos:shiroko" class="list-group-item list-group-item-action curactive" aria-current="true">Sunaookami Shiroko</alink>
+<alink ":people:abydos:hoshino" class="list-group-item list-group-item-action">Takanashi Hoshino</alink>
+<alink ":people:abydos:nonomi" class="list-group-item list-group-item-action">Izayoi Nonomi</alink>
+<alink ":people:abydos:serika" class="list-group-item list-group-item-action">Kuromi Serika</alink>
+<alink ":people:abydos:ayane" class="list-group-item list-group-item-action">Okusora Ayane</alink>
+</division>
+<club ftf>
+</td></tr><tr><td center>
+**First Appearance**</td><td>Volume 1, C1E2</td></tr></tbody></table>
+
+A student who studies at [[:setting:academies:abydos#abydos_high_school|Abydos High School]], of //Blue Archive.//
+
+The sports-loving field captain of the Foreclosure Task Force of the Abydos High School. Shiroko is a girl of few words and shows little emotions alike. She may seem aloof with her appearance, but deeply cares about Abydos High School the most.
+
+Due to troubling circumstances happening in Abydos High School, she is willing to do anything to revitalize the school by any means. Often times though her ideas are sometimes ridiculous like proposing to rob a bank for school funds.
+
+===== Personality =====
+
+Shiroko is a soft-spoken girl, who deeply cares for her friends, to the extent that she would do anything to help her friends towards their goal of revitalizing the school. Though she is generally calm and reserved, she hyperfocuses on certain interests and can sometimes be oblivious to how others would react to them. She often bikes and walks far more than regular people can keep up, thinking distances of 10s of kilometers are average for her. She fantasizes about robbing banks and going on survival fishing trips, and being unable to do either of these things causes her to pout and act with remarkable petulance for how calm she usually is. Shiroko is willing to fight Hina the moment she laid eyes on her despite the head prefect's reputation, stopping only at Ayane's begging. She requires people like Sensei and Ayane to hold her back and keep her sensible.
+
+She also instinctively didn't like Wakamo for acting clingy towards Sensei, seeing how surprised Wakamo was at Sensei's presence and immediately filling her with lead in jealousy.
+
+===== Appearance =====
+Her grey hair is styled in a shoulder-length long bob cut. It is accompanied with a pair of wolf ears. The insides of her wolf ears are originally depicted as black in Hwansang's official full body portrait, but are also often shown simply as grey or dark grey. Prominent white animal ear fluff protrudes from both of her wolf ears. Below her left wolf ear, she sports a cyan, inverted cross-shaped hairpin. Often covered by her hair, she also has a pair of humanoid ears; she has a singular, cyan stud ear piercing on her right one. Her eyes have mismatched, slitted pupils - the left one being white.
+
+===== See Also =====
+  *[[:setting:academies:abydos]]
+  *[[:setting:corporations:kaiser]]
+  *[[:people:abydos:hoshino]]
+  *[[:people:abydos:nonomi]]
+  *[[:people:abydos:serika]]
+  *[[:people:abydos:ayane]]
+  *[[:people:abydos:t_shiroko]]
+
+{{tag>Foreclosure_Task_Force}}

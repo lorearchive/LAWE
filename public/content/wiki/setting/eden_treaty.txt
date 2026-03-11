@@ -1,0 +1,34 @@
+====== Eden Treaty ======
+(((unfinished|November 2024)))
+----
+
+
+<blockquote footer="Yurizono Seia, Main Story, Volume 3, Chapter 1, Episode 1" cite="Main Story, Volume 3, Chapter 1, Episode 1">//"The Eden Treaty is a promise to put an end to hatred, so to speak. It's a pact to cease the long-standing rivalry between Trinity and Gehenna. \\ \\ In other words, it's an effort to build trust in the place of hatred that would only continue to fester if left alone. \\ \\ You can think of it as a peace treaty between Gehenna and Trinity. \\ \\ However, now that the General Student Council President has gone missing, the pact is worthless. \\ \\ Eden is the name of paradise from ancient scriptures. It's beyond me why the General Student Council President chose it to begin with. Perhaps it was because she had a sick sense of humor."//</blockquote>
+
+
+
+<callout type="info" icon="true">For your reference, the oldest discovered third-party mediated international treaty is the one where Mesilim of Kish mediated a dispute between Umma and Lagash concerning Gu-Edin. It's worth noting that the component "Edin" in Gu-Edin has been suggested as one of the possible origins of the name "Eden".(([[wp>Mesilim]]))</callout>
+
+===== Information =====
+
+{{  /pasted/20240714-025738.png?350|The document cover for Eden Treaty.}}
+
+Eden Treaty, formally the Treaty of Eden, is a non-aggression pact between [[setting/academies/trinity#trinity_general_school|Trinity General School]] and [[setting/academies/gehenna#gehenna_academy|Gehenna Academy]] of //Blue Archive//.(((cn))) This is also the central event that serves as the main stage for the third volume of the main story.
+
+The treaty will be the first treaty signed by Trinity in 170 years, with the last being during the New Council of Nicaea.(((cn))) The treaty was first devised by the General Student Council president, but fell apart after her disappearance.(((cn)))
+
+The main substance of the Eden Treaty is that Trinity and Gehenna establish a mutual non-aggression relationship at the Old Cathedral of Communion, where the Council of Trinity Unification was held in the past. To exercise the treaty, they set up the [[setting/eden_treaty#the_eto|the Eden Treaty Organization (ETO)]], a dispute mediation body involving executives from both academies, which in turn will alleviate the never-ending hostilities between the two schools and reduce their burden.((Although the name "Treaty Organization" might suggest that it is an organization similar to the North Atlantic Treaty Organization in the real world, the Eden Treaty is not a collective defense treaty. Therefore, it is closer to the Brussels Treaty Organization (Western Union), which was the predecessor to the former Western European Union and was formed under the Brussels Treaty.))
+
+
+===== Relation to the main story =====
+
+The Eden Treaty was promoted by the GSC President. In the past, the President mediated between the two academies. Despite the tense atmosphere between the two academies, they continued negotiations through repeated mediation. However, almost everything fell apart when the GSC President who was promoting the treaty suddenly disappeared. But Nagisa, one of the student council presidents of Trinity, stepped forward to salvage the situation and continued negotiations with Gehenna's side, bringing the treaty close to being concluded.
+
+However, Gehenna's willingness to negotiate is not very enthusiastic. The reason Gehenna resumed negotiations for the Eden Treaty was because Hina, the head of Gehenna's Prefect Team, actively advocated for the resumption of negotiations, instead of Makoto, the Gehenna Student Council president didn't care about the treaty. The one who attended the negotiations as Gehenna's representative was also Hina. Hina was under considerable stress, struggling with heavy workloads daily due to internal conflicts and disputes with external organizations, including Trinity. Hina actively pushed for the resumption of negotiations with the intention of retiring from her position as the head of the Prefect Team. She hoped that by signing the Eden Treaty and ending the long-standing conflict between Gehenna and Trinity, her workload would naturally decrease.
+
+
+===== The ETO =====
+
+The Eden Treaty Organization, abbreviated as ETO, is a neutral organization that is meant to interfere and resolve any and all conflicts that occur between Trinity and Gehenna. This is also to prevent either school from overstepping their bounds and sparking a war that would eliminate both schools from the face of Kivotos.
+
+Due to a secret deal between Arius and Pandemonium Society, Arius was initially appointed as the Eden Treaty's ETO during the day of the signing, which enabled them to utilize mimesis of Trinity's old inquisitor faction, the Justina Council of Saints. However, using Sensei's authority, a coalition comprised of the Remedial Knights, the Prefect Team, the Justice Task Force, and the Foreclosure Task Force (to an extent) was appointed as the new ETO, in the name of paradise.

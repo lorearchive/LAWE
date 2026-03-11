@@ -1,0 +1,106 @@
+====== Abydos High School ====== 
+(((citation|November 2024)))
+
+----
+{{  icons:abyd.png  }}
+(((academies|abydos)))
+
+An educational institution of [[setting/synopsis#kivotos|Kivotos]], and the main stage for Volume 1. An academy of //Blue Archive//.
+
+
+===== Background =====
+
+[{{ logos:abyd_banner.png?400|The logo of Abydos High School.}}]
+
+
+The longest running school in [[setting:synopsis#kivotos|Kivotos]], formerly thriving and boasting incredible financial and military power, before the unnatural and unfortunate desertification struck. Nowadays, most of its buildings have been covered in sand and ruins, leaving behind only an annex which seems to be the very last remains of the school.
+
+The school, in its attempts to solve desertification, accumulated an enormous amount of debt that it couldn't withstand. As a result, the majority of students left, and now only five students belonging to the Foreclosure Task Force remain. The situation has reached a point where the school is on the verge of closure.
+
+The loan amount these students have mortgaged to Kaiser Loan, a private moneylending company, amounts to a staggering 962.35 million yen, and they are paying monthly interest of 7.88 million yen.
+\\
+
+===== Campus ====
+
+
+The school building looks just like an ordinary Japanese high school that might appear in a school-themed story. There are some differences when compared to the in-game illustrations, and this is also true for Gehenna Academy. In the animation's concept art, there are slight changes, like adjustments to the location of annex buildings or a different location for the main gate.
+
+The classroom currently used by the countermeasure committees was originally an annex, not the main school building.(((cn))) As the Abydos district gradually became buried in sand, they repeatedly relocated to annex buildings until they eventually settled in their current location. According to Hoshino’s remarks in episode 9 of the TVA, she enrolled when the main building was still in use. Considering that the current campus was already established during her time as vice president alongside Yume, it appears that several relocations of the main building took place within a short period after her enrollment.
+
+In the main story, Abydos' grand main building is mentioned(((cn))), but since it's described as being buried in sand, its actual appearance remains unknown. However, it is said to have once been the largest and most powerful school, so it is presumed to have been far grander and more impressive in scale than the current building. The current relocated building is also gradually succumbing to desertification, with sand piling up in various places. Since the five remaining students struggle to clean the entire building, they focus on keeping at least the main building clean.(((cn)))
+
+When searching through classrooms now used as storage or the sports equipment room, they occasionally find items that could be sold for a high price or show traces of past extravagance.(((cn))) For instance, a feather mat filled with duck feathers, meant for gym class, was found in the annex, and there's a rumor that a firework capable of producing plasma when ignited—costing over a million yen per 100 grams—was discarded in the Oasis due to malfunction. This rumor led Yume and Hoshino to search the dried-up Oasis, but they came up empty-handed.(((cn)))
+
+Even though the committee members claim they've already sold anything worth selling, the fact that items like these are still being found—not even in the main building but merely in the old school building—suggests that Abidos at its peak was a wealthy school on an entirely different level.
+
+
+
+
+
+
+
+
+
+
+
+===== The District =====
+
+{{ illust/scenary/abydos_sand.png?400|The desertifying Abydos.}}
+
+A large, desertifying district in [[setting/synopsis#kivotos|Kivotos]]. The desertification of the district is ongoing, and residents are leaving their hometowns. [[abydos#abydos_high_school|Abydos High School]], which should address this issue, is not only unable to allocate a budget to solve it but is struggling just to pay off monthly debts and interest. As a result, desertification is effectively being neglected. The main building of Abydos High School, the oldest school in Kivotos, along with the building where Hoshino enrolled, is now buried in the sand.
+
+Nevertheless, winter itself exists, and judging by the formation of wadis, it doesn't seem entirely barren yet. Observing the uniforms of Abydos students or the description of winter, it doesn't appear particularly hot((When people think of deserts, there's a bias toward assuming they're hot, but this varies by desert. At night, due to low humidity, deserts can be as cold as ice.)), indicating that distinct seasons are indeed present.
+
+
+Abydos High School's former Student Council has sold land to Kaiser Corporation little by little to pay off interest, and as a result, all but the Abydos High School and its vicinity has virtually become Kaiser's private property. Moreover, due to its position in the buffer zone between Gehenna Academy and Trinity General School, Abydos' district, unable to fulfill its proper function, is sometimes freely traversed by students from other schools.
+
+==== The Desertification ====
+
+
+[{{  pasted/20240711-115804.png?400|The Abydos district as shown in the TVA.}}]
+
+
+In the TVA, the damage caused by desertification is described in more detail, not just as sand gradually covering neighborhoods, but involving several massive sandstorms. If it had just been a matter of sand gradually covering, it could have been resolved by deploying street sweepers and the like, a problem some Middle Eastern countries also handle this way in reality. However, with sandstorms dumping enormous amounts of sand across districts, there was no way to prevent it once it started spreading.
+
+Abydos attempted to secure loans to restore the district, but no bank would lend them money. In the end, they had no choice but to resort to borrowing from the loan shark Kaiser Loan.
+
+ However, these efforts were in vain as sandstorms repeatedly struck the district of Abydos, each time forcing them to borrow from Kaiser Loan to cover the costs. As a result, Abydos High School accumulated an enormous amount of debt.
+==== Etymology ====
+
+The name "Abydos" probably comes from the ancient Egyptian city Abydos, one of the oldest cities of ancient Egypt. Fore more information, check the [[/c_abydos|C/]] document.
+
+
+
+
+
+===== Shiba Seki Ramen =====
+
+[{{  /illust/scenary/shibaseki_front.png?400|Shiba Seki Ramen front entrance.}}]
+
+It's a ramen shop where Serika works part-time, one of the few restaurants still properly operating in the collapsing Abydos.
+
+While the name in Japanese seems to simply reflect the fact that the shop owner resembles a Shiba Inu dog, in Korean it evokes a specific profanity((Presumed to be intentional.)). As a result, it became a minor topic of discussion for a while after the official release in Korea.
+
+[{{  illust/scenary/shibaseki_topdown.png?400|A bird's-eye view of Shibaseki Ramen as depicted in Aru's character PV video, showing it moments before being blown by Haruka. The small building in the center is Shibaseki Ramen.}}]
+ 
+
+While the in-game appearance might suggest it's located in a relatively intact urban area, this is actually due to the game's frequent reuse of cityscape background illustrations. In reality, the desertification of Abydos is extremely severe/
+
+  *The desert has encroached up to the city center
+  *Even four-lane roads are covered in sand
+
+Interestingly, in the anime version, Shibaseki Ramen is portrayed as being in an intact urban area, contrasting with the game's lore of severe desertification.
+
+===== See Also =====
+
+  *[[people/abydos/shiroko]]
+  *[[people/abydos/hoshino]]
+  *[[people/abydos/nonomi]]
+  *[[people/abydos/serika]]
+  *[[people/abydos/ayane]]
+
+----
+== References ==
+[[https://namu.wiki/w/%EC%95%84%EB%B9%84%EB%8F%84%EC%8A%A4%20%EA%B3%A0%EB%93%B1%ED%95%99%EA%B5%90|Namuwiki | “블루 아카이브”, 학원, 아비도스 고등학교]]
+
+[[https://bluearchive.fandom.com/wiki/Abydos_High_School|Fandom | “Blue Archive Wiki”, Abydos High School]]
