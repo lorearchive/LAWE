@@ -1,0 +1,75 @@
+====== Gematria ======
+----
+
+{{  :pasted:20241111-081705.png?400|The four iconic members of Gematria.}}
+
+
+A mysterious organization which operates in Kivotos in //Blue Archive//. Their name, "Gematria", refers to [[wp>Gematria|traditional Israeli numerology that assigns numerical values to Hebrew letters for encryption or mystical interpretations]]. In the Taiwanese server, they are called "Shubishu" (數秘術, meaning numerology), and in the Chinese server, they are called "Shubiwei" (数秘会, meaning numerology association).
+
+They are adults who came from outside Kivotos, not native to it.(((cn))) While their stance towards [[:setting:schale]], specifically Sensei, varies among members, they are targeting other Kivotos students with some ulterior motive. They are the ones who introduced Decagrammaton, who successfully interpreted the divine  to Sensei, and also created Shiro & Kuro and Hieronymus who appear as Total Assault bosses. They also allied with [[setting:corporations:kaiser]], which holds [[:setting:academies:abydos]]'s bonds, attempting to corrupt through Terror - the opposite concept of Mystic - or use them as test subjects. According to Maestro, they typically make contact with Sensei through dreams. Another characteristic is that they are a horizontal organization without a specific leader, as they are a group of researchers.
+
+
+===== Overview =====
+
+While one might think they are a very old organization, given the mention that it took so long for Decagrammaton to declare the completion of their proof that cities had sunken into the sea during that time, the name "Gematria" is merely borrowed because it's considered appropriate, as mentioned above. Looking at how they use thorough and subtle methods that students can never trace (like the case of the Black Suits) and can perfectly conceal their true nature, yet only Beatrice has succeeded in completely isolating and privatizing a school, it is presumed that the current Gematria is different from the ancient Gematria that developed Decagrammaton.
+
+As a research group, they value studying the Mystic, Terror, and the Sublime with rationality, while being cautious and wary of madness. Therefore, according to internal rules, if a member behaves in violation of these rules, they will be expelled or, in extreme cases, executed.(((cn)))
+
+===== A deeper dive =====
+They are not a force with unified intentions - their positions regarding Sensei all differ. There's:
+  *Black Suit who sees Sensei as a peer, believing in competition and antagonistic growth,
+  *Maestro who sees Sensei as a kindred spirit, believing mutual exchange will elevate both their realms,
+  *Golconde & Decalcomanie who see Sensei as their metaphor, believing they will complete each other,
+  *and Beatrice who sees Sensei as an adversary, believing in mutual interference and plotting assassination.
+
+Notably, the first three members' plans don't conflict with each other and share a common respect for Sensei, so they don't interfere with one another. However, Beatrice, who views Sensei merely as an obstacle, tends to clash frequently with other members.
+
+In fact, interfering with Sensei goes completely against Black Suit's intentions, and Beatrice herself has been hindered by other members. Specifically, Maestro explicitly expressed displeasure towards Beatrice, stating they never permitted the misuse of the Justina Sainthood (which they had mimesis'd) for such purposes, Golconde showed skepticism, saying Beatrice's extreme methods were inappropriate, and Black Suit, while maintaining non-interference in each other's methods, drew the line by stating that Beatrice initiated the conflict and Sensei would inevitably interfere with her methods, thus shifting responsibility. Eventually, when Beatrice caused major trouble and still tried to blame others, she was unanimously purged from the organization.
+
+==== Purpose ====
+Their main purpose is the exploration and research of the Mystic, Terror, and the Sublime. They treat Kivotos students as research subjects but aren't necessarily hostile towards them. From their perspective, Sensei, who guides the students, might not conflict with their goals and could even be considered helpful. However, when considering one of Blue Archive's main themes of "which kind of adult is better", Gematria, as a group of adults who impose hardships on students in various ways, must inevitably be seen as antagonists from the perspective of Schale and Sensei, who represent an ideal position in dealing with students.
+
+This is evidenced by how adults exploit and manipulate students with ease. In Volume 1, they achieved their goal of pressuring the Foreclosure Task Force with debt, leading to [[people:abydos:hoshino]] being effectively cornered and secured for their purposes,(((cn))) and throughout Volume 3, Beatrice directly raised Arius as a genocide weapon while forcing nihilism upon them. Like Gematria, because adults have sufficient power and authority, they can abuse this to take advantage of and negatively influence the weak, namely students. In contrast, children lack power and authority((Here, this refers not to physical force but rather to knowledge or authority.)), and because they are still immature, they can be easily deceived. From the children's perspective, adults with relatively more experience can seem like idols, so they follow them without doubt. This represents an extreme expression of the relationship between the two groups. ((In the prologue, we also see students following Sensei solely because they are an adult. Similarly, in reality, a child needs a guardian or adult to learn to walk and speak. In Kivotos, this dynamic is represented in a simplified and exaggerated way within Blue Archive.))
+
+In the final volume, they aimed for Parousia((This word is used in Christian theology to refer to the Second Coming of Jesus Christ.)), a divine return based on their accumulated research, to counter the impending colors caused by Beatrice's sabotage.(((cn))) However, they were devastated by Shiroko’s assault, losing all their collected data.(((cn))) As the world’s end approached, Black Suit reluctantly approached Sensei, providing information to resist the Chroma but warned that overusing the Adult Card could lead to downfall, as it did for Gematria.
+
+After restoring Maestro’s body, Black Suit realized that anything Gematria now pursued would merely fall into the hands of the invading Chroma from outer space.(((cn))) Initially, they even considered abandoning Kivotos, but witnessing Sensei’s resistance alongside Schale’s students, they recognized Sensei as the last hope for a counterattack. Black Suit then invited Sensei to join Gematria, offering means to resist the colors as part of the deal.(((cn))) However, seeing Sensei's resolve to save the students at any cost, they dismissed the invitation as a joke, saying Gematria was temporarily disbanded. Instead, they freely revealed the location and existence of Atrahasis’s Ark, brought by the Chroma, and Utanapishtim's spaceship, which could counter it. Though Gematria initially appeared as an enemy, they effectively served as an ally in the final volume of Part 1.
+
+In the epilogue of Part 1, a character known as the Underground Dweller, who was exiled from Gematria, is introduced. Golconte & Decalcomanie, now transformed into Francis, refer to this figure as an old friend who will aid them in a certain plan. Meanwhile, Black Suit and Maestro's faction regard Francis as an even greater threat than Beatrice, heightening the likelihood of a hostile relationship in the upcoming chapter.
+
+Furthermore, over time, the Underground Dweller who allied with Francis began targeting Sensei’s life but was ultimately subdued by Shiroko’s attack before disappearing. Given these events, Black Suit and Maestro — who are relatively friendly toward Sensei — are likely to support Sensei going forward.
+
+===== Forces =====
+These are forces either created, acquired, or recruited by Gematria.
+
+In the final chapter, all of these forces were seized by the Chroma and corrupted. Among them, Binah, Chesed, Shiro & Kuro, Hod, Hieronymus, and Perorozilla appear as guardians of the [[[:setting:gsc#in_volume_f|false sancta]]. Even the incomplete work Gregory and the adjusting Goz were taken and seemingly in the process of being corrupted by the Chroma.
+
+In Chapter 3 of the final volume, it is hinted that the Chroma intended to complete and utilize these two independently, as they were poised to emerge as guardians of a new false sanctum.(((cn)))
+
+Later, with the appearance of Gregory in a completed form as a Total Assault version, it is implied that Gematria has either managed to recover some of its resources or has begun new production efforts.
+
+==== Acquired forces by members ====
+
+  ***Black Suit**
+    * [[:setting:decagrammaton#the_ten_prophets|Prophets]] of [[:setting:decagrammaton]]
+      * Kether((Though the first prophet of Decagrammaton, it was a prototype and thus not used as an immediate combat asset.))
+      * Binah
+      * Chesed
+      * Hod
+    * The technology of the Nameless Priests
+      * Supersonic Cruise Missile
+      * Halo-protecting Mask
+      * Medical Drone
+    * <del>Kaiser Corporation</del>(Alliance terminated)
+  * **Maestro**
+    * Artificial Angel Series Communio Sanctorum
+      * Father Hieronymus
+      * Father Gregorio
+      * Ambrosius (Failed to Reach Sublimity)
+    * Justina Sainthood
+    * Slumpia Terrorize Amuse Doll
+      * Shiro & Kuro
+      * Goz
+
+===== See Also =====
+  *[[:people:gematria:black_suit]]

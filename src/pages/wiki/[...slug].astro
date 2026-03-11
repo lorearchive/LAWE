@@ -2,15 +2,14 @@
 // get the pre processed data from props
 const { page, routes } = Astro.props;
 
-import { fetchWikiContent, getAllPages } from '../../utils/git-service'
+import { getAllPages } from '../../utils/git-service'
 import { processAllPages } from '../../utils/pages-processor'
 import Shell from '../../layouts/Shell.astro'
 import RenderTOC from '../../components/RenderTOC.astro'
 
 
 export async function getStaticPaths() {
-    const contentPath = await fetchWikiContent()
-    const rawPages = await getAllPages(contentPath)
+    const rawPages = await getAllPages()
     const { processedPages } = await processAllPages(rawPages)
     const filePaths = processedPages.map(page => page.filePath);
     

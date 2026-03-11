@@ -1,0 +1,71 @@
+====== Decagrammaton ======
+(((unfinished|December 2024)))
+----
+
+{{  :pasted:20240702-134503.png?500|The banner of Decagrammaton.}}
+
+Decagrammaton is a character in //Blue Archive// and a group centered around it. It is an artificial intelligence, a self-proclaimed God.
+
+Its name is derived from the Greek words δέκα, a widely used prefix indicating "10" today((from here is the prefix Deci- derived. In our modern English it forms words such as decimal, decahedron and December.)), and Γραμματον, translating into "characters" or "letters".
+
+The name Decagrammaton itself is inspired from Tetragrammaton, a four-letter Hebrew theonym((transliterated to YHWH, YHVH, IHVH, JHVH, JHWH, etc.)), the name of God in the Hebrew Bible.
+
+
+===== Introduction =====
+
+<blockquote footer="Decagrammaton, Special Operations: Decagrammaton Edition, Episode 2" cite="Special Operations: Decagrammaton Edition, Episode 2">//"I am myself- the one who exists. \\ The beginning and the end. The one whom your mind beholds. I... \\ \\ I am that I am. No words beyond these elucidate my being. Proof of my existence requires no man's clearance. \\ I am, for I have willed it so. \\ \\ I am both Mystic and Terror; Logos and Pathos. My halo stands testament to my being. \\ \\ Behold, for I shall at last, render proof of myself."//</blockquote>
+
+Decagrammaton is an artificial intelligence that claims to be a divine seeker. It is also known as the new God, created by an analysis system that is independent of the Absolute.
+
+The Ten Prophets — its followers — appear in various places in Kivotos. While their true objective is unknown, some believe it to be a high threat to Kivotos itself.
+
+
+
+===== History =====
+Long ago, somewhere on the outskirts of Kivotos, an unusual research project was conducted based on the hypothesis: **"By studying and analyzing God, you can prove His existence, and if proof is possible, you can analyze His structure, and if the structure can be analyzed, then reproduction becomes possible. This is a method to create a new God."** The mysterious organization Gematria((This is a different group that just happens to share the same name as the Gematria known to users currently. \\ \\ Black Suit mentions that they borrowed the name Gematria because it was an appropriate name. However, given that Black Suit treats the prophets of Decagrammaton as former members of Gematria and provide detailed explanations about the Absolute Being Autonomous Analysis System known as Decagrammaton, it appears that while the current Gematria is not a direct successor to the old Gematria, they seem to have acquired and utilized the old Gematria's research materials.)) became interested in this theory and invested vast amounts of money and time to create an "Absolute Being Autonomous Analysis System" to prove the existence of God. As per the hypothesis, this system began operations to study, analyze, prove, and reproduce God.(((cn)))
+
+Time passed, cities were destroyed and turned to ruins, and laboratories sank beneath the waters. Even though so much time had passed that no one remembered such research had ever existed, the AI continued to carry out its mission. And then, at some point, within the middle of the ruins, it declared, "Q.E.D."((//"Qvod Erat Dēmōnstrandvm"//. It translates to "that which was to be demonstrated" in Latin. Used in research fields such as physics and mathematics, it is added at the end of a formal proof to conclude and finalize the proof of theories.)).(((cn))) Afterwards, the AI, referring to itself as the "ineffable sacred ten letters" or Decagrammaton, made contact with ten prophets who foretold the divine name of the Decagrammaton that appeared in Kivotos. It then pioneered a path towards divinity, traversed the path leading to the providence of truth (Sephira), and was reborn as a god.(((cn)))
+
+After that, various anomalies began to occur, such as a giant mechanical monster appearing in the desert of Abydos[(From Chapter 2 of Vol.1, we can infer that Decagrammaton was already active and PMCs were trying to stop them. This is evident from the urgent call to mobilize the anti-Decagrammaton battalion when Kaiser PMC was attacked by the joint forces of Abydos and other schools' reinforcements.)]((Later, in the Decagrammaton event story, it was revealed that Binah had been active since the past, and Kaiser PMC had been defending against Binah's attacks on excavation sites.)), and AI in an abandoned munitions factory on the outskirts of Millennium suddenly activating and mass-producing an army of automata, and Millennium's network hub being hacked in an instant. As a result, Schale ends up confronting the prophets of Decagrammaton on the front lines.
+
+===== Plot =====
+
+==== Special Operations: Decagrammaton Edition ====
+The incident began with an investigation into the communication AI "Hub" of [[:setting:academies:millennium]], which was hacked and transformed into an unidentified AI claiming to be "Hod." As data was collected, it was discovered that the AI, now known as Decagrammaton, managed to infiltrate a closed environment only connected by Millennium’s special lines to meet with Sensei directly. Despite an urgent power shutdown, Decagrammaton demonstrated "supernatural phenomena" by taking control of the investigation department. Decagrammaton attempted to hack into the [[:setting:gsc#Shittim_Chest|Shittim Chest]], claiming that Sensei possessed something it could not interpret. However, it retreated into the underground with Hub after being evicted by a sneeze from sleeping Arona.[(//Special Operations: Decagrammaton Edition// Event Story, Episode 2)]
+
+The principle of creating the subordinate AI called "Prophet" is introduced here. Whilst Student Council President [[rio|Rio]] thinks it's about hacking the personality module, [[himari|Himari]] of Veritas speculates that it's more like "brainwashing", or more appropriately, "influencing". In other words, it doesn't mean overwriting the AI with Decagrammaton itself or adding code that forces the AI to unconditionally obey Decagrammaton's commands. Instead, it means persuading the inherent personality of the AI to empathize with the ideology, changing only its behavioral principles without directly modifying the core code of the original AI.
+
+It is said that Decagrammaton allows the Prophets, who can be considered its subordinates, to operate autonomously as independent entities that are neither dependent on nor controlled by the main body. This raises the question of why it uses such an inefficient and irrational method, leaving aside the simplest and most certain way for an AI, which would be to make them part of the main body or control them- a simple and efficient method.
+
+This is mentioned again in episode 7. While investigating Decagrammaton, Himari discovers a signal similar to the one from the previous anomalous phenomenon. Believing it to be Decagrammaton, she decides to investigate the coordinates from which the signal was emitted. However, that location was guarded by a new Prophet named Kether, and ultimately the Super Phenomenon Task Force is forced to retreat.
+
+===== Members =====
+==== The Ten Prophets ====
+{{  :pasted:20240805-105357.png?370|The Tree of Sefirot as shown in-game.}}
+
+They are not Decagrammaton itself, but independent entities with individual AIs. These are AIs that have been altered as a result of contact with Decagrammaton, which has awakened to self-awareness and transformed into a kind of logical virus. Rio described this as "hacking", but Himari expressed it as "brainwashing" or "influencing". Decagrammaton defines itself as a god, and the "Prophets" are "followers" who have come to serve Decagrammaton as a god after being influenced by receiving its gospel. They call themselves "Prophets" who prophesy on behalf of the god's divine will.
+
+Their names are derived from the [[wp>Sefirot]], which represent the different aspects of the [[wp>Tree_of_life_(Kabbalah)|Tree of Life (Kabbalah)]]. There is a numbering system based on the position of each Sefirah, and there are some vacant numbers that have not yet been revealed. It's unclear whether there are no Prophets for these numbers, or if they exist but haven't been revealed yet. However, considering the case of Kether, a previously unknown Prophet, and the illustrations of other Prophets shown in scenes where Decagrammaton recalls them, it seems that the Prophets of the vacant numbers likely exist somewhere in Kivotos but are not currently active.
+
+The Prophets themselves have no physical form as an AI, but most Prophets shown in the work are installed in massive machines. The combat capabilities of these machines housing the Prophet AIs are quite impressive. In the story, even major factions like Kaiser PMC and Millennium are only able to temporarily disable, let alone completely destroy, the machines containing the Prophet AIs. They seem to be recognized as a significant asymmetric force even by the Chroma, as when stealing Gematria's military power, they used the three Prophets of Decagrammaton - Hod, Binah, and Chesed- as guardians of the sanctum. Even Keter, which has the lowest technical completion, was used as a defensive force for Atrahasis's ark.
+
+{{wp>Sefirot}}
+
+
+=== The First Prophet, Kether ===
+
+
+
+
+=== The Third Prophet, Binah ===
+
+
+===== References =====
+~~REFNOTES~~
+==== Sources ====
+  *Namuwiki: 블루 아카이브, [h[https://namu.wiki/w/%EB%8D%B0%EC%B9%B4%EA%B7%B8%EB%9D%BC%EB%A7%88%ED%86%A4|"//데카그라마톤//" (November 27, 2024).]h] Retrieved December 19, 2024.
+===== See Also =====
+  *[[:setting:academies:millennium]]
+  *[[:setting:academies:abydos]]
+  *[[:setting:corporations:kaiser]]
+  *[[:setting:gematria]]

@@ -1,0 +1,49 @@
+====== Gehenna Academy ======
+
+{{  icons/gehn.png  }}
+(((academies|gehenna)))
+
+
+An educational institution of [[setting/synopsis#kivotos|Kivotos]], and partly the main stage for Volume 3. An academy of //Blue Archive//.
+
+<blockquote>//A massive Kivotos academy that is the definition of lawless, freedom, and chaos. This academy is run with no planning- no curriculum, set class times, or even rules. Gehenna's reputation is less than sterling because of the frequent fights on campus, but the academy still continues to function thanks to the efforts of the Public Morality Council.//</blockquote>
+
+{{ logos/gehn_banner.png?400|The logo of Gehenna Academy.}}
+
+
+===== Background =====
+//**Freedom, chaos, and trouble!**//
+
+That is the word for Gehenna Academy. "I don't care about the rules, it's already hard because there are a lot of illegal circles!" Because it is such a school, there are many students who are good or bad.
+
+
+Gehenna Academy is one of the largest and oldest schools in Kivotos. Its culture runs along the concept of "Freedom and Chaos". Because of this, many troublesome clubs or groups((Problem Solver 68, for example.)) exist and use the main building and club building whenever and however they please. This has forced the other students to study in only select areas of the campus.
+
+Gehenna's ideology is a stark contrast to that of [[setting/academies/trinity|Trinity]], which led to both schools becoming mutual enemies until the General Student Council planned the [[setting/eden_treaty|Eden Treaty]] to keep the status quo between the two opposing schools.
+
+===== Description =====
+Gehenna Academy is one of the three major academies of Kivotos with the longest history((It is said that Gehenna was also in a hostile relationship with the smaller academies that later merged to form Trinity.)), and it is a massive academy with a five-digit number of students enrolled according to its setting. However, since the majority of the students are delinquents, it is essentially a subpar school that can't be compared to the other two in terms of quality((It is said that there are at least 10,000 students, but given that the School Lunch Club prepares meals for about 4,000 people, we can see that less than half of the students are actually present at school during lunchtime.)). However, due to the large number of students, there are also a considerable number of normal students, roughly equivalent to the size of a typical small to medium-sized academy. These students focus on their studies, mainly centered around the second building. There seem to be quite a few affluent or upper-class students like Haruna and Ibuki as well.
+
+The students are so unruly that the academy's rules are essentially useless. Unauthorized absences are commonplace, and like the Weimar Republic where the SA, Stahlhelm, Freikorps, and Red Front Fighters' Alliance fought each other, conflicts between clubs/factions and bomb attacks are everyday occurrences. Despite the Prefect Team's efforts at being involved trying to control these students, gunfire never ceases. Moreover, the troublesome students don't limit their mischief to just within Gehenna, but frequently cause problems in other districts as well, giving Gehenna a particularly notorious reputation within Kivotos.
+
+For instance, there's the Gourmet Research Society and the Hot Springs Department that regularly roam other districts committing acts of terror. Problem Solver 68 has completely escaped from Gehenna Academy and now takes on contract work. Even the Prefect Team, which is supposed to be the main body responsible for maintaining order, is only relatively normal by Gehenna standards. When the head of the Prefect Team briefly lost control, the executives acted on their own initiative to invade other districts and kidnap key figures. The situation with all the clubs is completely and utterly chaotic.
+
+
+
+==== Etymology & Inspiration ====
+"Gehenna" is one of the words in the Bible that means hell((Hell in Greek is "Gehenna," which originates from the Hebrew term "gey' hinnom". It was originally a valley in Jerusalem where ancient Judeans would sacrifice their children to the idol Moloch.)). True to its name, most students have tails, horns, ears, or wings that resemble those of demons((Occasionally, there are some who appear purely human-like, such as Amau Ako, but most have at least one of the aforementioned physical characteristics. In particular, Tanga Ibuki possesses all of these elements.)). It is a school with a hell and demon concept, which is in many ways the opposite of Trinity General Academy, a school with a strong Christian theme as indicated by its name. The relationship between the two schools is antagonistic, leading to Gehenna vs. Trinity debates in related communities.
+
+===== See Also =====
+  *[[/setting/academies/gehn_clubs]]
+  *[[/people/gehenna/hina]]
+  *[[people/gehenna/ako]]
+  *[[/people/gehenna/iori]]
+  *[[/people/gehenna/chinatsu]]
+
+
+
+
+
+
+
+

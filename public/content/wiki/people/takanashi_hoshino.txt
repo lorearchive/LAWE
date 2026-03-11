@@ -1,0 +1,17 @@
+====== Takanashi Hoshino ======
+(((unfinished|November 2024)))
+----
+
+<infotable 
+name="hoshino"
+caption="caption rq"
+alias="타카나시 호시노 \\ 小鳥遊 ホシノ  \\ 小鸟游 星野"
+affiliation="[[setting:academies:abydos#abydos_high_school|Abydos High School]], 3rd Year"
+clubs="Foreclosure Task Force"
+age="17"
+height="145cm"
+/>
+
+
+A student who studies at [[:setting:academies:abydos#abydos_high_school|Abydos High School]], of //Blue Archive.//
+

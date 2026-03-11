@@ -1,0 +1,44 @@
+====== Kuromi Serika ======
+(((unfinished|November 2024)))
+----
+
+
+
+<table profileTable><thead><tr><th [colspan=2]>
+SERIKA
+</th></tr></thead><tbody><tr><td profileTableImage [colspan=2]>
+{{illust:memorial:serika.png?330}} \\ //Serika's memorial lobby.//
+</td></tr><tr><td profileTableLeftCell>**Name**</td><td>
+Kuromi Serika \\ 🇰🇷 쿠로미 세리카 \\ 🇯🇵 黒見 セリカ  \\ 🇨🇳 黑见 芹香 | 茜香
+</td></tr><tr><td profileTableLeftCell>**Affiliation**</td><td>
+Abydos Middle School 1 (Graduated)
+[[setting:academies:abydos#abydos_high_school|Abydos High School]], 1st Year
+</td></tr><tr><td profileTableLeftCell>**Clubs**</td><td>
+Foreclosure Task Force \\ **After Volume 1, Chapter 3:** Abydos Student Council
+</td></tr><tr><td profileTableLeftCell>**Age**</td><td>
+15
+</td></tr><tr><td profileTableLeftCell>**Height**</td><td>
+153cm
+</td></tr><tr><td profileTableLeftCell>**Birthday**</td><td>
+June 25
+</td></tr><tr><td profileTableLeftCell>**Hobbies**</td><td>
+Saving money \\ Part-time Job
+</td></tr><tr><td profileTableLeftCell>**Illustrator**</td><td>
+즉흥환상 (Hwansang)
+</td></tr><tr><td profileTableLeftCell>**Halo**</td><td>
+{{halos:serika.png?100}}
+</td></tr>
+</tbody></table>
+
+<table profileTable>
+<thead><tr><th [colspan=2]>
+A member of
+</th></tr></thead><tbody><tr><td [colspan=2] center>
+**Abydos High School** \\ [[:setting:academies:abydos|{{:icons:abyd.png?100}}]
+</td></tr><tr><td [colspan=2] center>
+<club ftf>
+</td></tr><tr><td center>
+**First Appearance**
+</td><td>
+Volume 1, C1E1
+</td></tr></tbody></table>
