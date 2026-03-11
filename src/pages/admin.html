@@ -1,12 +1,32 @@
-<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <!-- Tell Decap where to find config.yml -->
+    <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url" />
+    <title>Wiki Content Manager</title>
 
-<button id="signup-btn">Sign up</button>
+    <!-- Netlify Identity widget (needed for Decap login) -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  </head>
+  <body>
+    <!-- This script actually loads and runs Decap CMS -->
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 
-<script>
-  const btn = document.getElementById('signup-btn');
-  if (window.netlifyIdentity) {
-    btn.addEventListener('click', () => {
-      window.netlifyIdentity.open('signup'); // forces the signup tab
-    });
-  }
-</script>
+    <!-- Optional: after login, stay on /admin -->
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", (user) => {
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              // Reload or stay on /admin so Decap can pick up the logged‑in state
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

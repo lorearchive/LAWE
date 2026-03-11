@@ -9,7 +9,7 @@ collections:
   - name: "Lore Archive Wiki"
     label: "Wiki Pages"
     label_singular: "Wiki Page"
-    folder: ".wiki/wiki"       # raw wikifiles
+    folder: "public/content/wiki"       # raw wikifiles
     create: true               # Allow users to create new files
     slug: "{{slug}}"           # Filename template
     extension: "txt"           # Force .txt extension
