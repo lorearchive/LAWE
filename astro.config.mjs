@@ -7,13 +7,16 @@ import { fetchWikiContent, getAllPages } from './src/utils/git-service'
 import sveltiaCMS from 'astro-sveltia-cms'
 
 import svelte from '@astrojs/svelte';
-
 import netlify from '@astrojs/netlify';
 
 export default defineConfig({
   site: 'https://lorearchive.org',
   build: {},
   output: 'server',
+  adapter: netlify(),
+  session: {
+    driver: 'netlify-blobs'
+  },
 
   redirects: {
       "/": "/wiki/home"
@@ -95,5 +98,4 @@ export default defineConfig({
       ]
   },
 
-  adapter: netlify()
 });
