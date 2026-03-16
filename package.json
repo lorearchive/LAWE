@@ -11,11 +11,10 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/netlify": "^7.0.2",
-    "@astrojs/sitemap": "3.7.1",
-    "@astrojs/svelte": "^8.0.0",
+    "@astrojs/sitemap": "^3.6.0",
+    "@astrojs/svelte": "^7.2.4",
     "@floating-ui/dom": "^1.7.6",
-    "astro": "^6.0.4",
+    "astro": "^5.16.6",
     "astro-sveltia-cms": "^0.1.0",
     "svelte": "^5.38.8",
     "typescript": "^5.9.2"

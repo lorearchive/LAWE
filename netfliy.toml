@@ -12,8 +12,3 @@
 
 [build.environment]
      NETLIFY_EXPERIMENTAL_BUILD_RUST_SOURCE = "true"
-
-[functions]
-  # This tells Netlify to grab the WASM file from rust-wasm folder 
-  # and include it in the SSR function's environment.
-  included_files = ["rust-wasm/pkg/*.wasm"]
