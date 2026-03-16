@@ -1,19 +1,19 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: lorearchive/law-content
   branch: main
-
-media_folder: "/images" # Where images are stored
-public_folder: "/images"   # The path to access them in the HTML
+  site_domain: lorearchive.org
+  base_url: https://lorearchive.org
+  auth_endpoint: oauth
+media_folder: "images"
+public_folder: "/images"
 
 collections:
-  - name: "Lore Archive Wiki"
-    label: "Wiki Pages"
-    label_singular: "Wiki Page"
-    folder: ".wiki/wiki"       # raw wikifiles
-    create: true               # Allow users to create new files
-    slug: "{{slug}}"           # Filename template
-    extension: "txt"           # Force .txt extension
-    format: "yaml-frontmatter" # Tells CMS to wrap content in YAML
+  - name: wiki
+    label: The Lore Archives
+    folder: content/wiki
+    create: true
+    extension: txt
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Body", name: "body", widget: "code" } 
+      - { name: title, label: Title }
+      - { name: body, label: Body, widget: richtext }
