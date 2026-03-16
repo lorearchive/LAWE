@@ -11,7 +11,6 @@ import svelte from '@astrojs/svelte';
 export default defineConfig({
     site: 'https://lorearchive.org',
     build: {},
-    output: 'server',
 
     redirects: {
         "/": "/wiki/home"
