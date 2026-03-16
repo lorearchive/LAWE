@@ -1,4 +1,3 @@
-// @ts-check
 import global from './src/store'
 import { defineConfig } from 'astro/config'
 import sitemap from '@astrojs/sitemap'
@@ -8,11 +7,15 @@ import sveltiaCMS from 'astro-sveltia-cms'
 
 import svelte from '@astrojs/svelte';
 
-import cloudflare from '@astrojs/cloudflare';
+
+import netlify from '@astrojs/netlify';
 
 export default defineConfig({
   site: 'https://lorearchive.org',
   build: {},
+  output: 'server',
+  adapter: netlify(),
+
 
   redirects: {
       "/": "/wiki/home"
@@ -94,5 +97,4 @@ export default defineConfig({
       ]
   },
 
-  adapter: cloudflare()
 });
