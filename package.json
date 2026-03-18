@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "npm run build:wasm && astro dev",
     "prebuild": "npm run build:wasm",
-    "build": "astro build",
+    "build": "pnpm run build:wasm && astro build",
     "build:wasm": "cd rust-wasm && wasm-pack build --target web --out-dir ../rust-wasm/pkg",
     "preview": "astro preview",
     "astro": "astro"
