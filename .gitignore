@@ -33,5 +33,5 @@ pnpm-debug.log*
 
 # Rust cargo lock file
 rust-wasm/Cargo.lock
-# Local Netlify folder
-.netlify
+
+.netlify/

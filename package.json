@@ -5,23 +5,22 @@
   "scripts": {
     "dev": "npm run build:wasm && astro dev",
     "prebuild": "npm run build:wasm",
-    "build": "npm run build:wasm && astro build",
+    "build": "astro build",
     "build:wasm": "cd rust-wasm && wasm-pack build --target web --out-dir ../rust-wasm/pkg",
     "preview": "astro preview",
-    "astro": "astro",
-    "generate-types": "wrangler types"
+    "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^13.1.1",
-    "@astrojs/netlify": "^7.0.2",
+    "@astrojs/netlify": "^7.0.3",
     "@astrojs/sitemap": "3.7.1",
     "@astrojs/svelte": "^8.0.0",
     "@floating-ui/dom": "^1.7.6",
     "astro": "^6.0.4",
     "astro-sveltia-cms": "^0.1.0",
+    "cloudflare": "^5.2.0",
+    "netlify": "^24.3.0",
     "svelte": "^5.38.8",
-    "typescript": "^5.9.2",
-    "wrangler": "^4.73.0"
+    "typescript": "^5.9.2"
   },
   "devDependencies": {
     "@types/node": "^22.16.5"

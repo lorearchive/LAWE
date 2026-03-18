@@ -71,30 +71,4 @@ export default defineConfig({
   
   ],
 
-  vite: {
-      plugins: [
-          {
-              name: "content fetcher",
-              buildStart: async () => {
-              console.log('LAWE: Fetching content from remote repository...');
-              
-              try {
-                  const contentPath = await fetchWikiContent();
-                  const pages = await getAllPages(contentPath);
-                  
-                  await processAllPages(pages);
-                  
-                  console.log(`LAWE: Content fetching complete. Processed ${pages.length} pages.`);
-                  console.log(`LAWE: global.lastMod contains ${Object.keys(global.lastMod).length} entries`);
-                  
-              } catch (error) {
-                  console.error('LAWE: Error during content fetching:', error);
-                  throw error
-              }
-              }
-          }
-      
-      ]
-  },
-
 });

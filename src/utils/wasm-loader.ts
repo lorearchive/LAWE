@@ -1,4 +1,7 @@
 import initWasmBindgen from '../../rust-wasm/pkg/rust_wasm.js';
+// Only import 'fs' if we are in a Node environment
+import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
 
 let wasmInitialized = false;
 
@@ -6,26 +9,34 @@ export async function initWasm() {
     if (wasmInitialized) return;
 
     try {
-        // 1. Define the URL where we host the WASM file
-        // This works in both Browser and Netlify Functions (Server)
-        const wasmUrl = '/wasm/rust_wasm_bg.wasm';
+        let wasmBuffer: ArrayBuffer;
 
-        // 2. Fetch the binary data
-        // Note: In Netlify Functions, we rely on the global fetch available in Node 18+
-        const response = await fetch(wasmUrl);
-        
-        if (!response.ok) {
-            throw new Error(`Failed to fetch WASM: ${response.statusText} (${response.status})`);
+        if (typeof window === 'undefined') {
+            /**
+             * SERVER SIDE (Node.js / Build time)
+             * Fetch won't work for local files here. Use 'fs' instead.
+             **/
+            // Adjust the path to where your WASM file actually sits on your disk
+            const wasmPath = join(process.cwd(), 'public', 'wasm', 'rust_wasm_bg.wasm');
+            const buffer = await readFile(wasmPath);
+            wasmBuffer = buffer.buffer.slice(buffer.byteOffset, buffer.byteOffset + buffer.byteLength);
+        } else {
+            /**
+             * CLIENT SIDE (Browser)
+             * Standard fetch works here.
+             **/
+            const wasmUrl = '/wasm/rust_wasm_bg.wasm';
+            const response = await fetch(wasmUrl);
+            
+            if (!response.ok) {
+                throw new Error(`Failed to fetch WASM: ${response.statusText} (${response.status})`);
+            }
+            wasmBuffer = await response.arrayBuffer();
         }
 
-        const wasmBuffer = await response.arrayBuffer();
-
-        // 3. Initialize using the buffer
-        // This avoids the glue code trying to fetch the file itself (which causes path issues)
-        await initWasmBindgen(wasmBuffer);
-
+        await initWasmBindgen({ module_or_path: wasmBuffer });
         wasmInitialized = true;
-        console.log('WASM initialized successfully (via Public URL)');
+        console.log('WASM initialized successfully');
     } catch (error) {
         console.error('Failed to initialize WASM:', error);
         throw error;
