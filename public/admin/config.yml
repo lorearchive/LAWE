@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: lorearchive/law-content
+  repo: lorearchive/LAWE
   branch: main
   site_domain: lorearchive.org
   base_url: https://lorearchive.org
