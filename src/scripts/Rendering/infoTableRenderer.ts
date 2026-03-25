@@ -1,7 +1,3 @@
-import { initWasm } from "../../utils/wasm-loader";
-import { simple_inline } from "../../../rust-wasm/pkg/rust_wasm";
-
-await initWasm()
 
 // AffiliTable.ts
 interface AffiliTableProps {
@@ -184,7 +180,7 @@ export function renderInfoTable({ name, figure, caption, alias, affiliation, clu
             </tr>
             <tr>
                 <th id="lawe-infoTable-label">Affiliation</th>
-                <td>${affiliation ? simple_inline(affiliation) : ""}</td>
+                <td>${affiliation}</td>
             </tr>
             <tr>
                 <th id="lawe-infoTable-label">Club(s)</th>
