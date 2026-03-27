@@ -4,7 +4,7 @@ backend:
   branch: main
   site_domain: lorearchive.netlify.app
   base_url: https://lorearchive.netlify.app
-  auth_endpoint: oauth
+  auth_endpoint: api/auth  # Netlify's standard OAuth endpoint
   local_backend: true
 media_folder: "images"
 public_folder: "/images"
