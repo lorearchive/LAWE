@@ -2,9 +2,10 @@ backend:
   name: github
   repo: lorearchive/LAWE
   branch: main
-  site_domain: lorearchive.org
-  base_url: https://lorearchive.org
+  site_domain: lorearchive.netlify.app
+    base_url: https://lorearchive.netlify.app
   auth_endpoint: oauth
+  local_backend: true
 media_folder: "images"
 public_folder: "/images"
 
@@ -12,8 +13,8 @@ collections:
   - name: wiki
     label: The Lore Archives
     folder: content/wiki
-    create: true
-    extension: txt
+    create: false
+    extension: "txt"
+    slug: "{{title}}"
     fields:
-      - { name: title, label: Title }
       - { name: body, label: Body, widget: richtext }
