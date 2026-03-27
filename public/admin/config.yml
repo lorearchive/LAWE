@@ -1,11 +1,10 @@
 backend:
   name: github
-  repo: lorearchive/LAWE
+  repo: lorearchive/law-content/wiki
   branch: main
   site_domain: lorearchive.netlify.app
   base_url: https://lorearchive.netlify.app
   auth_endpoint: oauth
-  local_backend: true
 media_folder: "images"
 public_folder: "/images"
 
