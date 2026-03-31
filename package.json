@@ -17,7 +17,8 @@
     "astro-sveltia-cms": "^0.1.0",
     "cloudflare": "^5.2.0",
     "svelte": "^5.38.8",
-    "typescript": "^5.9.2"
+    "typescript": "^5.9.2",
+    "vercel": "^50.37.3"
   },
   "devDependencies": {
     "@types/node": "^22.16.5",

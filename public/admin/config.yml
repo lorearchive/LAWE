@@ -2,7 +2,7 @@ backend:
   name: github
   repo: lorearchive/law-content
   branch: main
-  site_domain: https://lawe-pearl.vercel.app
+  base_url: https://lawe-pearl.vercel.app
   auth_endpoint: oauth
 media_folder: "images"
 public_folder: "/images"
