@@ -9,7 +9,6 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/netlify": "^7.0.3",
     "@astrojs/sitemap": "3.7.1",
     "@astrojs/svelte": "^8.0.0",
     "@astrojs/vercel": "^10.0.3",
@@ -17,7 +16,6 @@
     "astro": "^6.0.4",
     "astro-sveltia-cms": "^0.1.0",
     "cloudflare": "^5.2.0",
-    "netlify": "^24.3.0",
     "svelte": "^5.38.8",
     "typescript": "^5.9.2"
   },

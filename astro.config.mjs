@@ -7,9 +7,6 @@ import sveltiaCMS from 'astro-sveltia-cms'
 
 import svelte from '@astrojs/svelte';
 
-
-import netlify from '@astrojs/netlify';
-
 import vercel from '@astrojs/vercel';
 
 export default defineConfig({

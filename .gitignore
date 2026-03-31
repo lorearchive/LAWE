@@ -34,5 +34,4 @@ pnpm-debug.log*
 # Rust cargo lock file
 rust-wasm/Cargo.lock
 
-.netlify/
 .vercel
