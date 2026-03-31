@@ -12,6 +12,7 @@
     "@astrojs/netlify": "^7.0.3",
     "@astrojs/sitemap": "3.7.1",
     "@astrojs/svelte": "^8.0.0",
+    "@astrojs/vercel": "^10.0.3",
     "@floating-ui/dom": "^1.7.6",
     "astro": "^6.0.4",
     "astro-sveltia-cms": "^0.1.0",

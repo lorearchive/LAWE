@@ -10,28 +10,31 @@ importers:
     dependencies:
       '@astrojs/netlify':
         specifier: ^7.0.3
-        version: 7.0.3(@types/node@22.19.15)(astro@6.0.6(@netlify/blobs@10.7.0)(@types/node@22.19.15)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(rollup@4.59.0)(yaml@2.8.2)
+        version: 7.0.3(@types/node@22.19.15)(@vercel/functions@3.4.3)(astro@6.0.6(@netlify/blobs@10.7.0)(@types/node@22.19.15)(@vercel/functions@3.4.3)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(rollup@4.59.0)(yaml@2.8.2)
       '@astrojs/sitemap':
         specifier: 3.7.1
         version: 3.7.1
       '@astrojs/svelte':
         specifier: ^8.0.0
-        version: 8.0.2(@types/node@22.19.15)(astro@6.0.6(@netlify/blobs@10.7.0)(@types/node@22.19.15)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(svelte@5.54.0)(typescript@5.9.3)(yaml@2.8.2)
+        version: 8.0.2(@types/node@22.19.15)(astro@6.0.6(@netlify/blobs@10.7.0)(@types/node@22.19.15)(@vercel/functions@3.4.3)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(svelte@5.54.0)(typescript@5.9.3)(yaml@2.8.2)
+      '@astrojs/vercel':
+        specifier: ^10.0.3
+        version: 10.0.3(astro@6.0.6(@netlify/blobs@10.7.0)(@types/node@22.19.15)(@vercel/functions@3.4.3)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))(rollup@4.59.0)(svelte@5.54.0)
       '@floating-ui/dom':
         specifier: ^1.7.6
         version: 1.7.6
       astro:
         specifier: ^6.0.4
-        version: 6.0.6(@netlify/blobs@10.7.0)(@types/node@22.19.15)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)
+        version: 6.0.6(@netlify/blobs@10.7.0)(@types/node@22.19.15)(@vercel/functions@3.4.3)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)
       astro-sveltia-cms:
         specifier: ^0.1.0
-        version: 0.1.0(astro@6.0.6(@netlify/blobs@10.7.0)(@types/node@22.19.15)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.1.0(astro@6.0.6(@netlify/blobs@10.7.0)(@types/node@22.19.15)(@vercel/functions@3.4.3)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))
       cloudflare:
         specifier: ^5.2.0
         version: 5.2.0
       netlify:
         specifier: ^24.3.0
-        version: 24.3.0(@swc/core@1.15.21)(@swc/wasm@1.15.21)(@types/node@22.19.15)(picomatch@4.0.3)(rollup@4.59.0)
+        version: 24.3.0(@swc/core@1.15.21)(@swc/wasm@1.15.21)(@types/node@22.19.15)(@vercel/functions@3.4.3)(picomatch@4.0.3)(rollup@4.59.0)
       svelte:
         specifier: ^5.38.8
         version: 5.54.0
@@ -86,6 +89,11 @@ packages:
 
   '@astrojs/underscore-redirects@1.0.1':
     resolution: {integrity: sha512-iSImJzW8m7MjA+15oJZAbSqSWu6ApQ0N8A0SaWV9yLzKYjzxWm/tZKbRSLRv94OE/rXuM25ZG7R8TepkhH7ahA==}
+
+  '@astrojs/vercel@10.0.3':
+    resolution: {integrity: sha512-4eJDFhTBnu6X19iKD1GOmhbGEkrws29aWt9eEtJjwMqNbbXoX95c0s115FXBYq5wLcERt19rLfimkU1vjgIdBw==}
+    peerDependencies:
+      astro: ^6.0.0
 
   '@babel/code-frame@7.29.0':
     resolution: {integrity: sha512-9NhCeYjq9+3uxgdtp20LSiJXJvN0FeCtNGpJxuMFZ1Kv3cWUNb6DOhJwUvcVCzKGR66cw4njwM6hrJLqgOwbcw==}
@@ -1693,6 +1701,41 @@ packages:
   '@ungap/structured-clone@1.3.0':
     resolution: {integrity: sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==}
 
+  '@vercel/analytics@1.6.1':
+    resolution: {integrity: sha512-oH9He/bEM+6oKlv3chWuOOcp8Y6fo6/PSro8hEkgCW3pu9/OiCXiUpRUogDh3Fs3LH2sosDrx8CxeOLBEE+afg==}
+    peerDependencies:
+      '@remix-run/react': ^2
+      '@sveltejs/kit': ^1 || ^2
+      next: '>= 13'
+      react: ^18 || ^19 || ^19.0.0-rc
+      svelte: '>= 4'
+      vue: ^3
+      vue-router: ^4
+    peerDependenciesMeta:
+      '@remix-run/react':
+        optional: true
+      '@sveltejs/kit':
+        optional: true
+      next:
+        optional: true
+      react:
+        optional: true
+      svelte:
+        optional: true
+      vue:
+        optional: true
+      vue-router:
+        optional: true
+
+  '@vercel/functions@3.4.3':
+    resolution: {integrity: sha512-kA14KIUVgAY6VXbhZ5jjY+s0883cV3cZqIU3WhrSRxuJ9KvxatMjtmzl0K23HK59oOUjYl7HaE/eYMmhmqpZzw==}
+    engines: {node: '>= 20'}
+    peerDependencies:
+      '@aws-sdk/credential-provider-web-identity': '*'
+    peerDependenciesMeta:
+      '@aws-sdk/credential-provider-web-identity':
+        optional: true
+
   '@vercel/nft@0.29.4':
     resolution: {integrity: sha512-6lLqMNX3TuycBPABycx7A9F1bHQR7kiQln6abjFbPrf5C/05qHM9M5E4PeTE59c7z8g6vHnx1Ioihb2AQl7BTA==}
     engines: {node: '>=18'}
@@ -1702,6 +1745,13 @@ packages:
     resolution: {integrity: sha512-rr7JVnI7YGjA4lngucrWjZ7eCOJZZQaDHB+5NRGOuNc+k4PU2Lb9PmYm8uBmW8qichF7WkR2RmwmhXHBhx6wzw==}
     engines: {node: '>=20'}
     hasBin: true
+
+  '@vercel/oidc@3.2.0':
+    resolution: {integrity: sha512-UycprH3T6n3jH0k44NHMa7pnFHGu/N05MjojYr+Mc6I7obkoLIJujSWwin1pCvdy/eOxrI/l3uDLQsmcrOb4ug==}
+    engines: {node: '>= 20'}
+
+  '@vercel/routing-utils@5.3.3':
+    resolution: {integrity: sha512-KYm2sLNUD48gDScv8ob4ejc3Gww2jcJyW80hTdYlenAPz/5BQar1Gyh38xrUuZ532TUwSb5mV1uRbAuiykq0EQ==}
 
   '@vue/compiler-core@3.5.30':
     resolution: {integrity: sha512-s3DfdZkcu/qExZ+td75015ljzHc6vE+30cFMGRPROYjqkroYI5NV2X1yAMX9UeyBNWB9MxCfPcsjpLS11nzkkw==}
@@ -1787,6 +1837,9 @@ packages:
     peerDependenciesMeta:
       ajv:
         optional: true
+
+  ajv@6.14.0:
+    resolution: {integrity: sha512-IWrosm/yrn43eiKqkfkHis7QioDleaXQHdDVPKg0FSwwd/DuvyX79TZnFOnYpB7dcsFAMmtFztZuXPDvSePkFw==}
 
   ajv@8.18.0:
     resolution: {integrity: sha512-PlXPeEWMXMZ7sPYOHqmDyCJzcfNrUr3fGNKtezX14ykXOEIvyK81d+qydx89KY5O71FKMPaQ2vBfBFI5NHR63A==}
@@ -2761,6 +2814,9 @@ packages:
     resolution: {integrity: sha512-7MptL8U0cqcFdzIzwOTHoilX9x5BrNqye7Z/LuC7kCMRio1EMSyqRK3BEAUD7sXRq4iT4AzTVuZdhgQ2TCvYLg==}
     engines: {node: '>=8.6.0'}
 
+  fast-json-stable-stringify@2.1.0:
+    resolution: {integrity: sha512-lhd/wF+Lk98HZoTCtlVraHtfh5XYijIjalXck7saUtuanSDyLMxnHhSXEDJqHxD7msR8D0uCmqlkwjCV8xvwHw==}
+
   fast-json-stringify@6.3.0:
     resolution: {integrity: sha512-oRCntNDY/329HJPlmdNLIdogNtt6Vyjb1WuT01Soss3slIdyUp8kAcDU3saQTOquEK8KFVfwIIF7FebxUAu+yA==}
 
@@ -3491,6 +3547,9 @@ packages:
 
   json-schema-ref-resolver@3.0.0:
     resolution: {integrity: sha512-hOrZIVL5jyYFjzk7+y7n5JDzGlU8rfWDuYyHwGa2WA8/pcmMHezp2xsVwxrebD/Q9t8Nc5DboieySDpCp4WG4A==}
+
+  json-schema-traverse@0.4.1:
+    resolution: {integrity: sha512-xbbCH5dCYU5T8LcEhhuh7HJ88HXuW3qsI3Y0zOZFKfZEHcpWiHU/Jxzk629Brsab/mMiHQti9wMP+845RPe3Vg==}
 
   json-schema-traverse@1.0.0:
     resolution: {integrity: sha512-NM8/P9n3XjXhIZn1lLhkFaACTOURQXjWhV4BA/RnOv8xvgqtqpAX9IO4mRQxSx1Rlo4tqzeqb0sOlruaOy3dug==}
@@ -4223,6 +4282,12 @@ packages:
     resolution: {integrity: sha512-3O/iVVsJAPsOnpwWIeD+d6z/7PmqApyQePUtCndjatj/9I5LylHvt5qluFaBT3I5h3r1ejfR056c+FCv+NnNXg==}
     engines: {node: 18 || 20 || >=22}
 
+  path-to-regexp@6.1.0:
+    resolution: {integrity: sha512-h9DqehX3zZZDCEm+xbfU0ZmwCGFCAAraPJWMXJ4+v32NjZJilVg3k1TcKsRgIb8IQ/izZSaydDc1OhJCZvs2Dw==}
+
+  path-to-regexp@6.3.0:
+    resolution: {integrity: sha512-Yhpw4T9C6hPpgPeA28us07OJeqZ5EzQTkbfwuhsUg0c237RomFoETJgmp2sa3F/41gfLE6G5cqcYwznmeEeOlQ==}
+
   path-to-regexp@8.3.0:
     resolution: {integrity: sha512-7jdwVIRtsP8MYpdXSwOS0YdD0Du+qOoF/AEPIt88PcCFrZCzx41oxku1jD88hZBwbNUIEfpqvuhjFaMAqMTWnA==}
 
@@ -4393,6 +4458,10 @@ packages:
 
   pump@3.0.4:
     resolution: {integrity: sha512-VS7sjc6KR7e1ukRFhQSY5LM2uBWAUPiOPa/A3mkKmiMwSmRFUITt0xuj+/lesgnCv+dPIEYlkzrcyXgquIHMcA==}
+
+  punycode@2.3.1:
+    resolution: {integrity: sha512-vYt7UD1U9Wg6138shLtLOvdAu+8DsC/ilFtEVHcH+wydcSpNE20AfSOduf6MkRFahL5FY7X1oU7nKVZFtfq8Fg==}
+    engines: {node: '>=6'}
 
   pupa@3.3.0:
     resolution: {integrity: sha512-LjgDO2zPtoXP2wJpDjZrGdojii1uqO0cnwKoIoUzkfS98HDmbeiGmYiXo3lXeFlq2xvne1QFQhwYXSUCLKtEuA==}
@@ -5273,6 +5342,9 @@ packages:
   uqr@0.1.2:
     resolution: {integrity: sha512-MJu7ypHq6QasgF5YRTjqscSzQp/W11zoUk6kvmlH+fmWEs63Y0Eib13hYFwAzagRJcVY8WVnlV+eBDUGMJ5IbA==}
 
+  uri-js@4.4.1:
+    resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
+
   urlpattern-polyfill@10.1.0:
     resolution: {integrity: sha512-IGjKp/o0NL3Bso1PymYURCJxMPNAf/ILOpendP9f5B6e1rTJgdgiOvgfoT8VxCAdY+Wisb9uhGaJJf3yZ2V9nw==}
 
@@ -5583,15 +5655,15 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/netlify@7.0.3(@types/node@22.19.15)(astro@6.0.6(@netlify/blobs@10.7.0)(@types/node@22.19.15)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(rollup@4.59.0)(yaml@2.8.2)':
+  '@astrojs/netlify@7.0.3(@types/node@22.19.15)(@vercel/functions@3.4.3)(astro@6.0.6(@netlify/blobs@10.7.0)(@types/node@22.19.15)(@vercel/functions@3.4.3)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(rollup@4.59.0)(yaml@2.8.2)':
     dependencies:
       '@astrojs/internal-helpers': 0.8.0
       '@astrojs/underscore-redirects': 1.0.1
       '@netlify/blobs': 10.7.2
       '@netlify/functions': 5.1.3
-      '@netlify/vite-plugin': 2.11.1(rollup@4.59.0)(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(yaml@2.8.2))
+      '@netlify/vite-plugin': 2.11.1(@vercel/functions@3.4.3)(rollup@4.59.0)(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(yaml@2.8.2))
       '@vercel/nft': 1.4.0(rollup@4.59.0)
-      astro: 6.0.6(@netlify/blobs@10.7.0)(@types/node@22.19.15)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)
+      astro: 6.0.6(@netlify/blobs@10.7.0)(@types/node@22.19.15)(@vercel/functions@3.4.3)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)
       esbuild: 0.27.4
       tinyglobby: 0.2.15
       vite: 7.3.1(@types/node@22.19.15)(jiti@2.6.1)(yaml@2.8.2)
@@ -5643,10 +5715,10 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 4.3.6
 
-  '@astrojs/svelte@8.0.2(@types/node@22.19.15)(astro@6.0.6(@netlify/blobs@10.7.0)(@types/node@22.19.15)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(svelte@5.54.0)(typescript@5.9.3)(yaml@2.8.2)':
+  '@astrojs/svelte@8.0.2(@types/node@22.19.15)(astro@6.0.6(@netlify/blobs@10.7.0)(@types/node@22.19.15)(@vercel/functions@3.4.3)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))(jiti@2.6.1)(svelte@5.54.0)(typescript@5.9.3)(yaml@2.8.2)':
     dependencies:
       '@sveltejs/vite-plugin-svelte': 6.2.4(svelte@5.54.0)(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(yaml@2.8.2))
-      astro: 6.0.6(@netlify/blobs@10.7.0)(@types/node@22.19.15)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)
+      astro: 6.0.6(@netlify/blobs@10.7.0)(@types/node@22.19.15)(@vercel/functions@3.4.3)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)
       svelte: 5.54.0
       svelte2tsx: 0.7.52(svelte@5.54.0)(typescript@5.9.3)
       typescript: 5.9.3
@@ -5677,6 +5749,29 @@ snapshots:
       - supports-color
 
   '@astrojs/underscore-redirects@1.0.1': {}
+
+  '@astrojs/vercel@10.0.3(astro@6.0.6(@netlify/blobs@10.7.0)(@types/node@22.19.15)(@vercel/functions@3.4.3)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))(rollup@4.59.0)(svelte@5.54.0)':
+    dependencies:
+      '@astrojs/internal-helpers': 0.8.0
+      '@vercel/analytics': 1.6.1(svelte@5.54.0)
+      '@vercel/functions': 3.4.3
+      '@vercel/nft': 1.4.0(rollup@4.59.0)
+      '@vercel/routing-utils': 5.3.3
+      astro: 6.0.6(@netlify/blobs@10.7.0)(@types/node@22.19.15)(@vercel/functions@3.4.3)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)
+      esbuild: 0.27.4
+      tinyglobby: 0.2.15
+    transitivePeerDependencies:
+      - '@aws-sdk/credential-provider-web-identity'
+      - '@remix-run/react'
+      - '@sveltejs/kit'
+      - encoding
+      - next
+      - react
+      - rollup
+      - supports-color
+      - svelte
+      - vue
+      - vue-router
 
   '@babel/code-frame@7.29.0':
     dependencies:
@@ -6360,7 +6455,7 @@ snapshots:
       uuid: 13.0.0
       write-file-atomic: 5.0.1
 
-  '@netlify/dev@4.16.2(rollup@4.59.0)':
+  '@netlify/dev@4.16.2(@vercel/functions@3.4.3)(rollup@4.59.0)':
     dependencies:
       '@netlify/ai': 0.4.1
       '@netlify/blobs': 10.7.2
@@ -6370,7 +6465,7 @@ snapshots:
       '@netlify/edge-functions-dev': 1.0.14
       '@netlify/functions-dev': 1.2.2(rollup@4.59.0)
       '@netlify/headers': 2.1.6
-      '@netlify/images': 1.3.5(@netlify/blobs@10.7.2)
+      '@netlify/images': 1.3.5(@netlify/blobs@10.7.2)(@vercel/functions@3.4.3)
       '@netlify/redirects': 3.1.8
       '@netlify/runtime': 4.1.18
       '@netlify/static': 3.1.5
@@ -6401,7 +6496,7 @@ snapshots:
       - supports-color
       - uploadthing
 
-  '@netlify/dev@4.16.3(rollup@4.59.0)':
+  '@netlify/dev@4.16.3(@vercel/functions@3.4.3)(rollup@4.59.0)':
     dependencies:
       '@netlify/ai': 0.4.1
       '@netlify/blobs': 10.7.3
@@ -6411,7 +6506,7 @@ snapshots:
       '@netlify/edge-functions-dev': 1.0.15
       '@netlify/functions-dev': 1.2.3(rollup@4.59.0)
       '@netlify/headers': 2.1.7
-      '@netlify/images': 1.3.6(@netlify/blobs@10.7.3)
+      '@netlify/images': 1.3.6(@netlify/blobs@10.7.3)(@vercel/functions@3.4.3)
       '@netlify/redirects': 3.1.9
       '@netlify/runtime': 4.1.19
       '@netlify/static': 3.1.6
@@ -6588,9 +6683,9 @@ snapshots:
     dependencies:
       '@netlify/headers-parser': 9.0.3
 
-  '@netlify/images@1.3.5(@netlify/blobs@10.7.0)':
+  '@netlify/images@1.3.5(@netlify/blobs@10.7.0)(@vercel/functions@3.4.3)':
     dependencies:
-      ipx: 3.1.1(@netlify/blobs@10.7.0)
+      ipx: 3.1.1(@netlify/blobs@10.7.0)(@vercel/functions@3.4.3)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -6612,9 +6707,9 @@ snapshots:
       - ioredis
       - uploadthing
 
-  '@netlify/images@1.3.5(@netlify/blobs@10.7.2)':
+  '@netlify/images@1.3.5(@netlify/blobs@10.7.2)(@vercel/functions@3.4.3)':
     dependencies:
-      ipx: 3.1.1(@netlify/blobs@10.7.2)
+      ipx: 3.1.1(@netlify/blobs@10.7.2)(@vercel/functions@3.4.3)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -6636,9 +6731,9 @@ snapshots:
       - ioredis
       - uploadthing
 
-  '@netlify/images@1.3.6(@netlify/blobs@10.7.3)':
+  '@netlify/images@1.3.6(@netlify/blobs@10.7.3)(@vercel/functions@3.4.3)':
     dependencies:
-      ipx: 3.1.1(@netlify/blobs@10.7.3)
+      ipx: 3.1.1(@netlify/blobs@10.7.3)(@vercel/functions@3.4.3)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -6792,9 +6887,9 @@ snapshots:
 
   '@netlify/types@2.5.0': {}
 
-  '@netlify/vite-plugin@2.11.1(rollup@4.59.0)(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(yaml@2.8.2))':
+  '@netlify/vite-plugin@2.11.1(@vercel/functions@3.4.3)(rollup@4.59.0)(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(yaml@2.8.2))':
     dependencies:
-      '@netlify/dev': 4.16.3(rollup@4.59.0)
+      '@netlify/dev': 4.16.3(@vercel/functions@3.4.3)(rollup@4.59.0)
       '@netlify/dev-utils': 4.4.2
       dedent: 1.7.2
       vite: 7.3.1(@types/node@22.19.15)(jiti@2.6.1)(yaml@2.8.2)
@@ -7435,6 +7530,14 @@ snapshots:
 
   '@ungap/structured-clone@1.3.0': {}
 
+  '@vercel/analytics@1.6.1(svelte@5.54.0)':
+    optionalDependencies:
+      svelte: 5.54.0
+
+  '@vercel/functions@3.4.3':
+    dependencies:
+      '@vercel/oidc': 3.2.0
+
   '@vercel/nft@0.29.4(rollup@4.59.0)(supports-color@10.2.2)':
     dependencies:
       '@mapbox/node-pre-gyp': 2.0.3(supports-color@10.2.2)
@@ -7472,6 +7575,15 @@ snapshots:
       - encoding
       - rollup
       - supports-color
+
+  '@vercel/oidc@3.2.0': {}
+
+  '@vercel/routing-utils@5.3.3':
+    dependencies:
+      path-to-regexp: 6.1.0
+      path-to-regexp-updated: path-to-regexp@6.3.0
+    optionalDependencies:
+      ajv: 6.14.0
 
   '@vue/compiler-core@3.5.30':
     dependencies:
@@ -7570,6 +7682,14 @@ snapshots:
   ajv-formats@3.0.1(ajv@8.18.0):
     optionalDependencies:
       ajv: 8.18.0
+
+  ajv@6.14.0:
+    dependencies:
+      fast-deep-equal: 3.1.3
+      fast-json-stable-stringify: 2.1.0
+      json-schema-traverse: 0.4.1
+      uri-js: 4.4.1
+    optional: true
 
   ajv@8.18.0:
     dependencies:
@@ -7677,11 +7797,11 @@ snapshots:
 
   ast-module-types@6.0.1: {}
 
-  astro-sveltia-cms@0.1.0(astro@6.0.6(@netlify/blobs@10.7.0)(@types/node@22.19.15)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)):
+  astro-sveltia-cms@0.1.0(astro@6.0.6(@netlify/blobs@10.7.0)(@types/node@22.19.15)(@vercel/functions@3.4.3)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)):
     dependencies:
-      astro: 6.0.6(@netlify/blobs@10.7.0)(@types/node@22.19.15)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)
+      astro: 6.0.6(@netlify/blobs@10.7.0)(@types/node@22.19.15)(@vercel/functions@3.4.3)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)
 
-  astro@6.0.6(@netlify/blobs@10.7.0)(@types/node@22.19.15)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2):
+  astro@6.0.6(@netlify/blobs@10.7.0)(@types/node@22.19.15)(@vercel/functions@3.4.3)(jiti@2.6.1)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2):
     dependencies:
       '@astrojs/compiler': 3.0.1
       '@astrojs/internal-helpers': 0.8.0
@@ -7731,7 +7851,7 @@ snapshots:
       ultrahtml: 1.6.0
       unifont: 0.7.4
       unist-util-visit: 5.1.0
-      unstorage: 1.17.4(@netlify/blobs@10.7.0)
+      unstorage: 1.17.4(@netlify/blobs@10.7.0)(@vercel/functions@3.4.3)
       vfile: 6.0.3
       vite: 7.3.1(@types/node@22.19.15)(jiti@2.6.1)(yaml@2.8.2)
       vitefu: 1.1.2(vite@7.3.1(@types/node@22.19.15)(jiti@2.6.1)(yaml@2.8.2))
@@ -8719,6 +8839,9 @@ snapshots:
       merge2: 1.4.1
       micromatch: 4.0.8
 
+  fast-json-stable-stringify@2.1.0:
+    optional: true
+
   fast-json-stringify@6.3.0:
     dependencies:
       '@fastify/merge-json-schemas': 0.2.1
@@ -9288,7 +9411,7 @@ snapshots:
 
   ipaddr.js@2.3.0: {}
 
-  ipx@3.1.1(@netlify/blobs@10.7.0):
+  ipx@3.1.1(@netlify/blobs@10.7.0)(@vercel/functions@3.4.3):
     dependencies:
       '@fastify/accept-negotiator': 2.0.1
       citty: 0.1.6
@@ -9304,7 +9427,7 @@ snapshots:
       sharp: 0.34.5
       svgo: 4.0.1
       ufo: 1.6.3
-      unstorage: 1.17.4(@netlify/blobs@10.7.0)
+      unstorage: 1.17.4(@netlify/blobs@10.7.0)(@vercel/functions@3.4.3)
       xss: 1.0.15
     transitivePeerDependencies:
       - '@azure/app-configuration'
@@ -9327,7 +9450,7 @@ snapshots:
       - ioredis
       - uploadthing
 
-  ipx@3.1.1(@netlify/blobs@10.7.2):
+  ipx@3.1.1(@netlify/blobs@10.7.2)(@vercel/functions@3.4.3):
     dependencies:
       '@fastify/accept-negotiator': 2.0.1
       citty: 0.1.6
@@ -9343,7 +9466,7 @@ snapshots:
       sharp: 0.34.5
       svgo: 4.0.1
       ufo: 1.6.3
-      unstorage: 1.17.4(@netlify/blobs@10.7.2)
+      unstorage: 1.17.4(@netlify/blobs@10.7.2)(@vercel/functions@3.4.3)
       xss: 1.0.15
     transitivePeerDependencies:
       - '@azure/app-configuration'
@@ -9366,7 +9489,7 @@ snapshots:
       - ioredis
       - uploadthing
 
-  ipx@3.1.1(@netlify/blobs@10.7.3):
+  ipx@3.1.1(@netlify/blobs@10.7.3)(@vercel/functions@3.4.3):
     dependencies:
       '@fastify/accept-negotiator': 2.0.1
       citty: 0.1.6
@@ -9382,7 +9505,7 @@ snapshots:
       sharp: 0.34.5
       svgo: 4.0.1
       ufo: 1.6.3
-      unstorage: 1.17.4(@netlify/blobs@10.7.3)
+      unstorage: 1.17.4(@netlify/blobs@10.7.3)(@vercel/functions@3.4.3)
       xss: 1.0.15
     transitivePeerDependencies:
       - '@azure/app-configuration'
@@ -9621,6 +9744,9 @@ snapshots:
   json-schema-ref-resolver@3.0.0:
     dependencies:
       dequal: 2.0.3
+
+  json-schema-traverse@0.4.1:
+    optional: true
 
   json-schema-traverse@1.0.0: {}
 
@@ -10229,7 +10355,7 @@ snapshots:
 
   netlify-redirector@0.5.0: {}
 
-  netlify@24.3.0(@swc/core@1.15.21)(@swc/wasm@1.15.21)(@types/node@22.19.15)(picomatch@4.0.3)(rollup@4.59.0):
+  netlify@24.3.0(@swc/core@1.15.21)(@swc/wasm@1.15.21)(@types/node@22.19.15)(@vercel/functions@3.4.3)(picomatch@4.0.3)(rollup@4.59.0):
     dependencies:
       '@fastify/static': 9.0.0
       '@netlify/ai': 0.4.1
@@ -10238,13 +10364,13 @@ snapshots:
       '@netlify/build': 35.8.9(@opentelemetry/api@1.8.0)(@swc/core@1.15.21)(@swc/wasm@1.15.21)(@types/node@22.19.15)(picomatch@4.0.3)(rollup@4.59.0)
       '@netlify/build-info': 10.4.0
       '@netlify/config': 24.4.3
-      '@netlify/dev': 4.16.2(rollup@4.59.0)
+      '@netlify/dev': 4.16.2(@vercel/functions@3.4.3)(rollup@4.59.0)
       '@netlify/dev-utils': 4.4.1
       '@netlify/edge-bundler': 14.9.15
       '@netlify/edge-functions': 3.0.4
       '@netlify/edge-functions-bootstrap': 2.17.1
       '@netlify/headers-parser': 9.0.3
-      '@netlify/images': 1.3.5(@netlify/blobs@10.7.0)
+      '@netlify/images': 1.3.5(@netlify/blobs@10.7.0)(@vercel/functions@3.4.3)
       '@netlify/local-functions-proxy': 2.0.3
       '@netlify/redirect-parser': 15.0.4
       '@netlify/zip-it-and-ship-it': 14.5.0(rollup@4.59.0)(supports-color@10.2.2)
@@ -10662,6 +10788,10 @@ snapshots:
       lru-cache: 11.2.7
       minipass: 7.1.3
 
+  path-to-regexp@6.1.0: {}
+
+  path-to-regexp@6.3.0: {}
+
   path-to-regexp@8.3.0: {}
 
   path-type@6.0.0: {}
@@ -10833,6 +10963,9 @@ snapshots:
     dependencies:
       end-of-stream: 1.4.5
       once: 1.4.0
+
+  punycode@2.3.1:
+    optional: true
 
   pupa@3.3.0:
     dependencies:
@@ -11850,7 +11983,7 @@ snapshots:
 
   unpipe@1.0.0: {}
 
-  unstorage@1.17.4(@netlify/blobs@10.7.0):
+  unstorage@1.17.4(@netlify/blobs@10.7.0)(@vercel/functions@3.4.3):
     dependencies:
       anymatch: 3.1.3
       chokidar: 5.0.0
@@ -11862,8 +11995,9 @@ snapshots:
       ufo: 1.6.3
     optionalDependencies:
       '@netlify/blobs': 10.7.0(supports-color@10.2.2)
+      '@vercel/functions': 3.4.3
 
-  unstorage@1.17.4(@netlify/blobs@10.7.2):
+  unstorage@1.17.4(@netlify/blobs@10.7.2)(@vercel/functions@3.4.3):
     dependencies:
       anymatch: 3.1.3
       chokidar: 5.0.0
@@ -11875,8 +12009,9 @@ snapshots:
       ufo: 1.6.3
     optionalDependencies:
       '@netlify/blobs': 10.7.2
+      '@vercel/functions': 3.4.3
 
-  unstorage@1.17.4(@netlify/blobs@10.7.3):
+  unstorage@1.17.4(@netlify/blobs@10.7.3)(@vercel/functions@3.4.3):
     dependencies:
       anymatch: 3.1.3
       chokidar: 5.0.0
@@ -11888,6 +12023,7 @@ snapshots:
       ufo: 1.6.3
     optionalDependencies:
       '@netlify/blobs': 10.7.3
+      '@vercel/functions': 3.4.3
 
   untildify@4.0.0: {}
 
@@ -11911,6 +12047,11 @@ snapshots:
       xdg-basedir: 5.1.0
 
   uqr@0.1.2: {}
+
+  uri-js@4.4.1:
+    dependencies:
+      punycode: 2.3.1
+    optional: true
 
   urlpattern-polyfill@10.1.0: {}
 

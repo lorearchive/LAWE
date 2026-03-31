@@ -10,11 +10,13 @@ import svelte from '@astrojs/svelte';
 
 import netlify from '@astrojs/netlify';
 
+import vercel from '@astrojs/vercel';
+
 export default defineConfig({
   site: 'https://lorearchive.org',
   build: {},
   output: 'server',
-  adapter: netlify(),
+  adapter: vercel(),
 
 
   redirects: {
