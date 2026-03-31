@@ -10,9 +10,10 @@ public_folder: "/images"
 collections:
   - name: wiki
     label: The Lore Archives
-    folder: content/wiki
+    folder: wiki/
     create: false
     extension: "txt"
     slug: "{{title}}"
     fields:
+      - { name: title, label: Title, widget: string }
       - { name: body, label: Body, widget: richtext }
