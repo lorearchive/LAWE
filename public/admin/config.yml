@@ -11,6 +11,7 @@ collections:
   - name: wiki
     label: The Lore Archives
     folder: "wiki"
+    label: "DEBUG - TEST LABEL"
     format: "frontmatter"
     create: true
     extension: "txt"
