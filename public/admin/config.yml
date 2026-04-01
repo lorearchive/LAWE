@@ -10,7 +10,7 @@ public_folder: "/images"
 collections:
   - name: wiki
     label: The Lore Archives
-    folder: wiki/
+    folder: wiki
     format: "frontmatter"
     create: false
     extension: "txt"
