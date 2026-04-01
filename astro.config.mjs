@@ -6,14 +6,15 @@ import { fetchWikiContent, getAllPages } from './src/utils/git-service'
 
 import svelte from '@astrojs/svelte';
 
+
 import vercel from '@astrojs/vercel';
+
 
 export default defineConfig({
   site: 'https://lorearchive.org',
   build: {},
   output: 'server',
-  adapter: vercel(),
-
+  
 
   redirects: {
       "/": "/wiki/home"
@@ -62,4 +63,11 @@ export default defineConfig({
   
   ],
 
+  vite: {
+    ssr: {
+        external: ['better-sqlite3']
+    }
+  },
+
+  adapter: vercel()
 });

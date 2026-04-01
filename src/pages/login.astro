@@ -1,0 +1,68 @@
+---
+import Shell from "../layouts/Shell.astro"
+import { auth } from "../utils/auth"
+
+const session = await auth.api.getSession({ headers: Astro.request.headers })
+if (session) return Astro.redirect("/wiki/home")
+---
+
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+</head>
+
+<Shell title="Log In - Lore Archive" aside={false}>
+    <section class="login-container">
+            <h1>Lore Archive Wiki Editor</h1>
+            <p>Authentication via GitHub is required to commit lore changes.</p>
+            
+            <button id="login-btn" class="btn-github">
+                Sign in with GitHub
+            </button>
+        </section>
+</Shell>
+
+
+  <script>
+  document.getElementById("login-btn").addEventListener("click", async () => {
+    const res = await fetch("/api/auth/sign-in/social", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        provider: "github",
+        callbackURL: "/wiki/home"
+      })
+    })
+
+    const data = await res.json()
+    if (data.url) window.location.href = data.url
+  })
+</script>
+</body>
+</html>
+
+<style>
+    .login-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 60vh;
+        text-align: center;
+    }
+    .btn-github {
+        background: #24292f;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1rem;
+        margin-top: 1rem;
+    }
+    .btn-github:hover {
+        background: #000;
+    }
+</style>
