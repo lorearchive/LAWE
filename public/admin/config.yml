@@ -11,9 +11,10 @@ collections:
   - name: wiki
     label: The Lore Archives
     folder: wiki/
+    format: "frontmatter"
     create: false
     extension: "txt"
     slug: "{{title}}"
     fields:
       - { name: title, label: Title, widget: string }
-      - { name: body, label: Body, widget: richtext }
+      - { name: body, label: Body, widget: text }
