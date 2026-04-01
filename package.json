@@ -14,7 +14,6 @@
     "@astrojs/vercel": "^10.0.3",
     "@floating-ui/dom": "^1.7.6",
     "astro": "^6.0.4",
-    "astro-sveltia-cms": "^0.1.0",
     "cloudflare": "^5.2.0",
     "svelte": "^5.38.8",
     "typescript": "^5.9.2",

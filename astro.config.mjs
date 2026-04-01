@@ -3,7 +3,6 @@ import { defineConfig } from 'astro/config'
 import sitemap from '@astrojs/sitemap'
 import { processAllPages } from './src/utils/pages-processor'
 import { fetchWikiContent, getAllPages } from './src/utils/git-service'
-import sveltiaCMS from 'astro-sveltia-cms'
 
 import svelte from '@astrojs/svelte';
 
@@ -60,13 +59,6 @@ export default defineConfig({
       }), 
       
       svelte(),
-
-      sveltiaCMS({
-          adminRoute: "/admin",
-          oauthDisabled: false,
-          oauthLoginRoute: "/oauth",
-          oauthCallbackRoute: '/oauth/callback'
-      })
   
   ],
 
