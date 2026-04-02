@@ -7,7 +7,7 @@ export function getIconMarkup(name: IconName, options: { size?: number, classNam
 
     const { size = 24, className = '', color } = options ?? {};
 
-    return raw.replace(/<svg /, `<svg id="lawe-icon-svg" class="${className}" width="${size}" height="${size}" fill="${color ?? 'none'}" `);
+    return raw.replace(/<svg /, `<svg id="lora-icon-svg" class="${className}" width="${size}" height="${size}" fill="${color ?? 'none'}" `);
 
 }
 export type IconName = keyof typeof icons

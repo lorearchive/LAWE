@@ -22,7 +22,7 @@ export function parseInfoTable(ctx: ParserCtx): ASTNode {
         }
 
     } else {
-        throw new Error("LAWE DEBUG PARSEINFOTABLE ENCOUNTERED UNRECOGNISED INFOTABLE TYPE: " + JSON.stringify(ctx.whereami()))
+        throw new Error("LORA DEBUG PARSEINFOTABLE ENCOUNTERED UNRECOGNISED INFOTABLE TYPE: " + JSON.stringify(ctx.whereami()))
     }
 
 }

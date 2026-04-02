@@ -90,7 +90,7 @@ function executeGitCommand(command: string, timeout: number): void {
         })
 
     } catch (e: any) {
-        throw new GitServiceError( `LAWE: Git command failed: ${command}`, e );
+        throw new GitServiceError( `LORA: Git command failed: ${command}`, e );
     }
 }
 
@@ -105,7 +105,7 @@ export async function fetchWikiContent( config: Partial<ContentFetchConfig> = {}
   
     // validate config
     if (!finalConfig.repoUrl || !finalConfig.branch) {
-        throw new GitServiceError('LAWE: Repository URL and branch are required');
+        throw new GitServiceError('LORA: Repository URL and branch are required');
     }
 
     // Sanitize paths
@@ -119,18 +119,18 @@ export async function fetchWikiContent( config: Partial<ContentFetchConfig> = {}
             // Verify it's actually a git repository
             const gitDirExists = await directoryExists(path.join(localPath, '.git'));
             if (!gitDirExists) {
-                console.log(`LAWE: Directory '${localPath}' exists but is not a git repository. Removing and cloning fresh...`);
+                console.log(`LORA: Directory '${localPath}' exists but is not a git repository. Removing and cloning fresh...`);
                 // Remove the directory and clone fresh
                 await fs.rm(localPath, { recursive: true, force: true });
-                console.log('LAWE: Cloning wiki content repository...')
+                console.log('LORA: Cloning wiki content repository...')
                 executeGitCommand( `git clone --depth 1 --single-branch --branch ${finalConfig.branch} "${finalConfig.repoUrl}" "${localPath}"`, finalConfig.gitTimeout );
             } else {
-                console.log('LAWE: Updating existing wiki content repository...');
+                console.log('LORA: Updating existing wiki content repository...');
                 // Reset local changes and pull latest
                 executeGitCommand( `cd "${localPath}" && git reset --hard HEAD && git pull origin ${finalConfig.branch}`, finalConfig.gitTimeout );
             }
         } else {
-            console.log('LAWE: Cloning wiki content repository...')
+            console.log('LORA: Cloning wiki content repository...')
             executeGitCommand( `git clone --depth 1 --single-branch --branch ${finalConfig.branch} "${finalConfig.repoUrl}" "${localPath}"`, finalConfig.gitTimeout );
         }
 
@@ -138,11 +138,11 @@ export async function fetchWikiContent( config: Partial<ContentFetchConfig> = {}
     
         if (!(await directoryExists(contentFullPath))) {
             throw new ContentValidationError(
-                `LAWE: Wiki content directory '${wikiContentPath}' not found in repository`
+                `LORA: Wiki content directory '${wikiContentPath}' not found in repository`
             )
         }
 
-        console.log(`LAWE: Wiki content successfully fetched to: ${contentFullPath}`);
+        console.log(`LORA: Wiki content successfully fetched to: ${contentFullPath}`);
         return contentFullPath;
     
     } catch (e) {
@@ -150,8 +150,8 @@ export async function fetchWikiContent( config: Partial<ContentFetchConfig> = {}
             throw e
         }
     
-        console.error('LAWE: Error fetching wiki content:', e);
-        throw new GitServiceError('LAWE: Failed to fetch wiki content', e as Error);
+        console.error('LORA: Error fetching wiki content:', e);
+        throw new GitServiceError('LORA: Failed to fetch wiki content', e as Error);
     }
 }
 
@@ -161,18 +161,18 @@ async function validateWikiFile(filePath: string, maxSize: number): Promise<void
         const stats = await fs.stat(filePath);
     
         if (stats.size > maxSize) {
-            throw new ContentValidationError( `LAWE: File '${filePath}' exceeds maximum size limit (${maxSize} bytes)` );
+            throw new ContentValidationError( `LORA: File '${filePath}' exceeds maximum size limit (${maxSize} bytes)` );
         }
     
         if (stats.size === 0) {
-            console.warn(`LAWE: Warning: Empty file found: ${filePath}`);
+            console.warn(`LORA: Warning: Empty file found: ${filePath}`);
         }
     
     } catch (e) {
         if (e instanceof ContentValidationError) {
             throw e;
         }
-        throw new ContentValidationError(`LAWE: Cannot access file: ${filePath}`, e as Error);
+        throw new ContentValidationError(`LORA: Cannot access file: ${filePath}`, e as Error);
     }
 }
 
@@ -195,7 +195,7 @@ async function getLastCommitDate(filePath: string, repoPath: string): Promise<Da
         const relativePath = path.relative(repoPath, filePath);
         const command = `cd "${repoPath}" && git log -1 --format="%ci" -- "${relativePath}"`;
         
-        console.log(`LAWE: Running git command: ${command}`);
+        console.log(`LORA: Running git command: ${command}`);
         
         const result = execSync(command, {
             stdio: 'pipe',
@@ -207,7 +207,7 @@ async function getLastCommitDate(filePath: string, repoPath: string): Promise<Da
         
         if (!commitDateStr) {
             // If no commit found for this file, fall back to file modification time
-            console.warn(`LAWE: No git history found for ${relativePath}, using file modification time`);
+            console.warn(`LORA: No git history found for ${relativePath}, using file modification time`);
             const stats = await fs.stat(filePath);
             return stats.mtime;
         }
@@ -215,15 +215,15 @@ async function getLastCommitDate(filePath: string, repoPath: string): Promise<Da
         const commitDate = new Date(commitDateStr);
         return commitDate;
     } catch (e) {
-        console.warn(`LAWE: Error getting git commit date for ${filePath}:`, e);
+        console.warn(`LORA: Error getting git commit date for ${filePath}:`, e);
         // Fall back to file modification time
         try {
             const stats = await fs.stat(filePath);
-            console.log(`LAWE: [DEBUG] Fallback to file mtime for ${filePath}: ${stats.mtime.toISOString()}`);
+            console.log(`LORA: [DEBUG] Fallback to file mtime for ${filePath}: ${stats.mtime.toISOString()}`);
             return stats.mtime;
         } catch (statError) {
             // If we can't even get file stats, return current date as last resort
-            console.error(`LAWE: Cannot get file stats for ${filePath}:`, statError);
+            console.error(`LORA: Cannot get file stats for ${filePath}:`, statError);
             return new Date();
         }
     }
@@ -237,7 +237,7 @@ async function checkMetaDir( wikiPath: string ): Promise<string> {
         await fs.access(metaDir);
     } catch {
         await fs.mkdir(metaDir, { recursive: true });
-        console.log(`LAWE: Created metadata directory: ${metaDir}`);
+        console.log(`LORA: Created metadata directory: ${metaDir}`);
     }
     
     return metaDir;
@@ -264,7 +264,7 @@ export async function getAllPages( contentPath: string, config: Partial<Pick<Con
 
     // Validate content path
     if (!(await directoryExists(contentPath))) {
-        throw new ContentValidationError(`LAWE: Content directory does not exist: ${contentPath}`);
+        throw new ContentValidationError(`LORA: Content directory does not exist: ${contentPath}`);
     }
 
     const wikiPath = path.dirname(contentPath); // Get .wiki directory
@@ -275,7 +275,7 @@ export async function getAllPages( contentPath: string, config: Partial<Pick<Con
     const repoPath = path.dirname(contentPath);
     const gitDirExists = await directoryExists(path.join(repoPath, '.git'));
     if (!gitDirExists) {
-        console.warn('LAWE: Git repository not found, falling back to file modification times');
+        console.warn('LORA: Git repository not found, falling back to file modification times');
     }
 
     // Recursive function to walk directory tree
@@ -343,22 +343,22 @@ export async function getAllPages( contentPath: string, config: Partial<Pick<Con
                         pages.push(pageData);
               
                     } catch (e) {
-                        console.error(`LAWE: Error processing wiki file '${entryPath}':`, e);
+                        console.error(`LORA: Error processing wiki file '${entryPath}':`, e);
                         // Continue processing other files instead of failing completely
                     }
                 } else {
-                    console.log(`LAWE: Unrecognized entry: ${entry.name}`)
+                    console.log(`LORA: Unrecognized entry: ${entry.name}`)
                 }
             }));
       
         } catch (e) {
-            throw new ContentValidationError(`LAWE: Error reading directory '${dirPath}'`, e as Error);
+            throw new ContentValidationError(`LORA: Error reading directory '${dirPath}'`, e as Error);
         }
     }
 
     await processDirectory(contentPath);
   
-    console.log(`LAWE: Successfully processed ${pages.length} wiki pages`);
+    console.log(`LORA: Successfully processed ${pages.length} wiki pages`);
     
     return pages;
 }
@@ -378,7 +378,7 @@ export async function getSinglePage( contentPath: string, slug: string[] ): Prom
         const resolvedContentPath = path.resolve(contentPath);
         
         if (!resolvedPath.startsWith(resolvedContentPath)) {
-            throw new ContentValidationError('LAWE: Invalid file path: outside content directory');
+            throw new ContentValidationError('LORA: Invalid file path: outside content directory');
         }
     
         await validateWikiFile(filePath, defaultConfig.maxFileSize);
@@ -408,10 +408,10 @@ export async function cleanupLocalRepo( config: Partial<ContentFetchConfig> = {}
     try {
         if (await directoryExists(localPath)) {
             await fs.rm(localPath, { recursive: true, force: true });
-            console.log(`LAWE: Cleaned up local repository: ${localPath}`);
+            console.log(`LORA: Cleaned up local repository: ${localPath}`);
         }
     } catch (e) {
-        throw new GitServiceError(`LAWE: Failed to cleanup local repository: ${localPath}`, e as Error);
+        throw new GitServiceError(`LORA: Failed to cleanup local repository: ${localPath}`, e as Error);
     }
 }
 

@@ -38,10 +38,10 @@ export default defineConfig({
               // Look up the lastMod date for this page
               const lastMod = global.lastMod[slugPath];
               
-              console.log(`LAWE: [SITEMAP DEBUG] URL: ${item.url}, pathname: ${pathname}, slugPath: ${slugPath}`);
+              console.log(`LORA: [SITEMAP DEBUG] URL: ${item.url}, pathname: ${pathname}, slugPath: ${slugPath}`);
               
               if (lastMod) {
-                  console.log(`LAWE: [SITEMAP] ${slugPath} -> ${lastMod.toISOString()}`);
+                  console.log(`LORA: [SITEMAP] ${slugPath} -> ${lastMod.toISOString()}`);
                   return {
                       url: item.url,
                       lastmod: lastMod.toISOString(),
@@ -49,7 +49,7 @@ export default defineConfig({
                   };
               
               } else {
-                  console.warn(`LAWE: [SITEMAP] No lastMod found for ${slugPath}, available keys:`, Object.keys(global.lastMod));
+                  console.warn(`LORA: [SITEMAP] No lastMod found for ${slugPath}, available keys:`, Object.keys(global.lastMod));
                   return {
                       url: item.url,
                       lastmod: new Date().toISOString(),

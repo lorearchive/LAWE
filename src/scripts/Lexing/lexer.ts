@@ -126,7 +126,7 @@ export default class Lexer {
 
             if (!handled) {
                 // This should never happen with TextHandler as fallback
-                throw new Error(`LAWE PP: Unhandled character at position ${context.position}: '${context.peek()}'`);
+                throw new Error(`LORA PP: Unhandled character at position ${context.position}: '${context.peek()}'`);
             }
         }
 

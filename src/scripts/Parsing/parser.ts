@@ -183,7 +183,7 @@ export default class Parser {
         const parts = content.split('|');
         
         if (parts.length !== 2) {
-            throw new Error("LAWE Parsing error: Invalid triple parentheses format");
+            throw new Error("LORA Parsing error: Invalid triple parentheses format");
         }
         
         const [command, date] = parts.map(part => part.trim());
@@ -316,7 +316,7 @@ export default class Parser {
                 .replace(/[^a-zA-Z0-9 ]/g, "")
                 .replace(/ /g, "_")
         } else {
-            throw new Error("LAWE parsing error: getHeadingID received node array which all nodes are not text." + JSON.stringify(nodeArr))
+            throw new Error("LORA parsing error: getHeadingID received node array which all nodes are not text." + JSON.stringify(nodeArr))
         }
 
         // Handle duplicate IDs by adding numbers
@@ -424,7 +424,7 @@ export default class Parser {
             format = formatMatch ? formatMatch[1].toLowerCase() : undefined
 
         } else {
-            throw new Error("LAWE Parsing error: Parser encountered no width information associated with image.")
+            throw new Error("LORA Parsing error: Parser encountered no width information associated with image.")
         }
 
         // Parse the caption if there's a pipe
@@ -531,7 +531,7 @@ export default class Parser {
                 children.push({ type: 'Text', value: this.previous().value })
 
             } else {
-                throw new Error("LAWE Parsing error: parseInlineUntil() encountered unrecognized token: " + this.peek().type)
+                throw new Error("LORA Parsing error: parseInlineUntil() encountered unrecognized token: " + this.peek().type)
             }
         }
     

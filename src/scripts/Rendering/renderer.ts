@@ -26,7 +26,7 @@ export default class Renderer {
             .join('');
             
         return `
-            <div id="lawe-heading-2-div" class="lawe-heading-div"><h2 id="notes" class="lawe-heading-2"><span class="lawe-heading">Notes</span></h2></div>
+            <div id="lora-heading-2-div" class="lora-heading-div"><h2 id="notes" class="lora-heading-2"><span class="lora-heading">Notes</span></h2></div>
             <div class="footnotes-section">
                 <ol class="footnotes-list">
                     ${footnotes}
@@ -48,7 +48,7 @@ export default class Renderer {
                 return `<p>${this.renderChildren(node)}</p>`
             case 'Heading':
                 const level = Math.min(node.level || 1, 6) // HTML supports h1-h6
-                return `<div id="lawe-heading-${level}-div" class="lawe-heading-div"><h${level} id="${node.ID}" class="lawe-heading-${level}"><span class="lawe-heading">${this.renderChildren(node)}</span></h${level}></div>`
+                return `<div id="lora-heading-${level}-div" class="lora-heading-div"><h${level} id="${node.ID}" class="lora-heading-${level}"><span class="lora-heading">${this.renderChildren(node)}</span></h${level}></div>`
             case 'Underline':
                 return `<u>${this.renderChildren(node)}</u>`
             case 'Italic':
@@ -68,12 +68,12 @@ export default class Renderer {
                 return this.renderCallout(node)
 
             case 'Blockquote':
-                return `<div id="lawe-blockquoteDiv"><blockquote id="lawe-blockquote">${this.renderChildren(node)}</blockquote><cite>— ${node.blockquoteCite}</cite></div>`
+                return `<div id="lora-blockquoteDiv"><blockquote id="lora-blockquote">${this.renderChildren(node)}</blockquote><cite>— ${node.blockquoteCite}</cite></div>`
 
 
 
             case 'Table': {
-                const attrs = this.renderAttributes(node.attributes, { id: "lawe-table" })
+                const attrs = this.renderAttributes(node.attributes, { id: "lora-table" })
                 return `<table ${attrs}>${this.renderChildren(node)}</table>`
             }
 
@@ -87,7 +87,7 @@ export default class Renderer {
                 return `<td>${this.renderChildren(node)}</td>`
 
             case 'TableHeaderCell': {
-                const attrs = this.renderAttributes(node.attributes, { id: "lawe-table-header-cell" })
+                const attrs = this.renderAttributes(node.attributes, { id: "lora-table-header-cell" })
                 return `<th ${attrs}>${this.renderChildren(node)}</th>`
             }
 
@@ -98,7 +98,7 @@ export default class Renderer {
                         school: node.attributes.school 
                     });
                 } else {
-                    throw new Error("LAWE RENDERING ERROR: node does not include any name or school information while trying to render affili table");
+                    throw new Error("LORA RENDERING ERROR: node does not include any name or school information while trying to render affili table");
                 }
             }
 
@@ -114,7 +114,7 @@ export default class Renderer {
                         height: node.attributes.height
                     });
                 } else {
-                    throw new Error("LAWE RENDERING ERROR: node does not include any name information while trying to render infotable");
+                    throw new Error("LORA RENDERING ERROR: node does not include any name information while trying to render infotable");
                 }
             
 
@@ -141,7 +141,7 @@ export default class Renderer {
     }
 
     private renderImage(node: ASTNode): string {       
-        return `<figure id="lawe-figure" class="lawe-figure-${node.align}"><a id="lawe-figure-a" class="a-no-style" href="https://github.com/lorearchive/law-content/tree/main/images${node.src}"><img src="https://raw.githubusercontent.com/lorearchive/law-content/main/images${node.src}" width="${node.width}" alt="${node.alt}" loading="lazy" /></a><figcaption>${node.alt}</figcaption></figure>`
+        return `<figure id="lora-figure" class="lora-figure-${node.align}"><a id="lora-figure-a" class="a-no-style" href="https://github.com/lorearchive/law-content/tree/main/images${node.src}"><img src="https://raw.githubusercontent.com/lorearchive/law-content/main/images${node.src}" width="${node.width}" alt="${node.alt}" loading="lazy" /></a><figcaption>${node.alt}</figcaption></figure>`
         
     }
 
@@ -151,9 +151,9 @@ export default class Renderer {
         switch(type) {
 
             case 'external':
-                return `<div id="lawe-alertnotif" class="alert alert-warning alertnotif" role="alert">${getIconMarkup('globe2', {className: "mb-2", color: "black"})}<p><strong>This article is for an external media.</strong> The material being described in this article are not part of the main story or game, and while most of them are considered canon, everything may not be. This wiki only provides the lore side of all external media.<br><span class="alertnotifsubtext"><em>(${node.tripleParenAlertDate}) &middot;</em></span></p></div>`
+                return `<div id="lora-alertnotif" class="alert alert-warning alertnotif" role="alert">${getIconMarkup('globe2', {className: "mb-2", color: "black"})}<p><strong>This article is for an external media.</strong> The material being described in this article are not part of the main story or game, and while most of them are considered canon, everything may not be. This wiki only provides the lore side of all external media.<br><span class="alertnotifsubtext"><em>(${node.tripleParenAlertDate}) &middot;</em></span></p></div>`
             case 'unfinished':
-                return `<div id="lawe-alertnotif" class="alert alert-warning alertnotif" role="alert">${getIconMarkup('document-text', {className: "mb-2"})}<p>This article is <strong>unfinished</strong>. Pleae wait patiently until the article is complete. You may help speed up the completion process by providing extra details or completing missing sections.<br><span class="alertnotifsubtext"><em>(${node.tripleParenAlertDate}) &middot; <a href="/wiki/alert_notifications">How do you know whether an article is finished?</a> &middot; <a href="#">Learn how and when to remove this message</a></em></span></p></div>`
+                return `<div id="lora-alertnotif" class="alert alert-warning alertnotif" role="alert">${getIconMarkup('document-text', {className: "mb-2"})}<p>This article is <strong>unfinished</strong>. Pleae wait patiently until the article is complete. You may help speed up the completion process by providing extra details or completing missing sections.<br><span class="alertnotifsubtext"><em>(${node.tripleParenAlertDate}) &middot; <a href="/wiki/alert_notifications">How do you know whether an article is finished?</a> &middot; <a href="#">Learn how and when to remove this message</a></em></span></p></div>`
             default:
                 return ''
         }
@@ -189,10 +189,10 @@ export default class Renderer {
 
 
         if (node.interwikiDest && node.interwikiId) {
-            return `<a href="${href}" title="${node.text}" id="lawe-link" class="${node.linkType} interwiki">${node.text}</a>`
+            return `<a href="${href}" title="${node.text}" id="lora-link" class="${node.linkType} interwiki">${node.text}</a>`
         }
 
-        return `<a href="/wiki/${href}" title="${node.text}" id="lawe-link" class="${node.linkType}">${hrefTitle}</a>`
+        return `<a href="/wiki/${href}" title="${node.text}" id="lora-link" class="${node.linkType}">${hrefTitle}</a>`
     }
 
 
@@ -209,13 +209,13 @@ export default class Renderer {
                 case "warning":
                 case "success":
                 case "danger":
-                    return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><div id="lawe-callout-icon"><span id="lawe-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {className: "mb-2"})}</span></div><span id="lawe-callout-title-span"><h4>${title}</h4></span><span id="lawe-callout-span-body">${body}</span></div></div>`
+                    return `<div id="lora-callout-${type}" class="lora-callout"><div id="lora-callout-inner"><div id="lora-callout-icon"><span id="lora-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {className: "mb-2"})}</span></div><span id="lora-callout-title-span"><h4>${title}</h4></span><span id="lora-callout-span-body">${body}</span></div></div>`
 
                 case "info":
-                    return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><div id="lawe-callout-icon"><span id="lawe-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {size: 28, className: "mb-2"})}</span></div><span id="lawe-callout-title-span"><h4>${title}</h4></span><span id="lawe-callout-span-body">${body}</span></div></div>`
+                    return `<div id="lora-callout-${type}" class="lora-callout"><div id="lora-callout-inner"><div id="lora-callout-icon"><span id="lora-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {size: 28, className: "mb-2"})}</span></div><span id="lora-callout-title-span"><h4>${title}</h4></span><span id="lora-callout-span-body">${body}</span></div></div>`
 
                 default: 
-                    throw new Error("LAWE CALLOUT TYPE UNKNOWN IN ICONS: " + type)
+                    throw new Error("LORA CALLOUT TYPE UNKNOWN IN ICONS: " + type)
                     //used to suppress errors, probably won't ever come across this
             }
 
@@ -225,13 +225,13 @@ export default class Renderer {
                 case "warning":
                 case "success":
                 case "danger":
-                    return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><div id="lawe-callout-icon"><span id="lawe-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {className: "mb-2"})}</span></div><span id="lawe-callout-span-body">${body}</span></div></div>`
+                    return `<div id="lora-callout-${type}" class="lora-callout"><div id="lora-callout-inner"><div id="lora-callout-icon"><span id="lora-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {className: "mb-2"})}</span></div><span id="lora-callout-span-body">${body}</span></div></div>`
 
                 case "info":
-                    return `<div id="lawe-callout-${type}" class="lawe-callout"><div id="lawe-callout-inner"><div id="lawe-callout-icon"><span id="lawe-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {size: 28, className: "mb-2"})}</span></div><span id="lawe-callout-span-body">${body}</span></div></div>`
+                    return `<div id="lora-callout-${type}" class="lora-callout"><div id="lora-callout-inner"><div id="lora-callout-icon"><span id="lora-callout-icon-span-${type}">${getIconMarkup(type + "-calloutIcon" as IconName, {size: 28, className: "mb-2"})}</span></div><span id="lora-callout-span-body">${body}</span></div></div>`
 
                 default: 
-                    throw new Error("LAWE CALLOUT TYPE UNKNOWN IN ICONS: " + type)
+                    throw new Error("LORA CALLOUT TYPE UNKNOWN IN ICONS: " + type)
                     //used to suppress errors, probably won't ever come across this
             }
 

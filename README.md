@@ -17,7 +17,7 @@ You can start the dev server with:
 npm run dev
 ```
 
-and compile LAWE with:
+and compile LORA with:
 
 ```bash
 npx astro build
@@ -32,9 +32,9 @@ npm run astro build
 
 
 ## Important acronyms used while compiling
-- `LAWE PP`: LAWE Pages-processor. (`/src/utils/pages-processor.ts`) Builds HTML from raw wikitext at compile time.
+- `LORA PP`: LORA Pages-processor. (`/src/utils/pages-processor.ts`) Builds HTML from raw wikitext at compile time.
 
 ## Syntax
 The syntax (i.e. the raw wikitext syntax) that the engine supports similar (partially overlaps) to that of the [DokuWiki](https://www.dokuwiki.org/dokuwiki) [syntax](https://www.dokuwiki.org/wiki:syntax). In fact, in the early days of the Lore Archive Wiki, DokuWiki was used as the engine behind the site. When I decided to create my own engine, I thought it would be troublesome to create a whole new syntax and adapt the old pages to the new syntax.
 
-Major markup syntax is identical to the DokuWiki syntax, including bold, underline, italic and a few other simple inline things. However the LAWE syntax brings about improvements, which can be found in [SYNTAX](https://github.com/lorearchive/LAWE/blob/main/SYNTAX.md). The syntax is also extended to support extra features which in DokuWiki required plugins to achieve.
+Major markup syntax is identical to the DokuWiki syntax, including bold, underline, italic and a few other simple inline things. However the LORA syntax brings about improvements, which can be found in [SYNTAX](https://github.com/lorearchive/LORA/blob/main/SYNTAX.md). The syntax is also extended to support extra features which in DokuWiki required plugins to achieve.

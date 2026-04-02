@@ -1,6 +1,6 @@
 let lastScroll = 0;
 const scrollWindow = document.getElementById('scrollableWindow')
-const header = document.getElementById('lawe-header')
+const header = document.getElementById('lora-header')
 scrollWindow.addEventListener('scroll', () => {
     const currentScroll = scrollWindow.scrollTop;
     if (currentScroll <= 0) {

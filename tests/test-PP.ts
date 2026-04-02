@@ -161,7 +161,7 @@ export async function testErrorHandling() {
     
     try {
         const result = await processPage(errorPage);
-        console.log('LAWE: Expected error but processing succeeded:', result.title);
+        console.log('LORA: Expected error but processing succeeded:', result.title);
     } catch (e) {
         if (e instanceof Error ) {
             console.log('Error handling working correctly:', e.message)
@@ -209,7 +209,7 @@ This page has approximately 50 words for testing processing speed.`,
 
 // Main test runner
 export async function runAllTests() {
-    console.log('LAWE: STARTING PP TESTS');
+    console.log('LORA: STARTING PP TESTS');
     
     try {
         await testSinglePage();
@@ -217,10 +217,10 @@ export async function runAllTests() {
         await testErrorHandling();
         await testPerformance();
         
-        console.log('\nLAWE: ALL TESTS COMPLETED SUCCESSFULLY!');
+        console.log('\nLORA: ALL TESTS COMPLETED SUCCESSFULLY!');
         
     } catch (error) {
-        console.error('\nLAWE: TESTS FAILED:', error);
+        console.error('\nLORA: TESTS FAILED:', error);
         process.exit(1);
     }
 }

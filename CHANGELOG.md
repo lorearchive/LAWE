@@ -17,5 +17,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Implementation of the core Alpha features
 
 
-[0.1.0-a]: https://github.com/lorearchive/LAWE/releases/tag/v0.1.0-a
-[0.2.0-a]: https://github.com/lorearchive/LAWE/releases/tag/v0.2.0-a
+[0.1.0-a]: https://github.com/lorearchive/LORA/releases/tag/v0.1.0-a
+[0.2.0-a]: https://github.com/lorearchive/LORA/releases/tag/v0.2.0-a

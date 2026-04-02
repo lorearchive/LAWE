@@ -4,12 +4,12 @@
     scroll-margin-top: 90px;
 }
 
-header#lawe-header {
+header#lora-header {
     background-color: white;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.15);
 }
 
-header#lawe-header.header-hidden {
+header#lora-header.header-hidden {
     transform: translateY(-100%);
 }
 

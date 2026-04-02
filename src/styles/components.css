@@ -2,7 +2,7 @@
 
 /** callouts **/
 
-.lawe-callout {
+.lora-callout {
     margin-bottom: 1.4em;
     border-top: 0.15em solid #eee;
     border-right: 0.15em solid #eee;
@@ -10,44 +10,44 @@
     border-radius: 0.5em;
     background-color: none;
 }
-.lawe-callout #lawe-callout-title-span > h4 {
+.lora-callout #lora-callout-title-span > h4 {
     margin: 0 0 0.1em 0; /* fallback for no title callouts */
 }
 
-#lawe-callout-inner {
+#lora-callout-inner {
     padding: 2em 2em 2em 2em;
     background-color: #f5f4f8;
 }
 
 
-#lawe-callout-info {
+#lora-callout-info {
     border-left: 0.3em solid #5bc0de;
 }
-#lawe-callout-info #lawe-callout-title-span > h4 {
+#lora-callout-info #lora-callout-title-span > h4 {
     margin: 0 0 0.1em 0;
     color: #5bc0de !important;
 }
-#lawe-callout-icon-span-info svg {
+#lora-callout-icon-span-info svg {
     fill: #5bc0de;
 }
 
 
-#lawe-callout-warning {
+#lora-callout-warning {
     border-left: 0.3em solid #FFA500;
 }
-#lawe-callout-warning #lawe-callout-title-span > h4 {
+#lora-callout-warning #lora-callout-title-span > h4 {
     margin: 0 0 0.1em 0;
     color: darkorange !important;
 }
 
-#lawe-callout-icon-span-warning svg {
+#lora-callout-icon-span-warning svg {
     fill: darkorange;
 }
 
 
 /** Alertnotifs **/
 
-#lawe-alertnotif {
+#lora-alertnotif {
     width: 80%;
     margin: 2rem auto;
     padding: 2rem;
@@ -55,11 +55,11 @@
     border-radius: 10px;
 }
 
-#lawe-alertnotif p {
+#lora-alertnotif p {
     font-size: 1rem;
 }
 
-#lawe-alertnotif p .alertnotifsubtext {
+#lora-alertnotif p .alertnotifsubtext {
     display: inline-block;
     margin-top: 0.9rem;
     font-size: 0.9rem;
@@ -94,7 +94,7 @@ th {
     background-color: #f0f0f0;
 }
 
-table#lawe-table {
+table#lora-table {
     border: 0.5em solid black;
 }
 
@@ -120,24 +120,24 @@ td:not(.td-border-x) {
     border-left: transparent;
 }
 
-table#lawe-infoTable.infoTable {
+table#lora-infoTable.infoTable {
     max-width: 300px;
     table-layout: fixed;
 
 }
 
-table#lawe-infoTable.affili {
+table#lora-infoTable.affili {
     width: 270px;
 
 }
 
-table#lawe-infoTable {
+table#lora-infoTable {
     float: right;
     clear: right;   
     border: 1px solid #a2a9b1;
 }
 
-table#lawe-infoTable.affili h3 {
+table#lora-infoTable.affili h3 {
     text-align: center;
 }
 
@@ -151,12 +151,12 @@ th {
 
 }
 
-th#lawe-infoTable-label {
+th#lora-infoTable-label {
     text-align:left;
     vertical-align: top;
 }
 
-td#lawe-infoTable-school-cell {
+td#lora-infoTable-school-cell {
     padding-top: 0;
     display: flex;
     flex-direction: column;
@@ -166,13 +166,13 @@ td#lawe-infoTable-school-cell {
     text-align: center;
 }
 
-#lawe-infoTable td {
+#lora-infoTable td {
     padding: 0.25em 0.75em 0.25em 0.75em;
     word-wrap: break-word;
     word-break: break-word;
 }
 
-#lawe-infoTable tr {
+#lora-infoTable tr {
     vertical-align: super;
 }
 
@@ -197,26 +197,26 @@ figure {
     margin: 0;
 }
 
-#lawe-figure:not(.figure-no-style) {
+#lora-figure:not(.figure-no-style) {
     background-color: #F9F9F9;
     border: 1px solid #CCC;
     display: block;
     max-width: fit-content;
 }
 
-.lawe-figure-right {
+.lora-figure-right {
     clear: right;
     float: right;
     margin: .5em 0 .8em 1.4em;
 }
 
-#lawe-figure img {
+#lora-figure img {
     margin: .2em;
     display: block;
     height: auto;
 }
 
-#lawe-figure figcaption:not(.figcaption-no-style) {
+#lora-figure figcaption:not(.figcaption-no-style) {
     display: block;
     background-color: #F9F9F9;
     font-size: 94%;

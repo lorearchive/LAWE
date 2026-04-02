@@ -100,7 +100,7 @@ export function renderAffiliTable({ name, school }: AffiliTableProps): string {
     const club = Object.entries(clubMemberList).find(([_, members]) => members.includes(name))?.[0] ?? null;
     
     if (!club) {
-        throw new Error("LAWE AFFILI TABLE RENDERING: CLUB not found for student " + name);
+        throw new Error("LORA AFFILI TABLE RENDERING: CLUB not found for student " + name);
     }
 
     const members = clubMemberList[club];
@@ -114,17 +114,17 @@ export function renderAffiliTable({ name, school }: AffiliTableProps): string {
 
 
     return `
-        <table id="lawe-infoTable" class="affili">
+        <table id="lora-infoTable" class="affili">
             <thead class="thead-no-style">
                 <tr>
-                    <th id="lawe-infoTable-th" class="pretitle" colspan="2">A member of<br /><h3 class="h3-no-spacing"><a href="/wiki/setting/${school}">${schoolFullName}</a></h3></th>
+                    <th id="lora-infoTable-th" class="pretitle" colspan="2">A member of<br /><h3 class="h3-no-spacing"><a href="/wiki/setting/${school}">${schoolFullName}</a></h3></th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td id="lawe-infoTable-school-cell" class="no-spacing" colspan="2">
-                        <figure id="lawe-figure" class="figure-no-style">
-                            <a id="lawe-figure-a" class="a-no-style" href="/wiki/setting/academies/${school}">
+                    <td id="lora-infoTable-school-cell" class="no-spacing" colspan="2">
+                        <figure id="lora-figure" class="figure-no-style">
+                            <a id="lora-figure-a" class="a-no-style" href="/wiki/setting/academies/${school}">
                                 <img src="https://raw.githubusercontent.com/lorearchive/law-content/main/images/icons/${school}.png" width="100" alt="The logo of ${schoolFullName}." loading="lazy" />
                             </a>
                         </figure>
@@ -157,10 +157,10 @@ export function renderInfoTable({ name, figure, caption, alias, affiliation, clu
     
     
     return `
-    <table id="lawe-infoTable" class="infoTable">
+    <table id="lora-infoTable" class="infoTable">
         <thead>
             <tr>
-                <th id="lawe-infoTable" class="pretitle" colspan="2">
+                <th id="lora-infoTable" class="pretitle" colspan="2">
                     <div class="title-wrap">
                         <span class="title-line1">${personFullName[name].split(" ")[0]}</span>
                         <span class="title-line2"><h3 class="h3-no-spacing">${personFullName[name].split(" ")[1]}</h3></span>
@@ -175,23 +175,23 @@ export function renderInfoTable({ name, figure, caption, alias, affiliation, clu
         </thead>
         <tbody>
             <tr>
-                <th id="lawe-infoTable-label">Other names</th>
+                <th id="lora-infoTable-label">Other names</th>
                 <td>${alias?.split("\\\\").map(s => s.trim()).join("<br />")}</td>
             </tr>
             <tr>
-                <th id="lawe-infoTable-label">Affiliation</th>
+                <th id="lora-infoTable-label">Affiliation</th>
                 <td>${affiliation}</td>
             </tr>
             <tr>
-                <th id="lawe-infoTable-label">Club(s)</th>
+                <th id="lora-infoTable-label">Club(s)</th>
                 <td>${clubs}</td>
             </tr>
             <tr>
-                <th id="lawe-infoTable-label">Age</th>
+                <th id="lora-infoTable-label">Age</th>
                 <td>${age}</td>
             </tr>
             <tr>
-                <th id="lawe-infoTable-label">Height</th>
+                <th id="lora-infoTable-label">Height</th>
                 <td>${height}</td>
             </tr>
         </tbody>

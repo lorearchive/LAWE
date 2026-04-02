@@ -154,7 +154,7 @@ function validateHtmlOutput(html: string, filePath: string): void {
     
     // super basic check, in real scenarios we might want proper HTML validation -- TODO
     if (Math.abs(openTags - closeTags - selfClosingTags) > 5) {
-        console.warn(`LAWE PP: Potential HTML structure issues in ${filePath}`);
+        console.warn(`LORA PP: Potential HTML structure issues in ${filePath}`);
     }
     
     // Check for empty output
@@ -191,7 +191,7 @@ export function processPage( rawPage: RawPage, config: Partial<PageProcessorConf
         try {
             tokens = lexer.tokenise(content);
         } catch (e) {
-            throw new PageProcessorError( 'LAWE: Lexical analysis failed', 'lexing', rawPage.filePath, e as Error )
+            throw new PageProcessorError( 'LORA: Lexical analysis failed', 'lexing', rawPage.filePath, e as Error )
         }
         
         // Stage 2: Parsing
@@ -199,7 +199,7 @@ export function processPage( rawPage: RawPage, config: Partial<PageProcessorConf
         try {
             ast = parser.parse(tokens);
         } catch (e) {
-            throw new PageProcessorError( 'LAWE PP: Parsing failed', 'parsing', rawPage.filePath, e as Error )
+            throw new PageProcessorError( 'LORA PP: Parsing failed', 'parsing', rawPage.filePath, e as Error )
         }
         
         // Stage 3: Rendering
@@ -207,7 +207,7 @@ export function processPage( rawPage: RawPage, config: Partial<PageProcessorConf
         try {
             htmlContent = renderer.render(ast);
         } catch (e) {
-            throw new PageProcessorError( 'LAWE PP: Rendering failed', 'rendering', rawPage.filePath, e as Error )
+            throw new PageProcessorError( 'LORA PP: Rendering failed', 'rendering', rawPage.filePath, e as Error )
         }
         
         // Stage 4: Validation
@@ -215,7 +215,7 @@ export function processPage( rawPage: RawPage, config: Partial<PageProcessorConf
             try {
                 validateHtmlOutput(htmlContent, rawPage.filePath);
             } catch (e) {
-                throw new PageProcessorError( 'LAWE PP: HTML validation failed', 'validation', rawPage.filePath, e as Error )
+                throw new PageProcessorError( 'LORA PP: HTML validation failed', 'validation', rawPage.filePath, e as Error )
             }
         }
         
@@ -233,7 +233,7 @@ export function processPage( rawPage: RawPage, config: Partial<PageProcessorConf
         
         // Check processing time
         if (processingTime > finalConfig.maxProcessingTime) {
-            console.warn(`LAWE PP: Page ${rawPage.filePath} took ${processingTime}ms to process`);
+            console.warn(`LORA PP: Page ${rawPage.filePath} took ${processingTime}ms to process`);
         }
         
         return {
@@ -258,7 +258,7 @@ export function processPage( rawPage: RawPage, config: Partial<PageProcessorConf
         }
         
         throw new PageProcessorError(
-            'LAWE PP: Unexpected error during page processing',
+            'LORA PP: Unexpected error during page processing',
             'unknown',
             rawPage.filePath,
             e as Error
@@ -272,7 +272,7 @@ export async function processAllPages( rawPages: RawPage[], config: Partial<Page
     const finalConfig = { ...defaultConfig, ...config };
     const startTime = Date.now();
     
-    console.log(`LAWE PP: Processing ${rawPages.length} wiki pages...`);
+    console.log(`LORA PP: Processing ${rawPages.length} wiki pages...`);
     
     const processedPages: ProcessedPage[] = [];
     const errors: ProcessingError[] = [];
@@ -297,7 +297,7 @@ export async function processAllPages( rawPages: RawPage[], config: Partial<Page
                 stage: error instanceof PageProcessorError ? error.stage as any : 'unknown',
             });
             
-            console.error(`LAWE PP: Failed to process ${rawPage.filePath}:`, error);
+            console.error(`LORA PP: Failed to process ${rawPage.filePath}:`, error);
         }
     });
     
@@ -313,10 +313,10 @@ export async function processAllPages( rawPages: RawPage[], config: Partial<Page
         errors,
     };
     
-    console.log(`LAWE PP: Processing complete! ${stats.successfulPages}/${stats.totalPages} pages successful in ${totalProcessingTime}ms`);
+    console.log(`LORA PP: Processing complete! ${stats.successfulPages}/${stats.totalPages} pages successful in ${totalProcessingTime}ms`);
     
     if (errors.length > 0) {
-        console.warn(`LAWE PP: ${errors.length} pages failed to process`);
+        console.warn(`LORA PP: ${errors.length} pages failed to process`);
     }
     
     return { processedPages, stats };
@@ -352,7 +352,7 @@ export async function processWithCache(
         }
     }
     
-    console.log(`LAWE PP: Cache stats - ${cacheHits.length} hits, ${cacheMisses.length} misses`);
+    console.log(`LORA PP: Cache stats - ${cacheHits.length} hits, ${cacheMisses.length} misses`);
     
     // Process only cache misses
     const { processedPages: newProcessedPages, stats } = await processAllPages(cacheMisses, finalConfig);
