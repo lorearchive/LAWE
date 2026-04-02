@@ -20,6 +20,7 @@ header#lawe-header.header-hidden {
 
 main {
     height: fit-content;
+    margin-top: 72px;
 }
 
 @media (max-width: 1544px) {

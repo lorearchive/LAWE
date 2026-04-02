@@ -68,6 +68,10 @@ export default defineConfig({
         external: ['better-sqlite3']
     }
   },
+  image: {
+    remotePatterns: [{ protocol: "https" }],
+    domains: ["avatars.githubusercontent.com"]
+  },
 
   adapter: vercel()
 });
