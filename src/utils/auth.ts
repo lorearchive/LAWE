@@ -1,11 +1,18 @@
 import { betterAuth } from "better-auth"
 import { createAuthClient } from "better-auth/client";
-import Database from "better-sqlite3"
+import {Pool} from "pg"
+import * as dotenv from "dotenv"
 
-const sqlite = new Database("./sessions.db")
+dotenv.config()
+
+const pool = new Pool({
+    connectionString: import.meta.env.DATABASE_URL,
+    ssl: true
+})
+
 
 export const auth = betterAuth({
-    database: sqlite,
+    database: pool,
     socialProviders: {
         github: {
             clientId: import.meta.env.OAUTH_GITHUB_CLIENT_ID,

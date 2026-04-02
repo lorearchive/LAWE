@@ -21,16 +21,17 @@
     "@floating-ui/dom": "^1.7.6",
     "astro": "^6.1.2",
     "better-auth": "^1.5.6",
-    "better-sqlite3": "^12.8.0",
     "cloudflare": "^5.2.0",
     "dotenv": "^17.3.1",
     "octokit": "^5.0.5",
+    "pg": "^8.20.0",
     "svelte": "^5.55.1",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.13",
     "@types/node": "^22.19.15",
+    "@types/pg": "^8.20.0",
     "vite-plugin-top-level-await": "^1.6.0",
     "vite-plugin-wasm": "^3.6.0"
   }
