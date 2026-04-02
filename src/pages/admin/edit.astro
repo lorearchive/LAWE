@@ -1,14 +1,17 @@
 ---
 import { auth } from "../../utils/auth"
-import { getPages } from "../../utils/octo"
+import { getPage } from "../../utils/octo"
 
 const session = await auth.api.getSession({ headers: Astro.request.headers })
 if (!session) return Astro.redirect("/login")
 
 const filePath = Astro.url.searchParams.get("file") || "test.txt"
-const fileData = await getPages(filePath)
 
-if (!fileData) return new Response(`File not found at ${filePath}`, { status: 404 } )
+const fileData = await getPage(Astro.request, filePath)
+
+if (!fileData) {
+    return new Response(`File not found at ${filePath}`, { status: 404 })
+}
 ---
 
 <html lang="en">
