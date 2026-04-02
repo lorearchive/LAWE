@@ -7,7 +7,9 @@ dotenv.config()
 
 const pool = new Pool({
     connectionString: import.meta.env.DATABASE_URL,
-    ssl: true
+    ssl: {
+        rejectUnauthorized: true
+    }
 })
 
 

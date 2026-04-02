@@ -28,8 +28,8 @@ if (!fileData) {
         <button id="save-btn" data-path={filePath} data-sha={fileData.sha}>Save to GitHub</button>
     </header>
 
-    <div id="editor" data-initial-content={fileData.content}></div>
-
+<div id="editor"></div>
+<script id="initial-data" type="application/json" set:html={JSON.stringify(fileData.content)}></script>
     <script>
         import { EditorState } from "@codemirror/state";
         import { EditorView, keymap, lineNumbers } from "@codemirror/view";
