@@ -1,55 +1,71 @@
 import { Octokit } from "octokit"
-import { auth } from "./auth"
-import Database from "better-sqlite3"
+import { auth } from "./auth" // Your Better Auth + Neon config
+import {Pool} from "pg"
 
-const sqlite = new Database("sessions.db")
 
-const octokit = new Octokit({ auth: process.env.GITHUB_PAT })
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+});
+
 const OWNER = "lorearchive"
 const REPO = "law-content"
 
+/**
+ * Gets an Octokit instance tied to the LOGGED-IN user.
+ * This ensures the user's GitHub account gets credit for the commit.
+ */
 export async function getAuthenticatedOctokit(request: Request) {
-
     const session = await auth.api.getSession({ headers: request.headers });
     if (!session) throw new Error("Unauthorized");
 
-    const account = sqlite.prepare(
-        `SELECT access_token FROM account
-         WHERE user_id = ? AND provider_id = 'github'
-         LIMIT 1`
-    ).get(session.user.id) as { access_token: string } | undefined
+    // Query Neon for the GitHub access token
+    const result = await pool.query(
+        `SELECT "accessToken" FROM account 
+         WHERE "userId" = $1 AND "providerId" = 'github' 
+         LIMIT 1`,
+        [session.user.id]
+    );
 
-    if (!account?.access_token) throw new Error("No GitHub token found")
+    const accessToken = result.rows[0]?.accessToken;
+    if (!accessToken) throw new Error("No GitHub token found in database");
 
-        return new Octokit({ auth: account.access_token })
+    return new Octokit({ auth: accessToken });
 }
 
-export async function getPages(path: string) {
+export async function getPage(request: Request, path: string) {
+    const userOctokit = await getAuthenticatedOctokit(request);
+    
     try {
-        const { data } = await octokit.rest.repos.getContent({
+        const { data } = await userOctokit.rest.repos.getContent({
             owner: OWNER,
             repo: REPO,
             path: path,
-        })
+        });
 
-        if ('content' in data) {
+        if ('content' in data && !Array.isArray(data)) {
             return {
                 content: Buffer.from(data.content, 'base64').toString('utf-8'),
                 sha: data.sha
-            }
+            };
         }
+        return null;
     } catch (e) {
-        return null
+        console.error("GitHub Fetch Error:", e);
+        return null;
     }
 }
 
-export async function savePage(path: string, content: string, sha: string) {
-    await octokit.rest.repos.createOrUpdateFileContents({
+
+export async function savePage(request: Request, path: string, content: string, sha: string) {
+    const userOctokit = await getAuthenticatedOctokit(request);
+
+    return await userOctokit.rest.repos.createOrUpdateFileContents({
         owner: OWNER,
         repo: REPO,
         path: path,
-        message: `chore(wiki): update ${path} via web editor`,
+        message: `lore(wiki): edit ${path}`,
         content: Buffer.from(content).toString('base64'),
         sha: sha
-    })
+    });
 }
