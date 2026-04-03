@@ -1,6 +1,6 @@
 import { Octokit } from "octokit"
 import { auth } from "./auth" // Your Better Auth + Neon config
-import {Pool} from "pg"
+import { Pool } from "pg"
 
 
 const pool = new Pool({
@@ -21,7 +21,6 @@ export async function getAuthenticatedOctokit(request: Request) {
     const session = await auth.api.getSession({ headers: request.headers });
     if (!session) throw new Error("Unauthorized");
 
-    // Query Neon for the GitHub access token
     const result = await pool.query(
         `SELECT "accessToken" FROM account 
          WHERE "userId" = $1 AND "providerId" = 'github' 

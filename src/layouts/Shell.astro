@@ -18,9 +18,7 @@ import Sidebar from "../components/island/Sidebar.svelte"
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link rel="stylesheet" href="/styles/global.css" />
-        <link rel="stylesheet" href="/styles/typography.css" />
-        <link rel="stylesheet" href="/styles/components.css" />
+        
 
         <link rel="sitemap" href="/sitemap-index.xml" />
 
@@ -29,44 +27,38 @@ import Sidebar from "../components/island/Sidebar.svelte"
     </head>
     
     <body class="page-body">
-        <div class="page-grid">
-    
-        {aside && (
-            <aside id="sidebar" class="sidebar">
-                <Sidebar client:load routes={routes} />
-            </aside>
-            )
-        }
+        <div class={aside ? "page-grid" : "full-width-wrapper"}>
+            {aside && (
+                <aside id="sidebar" class="sidebar">
+                    <Sidebar client:load routes={routes} />
+                </aside>
+            )}
 
-        <!-- Main content area -->
-        <div class="main-content">
-            <Header />
+            <div class="main-content">
+                <Header />
 
-            <!-- Main scrollable content -->
-            <div id="scrollableWindow" class="content-container">
-                <main class={`main-content-area ${toc ? 'main-w-toc' : 'main-no-toc'}`}>
-                    <slot />
-                </main> 
+                <div id="scrollableWindow" class="content-container">
+                    <main class={`main-content-area ${toc ? 'main-w-toc' : 'main-no-toc'}`}>
+                        <slot />
+                    </main> 
 
-                {toc && (
-                    <aside id="TOCaside">
-                        <slot name="TOCbar" />
-                    </aside>
-                )}
-                
+                    {toc && (
+                        <aside id="TOCaside">
+                            <slot name="TOCbar" />
+                        </aside>
+                    )}
+                </div>
             </div>
         </div>
 
-  </div>
-
-  <div id="fnTooltip" role="tooltip">
+        <div id="fnTooltip" role="tooltip">
             <div class="tooltip-content"></div>
             <div id="tooltip-arrow" class="tooltip-arrow"></div>
         </div>
 
-            <Tooltips />
+        <Tooltips />
         <script src="/src/scripts/header-scroll.js"></script>
-</body>
+    </body>
 
 </html>
 
@@ -95,6 +87,8 @@ import Sidebar from "../components/island/Sidebar.svelte"
         display: flex;
         flex-direction: column;
         height: 100%;
+        width: 100%;
+        min-width: 0;
         overflow: hidden;
     }
     
@@ -103,13 +97,13 @@ import Sidebar from "../components/island/Sidebar.svelte"
         flex-direction: row;
         justify-content: center;
         height: 100%;
+        width: 100%;
         overflow-y: auto;
     }
     
     .main-content-area {
         flex: 1;
         position: relative;
-        width: 100%;
     }
     
     /* Original styles */

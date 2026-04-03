@@ -5,112 +5,97 @@ import { auth } from "../../utils/auth"
 
 const session = await auth.api.getSession({ headers: Astro.request.headers })
 if (!session) return Astro.redirect("/login")
-
 const user = session.user
 const optimisedImage = await getImage({ src: user.image, format: "webp", width: 128, height: 128 })
-
-
 const currentHour = new Date().getHours()
 let greetingMessage = ""
 if (currentHour < 12) { greetingMessage = `Good morning, ${user.name}` }
 else if (currentHour < 17) { greetingMessage = `Good afternoon, ${user.name}` }
 else if (currentHour < 21) { greetingMessage = `Good evening, ${user.name}` }
 else { greetingMessage = `Good night, ${user.name}` }
-
 ---
 
-
-<head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,100..1000&display=swap" rel="stylesheet">
-</head>
-
 <Shell title="Account - Lore Archive" aside={true} toc={false}>
-    <section class="account">
-        <header>
-            <h2 class="font-gloock">{greetingMessage}</h2>
+  <section class="account">
+    <header>
+      <h2 class="font-gloock">{greetingMessage}</h2>
+      <div class="profile-card">
+        <div 
+          class="avatar" 
+          style={`background-image: url(${optimisedImage.src});`}
+          aria-label={`Profile picture for ${user.name}`}
+        ></div>
+        <div class="info">
+          <p>Authenticated via <strong>GitHub</strong></p>
+          <p class="email">{user.email}</p>
+        </div>
+      </div>
+    </header>
+    <button id="logout-btn" class="btn-danger">Sign Out</button>
+  </section>
 
-                    <div class="profile-card">
-
-            <div 
-                class="avatar" 
-                style={`background-image: url(${optimisedImage.src});`}
-                aria-label={`Profile picture for ${user.name}`}
-            ></div>
-
-            <div class="info">
-                <p>Authenticated via <strong>GitHub</strong></p>
-                <p class="email">{user.email}</p>
-            </div>
-
-                    </div>
-
-        </header>
-
-
-        <button id="logout-btn" class="btn-danger">
-            Sign Out
-        </button>
-    </section>
-
+  <!-- ... HTML stays the same ... -->
 
 <script>
-  import { authClient } from "../../utils/auth"
+  import { authClient } from "../../utils/auth-client"
 
+  // Using astro:page-load is good if you have View Transitions enabled.
+  // If you don't, use 'DOMContentLoaded'.
   document.addEventListener("DOMContentLoaded", () => {
     const btn = document.getElementById("logout-btn")
-    console.log("logout btn found:", btn)
+    
+    if (!btn) return;
 
-    btn?.addEventListener("click", async () => {
-      console.log("signing out...")
-      await authClient.signOut()
-      window.location.href = "/wiki/home"
+    btn.addEventListener("click", async () => {
+      try {
+        await authClient.signOut()
+        window.location.href = "/wiki/home"
+      } catch (e) {
+        console.error("Logout failed", e)
+      }
     })
   })
 </script>
-</Shell>
 
+<!-- ... Styles stay the same ... -->
 
-
-
-<style>
+  <style>
     .account {
-        padding: 2rem;
-        display: flex;
-        justify-content: space-between;
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
     }
     .profile-card {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
     .avatar {
-        width: 80px;
-        height: 80px;
-        background-size: cover;
-        background-position: center;
-        border-radius: 50%;
-        border: 2px solid var(--accent-color, #ccc);
+      width: 80px;
+      height: 80px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 50%;
+      border: 2px solid var(--accent-color, #ccc);
     }
     .email {
-        opacity: 0.7;
-        font-size: 0.9rem;
+      opacity: 0.7;
+      font-size: 0.9rem;
     }
-
     .btn-danger {
-        background: #24292f;
-        color: white;
-        padding: 12px 24px;
-        border-radius: 6px;
-        border: none;
-        cursor: pointer;
-        font-weight: 600;
-        font-size: 1rem;
-        margin-top: 1rem;
-        max-height: fit-content;
+      background: #24292f;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      margin-top: 1rem;
+      max-height: fit-content;
     }
-</style>
+  </style>
+</Shell>
