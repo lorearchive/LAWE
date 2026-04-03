@@ -1,13 +1,11 @@
 ---
 import Shell from "../../layouts/Shell.astro"
-import { getImage } from "astro:assets"
 import { auth } from "../../utils/auth"
 
 const session = await auth.api.getSession({ headers: Astro.request.headers })
 if (!session) return Astro.redirect("/login")
 
 const user = session.user
-const optimisedImage = await getImage({ src: user.image, format: "webp", width: 128, height: 128 })
 
 const currentHour = new Date().getHours()
 let greetingMessage = ""
@@ -22,11 +20,6 @@ else { greetingMessage = `Good night, ${user.name}` }
     <header>
       <h2 class="font-gloock">{greetingMessage}</h2>
       <div class="profile-card">
-        <div 
-          class="avatar" 
-          style={`background-image: url(${optimisedImage.src});`}
-          aria-label={`Profile picture for ${user.name}`}
-        ></div>
         <div class="info">
           <p>Authenticated via <strong>GitHub</strong></p>
           <p class="email">{user.email}</p>

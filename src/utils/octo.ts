@@ -5,10 +5,6 @@ import { auth } from "./auth";
 const OWNER = "lorearchive";
 const REPO = "law-content";
 
-/**
- * NEW: Gets an Octokit instance authorized for the specific 
- * LoreArchive installation.
- */
 export async function getAppOctokit() {
     return new Octokit({
         authStrategy: createAppAuth,
@@ -20,8 +16,7 @@ export async function getAppOctokit() {
     });
 }
 
-// Helper to verify the user is logged in before allowing a save
-async function verifySession(request: Request) {
+export async function verifySession(request: Request) {
     const session = await auth.api.getSession({ headers: request.headers });
     if (!session) throw new Error("Unauthorized");
     return session;
@@ -29,7 +24,6 @@ async function verifySession(request: Request) {
 
 export async function getPage(path: string) {
     try {
-        // App-level octokit can read public/private repos it's installed on
         const appOctokit = await getAppOctokit();
         
         const { data } = await appOctokit.rest.repos.getContent({
@@ -52,21 +46,17 @@ export async function getPage(path: string) {
 }
 
 export async function savePage(request: Request, path: string, content: string, sha: string) {
-    // 1. Verify the person hitting the API is actually logged in
-    const session = await verifySession(request);
 
-    // 2. Use the App's permission to perform the write
+    const session = await verifySession(request);
     const appOctokit = await getAppOctokit();
 
     return await appOctokit.rest.repos.createOrUpdateFileContents({
         owner: OWNER,
         repo: REPO,
         path: path,
-        // We can still attribute the commit to the user in the message!
-        message: `Web Editor: edit ${path} by ${session.user.email}`,
+        message: `${session.user.email} edited ${path} via web editor`,
         content: Buffer.from(content).toString('base64'),
         sha: sha,
-        // Optional: Make the user the "author" so their avatar shows up
         author: {
             name: session.user.name,
             email: session.user.email

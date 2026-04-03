@@ -1,5 +1,5 @@
 ---
-import { getPage } from "../../../utils/octo";
+import { getPage, verifySession } from "../../../utils/octo";
 import Editor from "../../../components/island/Editor.svelte";
  
 const { path } = Astro.params;
@@ -12,8 +12,8 @@ let pageData: { content: string; sha: string } | null = null;
 let error: string | null = null;
  
 try {
+    await verifySession(Astro.request);
     pageData = await getPage(path);
-console.log(pageData.content)
 
 } catch (e: any) {
 
@@ -145,7 +145,7 @@ console.log(pageData.content)
   <body>
     <div id="app">
       <header>
-        <span class="header-wordmark">lore</span>
+        <span class="header-wordmark">Lore Archive Wiki Web Editor</span>
         <div class="header-sep"></div>
         <div class="header-path">
           {

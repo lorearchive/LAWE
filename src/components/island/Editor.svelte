@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount, onDestroy } from "svelte";
+  import { onMount, onDestroy, untrack } from "svelte";
   import { EditorView, keymap, drawSelection, highlightActiveLine } from "@codemirror/view";
   import { EditorState } from "@codemirror/state";
   import {
@@ -19,14 +19,14 @@
 
   let editorEl: HTMLDivElement | undefined = $state();
   let view: EditorView | undefined = $state();
-  let currentSha = $state(sha);
+  let currentSha = $state(untrack(() => sha));
 
   // Editor status
   type SaveState = "idle" | "saving" | "saved" | "conflict" | "error";
   let saveState: SaveState = $state<SaveState>("idle");
   let saveMsg = $state("");
   let dirty = $state(false);
-  let lineCount = $state(initialContent.split("\n").length);
+  let lineCount = $state(untrack(() => initialContent.split("\n").length));
   let cursorLine = $state(1);
   let cursorCol = $state(1);
 
@@ -222,10 +222,8 @@
   .cm-host {
     flex: 1;
     overflow: hidden;
-    /* CodeMirror fills this */
   }
 
-  /* Let CodeMirror own the height */
   :global(.cm-host .cm-editor) {
     height: 100%;
   }
@@ -267,7 +265,6 @@
     font-family: "IBM Plex Mono", monospace;
     font-size: 11px;
     color: #4a4a48;
-    tabular-nums: true;
   }
 
   .save-btn {
