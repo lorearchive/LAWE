@@ -5,8 +5,10 @@ import { auth } from "../../utils/auth"
 
 const session = await auth.api.getSession({ headers: Astro.request.headers })
 if (!session) return Astro.redirect("/login")
+
 const user = session.user
 const optimisedImage = await getImage({ src: user.image, format: "webp", width: 128, height: 128 })
+
 const currentHour = new Date().getHours()
 let greetingMessage = ""
 if (currentHour < 12) { greetingMessage = `Good morning, ${user.name}` }

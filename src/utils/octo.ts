@@ -1,47 +1,41 @@
-import { Octokit } from "octokit"
-import { auth } from "./auth" // Your Better Auth + Neon config
-import { Pool } from "pg"
+import { Octokit } from "octokit";
+import { createAppAuth } from "@octokit/auth-app";
+import { auth } from "./auth";
 
-
-const pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: true
-    }
-});
-
-const OWNER = "lorearchive"
-const REPO = "law-content"
+const OWNER = "lorearchive";
+const REPO = "law-content";
 
 /**
- * Gets an Octokit instance tied to the LOGGED-IN user.
- * This ensures the user's GitHub account gets credit for the commit.
+ * NEW: Gets an Octokit instance authorized for the specific 
+ * LoreArchive installation.
  */
-export async function getAuthenticatedOctokit(request: Request) {
-    const session = await auth.api.getSession({ headers: request.headers });
-    if (!session) throw new Error("Unauthorized");
-
-    const result = await pool.query(
-        `SELECT "accessToken" FROM account 
-         WHERE "userId" = $1 AND "providerId" = 'github' 
-         LIMIT 1`,
-        [session.user.id]
-    );
-
-    const accessToken = result.rows[0]?.accessToken;
-    if (!accessToken) throw new Error("No GitHub token found in database");
-
-    return new Octokit({ auth: accessToken });
+export async function getAppOctokit() {
+    return new Octokit({
+        authStrategy: createAppAuth,
+        auth: {
+            appId: import.meta.env.GITHUB_APP_ID,
+            privateKey: import.meta.env.GITHUB_PRIVATE_KEY,
+            installationId: import.meta.env.GITHUB_APP_INSTALLATION_ID,
+        },
+    });
 }
 
-export async function getPage(request: Request, path: string) {
-    const userOctokit = await getAuthenticatedOctokit(request);
-    
+// Helper to verify the user is logged in before allowing a save
+async function verifySession(request: Request) {
+    const session = await auth.api.getSession({ headers: request.headers });
+    if (!session) throw new Error("Unauthorized");
+    return session;
+}
+
+export async function getPage(path: string) {
     try {
-        const { data } = await userOctokit.rest.repos.getContent({
+        // App-level octokit can read public/private repos it's installed on
+        const appOctokit = await getAppOctokit();
+        
+        const { data } = await appOctokit.rest.repos.getContent({
             owner: OWNER,
             repo: REPO,
-            path: path,
+            path: path.replace(/^\//, ''),
         });
 
         if ('content' in data && !Array.isArray(data)) {
@@ -51,22 +45,31 @@ export async function getPage(request: Request, path: string) {
             };
         }
         return null;
-    } catch (e) {
-        console.error("GitHub Fetch Error:", e);
+    } catch (e: any) {
+        console.error("Fetch Error:", e.message);
         return null;
     }
 }
 
-
 export async function savePage(request: Request, path: string, content: string, sha: string) {
-    const userOctokit = await getAuthenticatedOctokit(request);
+    // 1. Verify the person hitting the API is actually logged in
+    const session = await verifySession(request);
 
-    return await userOctokit.rest.repos.createOrUpdateFileContents({
+    // 2. Use the App's permission to perform the write
+    const appOctokit = await getAppOctokit();
+
+    return await appOctokit.rest.repos.createOrUpdateFileContents({
         owner: OWNER,
         repo: REPO,
         path: path,
-        message: `lore(wiki): edit ${path}`,
+        // We can still attribute the commit to the user in the message!
+        message: `Web Editor: edit ${path} by ${session.user.email}`,
         content: Buffer.from(content).toString('base64'),
-        sha: sha
+        sha: sha,
+        // Optional: Make the user the "author" so their avatar shows up
+        author: {
+            name: session.user.name,
+            email: session.user.email
+        }
     });
 }
