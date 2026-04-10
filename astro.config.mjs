@@ -10,11 +10,13 @@ import svelte from '@astrojs/svelte';
 import vercel from '@astrojs/vercel';
 
 
+import tailwindcss from '@tailwindcss/vite';
+
+
 export default defineConfig({
   site: 'https://lorearchive.org',
   build: {},
   output: 'server',
-  
 
   redirects: {
       "/": "/wiki/home"
@@ -68,5 +70,9 @@ export default defineConfig({
     domains: ["avatars.githubusercontent.com"]
   },
 
-  adapter: vercel()
+  adapter: vercel(),
+
+  vite: {
+    plugins: [tailwindcss()]
+  }
 });
