@@ -1,10 +1,12 @@
+@import "tw-animate-css";
+@import "shadcn-svelte/tailwind.css";
+@import "@fontsource-variable/inter";
+
 * {
     box-sizing: border-box;
     line-height: 1.6;
     scroll-margin-top: 90px;
 }
-
-
 
 #sidebar {
     height: calc(100vh - 72px);
@@ -43,8 +45,6 @@ main article {
   display: block; /* Change from inline-block */
 }
 
-
-
 #fnTooltip {
     -webkit-box-shadow: 5px 6px 20px 6px rgba(0,0,0,0.21); 
     box-shadow: 5px 6px 20px 6px rgba(0,0,0,0.21);
@@ -77,4 +77,14 @@ main article {
     border: inherit;
 }
 
-
+@layer base {
+	* {
+		@apply border-border outline-ring/50;
+    }
+	body {
+		@apply bg-background text-foreground;
+    }
+	html {
+		@apply font-sans;
+    }
+}
