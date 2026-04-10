@@ -1,6 +1,8 @@
 ---
 import Shell from "../layouts/Shell.astro"
 import { auth } from "../utils/auth"
+import { Button } from "$lib/components/ui/button/index.js"
+
 
 const session = await auth.api.getSession({ headers: Astro.request.headers })
 if (session) return Astro.redirect("/wiki/home")
@@ -17,15 +19,16 @@ if (session) return Astro.redirect("/wiki/home")
             <h1>Lore Archive Wiki Editor</h1>
             <p>Authentication via GitHub is required to commit lore changes.</p>
             
-            <button id="login-btn" class="btn-github">
-                Sign in with GitHub
-            </button>
+            <Button id="login-btn" class="btn-github">Sign in with GitHub</Button>
         </section>
+
+</script>
+ 
 </Shell>
 
 
   <script>
-  document.getElementById("login-btn").addEventListener("click", async () => {
+  document.getElementById("login-btn")?.addEventListener("click", async () => {
     const res = await fetch("/api/auth/sign-in/social", {
       method: "POST",
       headers: { "Content-Type": "application/json" },

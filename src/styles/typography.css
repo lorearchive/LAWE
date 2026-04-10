@@ -113,7 +113,14 @@ a:visited:active:not(.a-no-style) {
     color: #ff0000;
 }
 
-
+a.a-no-style,
+a.a-no-style:link,
+a.a-no-style:visited,
+a.a-no-style:hover,
+a.a-no-style:active {
+    color: inherit !important;
+    text-decoration: none !important;
+}
 
 
 #TOCItem a {

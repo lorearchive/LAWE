@@ -187,6 +187,8 @@
         : dirty ? "unsaved"
         : ""
     );
+
+    console.log(path)
 </script>
 
 <div class="editor-root">
@@ -194,7 +196,7 @@
 
   <footer>
     <div class="footer-left">
-      <span class="lastMod-label"><a href={`${path} is`} class="a-no-style">Last modified on {new Date(last.updated).toLocaleDateString()} by {last.committer} @ {last.commitSha.slice(0, 7)}</a></span>
+      <span class="lastMod-label"><a href={"https://github.com/lorearchive/law-content/commits/main/" + path} class="a-no-style">Last modified on {new Date(last.updated).toLocaleDateString()} by {last.committer} @ {last.commitSha.slice(0, 7)}</a></span>
     </div>
     <div class="footer-right">
       {#if statusLabel}
@@ -302,5 +304,9 @@
   .save-btn.saving {
     opacity: 0.45;
     cursor: default;
+  }
+
+  .lastMod-label:hover {
+    text-decoration: underline;
   }
 </style>

@@ -2,7 +2,7 @@
 const { title, routes, aside = true, toc = true } = Astro.props
 
 
-import Header from "../components/Header.astro"
+import Header from "../components/island/Header.svelte"
 import '../styles/global.css'
 import '../styles/typography.css' 
 import '../styles/components.css'
@@ -35,7 +35,7 @@ import Sidebar from "../components/island/Sidebar.svelte"
             )}
 
             <div class="main-content">
-                <Header />
+                <Header client:load />
 
                 <div id="scrollableWindow" class="content-container">
                     <main class={`main-content-area ${toc ? 'main-w-toc' : 'main-no-toc'}`}>

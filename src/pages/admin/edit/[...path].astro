@@ -1,6 +1,9 @@
 ---
 import { getPage, verifySession } from "../../../utils/octo";
 import Editor from "../../../components/island/Editor.svelte";
+
+import '../../../styles/global.css'
+import '../../../styles/typography.css'
  
 const { path } = Astro.params;
 
@@ -24,7 +27,7 @@ try {
 } catch (e: any) {
 
     if (e?.message === "Unauthorized") {
-        return Astro.redirect("/login");
+        return Astro.redirect("/signin");
     }
     error = e?.message ?? "Unknown error";
 }

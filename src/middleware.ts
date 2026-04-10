@@ -10,7 +10,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
         });
 
         if (!session) {
-        return context.redirect("/login");
+        return context.redirect("/signin");
         }
 
     }
