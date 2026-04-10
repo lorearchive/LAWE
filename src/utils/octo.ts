@@ -24,18 +24,26 @@ export async function verifySession(request: Request) {
 
 export async function getPage(path: string) {
     try {
-        const appOctokit = await getAppOctokit();
         
-        const { data } = await appOctokit.rest.repos.getContent({
-            owner: OWNER,
-            repo: REPO,
-            path: path.replace(/^\//, ''),
-        });
+        const appOctokit = await getAppOctokit();
+        const cleanPath = path.replace(/^\//, '')
+
+        const [contentRes, commitsRes] = await Promise.all([
+            appOctokit.rest.repos.getContent({ owner: OWNER, repo: REPO, path: cleanPath }),
+            appOctokit.rest.repos.listCommits({ owner: OWNER, repo: REPO, path: cleanPath, per_page: 1 }),
+        ]);
+
+        const data = contentRes.data
 
         if ('content' in data && !Array.isArray(data)) {
             return {
                 content: Buffer.from(data.content, 'base64').toString('utf-8'),
-                sha: data.sha
+                sha: data.sha,
+                last : {
+                    updated: commitsRes.data[0]?.commit.author?.date ?? null,
+                    committer: commitsRes.data[0]?.commit?.author?.name ?? null,
+                    commitSha: commitsRes.data[0]?.commit.tree.sha ?? null
+                }
             };
         }
         return null;
@@ -54,7 +62,7 @@ export async function savePage(request: Request, path: string, content: string, 
         owner: OWNER,
         repo: REPO,
         path: path,
-        message: `${session.user.email} edited ${path} via web editor`,
+        message: `${session.user.name} edited ${path} via web editor`,
         content: Buffer.from(content).toString('base64'),
         sha: sha,
         author: {

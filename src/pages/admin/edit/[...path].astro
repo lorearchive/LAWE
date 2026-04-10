@@ -3,12 +3,18 @@ import { getPage, verifySession } from "../../../utils/octo";
 import Editor from "../../../components/island/Editor.svelte";
  
 const { path } = Astro.params;
+
+export interface Last {
+    updated: string,
+    committer: string,
+    commitSha: string
+}
  
 if (!path) {
   return Astro.redirect("/");
 }
  
-let pageData: { content: string; sha: string } | null = null;
+let pageData: { content: string; sha: string, last: Last } | null = null;
 let error: string | null = null;
  
 try {
@@ -170,10 +176,13 @@ try {
             </div>
           ) : (
             <Editor
-              client:only="svelte"
-              path={path}
-              initialContent={pageData?.content ?? ""}
-              sha={pageData?.sha ?? ""}
+                client:only="svelte"
+                path={path}
+                initialContent={pageData?.content ?? ""}
+                sha={pageData?.sha ?? ""}
+                last={pageData?.last ?? ""
+
+              }
             />
           )
         }
