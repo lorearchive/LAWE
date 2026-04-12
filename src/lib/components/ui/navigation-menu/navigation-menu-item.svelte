@@ -12,6 +12,6 @@
 <NavigationMenuPrimitive.Item
 	bind:ref
 	data-slot="navigation-menu-item"
-	class={cn("cn-navigation-menu-item relative", className)}
+	class={cn("cn-navigation-menu-item relative mx-3", className)}
 	{...restProps}
 />

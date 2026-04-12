@@ -35,7 +35,10 @@ import Sidebar from "../components/island/Sidebar.svelte"
             )}
 
             <div class="main-content">
-                <Header client:load />
+                <div id="shell-header">
+                    <Header client:load />
+                </div>
+                
 
                 <div id="scrollableWindow" class="content-container">
                     <main class={`main-content-area ${toc ? 'main-w-toc' : 'main-no-toc'}`}>
