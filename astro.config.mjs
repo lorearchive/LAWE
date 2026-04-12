@@ -73,6 +73,9 @@ export default defineConfig({
   adapter: vercel(),
 
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    resolve: {
+        noExternal: ['bits-ui']
+    }
   }
 });
