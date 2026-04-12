@@ -1,0 +1,150 @@
+---
+export const prerender = false
+import Shell from "../../layouts/Shell.astro"
+---
+
+
+
+<Shell title={`Home - Lore Archive`} toc={false}>
+
+
+<div id="bg-grid-pattern"></div>
+
+    <div class="hero-text-container">
+        <h1 class="hero-text hero-text-right">The Lore</h1>
+        <h1 class="hero-text hero-text-left">Archive Wiki</h1>
+    </div>
+
+    <div class="subtitle-container">
+        <h3>From the Lore Archive Project</h3>
+    </div>
+
+
+    <div class="description-container">
+        <span class="description-text"><em>Built for lore enthusiastic Senseis, by lore enthusiastic Senseis.</em> The Lore Archive Wiki is the premier
+        <br />source of truth of the lore, fictional setting, and worldview of the mobile game <strong>Blue Archive</strong>,
+        <br /> created by the Lore Archive Project. It's open to be edited by anyone, anytime, anywhere.
+        <br />It's fast, free from ads, and looks nice.
+        <br />
+        <br />
+        <br />
+        <br />As of now, the Lore Archive Wiki is solely developed by and maintained by one man, me.
+        <br />If you have spare coffee money, why not buy me a coffee and support the project
+        <br />instead of spending it on pyroexenes(!?)
+        <br />
+        <br />
+        <br />If you have any questions, complaints, comments, or simply want to say hi, feel free to reach out at <a class="plain-link" href="mailto:&#99;&#105;&#114;&#114;&#111;&#119;&#64;&#112;&#114;&#111;&#116;&#111;&#110;&#46;&#109;&#101;"><u>&#99;&#105;&#114;&#114;&#111;&#119;&#64;&#112;&#114;&#111;&#116;&#111;&#110;&#46;&#109;&#101;</u></a>.
+        </span>
+    </div>
+
+
+</Shell>
+
+
+
+<style>
+    :root{
+        --cell: 100px;     /* size of each square */
+        --stroke: 1px;    /* line thickness */
+        --color: #dddddd;    /* line color */
+    }
+        
+    #bg-grid-pattern {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        min-height: 100vh;
+        height: auto;
+        
+        background-image:
+            linear-gradient(90deg, rgba(109, 240, 247, 0.37) 9%, rgba(110, 255, 170, 0.37) 57%, rgba(255, 248, 196, 0.37) 100%),
+            repeating-linear-gradient(0deg, var(--color) 0, var(--color) var(--stroke), transparent var(--stroke), transparent var(--cell)),
+            repeating-linear-gradient(90deg, var(--color) 0, var(--color) var(--stroke), transparent var(--stroke), transparent var(--cell));
+        
+        background-size: auto, auto, auto;
+        background-position: 0 0, 0 0, 0 0;
+    }
+
+    #scrollable-window {
+        overflow-x: hidden;
+    }
+
+    /* Homepage Styles */
+    .hero-text-container {
+        position: absolute;
+        top: 2.5rem; /* top-10 = 40px = 2.5rem */
+        left: 0;
+        right: 0;
+        bottom: 0;
+        font-family: 'Syne', sans-serif;
+        font-weight: 500; /* font-syne-500 */
+    }
+
+    .hero-text {
+        font-size: 9rem; /* text-9xl */
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        /* h1-no-style */
+        color: inherit;
+        font-weight: inherit;
+        line-height: inherit;
+        letter-spacing: inherit;
+        text-transform: inherit;
+        text-decoration: inherit;
+    }
+
+    .hero-text-right {
+        right: -1.75rem; /* -right-7 = -28px = -1.75rem */
+        top: 2.5rem; /* top-10 = 40px = 2.5rem */
+    }
+
+    .hero-text-left {
+        left: -2.5rem; /* -left-10 = -40px = -2.5rem */
+        top: 10rem; /* top-40 = 160px = 10rem */
+    }
+
+    .subtitle-container {
+        position: absolute;
+        top: 22.5rem; /* top-90 = 360px = 22.5rem */
+        font-family: 'Syne', sans-serif;
+        font-weight: 400; /* font-syne-400 */
+        left: 50%;
+        transform: translateX(-50%); /* left-1/2 -translate-x-1/2 */
+    }
+
+    .description-container {
+        position: absolute;
+        top: 33.75rem; /* top-135 = 540px = 33.75rem */
+        left: 3.75rem; /* left-15 = 60px = 3.75rem */
+    }
+
+    .description-text {
+        font-family: 'Syne', sans-serif;
+        opacity: 0.65; /* opacity-65 */
+    }
+
+    .plain-link {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    /* Regular Page Styles */
+    .page-toolbar {
+        margin-top: 0.75rem; /* mt-3 = 12px = 0.75rem */
+        padding: 0.5rem; /* p-2 = 8px = 0.5rem */
+        border-top: 1px solid black; /* border-t border-black */
+        border-bottom: 1px solid black; /* border-b border-black */
+        margin-bottom: 1.75rem; /* mb-7 = 28px = 1.75rem */
+        display: flex;
+        flex-direction: row;
+        align-items: center; /* items-center */
+        justify-content: space-between; /* justify-between */
+    }
+
+    .toolbar-section {
+        display: flex;
+        flex-direction: row;
+        align-items: center; /* items-center */
+    }
+</style>

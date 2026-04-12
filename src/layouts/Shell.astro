@@ -8,6 +8,12 @@ import '../styles/typography.css'
 import '../styles/components.css'
 import Tooltips from "../scripts/tooltips.astro"
 import Sidebar from "../components/island/Sidebar.svelte"
+
+import { auth } from "../utils/auth"
+
+const session = await auth.api.getSession({
+  headers: Astro.request.headers,
+});
 ---
 
 <!DOCTYPE html>
@@ -36,7 +42,7 @@ import Sidebar from "../components/island/Sidebar.svelte"
 
             <div class="main-content">
                 <div id="shell-header">
-                    <Header client:load />
+                    <Header client:load session={session} />
                 </div>
                 
 

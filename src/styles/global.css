@@ -16,6 +16,7 @@
 main {
     height: fit-content;
     margin-top: 72px;
+    width: full;
 }
 
 @media (max-width: 1544px) {
