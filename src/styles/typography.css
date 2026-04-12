@@ -1,3 +1,5 @@
+@import "@fontsource-variable/inter";
+
 @font-face {
   font-family: 'Syne';
   src: url('/fonts/Syne-VariableFont_wght.ttf') format('truetype');
@@ -36,6 +38,10 @@ body {
 .font-syne-400 {
     font-family: Syne, sans-serif;
     font-weight: 400;
+}
+
+.font-inter {
+    font-family: 'Inter Variable', sans-serif !important;
 }
 
 

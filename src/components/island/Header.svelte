@@ -9,7 +9,11 @@ import * as NavigationMenu from "$lib/components/ui/navigation-menu/index.ts"
             <NavigationMenu.Link href="/about" class="a-no-style ">
                 About
             </NavigationMenu.Link>
-            </NavigationMenu.Item>
-        <NavigationMenu.Item>Donate</NavigationMenu.Item>
+        </NavigationMenu.Item>
+        <NavigationMenu.Item>
+            <NavigationMenu.Link href="/donate" class="a-no-style ">
+                Donate
+            </NavigationMenu.Link>
+        </NavigationMenu.Item>
     </NavigationMenu.List>
 </NavigationMenu.Root>
