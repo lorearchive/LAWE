@@ -19,7 +19,7 @@ if (session) return Astro.redirect("/wiki/home")
             <h1>Lore Archive Wiki Editor</h1>
             <p>Authentication via GitHub is required to save changes.</p>
             
-            <SigninButton />
+            <SigninButton client:load />
 
             <p class="text-neutral-400 max-w-xl pt-7">Don't have an account? GitHub is a free platform for programmers - singing up <a href="https://github.com/signup">here</a> takes less than a minute, and helps keep the wiki secure.
             <br /><br />
